@@ -80,7 +80,7 @@ LIM.SCENE=LIM.SCENE||{};
                     break
             }
             this.anchor.x = 0.5
-            this.anchor.y = 0.51
+            this.anchor.y = 0.5
             this.x = (this.width * this.anchor.x + LIM.UTILS.lengthNum(item.x)) * this.scale.x
             this.y = (this.height * this.anchor.y + LIM.UTILS.lengthNum(item.y)) * this.scale.y
             this.rotation = item.rota/180*Math.PI
