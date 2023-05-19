@@ -15,27 +15,91 @@ LIM.SCENE=LIM.SCENE||{};
         this._name=name
         this._origin=origin
         Sprite.prototype.initialize.call(this);//;
-        this.drawBack()
     }
 
-    _.Shape.prototype.drawBack = function() {
-       if(!this._com.bit) return
-        let bit = this._origin.getBit(this._com.bit)
-        bit.addLoadListener(function () {
-            this.bitmap=bit
-        }.bind(this))
-    }
-
+    
     _.Shape.prototype.update = function () {
         Sprite.prototype.update.call(this);
         if(this.isActi()) {
             this.refresh()
         }
     }
+    _.Shape.prototype.refresh = function () {
+        if(this._com.next!==this._com.mode) this.shiftMode()
+        if(this.isRun(0)) this.draw()
+        if(this.isRun(1)) this.render()
+        if(this.isRun(2)) this.shape()
+    }
+    _.Shape.prototype.shiftMode=function(){
+        let index1=this._index
+        this._data=this._com.data[this._com.next]
+        let index2=this._index
+        if(index1!=index2&&!this._origin.isRun(1)) this._origin.setRun(1,true)
+        this.pushAction(this._com.mode,this._com.next)
+        this._com.mode=this._com.next
+    }
+    _.Shape.prototype.pushAction=function(mode,next){
+        let fun=mode+"_"+next
+        if(this._com.action[fun]){}
+        else if(!this.isRun(0)) this.setRun(0,true)
+    }
+    
+    
+    _.Shape.prototype.draw = function() {
+        if(this.isRun(0)) this.setRun(0,false)
+        let bit = this._origin.getBit(this._data.bit)
+        let that=this
+        bit.addLoadListener(function () {
+            if(that._data.clip) that.clip(bit,that._data.clip)
+            else that.bitmap=bit
+            if(!this.isRun(1)) this.setRun(1,true)
+            if(!this.isRun(2)) this.setRun(2,true)
+           }.bind(this)
+        )
+    }
+    _.Shape.prototype.clip = function(bit,clip) {
+        this.bitmap=new Bitmap(clip[6]+clip[4]*2,clip[7]+clip[5]*2)
+        this.bitmap.blt(bit,clip[0],clip[1],clip[2],clip[3],clip[4],clip[5],clip[6],clip[7])
+    }
 
+    _.Shape.prototype.shape=function(){
+        let item=this._data
+        if(item) {
+            switch (item.cover) {
+                case 1:
+                    this.scale.x = Math.max(LIM.UTILS.lengthNum(item.h) / this.height,LIM.UTILS.lengthNum(item.w) / this.width)
+                    this.scale.y = this.scale.x
+                    break
+                case 2:
+                    this.scale.x = Math.min(LIM.UTILS.lengthNum(item.h) / this.height,LIM.UTILS.lengthNum(item.w) / this.width)
+                    this.scale.y = this.scale.x
+                    break
+                default:
+                    this.scale.x = LIM.UTILS.lengthNum(item.w) / this.width
+                    this.scale.y = LIM.UTILS.lengthNum(item.h) / this.height
+                    break
+
+            }
+            this.anchor.x = 0.5
+            this.anchor.y = 0.5
+            this.x = (this.width * this.anchor.x + LIM.UTILS.lengthNum(item.x)) * this.scale.x
+            this.y = (this.height * this.anchor.y + LIM.UTILS.lengthNum(item.y)) * this.scale.y
+            this.rotation = item.rota/180*Math.PI
+            this.alpha = item.alpha
+        }
+    }
+    _.Shape.prototype.render=function(){
+        if(this.isRun(1)) this.setRun(1,false)
+        this._colorTone=this._data.tone||[0,0,0]
+        this._blendColor=this._data.blend||[0,0,0]
+        this._refresh()
+    }
+    
+    
     _.Shape.prototype.isActi=function(){return this._com.acti}
     _.Shape.prototype.isRun=function(bit){return LIM.UTILS.atBit(this._com.run,bit)}
     _.Shape.prototype.setRun=function(bit,bool){
+        console.log(bit+"//"+bool)
         this._com.run = LIM.UTILS.setBit(this._com.run,bit,bool);
     }
     

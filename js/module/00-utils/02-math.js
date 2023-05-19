@@ -250,7 +250,6 @@ LIM.UTILS=LIM.UTILS||{};
 
     /**获得百分比*/
     _.lengthNum=function(num){
-        console.log(num)
         try {
             if(isNaN(num))
             {
@@ -258,14 +257,12 @@ LIM.UTILS=LIM.UTILS||{};
                     let arr = num.split("w")
                     let a = parseFloat(arr[0]) * 0.01 * Graphics.width
                     let b = arr[1] ? parseFloat(arr[1]) : 0
-                    console.log(a+b)
                     return a + b
                 }
                 else if(num.split("h").length>1) {
                     let arr = num.split("h")
                     let a = parseFloat(arr[0]) * 0.01 * Graphics.height
                     let b = arr[1] ? parseFloat(arr[1]) : 0
-                    console.log(a+b)
                     return a + b
                 }
                 else return 0
