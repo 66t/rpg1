@@ -144,13 +144,13 @@ LIM.SCENE=LIM.SCENE||{};
         this.children=[]
         let arr=[]
         for(let key of Object.keys(this._item))
-            arr.push({key:key,index:this._item[key]._index})
+            arr.push({key:key,index:this._item[key]._index||0})
         arr.sort(LIM.UTILS.sortBy("index",false))
         for(let item of arr)
             if(this._item[item.key]) {
                 if(this._data.group[item.key]&&this._item[this._data.group[item.key]]){
                     let pant=this._item[this._data.group[item.key]]
-                    let index=this._item[item.key]._com.index
+                    let index=item.index
                     if(pant.children.length)
                         for(let i=0;i<pant.children.length;i++){
                             if(pant.children[i]._com) if(index<pant.children[i]._com.index) {pant.addChildAt(this._item[item.key],i);i=pant.children.length}

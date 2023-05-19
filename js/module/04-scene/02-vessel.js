@@ -21,7 +21,7 @@ LIM.SCENE=LIM.SCENE||{};
 
     _.Vessel.prototype.update = function () {
         Sprite.prototype.update.call(this);
-        if(this._com.run>=0) {
+        if(this.isActi()) {
             this.refresh()
         }
     }
@@ -84,7 +84,7 @@ LIM.SCENE=LIM.SCENE||{};
         this.alpha=LIM.UTILS.lengthNum(this._data.alpha)
         this.triggerMove()
     }
-
+    _.Vessel.prototype.isActi=function(){return this._com.acti}
     _.Vessel.prototype.isRun=function(bit){return LIM.UTILS.atBit(this._com.run,bit)}
     _.Vessel.prototype.setRun=function(bit,bool){
         this._com.run = LIM.UTILS.setBit(this._com.run,bit,bool);
