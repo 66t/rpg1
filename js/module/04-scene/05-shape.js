@@ -11,7 +11,10 @@ LIM.SCENE=LIM.SCENE||{};
             configurable: true}
     });
     _.Shape.prototype.initialize = function (origin,name,com) {
+        this._action=[]
         this._com=com
+        this._com.mode=-1
+        this._com.next=0
         this._name=name
         this._origin=origin
         Sprite.prototype.initialize.call(this);//;
@@ -25,27 +28,45 @@ LIM.SCENE=LIM.SCENE||{};
         }
     }
     _.Shape.prototype.refresh = function () {
-        if(this._com.next!==this._com.mode) this.shiftMode()
+        if(this._action.length) this.executeAction()
+        else if(this._com.next!==this._com.mode) this.shiftMode()
+        
         if(this.isRun(0)) this.draw()
         if(this.isRun(1)) this.render()
         if(this.isRun(2)) this.shape()
+    }
+    _.Shape.prototype.executeAction=function() {
+        let item = this._action[0]
+        if (item.time == 0) this._origin.triggerFun(this._action[0].funS)
+        if(item.time==item.change){
+            this._origin.triggerFun(this._action[0].funC)
+        }
+        if(item.time==item.frame){
+            this._origin.triggerFun(this._action[0].funE)
+            this._action.splice(0,1)
+        }
+        item.time++
     }
     _.Shape.prototype.shiftMode=function(){
         let index1=this._index
         this._data=this._com.data[this._com.next]
         let index2=this._index
         if(index1!=index2&&!this._origin.isRun(1)) this._origin.setRun(1,true)
-        this.pushAction(this._com.mode,this._com.next)
+        let mode=this._com.mode
         this._com.mode=this._com.next
+        this.pushAction(mode,this._com.next)
     }
     _.Shape.prototype.pushAction=function(mode,next){
         let fun=mode+"_"+next
-        if(this._com.action[fun]){}
+        if(this._com.action[fun]){
+            this._com.action[fun].time=0
+            this._action.push(this._com.action[fun])
+        }
         else if(!this.isRun(0)) this.setRun(0,true)
     }
     
     
-    _.Shape.prototype.draw = function() {
+    _.Shape.prototype.draw=function() {
         if(this.isRun(0)) this.setRun(0,false)
         let bit = this._origin.getBit(this._data.bit)
         let that=this
@@ -57,13 +78,21 @@ LIM.SCENE=LIM.SCENE||{};
            }.bind(this)
         )
     }
-    _.Shape.prototype.clip = function(bit,clip) {
+    _.Shape.prototype.clip=function(bit,clip) {
         this.bitmap=new Bitmap(clip[6]+clip[4]*2,clip[7]+clip[5]*2)
         this.bitmap.blt(bit,clip[0],clip[1],clip[2],clip[3],clip[4],clip[5],clip[6],clip[7])
     }
-
+  
+    _.Shape.prototype.render=function(){
+        if(this.isRun(1)) this.setRun(1,false)
+        this._colorTone=this._data.tone||[0,0,0]
+        this._blendColor=this._data.blend||[0,0,0]
+        this._refresh()
+    }
     _.Shape.prototype.shape=function(){
+        if(this.isRun(2)) this.setRun(2,false)
         let item=this._data
+       
         if(item) {
             switch (item.cover) {
                 case 1:
@@ -87,18 +116,9 @@ LIM.SCENE=LIM.SCENE||{};
             this.alpha = item.alpha
         }
     }
-    _.Shape.prototype.render=function(){
-        if(this.isRun(1)) this.setRun(1,false)
-        this._colorTone=this._data.tone||[0,0,0]
-        this._blendColor=this._data.blend||[0,0,0]
-        this._refresh()
-    }
-    
-    
     _.Shape.prototype.isActi=function(){return this._com.acti}
     _.Shape.prototype.isRun=function(bit){return LIM.UTILS.atBit(this._com.run,bit)}
     _.Shape.prototype.setRun=function(bit,bool){
-        console.log(bit+"//"+bool)
         this._com.run = LIM.UTILS.setBit(this._com.run,bit,bool);
     }
     

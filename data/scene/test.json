@@ -14,24 +14,21 @@
   },
   "vessel":{
     "1":{
-      "mode":-1,
-      "next":0, 
       "acti": true,
       "run":0,
       "ope":0,
       "data":[
         {"alpha":1,"x":"10w-20","y":"10h-20","index":100},
-        {"alpha":1,"x":100,"y":100, "index":50}
+        {"alpha":0.9,"x":200,"y":100, "index":50}
       ],
       "action":{
-        "0_1":{"wave":5,"frame":200,"fun":[]}
+        "-1_0":{"wave":5,"frame":0,"fun":["#mode:v_1:1"]},
+        "0_1":{"wave":4,"frame":200,"fun":[]}
       }
     }
   },
   "window": {
     "1":{
-      "mode":-1,
-      "next":0,
       "acti": true,
       "run":0,
       "ope":0,
@@ -55,14 +52,11 @@
           "text": [{"x":0,"y":0, "id": "a"},{"x":200,"y":100, "id": "a"}]
         }
       ],
-      "action":{
-      }
+      "action":{}
     }
   },
   "command": {
     "1":{
-      "mode":-1,
-      "next":0,
       "acti": true,
       "run":0,
       "ope":3,
@@ -113,22 +107,36 @@
   },
   "shape": {
     "1": {
-      "mode":-1,
-      "next":0,
-      "acti": true,
+      "acti": false,
       "run":0,
       "data": [
         {   
           "index":400,
           "bit":"t",
-          "cover":1,
-          "w":"100w","h":"100h",
-          "x":"0","y":0,"rota":0,"alpha":0.8,
+          "cover":2,
+          "w":"100w","h":"50h",
+          "x":0,"y":0,"rota":90,"alpha":0.1,
           "clip":[0,0,873,1294,0,0,873,1294],
           "tone":[120,0,0,0],"blend":[0,120,120,120]
+        },
+        {
+          "index":100,
+          "bit":"t",
+          "cover":1,
+          "w":"100w","h":"50h",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "clip":[0,0,873,1294,0,0,873,1294],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
         }
       ],
-      "action": {}
+      "action": {
+        "-1_0": {
+          "frame":0,"change":0,
+          "anime1":{},"anime2":{},
+          "filter1":{},"filter2":{},
+          "funS":["#mode:s_1:1"],"funC":[],"funE":[]
+        }
+      }
     }
   },
   "text": {

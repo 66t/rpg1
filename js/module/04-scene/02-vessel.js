@@ -14,6 +14,8 @@ LIM.SCENE=LIM.SCENE||{};
     _.Vessel.prototype.initialize = function (origin,name,com) {
         this._action=[]
         this._com=com
+        this._com.mode=-1
+        this._com.next=0
         this._name=name
         this._origin=origin
         Sprite.prototype.initialize.call(this);//;
@@ -60,8 +62,10 @@ LIM.SCENE=LIM.SCENE||{};
         let index2=this._index
 
         if(index1!=index2&&!this._origin.isRun(1)) this._origin.setRun(1,true)
-        this.pushAction(this._com.mode,this._com.next)
+         let mode=this._com.mode
         this._com.mode=this._com.next
+        this.pushAction(mode,this._com.next)
+     
     }
     _.Vessel.prototype.pushAction=function(mode,next){
         let fun=mode+"_"+next
@@ -73,7 +77,14 @@ LIM.SCENE=LIM.SCENE||{};
             if(this.x!==x) data.x=[this.x,x]
             if(this.y!==y) data.y=[this.y,y]
             if(this.alpha!==this._data.alpha) data.alpha=[this.alpha,this._data.alpha]
-            this._action.push({data:data,time:0,frame:v.frame,wave:v.wave,fun:v.fun})
+            
+            if(v.frame) this._action.push({data:data,time:0,frame:v.frame,wave:v.wave,fun:v.fun})
+            else {
+                this.x=x
+                this.y=y
+                this.alpha=this._data.alpha
+                this._origin.triggerFun(v.fun)
+            }
         }
         else if(!this.isRun(0)) this.setRun(0,true)
     }

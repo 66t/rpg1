@@ -132,7 +132,6 @@ LIM.SCENE=LIM.SCENE||{};
      *   2. 若动画时间小于总帧数，则增加动画时间，否则执行动画结束后的回调函数并移除动画数据
      */
     _.Vessel.prototype.move=function(){
-
         if(this._dar[0].time>0) {
             let r=LIM.UTILS.waveNum(this._dar[0].wave,this._dar[0].frame,this._dar[0].time)
             for (let key of Object.keys(this._dar[0].data)) {
@@ -147,7 +146,6 @@ LIM.SCENE=LIM.SCENE||{};
         }
         if(this._dar[0].time<this._dar[0].frame) this._dar[0].time++
         else {
-            this._com.run*=2
             this._origin.triggerFun(this._dar[0].fun)
             this._dar.splice(0,1)
         }

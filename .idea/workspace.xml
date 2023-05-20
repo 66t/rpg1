@@ -4,6 +4,7 @@
     <list default="true" id="ab70e38f-a7f5-4a56-ae11-24f412a275e9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/data/scene/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/scene/test.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/module/04-scene/01-scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/01-scene.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/04-scene/02-vessel.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/02-vessel.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/module/04-scene/05-shape.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/05-shape.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -100,8 +101,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -135,6 +136,7 @@
       <workItem from="1684394884546" duration="130000" />
       <workItem from="1684395042747" duration="115000" />
       <workItem from="1684461618512" duration="11000" />
+      <workItem from="1684506122629" duration="56000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1684395094847</created>
@@ -147,13 +149,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="870000" />
+    <option name="totallyTimeSpent" value="926000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25799572" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26066098" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />

@@ -44,7 +44,6 @@ LIM.SCENE=LIM.SCENE||{};
         this._run = 0b111;
     };
     _.Scene.prototype.refresh = function(){
-        this._time++
         if(this.isRun(2)) {
             this.createItem();
         }
@@ -55,6 +54,7 @@ LIM.SCENE=LIM.SCENE||{};
             for(let item of this.children)
                 item.update();
         }
+        this._time++
     }
 
     _.Scene.prototype.createItem = function () {
@@ -161,9 +161,20 @@ LIM.SCENE=LIM.SCENE||{};
                 else this.addChild(this._item[item.key])
             }
     }
-    _.Scene.prototype.triggerFun = function(eve) {
-        console.log("触发功能");
-        // ...触发功能的逻辑...
+    _.Scene.prototype.triggerFun=function(eve){
+        for(let item of eve)
+            if(item[0]=="#")
+                this.exFun(item.split(":"))
+            else {}
+    }
+    _.Scene.prototype.exFun=function(eve){
+        switch (eve[0]) {
+            case "#mode":
+                if(this._item[eve[1]]) {
+                    this._item[eve[1]]._com.next = eve[2]
+                    break
+                }
+        }
     }
 
     _.Scene.prototype.checkDataLoaded = function () {
