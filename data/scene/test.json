@@ -18,12 +18,12 @@
       "run":0,
       "ope":0,
       "data":[
-        {"alpha":1,"x":"10w-20","y":"10h-20","index":100},
-        {"alpha":0.9,"x":200,"y":100, "index":50}
+        {"alpha":1,"x":"10w-20","y":"10h-20","index":20},
+        {"alpha":0.9,"x":500,"y":100, "index":10}
       ],
       "action":{
         "-1_0":{"wave":5,"frame":0,"fun":["#mode:v_1:1"]},
-        "0_1":{"wave":4,"frame":200,"fun":[]}
+        "0_1":{"wave":4,"frame":100,"fun":["#activa:s_1"]}
       }
     }
   },
@@ -110,17 +110,17 @@
       "acti": false,
       "run":0,
       "data": [
-        {   
-          "index":400,
+        {
+          "index":15,
           "bit":"t",
-          "cover":2,
+          "cover":1,
           "w":"100w","h":"50h",
-          "x":0,"y":0,"rota":90,"alpha":0.1,
+          "x":0,"y":0,"rota":0,"alpha":1,
           "clip":[0,0,873,1294,0,0,873,1294],
-          "tone":[120,0,0,0],"blend":[0,120,120,120]
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
         },
         {
-          "index":100,
+          "index":8,
           "bit":"t",
           "cover":1,
           "w":"100w","h":"50h",
@@ -134,7 +134,7 @@
           "frame":0,"change":0,
           "anime1":{},"anime2":{},
           "filter1":{},"filter2":{},
-          "funS":["#mode:s_1:1"],"funC":[],"funE":[]
+          "funS":[],"funC":[],"funE":[]
         }
       }
     }

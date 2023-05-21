@@ -5,11 +5,7 @@ LIM.SCENE=LIM.SCENE||{};
     _.Vessel.prototype = Object.create(Sprite.prototype)
     _.Vessel.prototype.constructor = _.Vessel;
     Object.defineProperties(_.Vessel.prototype, {
-     _index: {
-         get: function ()
-          {return this._com.data.length>this._com.next?this._com.data[this._com.next].index:0;},
-          configurable: true}
-    });
+     _index: {get: function () {return this._data?this._data.index:0}, configurable: true}});
 
     _.Vessel.prototype.initialize = function (origin,name,com) {
         this._action=[]
@@ -60,7 +56,6 @@ LIM.SCENE=LIM.SCENE||{};
         let index1=this._index
         this._data=this._com.data[this._com.next]
         let index2=this._index
-
         if(index1!=index2&&!this._origin.isRun(1)) this._origin.setRun(1,true)
          let mode=this._com.mode
         this._com.mode=this._com.next

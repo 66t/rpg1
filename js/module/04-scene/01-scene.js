@@ -168,12 +168,14 @@ LIM.SCENE=LIM.SCENE||{};
             else {}
     }
     _.Scene.prototype.exFun=function(eve){
-        switch (eve[0]) {
+        if(this._item[eve[1]])
+            switch (eve[0]) {
             case "#mode":
-                if(this._item[eve[1]]) {
-                    this._item[eve[1]]._com.next = eve[2]
-                    break
-                }
+                this._item[eve[1]]._com.next = eve[2]
+                break
+            case "#activa":
+                this._item[eve[1]]._com.acti = true
+                break
         }
     }
 

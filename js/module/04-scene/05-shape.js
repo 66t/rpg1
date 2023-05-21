@@ -44,6 +44,7 @@ LIM.SCENE=LIM.SCENE||{};
         if(item.time==item.frame){
             this._origin.triggerFun(this._action[0].funE)
             this._action.splice(0,1)
+            this.setRun(0,true)
         }
         item.time++
     }
