@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ab70e38f-a7f5-4a56-ae11-24f412a275e9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/scene/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/scene/test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/04-scene/01-scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/01-scene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/04-scene/02-vessel.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/02-vessel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/04-scene/05-shape.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/05-shape.js" afterDir="false" />
-    </list>
+    <list default="true" id="ab70e38f-a7f5-4a56-ae11-24f412a275e9" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +71,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -103,7 +98,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -140,6 +134,7 @@
       <workItem from="1684506122629" duration="56000" />
       <workItem from="1684664996337" duration="304000" />
       <workItem from="1684686622618" duration="5000" />
+      <workItem from="1684722803529" duration="8000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1684395094847</created>
@@ -152,13 +147,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1235000" />
+    <option name="totallyTimeSpent" value="1243000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26599148" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26865673" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />

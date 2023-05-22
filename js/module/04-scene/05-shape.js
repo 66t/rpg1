@@ -37,17 +37,32 @@ LIM.SCENE=LIM.SCENE||{};
     }
     _.Shape.prototype.executeAction=function() {
         let item = this._action[0]
-        if (item.time == 0) this._origin.triggerFun(this._action[0].funS)
+
+        //执行动画
+        if(item.time<item.change) this.executeAnime(item.anime1,[item.change,item.time])
+        else this.executeAnime(item.anime2,[item.frame-item.change,item.time-item.change])
+        
+        //执行方法
+        if (item.time == 0) {
+            this._origin.triggerFun(this._action[0].funS)
+        }
         if(item.time==item.change){
             this._origin.triggerFun(this._action[0].funC)
         }
         if(item.time==item.frame){
             this._origin.triggerFun(this._action[0].funE)
-            this._action.splice(0,1)
             this.setRun(0,true)
+            this._action.splice(0,1)
         }
         item.time++
     }
+    _.Shape.prototype.executeAnime=function(anime,time) {
+        for(let item of Object.keys(anime)){
+            let r = LIM.UTILS.waveNum(anime[item].wave, time[0],time[1])
+            console.log(r)
+        }
+    }
+    
     _.Shape.prototype.shiftMode=function(){
         let index1=this._index
         this._data=this._com.data[this._com.next]

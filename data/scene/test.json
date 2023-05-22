@@ -122,7 +122,7 @@
         {
           "index":8,
           "bit":"t",
-          "cover":1,
+          "cover":2,
           "w":"100w","h":"50h",
           "x":0,"y":0,"rota":0,"alpha":1,
           "clip":[0,0,873,1294,0,0,873,1294],
@@ -133,6 +133,13 @@
         "-1_0": {
           "frame":0,"change":0,
           "anime1":{},"anime2":{},
+          "filter1":{},"filter2":{},
+          "funS":["#mode:s_1:1"],"funC":[],"funE":[]
+        },
+        "0_1": {
+          "frame":200,"change":100,
+          "anime1":{"alpha":{"wave": 1,"val1":1,"val2":0}},
+          "anime2":{"alpha":{"wave": 1,"val1":0,"val2":1}},
           "filter1":{},"filter2":{},
           "funS":[],"funC":[],"funE":[]
         }
