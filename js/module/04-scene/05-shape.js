@@ -34,13 +34,21 @@ LIM.SCENE=LIM.SCENE||{};
         if(this.isRun(0)) this.draw()
         if(this.isRun(1)) this.render()
         if(this.isRun(2)) this.shape()
+        if(this.isRun(3)) this.filter()
     }
     _.Shape.prototype.executeAction=function() {
         let item = this._action[0]
 
-        //执行动画
-        if(item.time<item.change) this.executeAnime(item.anime1,[item.change,item.time])
-        else this.executeAnime(item.anime2,[item.frame-item.change,item.time-item.change])
+        //执行动画 执行滤镜
+        if(item.time<item.change) {
+            this.executeAnime(item.anime1, [item.change, item.time])
+            this.executeFilter(item.filter1,[item.change, item.time])
+        }
+        else {
+            this.executeAnime(item.anime2, [item.frame - item.change, item.time - item.change])
+            this.executeFilter(item.filter2,[item.frame - item.change, item.time - item.change])
+        }
+        
         
         //执行方法
         if (item.time == 0) {
@@ -48,10 +56,10 @@ LIM.SCENE=LIM.SCENE||{};
         }
         if(item.time==item.change){
             this._origin.triggerFun(this._action[0].funC)
+            this.setRun(0,true)
         }
         if(item.time==item.frame){
             this._origin.triggerFun(this._action[0].funE)
-            this.setRun(0,true)
             this._action.splice(0,1)
         }
         item.time++
@@ -59,8 +67,20 @@ LIM.SCENE=LIM.SCENE||{};
     _.Shape.prototype.executeAnime=function(anime,time) {
         for(let item of Object.keys(anime)){
             let r = LIM.UTILS.waveNum(anime[item].wave, time[0],time[1])
-            console.log(r)
+            let val=anime[item].val1+(anime[item].val2-anime[item].val1)*r
+           switch (item) {
+               case "x":
+                   this.anchor.x=0.5+val;break
+               case "y":
+                   this.anchor.y=0.5+val;break
+               case "alpha":
+                   this.alpha=val;break
+                   
+           }
         }
+    }
+    _.Shape.prototype.executeFilter=function(filter,time) {
+        console.log(filter)
     }
     
     _.Shape.prototype.shiftMode=function(){
@@ -91,6 +111,7 @@ LIM.SCENE=LIM.SCENE||{};
             else that.bitmap=bit
             if(!this.isRun(1)) this.setRun(1,true)
             if(!this.isRun(2)) this.setRun(2,true)
+            if(!this.isRun(3)) this.setRun(3,true)
            }.bind(this)
         )
     }
@@ -132,11 +153,61 @@ LIM.SCENE=LIM.SCENE||{};
             this.alpha = item.alpha
         }
     }
+    _.Shape.prototype.filter=function(){
+        if(this.isRun(3)) this.setRun(3,false)
+        let item=this._data
+        this.filters=[]
+        this.filterType=[]
+        if(item.filter.length)
+        for(let i=0;i<item.filter.length;i++) {
+            let filter = this.typeFilter(item.filter[i].type)
+            this.filterType[i]=item.filter[i].type
+            for (let key of Object.keys(item.filter[i].data)) 
+                if(key[0]=="#") filter.uniforms[key.slice(1)] = item.filter[i].data[key.slice(1)]
+                else  filter[key] = item.data[key]
+            switch (i) {
+                case 0:this.filters=[filter];break
+                case 1:this.filters=[this.filters[0],filter];break
+                case 2:this.filters=[this.filters[0],this.filters[1],filter];break
+                case 3:this.filters=[this.filters[0],this.filters[1],this.filters[2],filter];break
+            }
+        }
+    }
+    _.Shape.prototype.setFilter=function(data){
+
+    }
     _.Shape.prototype.isActi=function(){return this._com.acti}
     _.Shape.prototype.isRun=function(bit){return LIM.UTILS.atBit(this._com.run,bit)}
     _.Shape.prototype.setRun=function(bit,bool){
         this._com.run = LIM.UTILS.setBit(this._com.run,bit,bool);
     }
     
+    _.Shape.prototype.typeFilter=function(type){
+        switch (type) {
+            case "adj": return new PIXI.filters.AdjustmentFilter()
+            case "bloom": return new PIXI.filters.AdvancedBloomFilter()
+            case "ascii": return new PIXI.filters.AsciiFilter()
+            case "bulge": return new PIXI.filters.BulgePinchFilter()
+            case "colorRep": return new PIXI.filters.ColorReplaceFilter()
+            case "cross": return new PIXI.filters.CrossHatchFilter()
+            case "crt": return new PIXI.filters.CRTFilter()
+            case "dot": return new PIXI.filters.DotFilter()
+            case "emboss": return new PIXI.filters.EmbossFilter()
+            case "glitch": return new PIXI.filters.GlitchFilter()
+            case "glow": return new PIXI.filters.GlowFilter()
+            case "motion": return new PIXI.filters.MotionBlurFilter([100,100],3,10)
+            case "outline": return new PIXI.filters.OutlineFilter()
+            case "old": return new PIXI.filters.OldFilmFilter()
+            case "pixel": return new PIXI.filters.PixelateFilter()
+            case "radial": return new PIXI.filters.RadialBlurFilter(100,{x:0,y:0})
+            case "rgb": return new PIXI.filters.RGBSplitFilter([0,0],[0,0],[0,0])
+            case "tiltX": return new PIXI.filters.TiltShiftXFilter()
+            case "tiltY": return new PIXI.filters.TiltShiftYFilter()
+            case "twist": return new PIXI.filters.TwistFilter()
+            case "zoom": return new PIXI.filters.ZoomBlurFilter()
+        }
+    }
+    _.Shape.prototype.changeFilter=function(data){}
+  
     
 })(LIM.SCENE);
