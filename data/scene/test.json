@@ -109,6 +109,7 @@
     "1": {
       "acti": false,
       "run":0,
+      "loop": true,
       "data": [
         {
           "index":15,
@@ -117,7 +118,7 @@
           "w":"100w","h":"50h",
           "x":0,"y":0,"rota":0,"alpha":1,
           "filter":[
-            {"type":"crt","hook":{},"data":{}}
+            {"type":"adj","data":{"alpha": 1,"gamma":1,"saturation":3,"contrast":3,"brightness":1,"curvature":1,"lineWidth":5.5,"lineContrast": 4}}
           ],
           "clip":[0,0,873,1294,0,0,873,1294],
           "tone":[0,0,0,0],"blend":[0,0,0,0]
@@ -144,16 +145,30 @@
           "funS":["#mode:s_1:1"],"funC":[],"funE":[]
         },
         "0_1": {
-          "frame":200,"change":100,
-          "anime1":{"alpha":{"wave": 1,"val1":1,"val2":0},"x":{"wave": 3,"val1":0,"val2":0.2}},
+          "frame":300,"change":200,
+          "anime1":{"alpha":{"wave": 1,"val1":1,"val2":1},"x":{"wave": 3,"val1":0,"val2":0.8}},
           "anime2":{"x":{"wave": 6,"val1":0.2,"val2":0}},
-          "filter1":{"id":0,"type":"crt",
+          "filter1":[{
+            "id":0,"type":"adj",
             "data":{
-              "seed":{"wave": 1,"val1":2,"val2":40},
-              "#curvature":{"wave": 1,"val1":10,"val2":0},
-              "#lineContrast":{"wave": 1,"val1":0.5,"val2":1},
-              "#lineWidth":{"wave": 1,"val1":2,"val2":4}
-            }},
+              "lineContrast":{"wave": 1,"val1":4,"val2":0},
+              "lineWidth":{"wave": 1,"val1":5.5,"val2":0}
+            }
+          }],
+          "filter2":{},
+          "funS":[],"funC":[],"funE":[]
+        },
+        "1":{
+          "frame":300,"change":200,
+          "anime1":{"alpha":{"wave": 1,"val1":1,"val2":1},"x":{"wave": 3,"val1":0,"val2":0.8}},
+          "anime2":{"x":{"wave": 6,"val1":0.2,"val2":0}},
+          "filter1":[{
+            "id":0,"type":"adj",
+            "data":{
+              "lineContrast":{"wave": 1,"val1":4,"val2":0},
+              "lineWidth":{"wave": 1,"val1":5.5,"val2":0}
+            }
+          }],
           "filter2":{},
           "funS":[],"funC":[],"funE":[]
         }

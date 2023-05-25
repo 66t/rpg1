@@ -17,9 +17,9 @@ LIM.SCENE=LIM.SCENE||{};
         this._com.next=0
         this._name=name
         this._origin=origin
+        this._time=0
         Sprite.prototype.initialize.call(this);//;
     }
-
     
     _.Shape.prototype.update = function () {
         Sprite.prototype.update.call(this);
@@ -30,17 +30,19 @@ LIM.SCENE=LIM.SCENE||{};
     _.Shape.prototype.refresh = function () {
         if(this._action.length) this.executeAction()
         else if(this._com.next!==this._com.mode) this.shiftMode()
+        else if(this._com.loop) this.loopMode()
         
         if(this.isRun(0)) this.draw()
         if(this.isRun(1)) this.render()
         if(this.isRun(2)) this.shape()
         if(this.isRun(3)) this.filter()
+        this._time++
     }
     _.Shape.prototype.executeAction=function() {
         let item = this._action[0]
 
         //执行动画 执行滤镜
-        if(item.time<item.change) {
+        if(item.time<=item.change) {
             this.executeAnime(item.anime1, [item.change, item.time])
             this.executeFilter(item.filter1,[item.change, item.time])
         }
@@ -49,11 +51,8 @@ LIM.SCENE=LIM.SCENE||{};
             this.executeFilter(item.filter2,[item.frame - item.change, item.time - item.change])
         }
         
-        
         //执行方法
-        if (item.time == 0) {
-            this._origin.triggerFun(this._action[0].funS)
-        }
+        if (item.time == 0) {this._origin.triggerFun(this._action[0].funS)}
         if(item.time==item.change){
             this._origin.triggerFun(this._action[0].funC)
             this.setRun(0,true)
@@ -79,9 +78,25 @@ LIM.SCENE=LIM.SCENE||{};
            }
         }
     }
-    _.Shape.prototype.executeFilter=function(filter,time) {
-        console.log(filter)
+    _.Shape.prototype.executeFilter=function(data,time) {
+       for (let i=0;i<data.length;i++) {
+           let filter
+           if (this.filterType[data[i].id] === data[i].type) 
+               filter = this.filters[data[i].id]
+           else {
+               this.filterType[data[i].id] = data[i].type
+               filter = this.typeFilter(data[i].type)
+               this.setFilter(i, filter)
+           }
+           for(let key of Object.keys(data[i].data)){
+               let r = LIM.UTILS.waveNum(data[i].data[key].wave, time[0],time[1])
+               let val=data[i].data[key].val1+(data[i].data[key].val2-data[i].data[key].val1)*r
+               if(key[0]=="#") filter.uniforms[key.slice(1)] = val
+               else  filter[key] = val
+           }
+       }
     }
+    
     
     _.Shape.prototype.shiftMode=function(){
         let index1=this._index
@@ -91,7 +106,17 @@ LIM.SCENE=LIM.SCENE||{};
         let mode=this._com.mode
         this._com.mode=this._com.next
         this.pushAction(mode,this._com.next)
+        if(this._action.length)this.executeAction()
     }
+    _.Shape.prototype.loopMode=function(){
+        let mode=this._com.mode
+        if(this._com.action[mode]){
+            this._com.action[mode].time=0
+            this._action.push(this._com.action[mode])
+            this.executeAction()
+        }
+    }
+    
     _.Shape.prototype.pushAction=function(mode,next){
         let fun=mode+"_"+next
         if(this._com.action[fun]){
@@ -162,28 +187,35 @@ LIM.SCENE=LIM.SCENE||{};
         for(let i=0;i<item.filter.length;i++) {
             let filter = this.typeFilter(item.filter[i].type)
             this.filterType[i]=item.filter[i].type
-            for (let key of Object.keys(item.filter[i].data)) 
+            this.setFilter(i,filter)
+            for (let key of Object.keys(item.filter[i].data))
                 if(key[0]=="#") filter.uniforms[key.slice(1)] = item.filter[i].data[key.slice(1)]
-                else  filter[key] = item.data[key]
-            switch (i) {
-                case 0:this.filters=[filter];break
-                case 1:this.filters=[this.filters[0],filter];break
-                case 2:this.filters=[this.filters[0],this.filters[1],filter];break
-                case 3:this.filters=[this.filters[0],this.filters[1],this.filters[2],filter];break
-            }
+                else  filter[key] = item.filter[i].data[key]
         }
     }
-    _.Shape.prototype.setFilter=function(data){
-
-    }
-    _.Shape.prototype.isActi=function(){return this._com.acti}
-    _.Shape.prototype.isRun=function(bit){return LIM.UTILS.atBit(this._com.run,bit)}
-    _.Shape.prototype.setRun=function(bit,bool){
-        this._com.run = LIM.UTILS.setBit(this._com.run,bit,bool);
-    }
     
+    _.Shape.prototype.setFilter=function(i,filter){
+        switch (i) {
+            case 0:this.filters=[filter];break
+            case 1:this.filters=[this.filters[0],filter];break
+            case 2:this.filters=[this.filters[0],this.filters[1],filter];break
+            case 3:this.filters=[this.filters[0],this.filters[1],this.filters[2],filter];break
+        }
+    }
     _.Shape.prototype.typeFilter=function(type){
         switch (type) {
+
+            //  alpha: 1 (透明度：1)
+            //  blue: 1 (蓝色：1)
+            //  brightness: 1 (亮度：1)
+            //  contrast: 1 (对比度：1)
+            //  curvature: 3.252466 (曲率：3.252466)
+            //  gamma: 1 (伽马：1)
+            //  green: 1 (绿色：1)
+            //  lineContrast: 0.8373767 (线条对比度：0.8373767)
+            //  lineWidth: 3.3495068 (线条宽度：3.3495068)
+            //  red: 1 (红色：1)
+            //  saturation: 1 (饱和度：1)
             case "adj": return new PIXI.filters.AdjustmentFilter()
             case "bloom": return new PIXI.filters.AdvancedBloomFilter()
             case "ascii": return new PIXI.filters.AsciiFilter()
@@ -207,7 +239,10 @@ LIM.SCENE=LIM.SCENE||{};
             case "zoom": return new PIXI.filters.ZoomBlurFilter()
         }
     }
-    _.Shape.prototype.changeFilter=function(data){}
-  
     
+    _.Shape.prototype.isActi=function(){return this._com.acti}
+    _.Shape.prototype.isRun=function(bit){return LIM.UTILS.atBit(this._com.run,bit)}
+    _.Shape.prototype.setRun=function(bit,bool){
+        this._com.run = LIM.UTILS.setBit(this._com.run,bit,bool);
+    }
 })(LIM.SCENE);
