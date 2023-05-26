@@ -33,53 +33,68 @@ LIM.SCENE=LIM.SCENE||{};
         else if(this._com.loop) this.loopMode()
         
         if(this.isRun(0)) this.draw()
-        if(this.isRun(1)) this.render()
-        if(this.isRun(2)) this.shape()
-        if(this.isRun(3)) this.filter()
+        if(this.isRun(1)) this.render(this._data)
+        if(this.isRun(2)) this.shape(this._data)
+        if(this.isRun(3)) this.filter(this._data)
         this._time++
     }
     _.Shape.prototype.executeAction=function() {
         let item = this._action[0]
-
+        
         //执行动画 执行滤镜
-        if(item.time<=item.change) {
-            this.executeAnime(item.anime1, [item.change, item.time])
-            this.executeFilter(item.filter1,[item.change, item.time])
+        if(item.time<item.change) {
+            if(item.anime1)this.executeAnime(item.anime1, [item.change, item.time])
+            if(item.filter1&&item.filter1.length) this.executeFilter(item.filter1,[item.change, item.time])
         }
         else {
-            this.executeAnime(item.anime2, [item.frame - item.change, item.time - item.change])
-            this.executeFilter(item.filter2,[item.frame - item.change, item.time - item.change])
+            if(item.anime2)this.executeAnime(item.anime2, [item.frame - item.change, item.time - item.change])
+            if(item.filter2&&item.filter2.length) this.executeFilter(item.filter2,[item.frame - item.change, item.time - item.change])
         }
-        
         //执行方法
-        if (item.time == 0) {this._origin.triggerFun(this._action[0].funS)}
-        if(item.time==item.change){
-            this._origin.triggerFun(this._action[0].funC)
-            this.setRun(0,true)
+        if (item.time == 0) {
+            if(this._action[0].funS) this._origin.triggerFun(this._action[0].funS)
         }
-        if(item.time==item.frame){
-            this._origin.triggerFun(this._action[0].funE)
+        if(item.time==item.change){
+            if(this._action[0].funC) this._origin.triggerFun(this._action[0].funC)
+            if(!item.while) this.setRun(0,true)
+        }
+        if(item.time>=item.frame){
+            if(this._action[0].funE) this._origin.triggerFun(this._action[0].funE)
             this._action.splice(0,1)
         }
+        
         item.time++
     }
     _.Shape.prototype.executeAnime=function(anime,time) {
-        for(let item of Object.keys(anime)){
-            let r = LIM.UTILS.waveNum(anime[item].wave, time[0],time[1])
-            let val=anime[item].val1+(anime[item].val2-anime[item].val1)*r
-           switch (item) {
-               case "x":
-                   this.anchor.x=0.5+val;break
-               case "y":
-                   this.anchor.y=0.5+val;break
-               case "alpha":
-                   this.alpha=val;break
-                   
-           }
+        let data={}
+        data.x=this._data.x
+        data.y=this._data.y
+        data.alpha=this._data.alpha
+        data.rota=this._data.rota
+        data.w=this._data.w
+        data.h=this._data.h
+        data.cover=this._data.cover
+        
+        for(let key of Object.keys(anime)){
+            if (typeof anime[key] == 'object') {
+                let val=0
+                for(let i=0;i<anime[key].length;i++){
+                    let r = LIM.UTILS.waveNum(anime[key][i].wave, time[0]/(1+anime[key][i].fre*2),time[1])
+                    let v=LIM.UTILS.lengthNum(anime[key][i].val1)+(LIM.UTILS.lengthNum(anime[key][i].val2)-LIM.UTILS.lengthNum(anime[key][i].val1))*r
+                    switch (anime[key][i].count) {
+                        case "add":val+=v;break
+                        case "mul":val*=v;break
+                    }
+                }
+                data[key]=val
+            }
+            else  data[key]=LIM.UTILS.lengthNum(anime[key])
         }
+        this.shape(data)
     }
     _.Shape.prototype.executeFilter=function(data,time) {
-       for (let i=0;i<data.length;i++) {
+       if(data.length)
+        for (let i=0;i<data.length;i++) {
            let filter
            if (this.filterType[data[i].id] === data[i].type) 
                filter = this.filters[data[i].id]
@@ -89,11 +104,16 @@ LIM.SCENE=LIM.SCENE||{};
                this.setFilter(i, filter)
            }
            for(let key of Object.keys(data[i].data)){
-               let r = LIM.UTILS.waveNum(data[i].data[key].wave, time[0],time[1])
-               let val=data[i].data[key].val1+(data[i].data[key].val2-data[i].data[key].val1)*r
+               let r = LIM.UTILS.waveNum(data[i].data[key].wave, time[0]/(1+data[i].data[key].fre*2),time[1])
+               let val=LIM.UTILS.lengthNum(data[i].data[key].val1)+
+                   (LIM.UTILS.lengthNum(data[i].data[key].val2)-LIM.UTILS.lengthNum(data[i].data[key].val1))*r
                if(key[0]=="#") filter.uniforms[key.slice(1)] = val
                else  filter[key] = val
            }
+       }
+       else if(this.filterType.length){
+           this.filterType=[]
+           this.filters=[]
        }
     }
     
@@ -102,6 +122,7 @@ LIM.SCENE=LIM.SCENE||{};
         let index1=this._index
         this._data=this._com.data[this._com.next]
         let index2=this._index
+        
         if(index1!=index2&&!this._origin.isRun(1)) this._origin.setRun(1,true)
         let mode=this._com.mode
         this._com.mode=this._com.next
@@ -116,7 +137,6 @@ LIM.SCENE=LIM.SCENE||{};
             this.executeAction()
         }
     }
-    
     _.Shape.prototype.pushAction=function(mode,next){
         let fun=mode+"_"+next
         if(this._com.action[fun]){
@@ -132,55 +152,55 @@ LIM.SCENE=LIM.SCENE||{};
         let bit = this._origin.getBit(this._data.bit)
         let that=this
         bit.addLoadListener(function () {
-            if(that._data.clip) that.clip(bit,that._data.clip)
-            else that.bitmap=bit
+            that.setBitmap(bit)
             if(!this.isRun(1)) this.setRun(1,true)
             if(!this.isRun(2)) this.setRun(2,true)
             if(!this.isRun(3)) this.setRun(3,true)
            }.bind(this)
         )
     }
+    _.Shape.prototype.setBitmap=function(bit){
+        if(this._data.clip) this.clip(bit,this._data.clip)
+        else this.bitmap=bit
+    }
     _.Shape.prototype.clip=function(bit,clip) {
         this.bitmap=new Bitmap(clip[6]+clip[4]*2,clip[7]+clip[5]*2)
-        this.bitmap.blt(bit,clip[0],clip[1],clip[2],clip[3],clip[4],clip[5],clip[6],clip[7])
+        this.bitmap.blt(bit,clip[0],clip[1],clip[2],clip[3],LIM.UTILS.lengthNum(clip[4]),LIM.UTILS.lengthNum(clip[5]),LIM.UTILS.lengthNum(clip[6]),LIM.UTILS.lengthNum(clip[7]))
     }
-  
-    _.Shape.prototype.render=function(){
+    _.Shape.prototype.render=function(item){
         if(this.isRun(1)) this.setRun(1,false)
-        this._colorTone=this._data.tone||[0,0,0]
-        this._blendColor=this._data.blend||[0,0,0]
+        this._colorTone=item.tone||[0,0,0]
+        this._blendColor=item.blend||[0,0,0]
         this._refresh()
     }
-    _.Shape.prototype.shape=function(){
+    _.Shape.prototype.shape=function(item){
         if(this.isRun(2)) this.setRun(2,false)
-        let item=this._data
-       
-        if(item) {
-            switch (item.cover) {
-                case 1:
-                    this.scale.x = Math.max(LIM.UTILS.lengthNum(item.h) / this.height,LIM.UTILS.lengthNum(item.w) / this.width)
-                    this.scale.y = this.scale.x
-                    break
-                case 2:
-                    this.scale.x = Math.min(LIM.UTILS.lengthNum(item.h) / this.height,LIM.UTILS.lengthNum(item.w) / this.width)
-                    this.scale.y = this.scale.x
-                    break
-                default:
-                    this.scale.x = LIM.UTILS.lengthNum(item.w) / this.width
-                    this.scale.y = LIM.UTILS.lengthNum(item.h) / this.height
-                    break
-            }
-            this.anchor.x = 0.5
-            this.anchor.y = 0.5
-            this.x = (this.width * this.anchor.x + LIM.UTILS.lengthNum(item.x)) * this.scale.x
-            this.y = (this.height * this.anchor.y + LIM.UTILS.lengthNum(item.y)) * this.scale.y
-            this.rotation = item.rota/180*Math.PI
-            this.alpha = item.alpha
+        this.cover(item)
+        this.anchor.x = 0.5
+        this.anchor.y = 0.5
+        this.x =  (this.width*0.5*this.scale.x)+LIM.UTILS.lengthNum(item.x)
+        this.y =  (this.height*0.5*this.scale.y)+LIM.UTILS.lengthNum(item.y)
+        this.rotation = item.rota/180*Math.PI
+        this.alpha = item.alpha
+    }
+    _.Shape.prototype.cover=function(item){
+        switch (item.cover) {
+            case 1:
+                this.scale.x = Math.max(LIM.UTILS.lengthNum(item.h) / this.height,LIM.UTILS.lengthNum(item.w) / this.width)
+                this.scale.y = this.scale.x
+                break
+            case 2:
+                this.scale.x = Math.min(LIM.UTILS.lengthNum(item.h) / this.height,LIM.UTILS.lengthNum(item.w) / this.width)
+                this.scale.y = this.scale.x
+                break
+            default:
+                this.scale.x = LIM.UTILS.lengthNum(item.w) / this.width
+                this.scale.y = LIM.UTILS.lengthNum(item.h) / this.height
+                break
         }
     }
-    _.Shape.prototype.filter=function(){
+    _.Shape.prototype.filter=function(item){
         if(this.isRun(3)) this.setRun(3,false)
-        let item=this._data
         this.filters=[]
         this.filterType=[]
         if(item.filter.length)

@@ -41,19 +41,14 @@ LIM.SCENE=LIM.SCENE||{};
     _.Scene.prototype.run = function() {
         this._time = 0;
         this._load = 1;
-        this._run = 0b111;
+        this._run = 0b1111;
     };
     _.Scene.prototype.refresh = function(){
-        if(this.isRun(2)) {
-            this.createItem();
-        }
-        if(this.isRun(1)) {
-            this.showItem();
-        }
-        if(this.isRun(0)) {
-            for(let item of this.children)
-                item.update();
-        }
+        if(this.isRun(2)) this.createItem();
+        if(this.isRun(1)) this.showItem();
+        if(this.isRun(0)) for(let item of this.children) item.update();
+        if(this.isRun(3)) this.effector()
+        
         this._time++
     }
 
@@ -69,6 +64,9 @@ LIM.SCENE=LIM.SCENE||{};
         this.createShape();
         this.createText();
     }
+    
+    
+    
     _.Scene.prototype.createVessel = function () {
         if(this._data.vessel) {
             for(let key of Object.keys(this._data.vessel)) {
@@ -135,7 +133,10 @@ LIM.SCENE=LIM.SCENE||{};
         }
     }
 
-
+    _.Scene.prototype.effector=function(){
+        for(let item of Object.keys(this._data.effector))
+           console.log(item)
+    }
 
     _.Scene.prototype.showItem = function() {
         if(this.isRun(1)) {

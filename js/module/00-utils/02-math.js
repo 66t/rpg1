@@ -118,30 +118,67 @@ LIM.UTILS=LIM.UTILS||{};
      * @return {int} 结果
      */
     _.waveNum=function(mode,max,i) {
+        i = i % (max*2);
         let t = i / max;
         switch (parseInt(mode)) {
-            case 0: // 方波形
-                return t >= 0.5 ? 1 : 0;
-            case 1: // 正弦波
-                return Math.abs(_.sinNum(max, i));
-            case 2: // 锯齿波
+            default: // 方波形
+                return t >= 1 ? 1 : 0;
+            case 1: // 三角波
                 return parseInt(t) % 2 == 1 ? 1 - (t % 1.0) : (t % 1.0);
-            case 3: // 高斯函数
+            case 2: // 正弦波
+                return Math.abs(_.sinNum(max, i));
+            case 3: // 斜波
+                return t - Math.floor(t)
+            case 4: // 指数衰减
+                return Math.pow(1.11, -i);
+            case 5: // 调幅波
+                return 1 / (i + 1.11);
+            case 6: // 平方根过渡
+                return Math.sqrt(i / max);
+            case 7: // 平方过渡
+                return Math.pow(i / max, 2);
+            case 8: // 高斯函数
                 let sigma = max / 6;
                 return Math.exp(-Math.pow(i - max, 2) / (2 * Math.pow(sigma, 2)));
-            case 4: // 指数衰减
-                return i==0 ? 0 : Math.pow(1024, t - 1);
-            case 5: // 三次贝塞尔曲线过渡
+            case 9: // 三次贝塞尔曲线过渡
                 return 3 * t * Math.pow(1 - t, 2) + 3 * Math.pow(t, 2) * (1 - t) + Math.pow(t, 3);
-            case 6: // 弹性过渡
+            case 10: // 弹性过渡
                 return Math.pow(2, -10 * i / max) * Math.sin((i / max - 0.1) * (2 * Math.PI) / 0.4) + 1;
-            case 7: // 回弹过渡
+            case 11: // 回弹过渡
                 let s = 1.70158;
                 return ((t = i / max - 1) * t * ((s + 1) * t + s) + 1);
-            case 8: // 阻尼振荡过渡
+            case 12: // 阻尼振荡过渡
                 let p = 0.3;
-                let s1 = p/4;
-                return Math.pow(2, -10 * t) * Math.sin((t - s1) * (2 * Math.PI) / p) + 1;
+                let s1 = p / 4;
+                return Math.pow( 2, -10 * t) * Math.sin((t - s1) * (2 * Math.PI) / p) + 1;
+            case 13: // 心型
+                let x = (2 * i - max) / max;
+                let y = (2 * Math.pow(x, 2) - 1) * Math.sqrt(1 - Math.pow(x, 2));
+                return (y + 1) / 2;
+            case 14: // 平滑步进波形
+                return Math.floor(t /0.1) * 0.1;
+            case 15: // 半圆波
+                return Math.sqrt(1 - Math.pow((t - 1), 2));
+            case 16: // Sine-Cosine波
+                return (Math.sin(i) + Math.cos(i)) / 2;
+            case 17: // 反弹过渡
+                let s2 = 1.5;
+                return 1 - ((t = i / max - 1) * t * ((s2 + 1) * t + s2) + 1);
+            case 18: // 径向渐变
+                let centerX = max / 2;
+                let centerY = max / 2;
+                let distance = Math.sqrt(Math.pow(i - centerX, 2) + Math.pow(i - centerY, 2));
+                return distance / max;
+            case 19: // 曲线过渡
+                return Math.sin(i * Math.PI / max);
+            case 20://震荡波
+                return Math.sin(i) * Math.cos(i);
+            case 21: // 斐波那契螺旋
+                let angle = 0.5 * Math.sqrt(i);
+                let radius = Math.sqrt(i / max);
+                let x1 = radius * Math.cos(angle);
+                let y1 = radius * Math.sin(angle);
+                return (Math.abs(x1) + Math.abs(y1)) / 2;
         }
     }
     
