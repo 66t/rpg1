@@ -43,6 +43,7 @@ LIM.SCENE=LIM.SCENE||{};
         this._load = 1;
         this._run = 0b1111;
     };
+    
     _.Scene.prototype.refresh = function(){
         if(this.isRun(2)) this.createItem();
         if(this.isRun(1)) this.showItem();
@@ -51,7 +52,6 @@ LIM.SCENE=LIM.SCENE||{};
         
         this._time++
     }
-
     _.Scene.prototype.createItem = function () {
         if(this.isRun(2)) {
             this.setRun(2,false)
@@ -64,7 +64,6 @@ LIM.SCENE=LIM.SCENE||{};
         this.createShape();
         this.createText();
     }
-    
     
     
     _.Scene.prototype.createVessel = function () {
@@ -132,12 +131,7 @@ LIM.SCENE=LIM.SCENE||{};
             }
         }
     }
-
-    _.Scene.prototype.effector=function(){
-        for(let item of Object.keys(this._data.effector))
-           console.log(item)
-    }
-
+    
     _.Scene.prototype.showItem = function() {
         if(this.isRun(1)) {
             this.setRun(1,false)
@@ -162,6 +156,23 @@ LIM.SCENE=LIM.SCENE||{};
                 else this.addChild(this._item[item.key])
             }
     }
+
+
+    _.Scene.prototype.effector=function(){
+        for(let key of Object.keys(this._data.effector))
+            if (this._data.effector[key].count === 1 && LIM.EVENT[this._data.effector[key].judge]()) {
+                this._data.effector[key].count++
+                this.triggerEffector(this._data.effector[key].fun)
+            }
+    }
+    _.Scene.prototype.triggerEffector=function(eve){
+        for(let key of eve) {
+            if (key[0] === "%") LIM.EVENT[key.substring(1,key.length)]()
+            else if (key[0] == "#") this.exFun(key.split(":"))
+            else if (this._data.fun[key]) this.triggerFun(this._data.fun[key])
+        }
+
+    }
     _.Scene.prototype.triggerFun=function(eve){
         for(let item of eve)
             if(item[0]=="#")
@@ -169,13 +180,22 @@ LIM.SCENE=LIM.SCENE||{};
             else {}
     }
     _.Scene.prototype.exFun=function(eve){
-        if(this._item[eve[1]])
-            switch (eve[0]) {
+          switch (eve[0]) {
             case "#mode":
-                this._item[eve[1]]._com.next = eve[2]
+                if(this._item[eve[1]])
+                    this._item[eve[1]]._com.next = eve[2]
                 break
             case "#activa":
-                this._item[eve[1]]._com.acti = true
+                if(this._item[eve[1]])
+                    this._item[eve[1]]._com.acti = true
+                break
+            case "#on_effector":
+                if(this._data.effector[eve[1]])
+                    this._data.effector[eve[1]].count++
+                break
+            case "#off_effector":
+                if(this._data.effector[eve[1]])
+                    this._data.effector[eve[1]].count=0
                 break
         }
     }

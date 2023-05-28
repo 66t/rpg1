@@ -18,6 +18,7 @@ LIM.SCENE=LIM.SCENE||{};
         this._name=name
         this._origin=origin
         this._time=0
+        this.filterType=[]
         Sprite.prototype.initialize.call(this);//;
     }
     
@@ -56,42 +57,52 @@ LIM.SCENE=LIM.SCENE||{};
         }
         if(item.time==item.change){
             if(this._action[0].funC) this._origin.triggerFun(this._action[0].funC)
+            this._data=this._com.data[this._com.next]
             if(!item.while) this.setRun(0,true)
         }
         if(item.time>=item.frame){
             if(this._action[0].funE) this._origin.triggerFun(this._action[0].funE)
             this._action.splice(0,1)
         }
-        
         item.time++
     }
-    _.Shape.prototype.executeAnime=function(anime,time) {
-        let data={}
-        data.x=this._data.x
-        data.y=this._data.y
-        data.alpha=this._data.alpha
-        data.rota=this._data.rota
-        data.w=this._data.w
-        data.h=this._data.h
-        data.cover=this._data.cover
-        
-        for(let key of Object.keys(anime)){
-            if (typeof anime[key] == 'object') {
-                let val=0
-                for(let i=0;i<anime[key].length;i++){
-                    let r = LIM.UTILS.waveNum(anime[key][i].wave, time[0]/(1+anime[key][i].fre*2),time[1])
-                    let v=LIM.UTILS.lengthNum(anime[key][i].val1)+(LIM.UTILS.lengthNum(anime[key][i].val2)-LIM.UTILS.lengthNum(anime[key][i].val1))*r
-                    switch (anime[key][i].count) {
-                        case "add":val+=v;break
-                        case "mul":val*=v;break
+    _.Shape.prototype.executeAnime = function (anime, time) {
+        if(!this._data)return
+        let data = {
+            x: this._data.x,
+            y: this._data.y,
+            alpha: this._data.alpha,
+            rota: this._data.rota,
+            w: this._data.w,
+            h: this._data.h,
+            cover: this._data.cover,
+            posi: this._data.posi,
+        };
+        for (let key of Object.keys(anime)) {
+            if (typeof anime[key] == "object") {
+                let val = 0;
+                let waveNum = LIM.UTILS.waveNum;
+                let lengthNum = LIM.UTILS.lengthNum;
+                for (let i = 0; i < anime[key].length; i++) {
+                    let anim = anime[key][i];
+                    let r = waveNum(anim.wave, time[0] / (1 + anim.fre * 2), time[1]);
+                    let v = lengthNum(anim.val1) + (lengthNum(anim.val2) - lengthNum(anim.val1)) * r;
+
+                    switch (anim.count) {
+                        case "add":
+                            val += v;
+                            break;
+                        case "mul":
+                            val *= v;
+                            break;
                     }
                 }
-                data[key]=val
+                data[key] = val;
             }
-            else  data[key]=LIM.UTILS.lengthNum(anime[key])
+            else data[key] = LIM.UTILS.lengthNum(anime[key]);
         }
-        this.shape(data)
-    }
+        this.shape(data);
+    };
     _.Shape.prototype.executeFilter=function(data,time) {
        if(data.length)
         for (let i=0;i<data.length;i++) {
@@ -120,9 +131,7 @@ LIM.SCENE=LIM.SCENE||{};
     
     _.Shape.prototype.shiftMode=function(){
         let index1=this._index
-        this._data=this._com.data[this._com.next]
-        let index2=this._index
-        
+        let index2=this._com.data[this._com.next]
         if(index1!=index2&&!this._origin.isRun(1)) this._origin.setRun(1,true)
         let mode=this._com.mode
         this._com.mode=this._com.next
@@ -139,11 +148,14 @@ LIM.SCENE=LIM.SCENE||{};
     }
     _.Shape.prototype.pushAction=function(mode,next){
         let fun=mode+"_"+next
-        if(this._com.action[fun]){
+        if(this._com.action&&this._com.action[fun]){
             this._com.action[fun].time=0
             this._action.push(this._com.action[fun])
         }
-        else if(!this.isRun(0)) this.setRun(0,true)
+        else if(!this.isRun(0)) {
+            this._data=this._com.data[this._com.next]
+            this.setRun(0,true)
+        }
     }
     
     
@@ -175,13 +187,19 @@ LIM.SCENE=LIM.SCENE||{};
     }
     _.Shape.prototype.shape=function(item){
         if(this.isRun(2)) this.setRun(2,false)
-        this.cover(item)
-        this.anchor.x = 0.5
-        this.anchor.y = 0.5
-        this.x =  (this.width*0.5*this.scale.x)+LIM.UTILS.lengthNum(item.x)
-        this.y =  (this.height*0.5*this.scale.y)+LIM.UTILS.lengthNum(item.y)
-        this.rotation = item.rota/180*Math.PI
-        this.alpha = item.alpha
+        this.cover(item);
+        this.anchor.set(0.5, 0.5);
+        
+        let sx=item.posi % 3 === 1 ? this.width * this.scale.x * 0.5 :
+               item.posi % 3 === 2 ? Graphics.width * 0.5 :
+               Graphics.width - this.width * this.scale.x * 0.5;
+        let sy=item.posi > 6 ? this.height * this.scale.y * 0.5 :
+               item.posi < 4 ? Graphics.height - this.height * this.scale.y * 0.5 :
+               Graphics.height * 0.5;
+        this.x = sx+LIM.UTILS.lengthNum(item.x);
+        this.y = sy+LIM.UTILS.lengthNum(item.y);
+        this.rotation = item.rota / 180 * Math.PI;
+        this.alpha = item.alpha;
     }
     _.Shape.prototype.cover=function(item){
         switch (item.cover) {
@@ -203,7 +221,7 @@ LIM.SCENE=LIM.SCENE||{};
         if(this.isRun(3)) this.setRun(3,false)
         this.filters=[]
         this.filterType=[]
-        if(item.filter.length)
+        if(item.filter&&item.filter.length)
         for(let i=0;i<item.filter.length;i++) {
             let filter = this.typeFilter(item.filter[i].type)
             this.filterType[i]=item.filter[i].type
