@@ -141,7 +141,6 @@ LIM.SCENE=LIM.SCENE||{};
                     case "y":this.y=v;break
                     case "alpha":this.alpha=v;break
                 }
-
             }
         }
         if(this._dar[0].time<this._dar[0].frame) this._dar[0].time++

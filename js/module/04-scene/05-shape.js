@@ -23,8 +23,8 @@ LIM.SCENE=LIM.SCENE||{};
     }
     
     _.Shape.prototype.update = function () {
-        Sprite.prototype.update.call(this);
         if(this.isActi()) {
+            Sprite.prototype.update.call(this);
             this.refresh()
         }
     }
@@ -77,9 +77,15 @@ LIM.SCENE=LIM.SCENE||{};
             h: this._data.h,
             cover: this._data.cover,
             posi: this._data.posi,
-        };
+        }
         for (let key of Object.keys(anime)) {
-            if (typeof anime[key] == "object") {
+            if(anime[key].incre) 
+                switch (key) {
+                    case "rota":
+                        data[key]=(this.rotation/Math.PI*180)+anime[key].val;
+                        break
+                }
+            else if (typeof anime[key] == "object") {
                 let val = 0;
                 let waveNum = LIM.UTILS.waveNum;
                 let lengthNum = LIM.UTILS.lengthNum;

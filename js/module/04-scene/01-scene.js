@@ -189,6 +189,10 @@ LIM.SCENE=LIM.SCENE||{};
                 if(this._item[eve[1]])
                     this._item[eve[1]]._com.acti = true
                 break
+            case "#sleep":
+                 if(this._item[eve[1]])
+                     this._item[eve[1]]._com.acti = false
+                 break    
             case "#on_effector":
                 if(this._data.effector[eve[1]])
                     this._data.effector[eve[1]].count++

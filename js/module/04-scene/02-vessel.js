@@ -18,8 +18,8 @@ LIM.SCENE=LIM.SCENE||{};
     }
 
     _.Vessel.prototype.update = function () {
-        Sprite.prototype.update.call(this);
         if(this.isActi()) {
+            Sprite.prototype.update.call(this);
             this.refresh()
         }
     }
@@ -48,6 +48,7 @@ LIM.SCENE=LIM.SCENE||{};
         }
     }
     _.Vessel.prototype.refresh=function () {
+      
         if(this._com.next!==this._com.mode) this.shiftMode()
         if(this.isRun(0)) this.location()
         if(this.hasActions()==1) this.move()
@@ -72,7 +73,6 @@ LIM.SCENE=LIM.SCENE||{};
             if(this.x!==x) data.x=[this.x,x]
             if(this.y!==y) data.y=[this.y,y]
             if(this.alpha!==this._data.alpha) data.alpha=[this.alpha,this._data.alpha]
-            
             if(v.frame) this._action.push({data:data,time:0,frame:v.frame,wave:v.wave,fun:v.fun})
             else {
                 this.x=x

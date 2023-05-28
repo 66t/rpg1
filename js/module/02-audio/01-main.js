@@ -1,5 +1,7 @@
 ﻿var vol={
-    v1:{folder:"bgs",name:"melo",pos:0,bool:true,volume:100,pitch:100,pan:0}
+    v1:{folder:"bgm",name:"melo",pos:20,bool:true,volume:100,pitch:100,pan:0},
+    v2:{folder:"bgm",name:"メタモリボン",pos:0,bool:true,volume:50,pitch:100,pan:0}
+    
 }
 function Conductor() {}
 
