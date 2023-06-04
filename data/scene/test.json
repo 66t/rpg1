@@ -43,7 +43,7 @@
           "padding":[15,20],
           "option":{
             "mode": 0,
-            "row": 6,
+            "row": 4,
             "cols":1,
             "offset":[0,0],
             "select": -1,
