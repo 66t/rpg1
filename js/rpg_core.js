@@ -8276,7 +8276,7 @@ WebAudio.prototype._createNodes = function() {
     var context = WebAudio._context;
     this._sourceNode = context.createBufferSource();
     this._sourceNode.buffer = this._buffer;
-    this._sourceNode.loopStart = this._loopStart;
+    this._sourceNode.loopStart = this._loopStart;this._gainNode
     this._sourceNode.loopEnd = this._loopStart + this._loopLength;
     this._sourceNode.playbackRate.setValueAtTime(this._pitch, context.currentTime);
     this._gainNode = context.createGain();

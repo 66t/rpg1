@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ab70e38f-a7f5-4a56-ae11-24f412a275e9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/data/scene/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/scene/test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/04-scene/05-shape.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/05-shape.js" afterDir="false" />
+    <list default="true" id="ab70e38f-a7f5-4a56-ae11-24f412a275e9" name="Default Changelist" comment="1">
+      <change afterPath="$PROJECT_DIR$/js/libs/howler.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reference/sound1.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/load.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/load.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/02-audio/01-main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/02-audio/01-main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/rpg_core.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/rpg_core.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,57 +19,101 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/img/faces/Actor1.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fonts/gamefont.css">
+        <entry file="file://$PROJECT_DIR$/js/module/02-audio/01-main.js">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/scene/test.json">
+        <entry file="file://$PROJECT_DIR$/reference/b.html">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
+        <entry file="file://$PROJECT_DIR$/reference/a.html">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/encodings.xml">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/vcs.xml">
+        <entry file="file://$PROJECT_DIR$/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="3" selection-start-line="3" selection-end-line="5" selection-end-column="10" />
+            <state>
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+        <entry file="file://$PROJECT_DIR$/js/load.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="12" column="52" lean-forward="true" selection-start-line="12" selection-start-column="52" selection-end-line="12" selection-end-column="52" />
+            <state relative-caret-position="-114">
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/icon/icon.png">
-          <provider selected="true" editor-type-id="images" />
+        <entry file="file://$PROJECT_DIR$/js/module/00-utils/03-algorithm.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/module/04-scene/03-window.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#6844#6956#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/module/04-scene/05-shape.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/module/01-storage/04-number.js">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Erlang Module" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>parse_value</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>bit_value</replace>
+    </replaceStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/code/bit.erl" />
+        <option value="$PROJECT_DIR$/code/codeFacture.erl" />
+        <option value="$PROJECT_DIR$/code/a.erl" />
+      </list>
+    </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
@@ -84,21 +133,6 @@
               <item name="rpgmv" type="b2602c69:ProjectViewProjectNode" />
               <item name="rpgmv" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="rpgmv" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rpgmv" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rpgmv" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rpgmv" type="462c0819:PsiDirectoryNode" />
-              <item name="icon" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rpgmv" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rpgmv" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -110,7 +144,13 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1684395101769" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1685850935001" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\rpgmv\project" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -144,6 +184,13 @@
       <workItem from="1684722803529" duration="8000" />
       <workItem from="1684935229488" duration="10000" />
       <workItem from="1684997824259" duration="25000" />
+      <workItem from="1685627557762" duration="1614000" />
+      <workItem from="1685630596702" duration="4470000" />
+      <workItem from="1685714269917" duration="60000" />
+      <workItem from="1685843526207" duration="2589000" />
+      <workItem from="1685851218094" duration="15000" />
+      <workItem from="1685851241724" duration="41000" />
+      <workItem from="1685851570488" duration="256000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1684395094847</created>
@@ -156,13 +203,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1278000" />
+    <option name="totallyTimeSpent" value="10323000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2739872" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29637527" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -179,8 +225,9 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Messages" order="12" visible="true" weight="0.329718" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -207,9 +254,6 @@
     <entry file="file://$PROJECT_DIR$/fonts/gamefont.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/scene/test.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -229,7 +273,101 @@
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
-          <caret line="12" column="52" lean-forward="true" selection-start-line="12" selection-start-column="52" selection-end-line="12" selection-end-column="52" />
+          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/rpg_windows.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Newfile.txt" />
+    <entry file="file://$PROJECT_DIR$/code/test.json" />
+    <entry file="file://$PROJECT_DIR$/code/bit.erl" />
+    <entry file="file://$PROJECT_DIR$/code/codeFacture.erl" />
+    <entry file="file://$PROJECT_DIR$/code/a.erl" />
+    <entry file="file://$PROJECT_DIR$/data/scene/test.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+          <folding>
+            <element signature="n#!!block;n#text#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/scene/window.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/module/00-utils/04-filter.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/module/01-storage/01-main.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/module/01-storage/03-boolean.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/rpg_managers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="20" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="20" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/module/02-audio/01-main.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reference/b.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reference/a.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/module/00-utils/03-algorithm.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/module/04-scene/03-window.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#6844#6956#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/module/04-scene/05-shape.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/module/01-storage/04-number.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/load.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-114">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

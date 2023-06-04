@@ -10,6 +10,12 @@ window.onload = function() {
     LIM.$data=new LIM.STORAGE.Data()
     LIM.$bool=new LIM.STORAGE.Bool()
     LIM.$number=new LIM.STORAGE.Number()
-    Conductor.play("v1",2)
-    Conductor.play("v2",1)
+    
+    LIM.$data.pro(1,1000)
+    LIM.$data.pro(1,2000)
+    LIM.$data.pro(1,5000)
+    LIM.$data.pro(1,10000)
+    LIM.$data.pro(1,7000)
+    LIM.$data.pro(1,8000)
+    Conductor.play("v2")
 };

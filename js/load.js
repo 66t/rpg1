@@ -9,7 +9,7 @@
 var LIM=LIM||{};//;
 LIM.module=[
     {src:"js",data:[
-        {src:"libs",data:[{src:"pixi"},{src:"pixi-filters"},{src:"pixi-tilemap"},{src:"pixi-picture"},{src:"fpsmeter"},{src:"lz-string"},{src:"iphone-inline-video.browser"}]}, ,
+        {src:"libs",data:[{src:"pixi"},{src:"pixi-filters"},{src:"howler"},{src:"pixi-tilemap"},{src:"pixi-picture"},{src:"fpsmeter"},{src:"lz-string"},{src:"iphone-inline-video.browser"}]}, ,
         {src:"rpg_core"},{src:"rpg_managers"},{src:"rpg_objects"},{src:"rpg_scenes"},{src:"rpg_sprites"},{src:"rpg_windows"},
         {src:"plugins"},
         {src:"module",data:[

@@ -1,6 +1,34 @@
-﻿var vol={
+﻿WebAudio.prototype._createNodes = function() {
+    var context = WebAudio._context;
+    this._sourceNode = context.createBufferSource();
+    this._sourceNode.buffer = this._buffer;
+    this._sourceNode.loopStart = this._loopStart;
+    this._sourceNode.loopEnd = this._loopStart + this._loopLength;
+    this._sourceNode.playbackRate.setValueAtTime(this._pitch, context.currentTime);
+    this._gainNode = context.createGain();
+    this._gainNode.gain.setValueAtTime(this._volume, context.currentTime);
+
+    this._filterNode = context.createBiquadFilter()
+    this._filterNode.type = 'highpass';
+    this._filterNode.Q.value = 1;
+    this._filterNode.frequency.value = 540;
+    this._filterNode.gain.value = 4;
+    
+    this._pannerNode = context.createPanner();
+    this._pannerNode.panningModel = 'equalpower';
+    this._updatePanner();
+};
+WebAudio.prototype._connectNodes = function() {
+    this._sourceNode.connect(this._gainNode);
+    this._gainNode.connect(this._pannerNode);
+    this._filterNode.connect(WebAudio._masterGainNode);
+    this._pannerNode.connect(WebAudio._masterGainNode);
+};
+
+
+var vol={
     v1:{folder:"bgm",name:"melo",pos:20,bool:true,volume:100,pitch:100,pan:0},
-    v2:{folder:"bgm",name:"メタモリボン",pos:0,bool:true,volume:50,pitch:100,pan:0}
+    v2:{folder:"bgm",name:"メタモリボン",pos:20,bool:true,volume:0,pitch:100,pan:100}
     
 }
 function Conductor() {}
@@ -54,9 +82,7 @@ Conductor.fadeOutMe = function(kont,duration) {
     if (this._Buffer[kont]) {
         this._Buffer[kont].fadeOut(duration);
     }
-    
 };
-
 Conductor.isCurrentVol = function(vol) {return (vol.kont&&this._current[vol.kont] && this._Buffer[vol.kont] && this._current[vol.kont].name === vol.name)}
     
 Conductor.makeEmptyAudioObject = function() {return { kont:"null",folder:'',name: '',volume:0,pitch:0,pan:0};}
