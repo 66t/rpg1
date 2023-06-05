@@ -13,7 +13,7 @@ LIM.SCENE=LIM.SCENE||{};
     }
     _.Command.prototype.refresh = function () {
         _.Window.prototype.refresh.call(this);
-        if(this.isRun(3)) this.drawOption()
+       // if(this.isRun(3)) this.drawOption()
         this.processWheel()
         this.processTouch()
     }
@@ -49,7 +49,6 @@ LIM.SCENE=LIM.SCENE||{};
         if(option.item) {
             for(let key of Object.keys(option.item)) {
                 let rect = this.itemRect(option,key)
-                console.log(rect)
                 let listItem = this._list[key] = {mode: option.item[key].mode || 0}
                 let bitData = this.getOptionData(option,key)
                 let bit = this._origin.getBit(bitData.bit)

@@ -12,10 +12,12 @@ LIM.SCENE=LIM.SCENE||{};
         this._load = -5
         this._bit = {}
         this._font = {}
+        this._val = {}
         DataManager.loadDataFile('$dataScene', 'scene/' + name + '.json');
         Scene_Base.prototype.initialize.call(this);
     }
     _.Scene.prototype.update = function () {
+        this.lookValLlisten()
         switch (this._load) {
             case -5:
                 this.checkDataLoaded();
@@ -94,8 +96,12 @@ LIM.SCENE=LIM.SCENE||{};
         }
     }
     _.Scene.prototype.createText = function () {
-        if(this._data.text){
-            for(let key of Object.keys(this._data.text)) {
+        if(this._data.text)
+            for(let key of Object.keys(this._data.text)) 
+                this.createTextBit(key)
+    }
+    _.Scene.prototype.createTextBit = function (key) {
+        if(this._data.text[key]){
                 let item = this._data.text[key]
                 var bitmap = new Bitmap(0,0);
                 bitmap.fontSize = item.fontSize;
@@ -105,22 +111,35 @@ LIM.SCENE=LIM.SCENE||{};
                 bitmap.outlineColor = item.outlineColor;
                 bitmap.fontItalic = item.fontItalic;
                 let content=this.getContent(this._font[item.content])
-                this._font[item.content].text.replacePlace(this._font[item.content].arr)
-
-                let width=bitmap.measureTextWidth(content)
+                let width=bitmap.measureTextWidth(content[0])
                 bitmap._createCanvas(width,item.fontSize)
-                bitmap.drawText(content, 0, 0, width,item.fontSize,'center')
+                bitmap.drawText(content[0], 0, 0, width,item.fontSize,'center')
+                bitmap.drawText("11111", 0, 0, width,item.fontSize,'center')
                 this._text[key] = bitmap;
-            }
+                this.addValLlisten(key,content[1],"txet")
         }
     }
+    
+    
     _.Scene.prototype.getContent=function(text){
         let arr=text.arr
-        for(let i=0;i<arr.length;i++)
-            if(arr[i][0]=="@")
-                arr[i]=this.getContent(this._font[arr[i].splice(0,1)])
-        let str=text.text.replacePlace(text.arr)
-        return str
+        let val=[]
+        if(arr&&arr.length) {
+            for (let i = 0; i < arr.length; i++)
+                if (arr[i][0] == "@"){
+                   let cont = this.getContent(this._font[arr[i].splice(0, 1)])
+                   arr[i]=cont[0]
+                   if(cont[1].length) val=val.concat(cont[1])
+                }
+                else if (arr[i][0] == "#") {
+                   let num =arr[i].splice(0, 1)
+                   val.push(num)
+                   arr[i] = LIM.$number.get(num)
+                }
+            let str = text.text.replacePlace(text.arr)
+            return [str,val]
+        }
+        return [text.text,val]
     }
     _.Scene.prototype.createShape = function () {
         if(this._data.shape) {
@@ -156,8 +175,13 @@ LIM.SCENE=LIM.SCENE||{};
                 else this.addChild(this._item[item.key])
             }
     }
-
-
+    _.Scene.prototype.addValLlisten=function (key,val,type){
+        for(let v of val) {
+            if (!this._val[v]) this._val[v] = []
+        }
+        this._val.push({val:LIM.$number.get(val),key:key,type:type})
+    }
+    _.Scene.prototype.lookValLlisten=function (){}
     _.Scene.prototype.effector=function(){
         for(let key of Object.keys(this._data.effector))
             if (this._data.effector[key].count === 1 && LIM.EVENT[this._data.effector[key].judge]()) {

@@ -37,19 +37,20 @@
         {
           "alpha":1,
           "index":2,
-          "x":680,"y":260,
-          "size":[14,22],
+          "x":80,"y":60,
+          "size":[24,32],
           "image": {"bit":"ver","x1":291,"x2":311,"x3":331,"x4":351,"y1":268,"y2":288,"y3":308,"y4":328},
           "padding":[15,20],
           "option":{
             "mode": 0,
-            "row": 4,
-            "cols":1,
+            "row": 2,
+            "flex":0,
+            "cols":2,
             "offset":[0,0],
             "select": -1,
             "activation":-1,
             "disable": [],
-            "margin":[5,5],
+            "margin":[15,5],
             "useUi":{
               "vis":{"bit":"ver","x1":291,"x2":311,"x3":331,"x4":351,"y1":268,"y2":288,"y3":308,"y4":328},
               "dis":{"bit":"ver","x1":291,"x2":311,"x3":331,"x4":351,"y1":268,"y2":288,"y3":308,"y4":328},
@@ -58,14 +59,15 @@
               "act":{"bit":"ver","x1":291,"x2":311,"x3":331,"x4":351,"y1":268,"y2":288,"y3":308,"y4":328}
             },
             "item": {
-              "0": {},
-              "1": {},
-              "2": {},
-              "3": {},
-              "4": {},
-              "5": {}
+              "0": {"text":{"id":"a","x":0,"y":0}},
+              "1": {"text":{"id":"b","x":0,"y":0}},
+              "2": {"text":{"id":"c","x":0,"y":0}},
+              "3": {"text":{"id":"d","x":0,"y":0}},
+              "4": {"text":{"id":"e","x":0,"y":0}},
+              "5": {"text":{"id":"f","x":0,"y":0}}
             }
-          }
+          },
+          "text":[{"id":"a","x":100,"y":100}]
         }
       ],
       "action":{}
@@ -543,6 +545,36 @@
   "text": {
     "a":{
       "content": "0_1",
+      "fontSize": 34, "textColor":[0,0.1,"#f00",0.5,"#000"],
+      "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
+    },
+    "b":{
+      "content": "1_1",
+      "fontSize": 34, "textColor":[0,0.1,"#f00",0.5,"#000"],
+      "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
+    },
+    "c":{
+      "content": "0_3",
+      "fontSize": 34, "textColor":[0,0.1,"#f00",0.5,"#000"],
+      "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
+    },
+    "c1":{
+      "content": "0_4",
+      "fontSize": 34, "textColor":[0,0.1,"#f00",0.5,"#000"],
+      "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
+    },
+    "d":{
+      "content": "0_5",
+      "fontSize": 34, "textColor":[0,0.1,"#f00",0.5,"#000"],
+      "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
+    },
+    "e":{
+      "content": "0_6",
+      "fontSize": 34, "textColor":[0,0.1,"#f00",0.5,"#000"],
+      "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
+    },
+    "f":{
+      "content": "0_7",
       "fontSize": 34, "textColor":[0,0.1,"#f00",0.5,"#000"],
       "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
     }
