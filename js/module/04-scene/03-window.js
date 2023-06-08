@@ -25,6 +25,9 @@ LIM.SCENE=LIM.SCENE||{};
 
     _.Window.prototype.drawBack = function() {
         if(this.isRun(1)) this.setRun(1,false)
+
+ // "size":[24,32],
+ // "image": {"bit":"ver","x1":291,"x2":311,"x3":331,"x4":351,"y1":268,"y2":288,"y3":308,"y4":328},
         if(this._data.image && this._data.size) {
             let bit = this._origin.getBit(this._data.image.bit)
             let imageData = this._data.image

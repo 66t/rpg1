@@ -6,7 +6,7 @@ PluginManager.setup($plugins);
 
 window.onload =  function () {
     //SceneManager.run(Scene_Boot);
-    SceneManager.run(LIM.SCENE.Scene, "test");
+    SceneManager.run(LIM.SCENE.Scene, "test1");
     LIM.$data = new LIM.STORAGE.Data()
     LIM.$bool = new LIM.STORAGE.Bool()
     LIM.$number = new LIM.STORAGE.Number()
@@ -15,5 +15,5 @@ window.onload =  function () {
     
     setInterval(function (){
         LIM.$number.set(1, LIM.$number.get(1)+1)
-    },1000)
+    },100)
 };

@@ -10,14 +10,16 @@ Conductor._Effect={}
 Conductor.start=function(id,traje){
     let v=$Musical[id]
     if(v) {
-        Conductor._Buffer[traje] = new Pz.Sound(`${Conductor._path}/${v.folder}/${v.name}.ogg`,() => {
-        Conductor._Buffer[traje].attack = v.attack||0;
-        Conductor._Buffer[traje].release = v.release||0;
-        Conductor._Buffer[traje].loop = v.loop||false;
-        Conductor._Buffer[traje].volume = (v.volume||1)*Conductor._VolVolume*(Conductor._TrajeVolume[traje]?Conductor._TrajeVolume[traje]:1);
-        Conductor._Buffer[traje].attackCurve = v.attackCurve||'linear';
-        Conductor._Buffer[traje].releaseCurve = v.releaseCurve||'linear';
-        Conductor._Buffer[traje].play()})
+        let sound = new Pz.Sound(`${Conductor._path}/${v.folder}/${v.name}.ogg`, () => {
+             sound.attack = v.attack || 0;
+             sound.release = v.release || 0;
+             sound.loop = v.loop || false;
+             sound.volume = (v.volume || 1) * Conductor._VolVolume * (Conductor._TrajeVolume[traje] ? Conductor._TrajeVolume[traje] : 1);
+             sound.attackCurve = v.attackCurve || 'linear';
+             sound.releaseCurve = v.releaseCurve || 'linear';
+             sound.play()
+        })
+        if(traje) Conductor._Buffer[traje]=sound
     }
 }
 Conductor.pause=function(traje,time){

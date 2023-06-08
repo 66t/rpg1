@@ -1,0 +1,119 @@
+{
+  "bit":{
+    "cof1":["img/scene_title/","cof1",0,true],
+    "cof2":["img/scene_title/","cof2",0,true],
+    "back":["img/scene_title/","back",0,true],
+    "floor":["img/scene_title/","floor",0,true],
+    "t":["img/scene_title/","t",0,true],
+    "title":["img/scene_title/","title",0,true],
+    "ver":["img/scene_title/","com12",0,true]
+  },
+  "group": {
+    "c_1":"v_1"
+  },
+  "vessel":{
+    "1":{
+      "acti": true,
+      "run":0,
+      "ope":0,
+      "data":[
+        {"alpha":1,"x":500,"y":0,"index":60},
+        {"alpha":1,"x":0,"y":0, "index":60}
+      ],
+      "action":{
+        "-1_0":{"wave":1,"frame":0,"fun":["#mode:v_1:1"]},
+        "0_1":{"wave":6,"frame":100,"fun":[]}
+      }
+    }
+  },
+  "window": {},
+  "command": {
+    "1":{
+      "acti": true,
+      "run":0,
+      "ope":3,
+      "data":[
+        {
+          "alpha":1,
+          "index":2,
+          "x":"100w-400","y":"100h-500",
+          "w":400,"h":500,
+          "padding":[20,20],
+          "option":{
+            "mode": 1,
+            "row": 3,
+            "cols":3,
+            "margin":[5,5],
+            "useUi":{
+              "vis":{"bit":"ver","x1":6,"x2":20,"x3":35,"x4":49,"y1":0,"y2":20,"y3":32,"y4":51},
+              "dis":{"bit":"ver","x1":56,"x2":70,"x3":85,"x4":99,"y1":0,"y2":20,"y3":32,"y4":51},
+              "sel":{"bit":"ver","x1":106,"x2":120,"x3":135,"x4":149,"y1":0,"y2":20,"y3":32,"y4":51},
+              "dse":{"bit":"ver","x1":156,"x2":170,"x3":185,"x4":199,"y1":0,"y2":20,"y3":32,"y4":51},
+              "act":{"bit":"ver","x1":206,"x2":220,"x3":235,"x4":249,"y1":0,"y2":20,"y3":32,"y4":51} 
+            },
+            "offset":[20,0],
+            "itemText":{"x":0,"y":0,"padding":[10,10]},
+            "item": {
+              "0": {"text":{"id":"a"}},
+              "1": {"text":{"id":"b"}},
+              "2": {"text":{"id":"c"}},
+              "4": {"text":{"id":"e"}},
+              "5": {"text":{"id":"f"}},
+              "7": {"text":{"id":"b"}},
+              "8": {"text":{"id":"c"}},
+              "10": {"text":{"id":"d"}},
+              "12": {"text":{"id":"e"}},
+              "14": {"text":{"id":"f"}},
+              "15": {"text":{"id":"a"}},
+              "16": {"text":{"id":"b"}},
+              "17": {"text":{"id":"c"}},
+              "18": {"text":{"id":"d"}},
+              "20": {"text":{"id":"e"}},
+              "22": {"text":{"id":"f"}}
+            },
+
+            "top":0,
+            "select": -1,
+            "activation":-1,
+            "disable": ["3","4","5"]
+          }
+        }
+      ],
+      "action":{}
+    }
+  },
+  "text": {
+    "a":{
+      "content": "0_1",
+      "fontSize": 34, "textColor":[0,0.1,"#f00",0.5,"#000"],
+      "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
+    },
+    "b":{
+      "content": "0_2",
+      "fontSize": 34, "textColor":[0,0.1,"#f00",0.5,"#000"],
+      "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
+    },
+    "c":{
+      "content": "0_3",
+      "fontSize": 54, "textColor":[0,0.1,"#f00",0.5,"#000"],
+      "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
+    },
+    "d":{
+      "content": "0_4",
+      "fontSize": 34, "textColor":[0,0.1,"#f00",0.5,"#000"],
+      "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
+    },
+    "e":{
+      "content": "0_5",
+      "fontSize": 34, "textColor":[0,0.1,"#f00",0.5,"#000"],
+      "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
+    },
+    "f":{
+      "content": "0_6",
+      "fontSize": 34, "textColor":[0,0.1,"#f00",0.5,"#000"],
+      "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
+    }
+  },
+  "effector":{
+  }
+}

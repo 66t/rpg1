@@ -139,15 +139,15 @@ LIM.SCENE=LIM.SCENE||{};
         return 0;
     }
 
-    _.Vessel.prototype._getTotalValue = function(propertyName) {
+    _.Vessel.prototype.getTotalValue = function(propertyName) {
         let total = this[propertyName];
         for (let current = this; current && current.parent && current.parent[propertyName]; current = current.parent) {
             total += current.parent[propertyName];
         }
         return total;
     }
-    _.Vessel.prototype.getX = function() {return this._getTotalValue('x');}
-    _.Vessel.prototype.getY = function() {return this._getTotalValue('y');}
+    _.Vessel.prototype.getX = function() {return this.getTotalValue('x');}
+    _.Vessel.prototype.getY = function() {return this.getTotalValue('y');}
     _.Vessel.prototype.triggerMove=function () {
         for(let item of this.children)
             if(!item.type) if(!item.isRun(4)) item.setRun(4,true)
