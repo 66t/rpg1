@@ -13,22 +13,18 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="022b3a10-94e5-42d6-b94a-cfdedd324291" name="Default Changelist" comment="变量观察">
-      <change afterPath="$PROJECT_DIR$/js/module/00-utils/04-keyInput.js" afterDir="false" />
+    <list default="true" id="022b3a10-94e5-42d6-b94a-cfdedd324291" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/js/libs/crypto-js.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.rpgmv.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.rpgmv.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/System.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/System.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/scene/test.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/scene/test1.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/scene/test1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/scene_title/com12.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/scene_title/com12.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/libs/pixi.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/libs/pixi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/event/event1.js" beforeDir="false" afterPath="$PROJECT_DIR$/event/event1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/libs/lz-string.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/js/load.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/load.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/00-utils/04-filter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/04-scene/01-scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/01-scene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/04-scene/02-vessel.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/02-vessel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/04-scene/03-window.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/03-window.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/04-scene/04-command.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/04-command.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/04-scene/05-shape.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/05-shape.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/old-scene/05-vessel.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/old-scene/05-vessel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/00-utils/01-string.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/00-utils/01-string.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/00-utils/04-keyInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/00-utils/04-keyInput.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/01-storage/02-save.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/01-storage/02-save.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +191,7 @@
       <workItem from="1686469056466" duration="16187000" />
       <workItem from="1686532579417" duration="48692000" />
       <workItem from="1686624014515" duration="16798000" />
-      <workItem from="1686647661852" duration="3311000" />
+      <workItem from="1686647661852" duration="12118000" />
     </task>
     <task id="LOCAL-00001" summary="11">
       <created>1684404192045</created>
@@ -302,7 +298,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685980764910</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="键盘">
+      <created>1686651438616</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1686651438616</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -363,7 +366,8 @@
     <MESSAGE value="更新" />
     <MESSAGE value="ceshi" />
     <MESSAGE value="变量观察" />
-    <option name="LAST_COMMIT_MESSAGE" value="变量观察" />
+    <MESSAGE value="键盘" />
+    <option name="LAST_COMMIT_MESSAGE" value="键盘" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -540,46 +544,37 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/00-utils/04-keyInput.js</url>
-          <line>47</line>
+          <line>97</line>
           <option name="timeStamp" value="75" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/00-utils/04-keyInput.js</url>
-          <line>105</line>
-          <option name="timeStamp" value="76" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/00-utils/04-keyInput.js</url>
-          <line>55</line>
-          <option name="timeStamp" value="79" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/00-utils/04-keyInput.js</url>
-          <line>70</line>
-          <option name="timeStamp" value="82" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/00-utils/04-keyInput.js</url>
-          <line>97</line>
+          <line>103</line>
           <option name="timeStamp" value="84" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/00-utils/04-keyInput.js</url>
-          <line>93</line>
+          <line>99</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="85" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/00-utils/04-keyInput.js</url>
-          <line>114</line>
+          <line>112</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="86" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/00-utils/04-keyInput.js</url>
-          <line>64</line>
+          <line>116</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="87" />
+          <option name="timeStamp" value="88" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/00-utils/04-keyInput.js</url>
+          <line>108</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="89" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

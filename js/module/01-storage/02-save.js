@@ -8,9 +8,15 @@ LIM.STORAGE=LIM.STORAGE||{};
      * @param savefileId {int} 存档位
      * @return {String} 存档内容
      */
+    _.key=CryptoJS.enc.Hex.parse('123318efc4b6388888af51a6cd932b12');
     _.makeSaveContents = function(savefileId) {
         let contents = {};
-        if (savefileId < 0) {}
+        if (savefileId < 0) {
+            contents.storage={
+                key: LIM.INPUT.controlMapper
+            }
+               
+        }
         else if (savefileId === 0) {}
         else {
             contents.storage  = {
@@ -21,7 +27,7 @@ LIM.STORAGE=LIM.STORAGE||{};
                 inn:LIM.$data.inn,
             };
         }
-        return LZString.compressToBase64(JSON.stringify(contents));
+        return CryptoJS.AES.encrypt(JSON.stringify(contents), LIM.STORAGE.key, { mode: CryptoJS.mode.ECB });
     };
     
     /** 读取存档内容
@@ -33,10 +39,14 @@ LIM.STORAGE=LIM.STORAGE||{};
      */
     _.loadSaveContents = function(savefileId,data) {
         if(!data) return 
-        else if (savefileId < 0) {}
+        else if (savefileId < 0) {
+            let decrypted = CryptoJS.AES.decrypt(data, LIM.STORAGE.key, { mode: CryptoJS.mode.ECB });
+            let contents = JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
+            LIM.INPUT.controlMapper =contents.storage.key
+        }
         else if (savefileId === 0) {}
         else {
-            let contents = JSON.parse(LZString.decompressFromBase64(data));
+            let contents = JSON.parse( CryptoJS.AES.decrypt(data, LIM.STORAGE.key, { mode: CryptoJS.mode.ECB }).toString(CryptoJS.enc.Utf8));
             LIM.$data.key=contents.storage.key
             LIM.$data.seed=contents.storage.seed
             LIM.$data.init_seed=contents.storage.init_seed

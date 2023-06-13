@@ -6,7 +6,11 @@ LIM.EVENT=LIM.EVENT||{};
     _.false=()=>{return false}
     _.load=()=>{
         DataManager.loadDatabase()
-        ConfigManager.load()
     }
     _.ready=()=>{return DataManager.isDatabaseLoaded()&&Graphics.isFontLoaded('GameFont')}
+    
+    
+    _.reload=()=>{if (Utils.isNwjs()) {location.reload();}}
+    _.test=()=>{if (Utils.isNwjs() && Utils.isOptionValid('test')) {require('nw.gui').Window.get().showDevTools();}
+    }
 })(LIM.EVENT)

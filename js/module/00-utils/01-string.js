@@ -5,6 +5,7 @@
  * @return {int} 此字符串长度
  */
 String.prototype.getLen = function(){
+     
     let len=0,l=this.length;
     for (let i=0;i<l;i++) if(this.charCodeAt(i)>255) len+=2;else len++;
     return len
