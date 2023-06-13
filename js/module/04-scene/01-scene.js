@@ -17,7 +17,6 @@ LIM.SCENE=LIM.SCENE||{};
         Scene_Base.prototype.initialize.call(this);
     }
     _.Scene.prototype.update = function () {
-        this.checkValLlisten()
         switch (this._load) {
             case -5:
                 this.checkDataLoaded();
@@ -59,14 +58,11 @@ LIM.SCENE=LIM.SCENE||{};
             this.setRun(2,false)
         }
         this._item = {}
-        this._text = {}
         this.createVessel();
         this.createWindow();
         this.createCommand();
         this.createShape();
-        this.createText();
     }
-    
     
     _.Scene.prototype.createVessel = function () {
         if(this._data.vessel) {
@@ -105,15 +101,11 @@ LIM.SCENE=LIM.SCENE||{};
         }
     }
 
-    _.Scene.prototype.createText = function () {
-        if(this._data.text)
-            for(let key of Object.keys(this._data.text))
-                this.createTextBit(key)
-    }
-    _.Scene.prototype.createTextBit = function (key) {
+
+    _.Scene.prototype.getTextBit = function (key) {
         if(this._data.text[key]){
             let item = this._data.text[key]
-            var bitmap = new Bitmap(0,0);
+            let bitmap = new Bitmap(0,0);
             bitmap.fontSize = item.fontSize;
             bitmap.fontFace = 'GameFont';
             bitmap.textColor=item.textColor
@@ -124,22 +116,11 @@ LIM.SCENE=LIM.SCENE||{};
             let width=bitmap.measureTextWidth(content[0])
             bitmap._createCanvas(width,item.fontSize)
             bitmap.drawText(content[0], 0, 0, width,item.fontSize,'center')
-            this._text[key] = bitmap;
-            this.addValLlisten(key,content[1],"txet")
+            return  bitmap;
         }
-    }
-    _.Scene.prototype.checkTextBit = function (key) {
-        if(this._data.text[key]&&this._text[key]){
-            let item = this._data.text[key]
-            let content=this.getContent(this._font[item.content])
-            let width= this._text[key].measureTextWidth(content[0])
-            this._text[key].clear()
-            this._text[key]._createCanvas(width,item.fontSize)
-            this._text[key].drawText(content[0], 0, 0, width,item.fontSize,'center')
-        }
+        return  new Bitmap();
     }
     _.Scene.prototype.getContent=function(text){
-        let val=[]
         if(text.arr&&text.arr.length) {
             let arr=[]
             for(let item of text.arr) arr.push(item)
@@ -147,17 +128,15 @@ LIM.SCENE=LIM.SCENE||{};
                 if (arr[i][0] == "@"){
                     let cont = this.getContent(this._font[arr[i].splice(0, 1)])
                     arr[i]=cont[0]
-                    if(cont[1].length) val=val.concat(cont[1])
                 }
                 else if (arr[i][0] == "#") {
                     let num =arr[i].splice(0, 1)
-                    val.push(num)
                     arr[i] = LIM.$number.get(num)
                 }
             let str = text.text.replacePlace(arr)
-            return [str,val]
+            return [str]
         }
-        return [text.text,val]
+        return [text.text]
     }
     
     _.Scene.prototype.showItem = function() {
@@ -183,30 +162,6 @@ LIM.SCENE=LIM.SCENE||{};
                 }
                 else this.addChild(this._item[item.key])
             }
-    }
-    
-    
-    _.Scene.prototype.addValLlisten=function (key,val,type){
-        for(let v of val) {
-            if (!this._val[v]) this._val[v] = []
-            this._val[v].push({val:LIM.$number.get(val),key:key,type:type})
-        }
-    }
-    _.Scene.prototype.checkValLlisten=function (){
-        for(let key of Object.keys(this._val)) {
-            let val  = LIM.$number.get(key)
-            for(let item of this._val[key]){
-              if(item.val!=val) {
-                  item.val=val
-                  switch (item.type){
-                      case "txet":
-                          this.checkTextBit(item.key)
-                          break
-                  }
-              }
-            }
-           
-        }
     }
     
     _.Scene.prototype.effector=function(){

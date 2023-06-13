@@ -58,6 +58,7 @@ LIM.SCENE=LIM.SCENE||{};
         if(item.time==item.change){
             if(this._action[0].funC) this._origin.triggerFun(this._action[0].funC)
             this._data=this._com.data[this._com.next]
+            this._time=0
             if(!item.while) this.setRun(0,true)
         }
         if(item.time>=item.frame){
@@ -160,6 +161,7 @@ LIM.SCENE=LIM.SCENE||{};
         }
         else if(!this.isRun(0)) {
             this._data=this._com.data[this._com.next]
+            this._time=0
             this.setRun(0,true)
         }
     }

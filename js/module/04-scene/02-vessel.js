@@ -9,6 +9,7 @@ LIM.SCENE=LIM.SCENE||{};
 
     _.Vessel.prototype.initialize = function (origin,name,com) {
         this._action=[]
+        this._time=0
         this._com=com
         this._com.mode=-1
         this._com.next=0
@@ -48,10 +49,10 @@ LIM.SCENE=LIM.SCENE||{};
         }
     }
     _.Vessel.prototype.refresh=function () {
-      
         if(this._com.next!==this._com.mode) this.shiftMode()
         if(this.isRun(0)) this.location()
         if(this.hasActions()==1) this.move()
+        this._time++
     }
     _.Vessel.prototype.shiftMode=function(){
         let index1=this._index
@@ -61,7 +62,6 @@ LIM.SCENE=LIM.SCENE||{};
          let mode=this._com.mode
         this._com.mode=this._com.next
         this.pushAction(mode,this._com.next)
-     
     }
     _.Vessel.prototype.pushAction=function(mode,next){
         let fun=mode+"_"+next
@@ -95,7 +95,7 @@ LIM.SCENE=LIM.SCENE||{};
     _.Vessel.prototype.setRun=function(bit,bool){
         this._com.run = LIM.UTILS.setBit(this._com.run,bit,bool);
     }
-
+  
     _.Vessel.prototype.isOpe=function(bit){return LIM.UTILS.atBit(this._com.ope,bit)}
     _.Vessel.prototype.setOpe=function(bit,bool){
         this._com.ope = LIM.UTILS.setBit(this._com.ope,bit,bool);

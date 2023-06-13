@@ -10,6 +10,9 @@ LIM.SCENE=LIM.SCENE||{};
         this._doubleThreshold = 300;
         this._interval = [0,0];
         this._list={}
+        this._arrow={}
+        this._cursor={}
+        this._option={}
 
     }
     _.Command.prototype.update = function () {
@@ -20,11 +23,18 @@ LIM.SCENE=LIM.SCENE||{};
     
     _.Command.prototype.refresh = function () {
         _.Window.prototype.refresh.call(this);
-        if(this.isRun(3)) this.drawOption()
+        if(this.isRun(3)) this.drawOption(this._data.option)
+        this.drawArrow()
+        this.drawCursor()
         this.processWheel()
         this.processTouch()
     }
-
+    _.Command.prototype.shiftMode=function(){
+        _.Window.prototype.shiftMode.call(this);
+        this._arrow={}
+        this._time=0
+        this.cleanDraw(3)
+    }
     _.Command.prototype.location=function(){
         _.Window.prototype.location.call(this);
         if(!this.isRun(3)) this.setRun(3,true)
@@ -46,20 +56,179 @@ LIM.SCENE=LIM.SCENE||{};
                 else console.log("左键");
                 this._lastClickTime = currentTime;
             }
-            else if (TouchInput.isCancelled()) console.log("右键");
+            else if (TouchInput.isCancelled()) this.select(-1);
         }
     }
-    _.Command.prototype.drawOption = function() {
+
+    _.Command.prototype.drawArrow = function() {
+        let option = this._data.option;
+        const arrowKeys = Object.keys(option.arrow);
+        if (option.arrow) {
+            for (let key of arrowKeys) {
+                this.newArrow(option, key);
+                let item = option.arrow[key];
+                let index = parseInt(this._time / item.frame);
+                let data = item.image[index % item.image.length];
+
+                if (item.image.length > 1 && this._time % item.frame === 1) {
+                    let bit = this._origin.getBit(data.bit);
+                    bit.addLoadListener(() => {
+                        this._arrow[key].bitmap = new Bitmap(data.w, data.h);
+                        this._arrow[key].bitmap.blt(bit, data.x, data.y, data.w, data.h, 0, 0);
+                    });
+                }
+
+                let rotation, x, y, scaleX, scaleY;
+
+                if (typeof item.rota !== 'object') {rotation = (data.rota + item.rota) / 180 * Math.PI;}
+                else {
+                    let r = LIM.UTILS.waveNum(item.rota.wave, item.rota.frae / (1 + item.rota.fre * 2), this._time);
+                    rotation = (data.rota + item.rota.val1 + r * (item.rota.val2 - item.rota.val1)) / 180 * Math.PI;
+                }
+
+                if (typeof item.x !== 'object') {x = LIM.UTILS.lengthNum(item.x);}
+                else {
+                    let r = LIM.UTILS.waveNum(item.x.wave, item.x.frae / (1 + item.x.fre * 2), this._time);
+                    x = LIM.UTILS.lengthNum(item.x.val1) + r * (LIM.UTILS.lengthNum(item.x.val2) - LIM.UTILS.lengthNum(item.x.val1));
+                }
+
+                if (typeof item.y !== 'object') {y = LIM.UTILS.lengthNum(item.y);}
+                else {
+                    let r = LIM.UTILS.waveNum(item.y.wave, item.y.fra / (1 + item.y.fre * 2), this._time);
+                    y = LIM.UTILS.lengthNum(item.y.val1) + r * (LIM.UTILS.lengthNum(item.y.val2) - LIM.UTILS.lengthNum(item.y.val1));
+                }
+
+                if (typeof item.sw !== 'object') {scaleX = item.sw;}
+                else {
+                    let r = LIM.UTILS.waveNum(item.sw.wave, item.sw.fra / (1 + item.sw.fre * 2), this._time);
+                    scaleX = item.sw.val1 + r * (item.sw.val2 - item.sw.val1);
+                }
+
+                if (typeof item.sh !== 'object') {scaleY = item.sh;}
+                else {
+                    let r = LIM.UTILS.waveNum(item.sh.wave, item.sh.fra / (1 + item.sh.fre * 2), this._time);
+                    scaleY = item.sh.val1 + r * (item.sh.val2 - item.sh.val1);
+                }
+
+                this._arrow[key].rotation = rotation;
+                this._arrow[key].x = x;
+                this._arrow[key].y = y;
+                this._arrow[key].scale.x = scaleX;
+                this._arrow[key].scale.y = scaleY;
+            }
+        }
+    };
+    
+    _.Command.prototype.updataArrow=function (option){
+        if(this._arrow['up'])
+            this._arrow['up'].alpha=option.top>0?1:0
+        if(this._arrow['down'])
+            this._arrow['down'].alpha=option.top<this.topMax(option)?1:0
+    }
+    _.Command.prototype.newArrow=function (option,key){
+        if(!this._arrow[key]&&option.arrow[key]){
+            this._arrow[key]= new Sprite()
+            this._arrow[key].type = 3
+            this._arrow[key].anchor.set(0.5, 0.5);
+            this.addChild( this._arrow[key])
+            this.updataArrow(option)
+        }
+    }
+    
+    _.Command.prototype.drawCursor = function() {
+        let option = this._data.option;
+        const cursorKeys = Object.keys(option.cursor);
+        if (option.cursor) {
+            let rect={x1:0,x2:0,y1:0,y2:0};
+            if (this._option[option.select]) rect = this._option[option.select];
+            for (let key of cursorKeys) {
+                this.newCursor(option, key);
+                let item = option.cursor[key];
+                let index = parseInt(this._time / item.frame);
+                let data = item.image[index % item.image.length];
+
+                if (item.image.length > 1 && this._time % item.frame === 1) {
+                    let bit = this._origin.getBit(data.bit);
+                    bit.addLoadListener(() => {
+                        this._cursor[key].bitmap = new Bitmap(data.w, data.h);
+                        this._cursor[key].bitmap.blt(bit, data.x, data.y, data.w, data.h, 0, 0);
+                    });
+                }
+
+                this._cursor[key].alpha = option.select>-1?1:0
+
+                let sx = 0;
+                let sy = 0;
+
+                if (item.mode % 3 === 0) sx = rect.x2;
+                else if (item.mode % 3 === 0) sx = rect.x1 + (rect.x2 - rect.x1) / 2;
+                else sx = rect.x1;
+
+                if (item.mode / 3 > 2) sy = rect.y1;
+                else if (data.item / 3 > 1) sy = rect.y1 + (rect.y2 - rect.y1) / 2;
+                else sy = rect.y2;
+
+                let rotation, x, y, scaleX, scaleY;
+
+                if (typeof item.rota !== 'object') {
+                    rotation = (data.rota + item.rota) / 180 * Math.PI;
+                } else {
+                    let r = LIM.UTILS.waveNum(item.rota.wave, item.rota.frae / (1 + item.rota.fre * 2), this._time);
+                    rotation = (data.rota + item.rota.val1 + r * (item.rota.val2 - item.rota.val1)) / 180 * Math.PI;
+                }
+
+                if (typeof item.x !== 'object') {
+                    x = LIM.UTILS.lengthNum(item.x) + sx;
+                } else {
+                    let r = LIM.UTILS.waveNum(item.x.wave, item.x.frae / (1 + item.x.fre * 2), this._time);
+                    x = LIM.UTILS.lengthNum(item.x.val1) + r * (LIM.UTILS.lengthNum(item.x.val2) - LIM.UTILS.lengthNum(item.x.val1)) + sx;
+                }
+
+               if (typeof item.y !== 'object') {
+                    y = LIM.UTILS.lengthNum(item.y) + sy;
+                } else {
+                    let r = LIM.UTILS.waveNum(item.y.wave, item.y.fra / (1 + item.y.fre * 2), this._time);
+                    y = LIM.UTILS.lengthNum(item.y.val1) + r * (LIM.UTILS.lengthNum(item.y.val2) - LIM.UTILS.lengthNum(item.y.val1)) + sy;
+                }
+
+                if (typeof item.sw !== 'object') {
+                    scaleX = item.sw;
+                } else {
+                    let r = LIM.UTILS.waveNum(item.sw.wave, item.sw.fra / (1 + item.sw.fre * 2), this._time);
+                    scaleX = item.sw.val1 + r * (item.sw.val2 - item.sw.val1);
+                }
+
+                if (typeof item.sh !== 'object') {
+                    scaleY = item.sh;
+                } else {
+                    let r = LIM.UTILS.waveNum(item.sh.wave, item.sh.fra / (1 + item.sh.fre * 2), this._time);
+                    scaleY = item.sh.val1 + r * (item.sh.val2 - item.sh.val1);
+                }
+
+                this._cursor[key].rotation = rotation;
+                this._cursor[key].x = x;
+                this._cursor[key].y = y;
+                this._cursor[key].scale.x = scaleX;
+                this._cursor[key].scale.y = scaleY;
+            }
+        }
+    };
+    _.Command.prototype.newCursor=function (option,key){
+        if(!this._cursor[key]&&option.cursor[key]){
+            this._cursor[key]= new Sprite()
+            this._cursor[key].type = 4
+            this._cursor[key].anchor.set(0.5, 0.5);
+            this.addChild( this._cursor[key])
+        }
+    }
+    
+    _.Command.prototype.drawOption = function(option) {
         if(this.isRun(3)) this.setRun(3,false)
         this.cleanDraw(2)
-        let option = this._data.option
+        this._option={}
         if(option.item) {
-            for(let key of Object.keys(option.item)) {
-                //判定渲染
-                let offset=option.top*option.cols
-                if(key-offset<0||key-offset>option.row*option.cols) continue
-                
-                let rect = this.itemRect(option,key-offset)
+            for(let key of this.showOption(option)) {
+                let rect = this.itemRect(option,key)
                 let listItem = this._list[key] = {mode: option.item[key].mode || 0}
                 let bitData = this.getOptionData(option,key)
                 let bit = this._origin.getBit(bitData.bit)
@@ -91,35 +260,17 @@ LIM.SCENE=LIM.SCENE||{};
                         sp.type = 2
                         sp.x = rect.x
                         sp.y = rect.y
+                        this._option[key]={x1:rect.x,y1:rect.y,x2:rect.x+sw,y2:rect.y+sh}
 
                         this.drawTxt(sp,item)
-                        
-                        this.fillMask(sp)
-                        this.addChild(sp)
+                        this.addChildAt(sp,0)
                         this.bit(bit, sp.bitmap, bitData, [size0, size1])
                     }
                 }.bind(this))
             }
         }
     }
-    _.Command.prototype.drawTxt = function(sp,item){
-        let data=this._data.option.itemText||{x:0,y:0,padding:[0,0]}
-        let txt=new Sprite(this._origin._text[item.text.id])
-        txt.width=sp.width-(item.padding?item[0]:data.padding[0])*2
-        txt.height=sp.height-(item.padding?item[1]:data.padding[1])*2
-        txt.x=(item.x||data.x)+(item.padding?item[0]:data.padding[0])
-        txt.y=(item.y||data.y)+(item.padding?item[1]:data.padding[1])
-        sp.addChild(txt)
-    }
-    
-    
-    _.Command.prototype.isTouch=function () {
-        return TouchInput.x>this.getX()&&
-            TouchInput.x<this.getX()+this.width&&
-            TouchInput.y>this.getY()&&
-            TouchInput.y<this.getY()+this.height
-    }
-    _.Command.prototype.itemRect = function(option, index) {
+    _.Command.prototype.itemRect = function(option,index) {
         let rect = new Rectangle();
         let h = this.height - this._data.padding[1] * 2;
         let w = this.width - this._data.padding[0] * 2;
@@ -129,6 +280,7 @@ LIM.SCENE=LIM.SCENE||{};
         let margin1 = option.margin[1];
         switch (option.mode) {
             case 0:
+                index-=option.top*option.cols
                 w /= cols;
                 h /= row;
                 w -= margin0 * 2;
@@ -141,6 +293,7 @@ LIM.SCENE=LIM.SCENE||{};
                 rect.y = this._data.padding[1] + (r0 * h) + ((r0 * 2 + 1) * margin1);
                 break
             case 1:
+                index-=option.top*option.cols
                 w /= row;
                 h /= cols ;
                 w -= margin0 * 2;
@@ -151,6 +304,12 @@ LIM.SCENE=LIM.SCENE||{};
                 let c1 =  parseInt(index / cols)
                 rect.x = this._data.padding[0] + (c1 * w) + ((c1 * 2 + 1) * margin0);
                 rect.y = this._data.padding[1] + (r1 * h) + ((r1 * 2 + 1) * margin1);
+                break
+            default:
+                rect.width = option.item[index].rect.w||0;
+                rect.height =  option.item[index].rect.h||0;
+                rect.x= (option.item[index].rect.x||0)+this._data.padding[0]-option.layout[option.top].redu[0];
+                rect.y= (option.item[index].rect.y||0)+this._data.padding[1]-option.layout[option.top].redu[1];
                 break
         }
         return rect;
@@ -171,54 +330,141 @@ LIM.SCENE=LIM.SCENE||{};
         if (isDisable) return (keyItemUseUi && keyItemUseUi.dis) || (optionUseUi && optionUseUi.dis) || null;
         return (keyItemUseUi && keyItemUseUi.vis) || (optionUseUi && optionUseUi.vis) || null;
     };
+ 
+
+    _.Command.prototype.drawTxt = function(sp,item){
+        let data=this._data.option.itemText||{x:0,y:0,padding:[0,0]}
+        let txt=new Sprite(this._origin.getTextBit(item.text.id))
+        txt.width=sp.width-(item.padding?item[0]:data.padding[0])*2
+        txt.height=sp.height-(item.padding?item[1]:data.padding[1])*2
+        txt.x=(item.x||data.x)+(item.padding?item[0]:data.padding[0])
+        txt.y=(item.y||data.y)+(item.padding?item[1]:data.padding[1])
+        sp.addChild(txt)
+    }
+    _.Command.prototype.isTouch=function () {
+        return TouchInput.x>this.getX()&&
+            TouchInput.x<this.getX()+this.width&&
+            TouchInput.y>this.getY()&&
+            TouchInput.y<this.getY()+this.height
+    }
     
+    _.Command.prototype.topMax =function (option){
+        let max = 0;
+        let row;
+        switch (option.mode){
+            case 0:
+            case 1:
+                for (let key in option.item) if (max === 0 ||parseInt(key) > max) max = key;
+                row = Math.ceil(max/option.cols)-option.row
+                break
+            default:
+                row = option.topMax||0
+                break
+        }
+        return row
+    }
     _.Command.prototype.topRow =function (i){
         this._interval[0]=30
         let option= this._data.option
-        let max = 0;
-        for (let key in option.item) if (max === 0 ||parseInt(key) > max) max = key;
-        let row = Math.ceil(max/option.cols)-option.row
-        if(option.select<0) this.select(this.findOption())
+        let row = this.topMax(option);
+        if(option.select<0) this.select(this.findOption(option))  //没有选择
         else {
-            if((i==1&&option.top==0)||(i==-1&&option.top==row)){}
+            //滚动top
+            if((i==1&&option.top==0)||(i==-1&&option.top==row)){} 
             else {
                 option.top -= i
                 Conductor.start("v3")
             }
-            let select=this.findOption(i)
+            //改变选项
+            let select=this.findOption(option,i)
             if(select>-1) this.select(select)
             else {
+                let s1=option.select
                 option.select=-1
-                this.select(this.findOption())
+                let s2=this.findOption(option)
+                if(s2!=s1) this.select(s2)
+                else option.select=s1
             }
         }
-      
-        this.drawOption()
-    }
-    _.Command.prototype.findOption=function (i){
-        let option= this._data.option
-        let min=option.top*option.cols
-        let max=min+option.cols*option.row
-        if(option.select==-1){
-            for(let i=min;i<max;i++) if(option.item[i]) return i
-        }
-        else{
-            if(i==-1) {
-                for (let i = option.select + option.cols; i < max; i += option.cols) if (option.item[i]) return i
-            }
-            else {
-                for (let i = option.select - option.cols; i >= min; i -= option.cols) if (option.item[i]) return i
-            }
-            
-        }
-        return -1
+        this.updataArrow(option)
     }
     _.Command.prototype.select =function (index){
         let option= this._data.option
         if(option.select!=index) {
             option.select = index
             Conductor.start("v4")
+            if(!this.isRun(3)) this.setRun(3,true)
         }
     }
-    
+    _.Command.prototype.showOption=function (option){
+        let arr=[]
+        if(option.item)
+            switch (option.mode){
+                case 0:
+                case 1:
+                    for(let key of Object.keys(option.item)){
+                        let offset=option.top*option.cols
+                        if(!(key-offset<0||key-offset>=option.row*option.cols))
+                            arr.push(key)
+                    }
+                    break
+                default:
+                    if(option.layout){
+                        let w=this._data.w-this._data.padding[0]*2
+                        let h=this._data.h-this._data.padding[1]*2
+                        let x=option.layout[option.top].redu[0]
+                        let y=option.layout[option.top].redu[1]
+                        for(let i=option.top;i<option.layout.length;i++)
+                           for(let item of option.layout[i].menber){
+                              if(!option.item[item]) continue
+                              let rect=option.item[item].rect
+                              if(w>=rect.w+rect.x-x&&h>rect.h+rect.y-y)
+                                  arr.push(item)
+                           }
+                    }
+            }
+        return arr
+    }
+    _.Command.prototype.findOption=function (option,i){
+        switch (option.mode){
+            case 0:
+            case 1:
+                let min=option.top*option.cols
+                let max=min+option.cols*option.row
+                if(option.select==-1){
+                    for(let i=min;i<max;i++) if(option.item[i]) return i
+                }
+                else{
+                    if(i==-1) {
+                        for (let k = option.select + option.cols; k < max; k += option.cols) if (option.item[k]) return k
+                    }
+                    else {
+                        for (let k = option.select - option.cols; k >= min; k -= option.cols) if (option.item[k]) return k
+                    }
+
+                }
+                return -1
+            default:
+                if(option.select!==-1) {
+                    let line = 0
+                    if(i==-1) {
+                        for (let i = 0; i < option.layout.length - 1; i++)
+                            if (option.layout[i].menber.indexOf(option.select) > -1) {
+                                line = i;
+                                return option.layout[line + 1].menber[0]
+                            }
+                    }
+                    else {
+                        for (let i = 1; i < option.layout.length; i++)
+                            if (option.layout[i].menber.indexOf(option.select) > -1) {
+                                line = i;
+                                return option.layout[line - 1].menber[0]
+                            }
+                    }
+                }
+                return option.layout[option.top].menber[0]    
+               
+        }
+      
+    }
 })(LIM.SCENE);

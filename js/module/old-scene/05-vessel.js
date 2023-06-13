@@ -38,6 +38,7 @@ LIM.SCENE=LIM.SCENE||{};
         this._dar=[]
         this._mode=-1
         this._data={}
+        this._time=0
         this._com=com
         this._origin=origin
         Sprite.prototype.initialize.call(this);//;
@@ -167,5 +168,6 @@ LIM.SCENE=LIM.SCENE||{};
         if(this._mode!==this._com.mode) this.shiftMode()
         if(this._com.run%3===0) this.location()
         if(this._dar.length>0) this.move()
+        this._time++
     }
 })(LIM.SCENE);
