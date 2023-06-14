@@ -335,10 +335,13 @@ LIM.SCENE=LIM.SCENE||{};
     _.Command.prototype.drawTxt = function(sp,item){
         let data=this._data.option.itemText||{x:0,y:0,padding:[0,0]}
         let txt=new Sprite(this._origin.getTextBit(item.text.id))
+        let w=txt.width
+        let h =txt.height
         txt.width=sp.width-(item.padding?item[0]:data.padding[0])*2
         txt.height=sp.height-(item.padding?item[1]:data.padding[1])*2
-        txt.x=(item.x||data.x)+(item.padding?item[0]:data.padding[0])
-        txt.y=(item.y||data.y)+(item.padding?item[1]:data.padding[1])
+        
+        txt.x=(item.x||data.x)+(item.padding?item[0]:data.padding[0])+(item.text.align?(txt.width-w)/item.text.align:0)
+        txt.y=(item.y||data.y)+(item.padding?item[1]:data.padding[1])+(item.text.verti?(txt.height-h)/item.text.verti:0)
         sp.addChild(txt)
     }
     _.Command.prototype.isTouch=function () {
@@ -367,10 +370,11 @@ LIM.SCENE=LIM.SCENE||{};
         this._interval[0]=30
         let option= this._data.option
         let row = this.topMax(option);
+       
         if(option.select<0) this.select(this.findOption(option))  //没有选择
         else {
             //滚动top
-            if((i==1&&option.top==0)||(i==-1&&option.top==row)){} 
+            if(row==-1||(i==1&&option.top==0)||(i==-1&&option.top==row)){} 
             else {
                 option.top -= i
                 Conductor.start("v3")
@@ -432,7 +436,7 @@ LIM.SCENE=LIM.SCENE||{};
                 let min=option.top*option.cols
                 let max=min+option.cols*option.row
                 if(option.select==-1){
-                    for(let i=min;i<max;i++) if(option.item[i]) return i
+                     for(let i=min;i<max;i++) if(option.item[i]) return i
                 }
                 else{
                     if(i==-1) {
@@ -441,7 +445,6 @@ LIM.SCENE=LIM.SCENE||{};
                     else {
                         for (let k = option.select - option.cols; k >= min; k -= option.cols) if (option.item[k]) return k
                     }
-
                 }
                 return -1
             default:

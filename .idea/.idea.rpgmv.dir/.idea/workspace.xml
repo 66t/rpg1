@@ -14,17 +14,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="022b3a10-94e5-42d6-b94a-cfdedd324291" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/js/libs/crypto-js.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.rpgmv.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.rpgmv.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/scene/test.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/scene/test1.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/scene/test1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event/event1.js" beforeDir="false" afterPath="$PROJECT_DIR$/event/event1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/libs/lz-string.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/load.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/load.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/00-utils/01-string.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/00-utils/01-string.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/00-utils/04-keyInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/00-utils/04-keyInput.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/01-storage/02-save.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/01-storage/02-save.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/System.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/System.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/text/0.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/text/0.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/04-scene/04-command.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/04-command.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,25 +95,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;background.image.plus&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "background.image.plus",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\pc\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\pc\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\pc\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\pc\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\pc\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\pc\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
@@ -192,6 +186,9 @@
       <workItem from="1686532579417" duration="48692000" />
       <workItem from="1686624014515" duration="16798000" />
       <workItem from="1686647661852" duration="12118000" />
+      <workItem from="1686668469523" duration="48000" />
+      <workItem from="1686668547329" duration="2899000" />
+      <workItem from="1686743764148" duration="331000" />
     </task>
     <task id="LOCAL-00001" summary="11">
       <created>1684404192045</created>
@@ -305,7 +302,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686651438616</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="使用crypto">
+      <created>1686668505317</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1686668505317</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -367,7 +371,8 @@
     <MESSAGE value="ceshi" />
     <MESSAGE value="变量观察" />
     <MESSAGE value="键盘" />
-    <option name="LAST_COMMIT_MESSAGE" value="键盘" />
+    <MESSAGE value="使用crypto" />
+    <option name="LAST_COMMIT_MESSAGE" value="使用crypto" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -539,7 +544,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
-          <line>391</line>
+          <line>395</line>
           <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -555,26 +560,27 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/00-utils/04-keyInput.js</url>
           <line>99</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="85" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/00-utils/04-keyInput.js</url>
           <line>112</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="86" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/00-utils/04-keyInput.js</url>
           <line>116</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/00-utils/04-keyInput.js</url>
           <line>108</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="89" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
+          <line>374</line>
+          <option name="timeStamp" value="90" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
