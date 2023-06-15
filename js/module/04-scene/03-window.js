@@ -6,6 +6,7 @@ LIM.SCENE=LIM.SCENE||{};
     _.Window.prototype.constructor = _.Window;
     _.Window.prototype.initialize = function (origin,name,com) {
         _.Vessel.prototype.initialize.call(this,origin,name,com);
+        this._anime={}
     }
 
     _.Window.prototype.shiftMode=function(){
@@ -17,11 +18,15 @@ LIM.SCENE=LIM.SCENE||{};
         _.Vessel.prototype.refresh.call(this);
         if(this.isRun(1)) this.drawBack()
         if(this.isRun(2)) this.drawText()
+        this.updateAnime()
     }
     _.Window.prototype.location=function(){
         _.Vessel.prototype.location.call(this);
     }
-
+    _.Window.prototype.setAnime =function (type,data){
+        if(this._anime[type]) this._anime[type].push(data)
+        else  this._anime[type]=[data]
+    }
     _.Window.prototype.drawBack = function() {
         if(this.isRun(1)) this.setRun(1,false)
         
@@ -54,14 +59,55 @@ LIM.SCENE=LIM.SCENE||{};
         let padding1 = this._data.padding[1]
         if(this._data.text)
             for(let item of this._data.text) {
-                    let sp = new Sprite(this._origin.getTextBit(item.id))
-                    sp.x = item.x + padding0
-                    sp.y = item.y + padding1
-                    sp.type = 1
-                    this.addChild(sp)
+                    let content=this._origin.getText(item.id)
+                    if(content) {
+                        let sp = new Sprite(this.getTextBit(content[0],content[1],1))
+                        sp.x = item.x + padding0
+                        sp.y = item.y + padding1
+                        sp.type = 1
+                        this.addChild(sp)
+                    }
                 }
     }
+    _.Window.prototype.getTextBit=function (content,item,index){
+         let bitmap = new Bitmap(0,0);
+         bitmap.fontSize = item.fontSize;
+         bitmap.fontFace = 'GameFont';
+         bitmap.outlineWidth = item.outlineWidth;
+         bitmap.fontItalic = item.fontItalic;
+         if(item.anime){
+             let t=parseInt(this._time/item.anime)
+             bitmap.textColor=item.textColor[t%item.textColor.length]
+             bitmap.outlineColor = item.outlineColor[t%item.outlineColor.length];
+             this.setAnime(index,[bitmap,item,content])
+         }
+         else {
+             bitmap.textColor=item.textColor[0]
+             bitmap.outlineColor = item.outlineColor[0];   
+         }
+         let width=bitmap.measureTextWidth(content)
+         bitmap._createCanvas(width,item.fontSize)
+         bitmap.drawText(content, 0, 0, width,item.fontSize,'center')
+         return  bitmap;
+    }
     
+    _.Window.prototype.updateAnime=function (){
+        for(let key in this._anime){
+           for(let index in this._anime[key]){
+               let bitmap=this._anime[key][index][0]
+               let item=this._anime[key][index][1]
+               if(this._time%item.anime==0) {
+                   let content = this._anime[key][index][2]
+                   let t = parseInt(this._time / item.anime)
+                   bitmap.clear()
+                   bitmap.textColor = item.textColor[t % item.textColor.length]
+                   bitmap.outlineColor = item.outlineColor[t % item.outlineColor.length];
+                   let width = bitmap.measureTextWidth(content)
+                   bitmap.drawText(content, 0, 0, width, item.fontSize, 'center')
+               }
+           }
+        }
+    }
     _.Window.prototype.drawBrush=function (bitmap,com){
         if(com)
           for(let item of com){
@@ -85,8 +131,6 @@ LIM.SCENE=LIM.SCENE||{};
             }  
          }
     }
-
-    
     _.Window.prototype.cleanDraw=function (type) {
         for(let i=0;i<this.children.length;i++){
             if(this.children[i].type==type) {
@@ -94,5 +138,6 @@ LIM.SCENE=LIM.SCENE||{};
                 i--
             }
         }
+        delete this._anime[type]
     }
 })(LIM.SCENE);

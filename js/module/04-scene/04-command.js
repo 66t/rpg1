@@ -261,8 +261,7 @@ LIM.SCENE=LIM.SCENE||{};
                         sp.x = rect.x
                         sp.y = rect.y
                         this._option[key]={x1:rect.x,y1:rect.y,x2:rect.x+sw,y2:rect.y+sh}
-
-                        this.drawTxt(sp,item)
+                        this.drawContent(sp,item)
                         this.addChildAt(sp,0)
                         this.bit(bit, sp.bitmap, bitData, [size0, size1])
                     }
@@ -332,17 +331,19 @@ LIM.SCENE=LIM.SCENE||{};
     };
  
 
-    _.Command.prototype.drawTxt = function(sp,item){
+    _.Command.prototype.drawContent = function(sp,item){
         let data=this._data.option.itemText||{x:0,y:0,padding:[0,0]}
-        let txt=new Sprite(this._origin.getTextBit(item.text.id))
-        let w=txt.width
-        let h =txt.height
-        txt.width=sp.width-(item.padding?item[0]:data.padding[0])*2
-        txt.height=sp.height-(item.padding?item[1]:data.padding[1])*2
-        
-        txt.x=(item.x||data.x)+(item.padding?item[0]:data.padding[0])+(item.text.align?(txt.width-w)/item.text.align:0)
-        txt.y=(item.y||data.y)+(item.padding?item[1]:data.padding[1])+(item.text.verti?(txt.height-h)/item.text.verti:0)
-        sp.addChild(txt)
+        let content=this._origin.getText(item.text.id)
+        if(content) {
+            let txt=new Sprite(this.getTextBit(content[0],content[1],sp.type||0))
+            let w=txt.width
+            let h =txt.height
+            txt.width=sp.width-(item.padding?item[0]:data.padding[0])*2
+            txt.height=sp.height-(item.padding?item[1]:data.padding[1])*2
+            txt.x=(item.x||data.x)+(item.padding?item[0]:data.padding[0])+(item.text.align?(txt.width-w)/item.text.align:0)
+            txt.y=(item.y||data.y)+(item.padding?item[1]:data.padding[1])+(item.text.verti?(txt.height-h)/item.text.verti:0)
+            sp.addChild(txt)
+        }
     }
     _.Command.prototype.isTouch=function () {
         return TouchInput.x>this.getX()&&
@@ -406,7 +407,7 @@ LIM.SCENE=LIM.SCENE||{};
             switch (option.mode){
                 case 0:
                 case 1:
-                    for(let key of Object.keys(option.item)){
+                    for(let key in option.item){
                         let offset=option.top*option.cols
                         if(!(key-offset<0||key-offset>=option.row*option.cols))
                             arr.push(key)

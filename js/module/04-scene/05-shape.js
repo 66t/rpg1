@@ -79,7 +79,7 @@ LIM.SCENE=LIM.SCENE||{};
             cover: this._data.cover,
             posi: this._data.posi,
         }
-        for (let key of Object.keys(anime)) {
+        for (let key in anime) {
             if(anime[key].incre) 
                 switch (key) {
                     case "rota":
@@ -121,7 +121,7 @@ LIM.SCENE=LIM.SCENE||{};
                filter = this.typeFilter(data[i].type)
                this.setFilter(i, filter)
            }
-           for(let key of Object.keys(data[i].data)){
+           for(let key in data[i].data){
                let r = LIM.UTILS.waveNum(data[i].data[key].wave, time[0]/(1+data[i].data[key].fre*2),time[1])
                let val=LIM.UTILS.lengthNum(data[i].data[key].val1)+
                    (LIM.UTILS.lengthNum(data[i].data[key].val2)-LIM.UTILS.lengthNum(data[i].data[key].val1))*r
@@ -234,7 +234,7 @@ LIM.SCENE=LIM.SCENE||{};
             let filter = this.typeFilter(item.filter[i].type)
             this.filterType[i]=item.filter[i].type
             this.setFilter(i,filter)
-            for (let key of Object.keys(item.filter[i].data))
+            for (let key in item.filter[i].data)
                 if(key[0]=="#") filter.uniforms[key.slice(1)] = item.filter[i].data[key.slice(1)]
                 else  filter[key] = item.filter[i].data[key]
         }

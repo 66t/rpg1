@@ -66,7 +66,7 @@ LIM.SCENE=LIM.SCENE||{};
     
     _.Scene.prototype.createVessel = function () {
         if(this._data.vessel) {
-            for(let key of Object.keys(this._data.vessel)) {
+            for(let key in this._data.vessel) {
                 let item = this._data.vessel[key]
                 let name = 'v_' + key
                 this._item[name] = new LIM.SCENE.Vessel(this, name, item)
@@ -75,7 +75,7 @@ LIM.SCENE=LIM.SCENE||{};
     }
     _.Scene.prototype.createWindow = function () {
         if(this._data.window) {
-            for(let key of Object.keys(this._data.window)) {
+            for(let key in this._data.window) {
                 let item = this._data.window[key]
                 let name = 'w_' + key
                 this._item[name] = new LIM.SCENE.Window(this, name, item)
@@ -84,7 +84,7 @@ LIM.SCENE=LIM.SCENE||{};
     }
     _.Scene.prototype.createCommand = function () {
         if(this._data.command) {
-            for(let key of Object.keys(this._data.command)) {
+            for(let key in this._data.command) {
                 let item = this._data.command[key]
                 let name = 'c_' + key
                 this._item[name] = new LIM.SCENE.Command(this, name, item)
@@ -93,7 +93,7 @@ LIM.SCENE=LIM.SCENE||{};
     }
     _.Scene.prototype.createShape = function () {
         if(this._data.shape) {
-            for(let key of Object.keys(this._data.shape)) {
+            for(let key in this._data.shape) {
                 let item = this._data.shape[key]
                 let name = 's_' + key
                 this._item[name] = new LIM.SCENE.Shape(this, name, item)
@@ -102,23 +102,13 @@ LIM.SCENE=LIM.SCENE||{};
     }
 
 
-    _.Scene.prototype.getTextBit = function (key) {
+    _.Scene.prototype.getText = function (key) {
         if(this._data.text[key]){
             let item = this._data.text[key]
-            let bitmap = new Bitmap(0,0);
-            bitmap.fontSize = item.fontSize;
-            bitmap.fontFace = 'GameFont';
-            bitmap.textColor=item.textColor
-            bitmap.outlineWidth = item.outlineWidth;
-            bitmap.outlineColor = item.outlineColor;
-            bitmap.fontItalic = item.fontItalic;
-            let content=this.getContent(this._font[item.content])
-            let width=bitmap.measureTextWidth(content[0])
-            bitmap._createCanvas(width,item.fontSize)
-            bitmap.drawText(content[0], 0, 0, width,item.fontSize,'center')
-            return  bitmap;
+            let content=this.getContent(this._font[item.content])[0]
+            return [content,item]
         }
-        return  new Bitmap();
+        return null;
     }
     _.Scene.prototype.getContent=function(text){
         if(text.arr&&text.arr.length) {
@@ -145,7 +135,7 @@ LIM.SCENE=LIM.SCENE||{};
         }
         this.children=[]
         let arr=[]
-        for(let key of Object.keys(this._item))
+        for(let key in this._item)
             arr.push({key:key,index:this._item[key]._index||0})
         arr.sort(LIM.UTILS.sortBy("index",false))
         for(let item of arr)
@@ -165,7 +155,7 @@ LIM.SCENE=LIM.SCENE||{};
     }
     
     _.Scene.prototype.effector=function(){
-        for(let key of Object.keys(this._data.effector))
+        for(let key in this._data.effector)
             if (this._data.effector[key].count === 1 && LIM.EVENT[this._data.effector[key].judge]()) {
                 this._data.effector[key].count++
                 this.triggerEffector(this._data.effector[key].fun)
@@ -219,7 +209,7 @@ LIM.SCENE=LIM.SCENE||{};
     _.Scene.prototype.readyLoadFont = function () {
         this._load = -1;
         this._loadFont = {};
-        for (let key of Object.keys(this._data.text))
+        for (let key in this._data.text)
             this.loadFontIfNeeded(this._data.text[key].content);
     }
     _.Scene.prototype.loadFont = function (file) {
@@ -232,10 +222,10 @@ LIM.SCENE=LIM.SCENE||{};
         if (!this._loadFont[file]) this.loadFont(file);
     }
     _.Scene.prototype.checkFont = function () {
-        for (let key of Object.keys(this._loadFont))
+        for (let key in this._loadFont)
             if (this._loadFont[key].load == 1) {
                 let data = this._loadFont[key].data;
-                for (let key of Object.keys(data)) {
+                for (let key in data) {
                     let arr = data[key].arr;
                     for (let p of arr) {
                         if (p[0] == "@") {
@@ -248,7 +238,7 @@ LIM.SCENE=LIM.SCENE||{};
             }
         let allTextLoaded = Object.values(this._loadFont).every(item => item.load == 2);
         if (allTextLoaded) {
-            for(let key of Object.keys(this._font))
+            for(let key in this._font)
                 this._font[key]=this._loadFont[key.split("_")[0]].data[key]
             delete this._loadFont
             this.run();}
@@ -257,7 +247,7 @@ LIM.SCENE=LIM.SCENE||{};
     _.Scene.prototype.loadResources = function () {
         if(this._data.bit) {
             this._bitload=0
-            for (let key of Object.keys(this._data.bit)) {
+            for (let key in this._data.bit) {
                 this._bitload++
                 let item=this._data.bit[key]
                 this._bit[key] = ImageManager.loadBitmap(item[0],item[1],item[2],item[3])

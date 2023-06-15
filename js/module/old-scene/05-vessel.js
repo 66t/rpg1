@@ -135,7 +135,7 @@ LIM.SCENE=LIM.SCENE||{};
     _.Vessel.prototype.move=function(){
         if(this._dar[0].time>0) {
             let r=LIM.UTILS.waveNum(this._dar[0].wave,this._dar[0].frame,this._dar[0].time)
-            for (let key of Object.keys(this._dar[0].data)) {
+            for (let key in this._dar[0].data) {
                 let v=parseFloat(r * (this._dar[0].data[key][1] - this._dar[0].data[key][0]) + this._dar[0].data[key][0])
                 switch (key) {
                     case "x":this.x=v;break

@@ -45,7 +45,7 @@ LIM.INPUT.releaseCode=function (key){
 
 LIM.INPUT.update = function() {
     let time = Date.now();
-    for (let key of Object.keys(LIM.INPUT.codeTable)) {
+    for (let key in LIM.INPUT.codeTable) {
         let codeTable = LIM.INPUT.codeTable[key];
         let { count, keyTime, upTime } = codeTable;
         if (count < 0) {
@@ -65,13 +65,13 @@ LIM.INPUT.update = function() {
             this.keyEvent(key, -1);//松开时
         }
     }
-    for(let key of Object.keys(LIM.INPUT.controlMapper)){
+    for(let key in LIM.INPUT.controlMapper){
         if(LIM.INPUT.isInput(key)) LIM.INPUT.key[key]=LIM.INPUT.key[key]+1
         else LIM.INPUT.key[key]=-1
     }
 };
 
-LIM.INPUT.c=function (key,down){
+LIM.INPUT.X=function (key,down){
     if(down) return LIM.INPUT.key[key]===0 
     else return LIM.INPUT.key[key]%LIM.INPUT.repeatTime===0
 }

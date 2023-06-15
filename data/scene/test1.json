@@ -163,34 +163,34 @@
   },
   "text": {
     "a":{
-      "content": "0_1",
-      "fontSize": 34, "textColor":[0,0.1,"#f00",0.5,"#000"],
-      "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
+      "content": "0_1","anime":1,
+      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
+      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
     },
     "b":{
       "content": "0_2",
-      "fontSize": 34, "textColor":[0,0.1,"#f00",0.5,"#000"],
-      "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
+      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
+      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
     },
     "c":{
       "content": "0_3",
-      "fontSize": 54, "textColor":[0,0.1,"#f00",0.5,"#000"],
-      "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
+      "fontSize": 54, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
+      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
     },
     "d":{
       "content": "0_4",
-      "fontSize": 34, "textColor":[0,0.1,"#f00",0.5,"#000"],
-      "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
+      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
+      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
     },
     "e":{
       "content": "0_5",
-      "fontSize": 34, "textColor":[0,0.1,"#f00",0.5,"#000"],
-      "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
+      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
+      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
     },
     "f":{
       "content": "0_6",
-      "fontSize": 34, "textColor":[0,0.1,"#f00",0.5,"#000"],
-      "outlineWidth":2, "outlineColor":"#0f0", "fontItalic":false
+      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
+      "outlineWidth":2, "outlineColor":"[#0f0]", "fontItalic":false
     }
   },
   "effector":{
