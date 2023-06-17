@@ -52,17 +52,17 @@ LIM.SCENE=LIM.SCENE||{};
             if(item.filter2&&item.filter2.length) this.executeFilter(item.filter2,[item.frame - item.change, item.time - item.change])
         }
         //执行方法
-        if (item.time == 0) {
-            if(this._action[0].funS) this._origin.triggerFun(this._action[0].funS)
+        if (item.time == 0) { 
+            if(this._action[0].comS)  this._origin.triggerHandler(this._action[0].comS)
         }
         if(item.time==item.change){
-            if(this._action[0].funC) this._origin.triggerFun(this._action[0].funC)
+            if(this._action[0].comC) this._origin.triggerHandler(this._action[0].comC)
             this._data=this._com.data[this._com.next]
             this._time=0
             if(!item.while) this.setRun(0,true)
         }
         if(item.time>=item.frame){
-            if(this._action[0].funE) this._origin.triggerFun(this._action[0].funE)
+            if(this._action[0].comE) this._origin.triggerHandler(this._action[0].comE)
             this._action.splice(0,1)
         }
         item.time++
@@ -77,7 +77,7 @@ LIM.SCENE=LIM.SCENE||{};
             w: this._data.w,
             h: this._data.h,
             cover: this._data.cover,
-            posi: this._data.posi,
+            adso: this._data.adso,
         }
         for (let key in anime) {
             if(anime[key].incre) 
@@ -198,11 +198,11 @@ LIM.SCENE=LIM.SCENE||{};
         this.cover(item);
         this.anchor.set(0.5, 0.5);
         
-        let sx=item.posi % 3 === 1 ? this.width * this.scale.x * 0.5 :
-               item.posi % 3 === 2 ? Graphics.width * 0.5 :
+        let sx=item.adso % 3 === 1 ? this.width * this.scale.x * 0.5 :
+               item.adso % 3 === 2 ? Graphics.width * 0.5 :
                Graphics.width - this.width * this.scale.x * 0.5;
-        let sy=item.posi > 6 ? this.height * this.scale.y * 0.5 :
-               item.posi < 4 ? Graphics.height - this.height * this.scale.y * 0.5 :
+        let sy=item.adso > 6 ? this.height * this.scale.y * 0.5 :
+               item.adso < 4 ? Graphics.height - this.height * this.scale.y * 0.5 :
                Graphics.height * 0.5;
         this.x = sx+LIM.UTILS.lengthNum(item.x);
         this.y = sy+LIM.UTILS.lengthNum(item.y);

@@ -16,6 +16,8 @@ LIM.SCENE=LIM.SCENE||{};
         DataManager.loadDataFile('$dataScene', 'scene/' + name + '.json');
         Scene_Base.prototype.initialize.call(this);
     }
+    
+
     _.Scene.prototype.update = function () {
         switch (this._load) {
             case -5:
@@ -39,6 +41,7 @@ LIM.SCENE=LIM.SCENE||{};
                 this.refresh();
         }
     }
+    
     _.Scene.prototype.run = function() {
         this._time = 0;
         this._load = 1;
@@ -156,24 +159,33 @@ LIM.SCENE=LIM.SCENE||{};
     
     _.Scene.prototype.effector=function(){
         for(let key in this._data.effector)
-            if (this._data.effector[key].count === 1 && LIM.EVENT[this._data.effector[key].judge]()) {
+            if (this._data.effector[key].count === 1 && this.judge(this._data.effector[key].judge)) {
                 this._data.effector[key].count++
-                this.triggerEffector(this._data.effector[key].fun)
+                this.triggerHandler(this._data.effector[key].com)
             }
     }
-    _.Scene.prototype.triggerEffector=function(eve){
-        for(let key of eve) {
-            if (key[0] === "%") LIM.EVENT[key.substring(1,key.length)]()
-            else if (key[0] == "#") this.exFun(key.split(":"))
-            else if (this._data.fun[key]) this.triggerFun(this._data.fun[key])
+    _.Scene.prototype.judge=function (judge){
+        switch (judge[0]){
+            case "%":return LIM.EVENT[judge.slice(1)]()
         }
-
     }
-    _.Scene.prototype.triggerFun=function(eve){
-        for(let item of eve)
-            if(item[0]=="#")
-                this.exFun(item.split(":"))
-            else {}
+
+    _.Scene.prototype.triggerHandler=function(com,data) {
+        if(!com) return
+        let handler=this._data.handler[com]
+        if(handler) this.exCom(handler,data)
+    }
+    _.Scene.prototype.exCom=function(parser,data){
+        for(let token of parser) {
+            if(data) token=token.replacePlace(data)
+            if (token[0] === "%")
+            {
+                let fun=token.slice(1)
+                if(LIM.EVENT[fun]) LIM.EVENT[fun]()
+            }
+            else if (token[0] == "#") this.exFun(token.split(":"))
+            else  this.triggerHandler(token)
+        }
     }
     _.Scene.prototype.exFun=function(eve){
           switch (eve[0]) {
@@ -197,6 +209,14 @@ LIM.SCENE=LIM.SCENE||{};
                 if(this._data.effector[eve[1]])
                     this._data.effector[eve[1]].count=0
                 break
+           case "#whell":
+               if(this._item[eve[1]]&&this._item[eve[1]] instanceof _.Command)
+                   this._item[eve[1]].topRow(eve[2])
+               break
+           case "#select":
+               if(this._item[eve[1]]&&this._item[eve[1]] instanceof _.Command)
+                   this._item[eve[1]].select(eve[2])
+               break
         }
     }
 

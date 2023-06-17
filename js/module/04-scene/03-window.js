@@ -6,10 +6,10 @@ LIM.SCENE=LIM.SCENE||{};
     _.Window.prototype.constructor = _.Window;
     _.Window.prototype.initialize = function (origin,name,com) {
         _.Vessel.prototype.initialize.call(this,origin,name,com);
-        this._anime={}
     }
 
     _.Window.prototype.shiftMode=function(){
+        this._anime={}
         _.Vessel.prototype.shiftMode.call(this);
         if(!this.isRun(1)) this.setRun(1,true)
         if(!this.isRun(2)) this.setRun(2,true)

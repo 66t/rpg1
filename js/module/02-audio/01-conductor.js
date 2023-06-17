@@ -8,6 +8,7 @@ Conductor._Buffer={};
 Conductor._Effect={}
 
 Conductor.start=function(id,traje){
+    console.log(id)
     let v=$Musical[id]
     if(v) {
         let sound = new Pz.Sound(`${Conductor._path}/${v.folder}/${v.name}.ogg`, () => {

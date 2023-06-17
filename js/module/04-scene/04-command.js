@@ -6,19 +6,23 @@ LIM.SCENE=LIM.SCENE||{};
     _.Command.prototype.constructor = _.Command;
     _.Command.prototype.initialize = function (origin,name,com) {
         _.Window.prototype.initialize.call(this,origin,name,com);
-        this._lastClickTime = 0;
-        this._doubleThreshold = 300;
-        this._interval = [0,0];
-        this._list={}
-        this._arrow={}
-        this._cursor={}
-        this._option={}
-
+        this._time=0
     }
     _.Command.prototype.update = function () {
         _.Window.prototype.update.call(this);
         if(this._interval[0]>0) this._interval[0]--
         if(this._interval[1]>0) this._interval[1]--
+        if(this._interval[2]>0) this.updateActive()
+    }
+    
+    _.Command.prototype.updateActive=function (){
+        this._interval[2]--
+        if(this._interval[2]==0){
+            this._data.option.active=-1
+            this._origin.triggerHandler(this._roof)
+            this._roof=""
+            if(!this.isRun(3)) this.setRun(3,true)
+        }
     }
     
     _.Command.prototype.refresh = function () {
@@ -30,9 +34,15 @@ LIM.SCENE=LIM.SCENE||{};
         this.processTouch()
     }
     _.Command.prototype.shiftMode=function(){
-        _.Window.prototype.shiftMode.call(this);
         this._arrow={}
-        this._time=0
+        this._list={}
+        this._interval = [0,0,0];
+        this._roof=""
+        this._arrow={}
+        this._cursor={}
+        this._option={}
+        this._rect={}
+        _.Window.prototype.shiftMode.call(this);
         this.cleanDraw(3)
     }
     _.Command.prototype.location=function(){
@@ -41,22 +51,33 @@ LIM.SCENE=LIM.SCENE||{};
     }
 
     _.Command.prototype.processWheel = function() {
-        if(this._interval[0]===0&&this.hasActions()===0&&this.isOpe(1)){
+        if( this._interval[0]===0&&
+            this.hasActions()===0&&
+            this.isOpe(1)&&!this.hasActiva()){
             let threshold = 20;
-            if (TouchInput.wheelY >= threshold) this.topRow(-1)
-            if (TouchInput.wheelY <= -threshold) this.topRow(1)
+            if (TouchInput.wheelY >= threshold) 
+                if(this._symbol["wheel"])
+                    this._origin.triggerHandler(this._symbol["wheel"],[-1])
+            if (TouchInput.wheelY <= -threshold)
+                if(this._symbol["wheel"])
+                    this._origin.triggerHandler(this._symbol["wheel"],[1])
         }
     }
     _.Command.prototype.processTouch = function() {
-        if(this.hasActions()==0&&this.isOpe(0)){
-            const currentTime = performance.now();
+        if( this._interval[1]===0&&
+            this.hasActions()===0&&
+            this.isOpe(0)&&!this.hasActiva()){
             if (TouchInput.isTriggered() && this.isTouch()) {
-                if (currentTime - this._lastClickTime < this._doubleThreshold)
-                    console.log("左键双击");
-                else console.log("左键");
-                this._lastClickTime = currentTime;
+                if(this._symbol["select"])
+                {
+                    let arr=this.touchOption()
+                    for(let index of arr)
+                        this._origin.triggerHandler(this._symbol["select"],[index])
+                }
             }
-            else if (TouchInput.isCancelled()) this.select(-1);
+            else if (TouchInput.isCancelled())
+                if(this._symbol["cancel"])
+                    this._origin.triggerHandler(this._symbol["cancel"],[-1])
         }
     }
 
@@ -261,7 +282,30 @@ LIM.SCENE=LIM.SCENE||{};
                         sp.x = rect.x
                         sp.y = rect.y
                         this._option[key]={x1:rect.x,y1:rect.y,x2:rect.x+sw,y2:rect.y+sh}
-                        this.drawContent(sp,item)
+
+                        let state=this.getOptionState(option,parseInt(key))
+                        let cont
+                        switch (state){
+                            case 0:  //默认
+                                cont=item.def
+                                break 
+                            case 1:  //选中
+                                cont=item.sel||item.def
+                                break
+                            case 2:  //禁用
+                                cont=item.dis||item.def
+                                break
+                            case 3:  //禁用并选择
+                                cont=item.dse||item.sel||item.def
+                                break
+                            case 4:  //激活
+                            case 5:
+                            case 6:
+                            case 7:
+                                cont=item.act||item.def
+                                break
+                        }
+                        this.drawContent(sp,cont,option.itemText||{x:0,y:0,padding:[0,0]})
                         this.addChildAt(sp,0)
                         this.bit(bit, sp.bitmap, bitData, [size0, size1])
                     }
@@ -269,6 +313,16 @@ LIM.SCENE=LIM.SCENE||{};
             }
         }
     }
+    
+    
+    _.Command.prototype.getOptionState=function (option,key){
+        let x=0b000
+        if(option.active === key) x|=0b100
+        if(option.select === key) x|=0b001
+        if(option.disable.indexOf(key) > -1) x|=0b010
+        return x
+    }
+
     _.Command.prototype.itemRect = function(option,index) {
         let rect = new Rectangle();
         let h = this.height - this._data.padding[1] * 2;
@@ -311,40 +365,71 @@ LIM.SCENE=LIM.SCENE||{};
                 rect.y= (option.item[index].rect.y||0)+this._data.padding[1]-option.layout[option.top].redu[1];
                 break
         }
+        this._rect[index]=rect
         return rect;
     }
     _.Command.prototype.getOptionData = function(option, key) {
-        const keyItem = option.item[key];
-        const keyItemUseUi = keyItem && keyItem.useUi;
-        const optionUseUi = option.useUi;
-        const isActivation = option.activation == key;
-        const isSelect = option.select == key;
-        const isDisable = option.disable.indexOf(key) > -1;
-
-        if (isActivation) return (keyItemUseUi && keyItemUseUi.act) || (optionUseUi && optionUseUi.act) || null;
-        if (isSelect) {
-            if (isDisable) return (keyItemUseUi && keyItemUseUi.dse) || (optionUseUi && optionUseUi.dse) || null;
-            return (keyItemUseUi && keyItemUseUi.sel) || (optionUseUi && optionUseUi.sel) || null;
+        let keyItem = option.item[key];
+        let optionUseUi = option.useUi;
+        let keyItemUseUi
+        let state=this.getOptionState(option,parseInt(key))
+        switch (state){
+            case 0:  //默认
+                keyItemUseUi = keyItem["def"]&&keyItem["def"].useUi||null;
+                return keyItemUseUi ||optionUseUi.def || null;
+                break
+            case 1:  //选中
+                keyItemUseUi = keyItem["sel"]&&keyItem["sel"].useUi||null;
+                return keyItemUseUi || optionUseUi.sel || null;
+                break
+            case 2:  //禁用
+                keyItemUseUi = keyItem["dis"]&&keyItem["dis"].useUi||null;
+                return keyItemUseUi || optionUseUi.dis || null;
+                break
+            case 3:  //禁用并选择
+                keyItemUseUi = keyItem["dse"]&&keyItem["dse"].useUi||null;
+                return keyItemUseUi ||optionUseUi.dse || null;
+                break
+            case 4:  //激活
+            case 5:
+            case 6:
+            case 7:
+                keyItemUseUi = keyItem["act"]&&keyItem["act"].useUi||null;
+                return keyItemUseUi || optionUseUi.act || null;
+                break
         }
-        if (isDisable) return (keyItemUseUi && keyItemUseUi.dis) || (optionUseUi && optionUseUi.dis) || null;
-        return (keyItemUseUi && keyItemUseUi.vis) || (optionUseUi && optionUseUi.vis) || null;
     };
  
 
-    _.Command.prototype.drawContent = function(sp,item){
-        let data=this._data.option.itemText||{x:0,y:0,padding:[0,0]}
+    _.Command.prototype.drawContent = function(sp,item,data){
         let content=this._origin.getText(item.text.id)
         if(content) {
             let txt=new Sprite(this.getTextBit(content[0],content[1],sp.type||0))
             let w=txt.width
             let h =txt.height
-            txt.width=sp.width-(item.padding?item[0]:data.padding[0])*2
-            txt.height=sp.height-(item.padding?item[1]:data.padding[1])*2
-            txt.x=(item.x||data.x)+(item.padding?item[0]:data.padding[0])+(item.text.align?(txt.width-w)/item.text.align:0)
-            txt.y=(item.y||data.y)+(item.padding?item[1]:data.padding[1])+(item.text.verti?(txt.height-h)/item.text.verti:0)
+            txt.width=sp.width-(item.padding?item.padding[0]:data.padding[0])*2
+            txt.height=sp.height-(item.padding?item.padding[1]:data.padding[1])*2
+            txt.x=(item.x||data.x)+(item.padding?item.padding[0]:data.padding[0])+(item.text.align?(txt.width-w)/item.text.align:0)
+            txt.y=(item.y||data.y)+(item.padding?item.padding[1]:data.padding[1])+(item.text.verti?(txt.height-h)/item.text.verti:0)
             sp.addChild(txt)
         }
     }
+    _.Command.prototype.touchOption =function () {
+        const touch= [TouchInput.x-this.getX(),TouchInput.y-this.getY()]
+        const arr = Object.entries(this._rect)
+            .filter(([key, rect]) => {
+                const { x, y, width, height } = rect;
+                return (
+                    touch[0] >= x &&
+                    touch[0] <= x + width &&
+                    touch[1] >= y &&
+                    touch[1] <= y + height
+                );
+            }).map(([key]) => key);
+        return  arr
+    }
+       
+    
     _.Command.prototype.isTouch=function () {
         return TouchInput.x>this.getX()&&
             TouchInput.x<this.getX()+this.width&&
@@ -378,7 +463,7 @@ LIM.SCENE=LIM.SCENE||{};
             if(row==-1||(i==1&&option.top==0)||(i==-1&&option.top==row)){} 
             else {
                 option.top -= i
-                Conductor.start("v3")
+                this.PlaySe("wheel")
             }
             //改变选项
             let select=this.findOption(option,i)
@@ -394,11 +479,29 @@ LIM.SCENE=LIM.SCENE||{};
         this.updataArrow(option)
     }
     _.Command.prototype.select =function (index){
+        this._interval[1]=5
+        try {index=parseInt(index)}
+        catch (e) {index=-1}
         let option= this._data.option
-        if(option.select!=index) {
+        
+        if(option.select!=index) { //选择
             option.select = index
-            Conductor.start("v4")
+            if(option.select==-1)
+                this.PlaySe("cancel") 
+            else
+                this.PlaySe("select")
             if(!this.isRun(3)) this.setRun(3,true)
+        }
+        else if(index!=-1) { //二次选中
+            if(option.disable.indexOf(index)<0) {
+                let data = option.item[index].act || option.item[index].sel || option.item[index].def
+                option.active = index
+                this._interval[2] = data.time || 30
+                this._roof = data.symbol
+                this.PlaySe("activation")
+                if (!this.isRun(3)) this.setRun(3, true)
+            }
+            else  this.PlaySe("disable")
         }
     }
     _.Command.prototype.showOption=function (option){
@@ -466,9 +569,11 @@ LIM.SCENE=LIM.SCENE||{};
                             }
                     }
                 }
-                return option.layout[option.top].menber[0]    
-               
+                return option.layout[option.top].menber[0]
         }
-      
     }
+    _.Command.prototype.hasActiva=function () {
+        return this._data.option.active>-1
+    }
+    
 })(LIM.SCENE);

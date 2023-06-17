@@ -5,7 +5,6 @@ LIM.INPUT.key={}
 LIM.INPUT.waitTime = 12;
 LIM.INPUT.repeatTime = 20;
 LIM.INPUT.inputTime = 60;
-
 LIM.INPUT.keyMapper = {  //功能键
     "116:-1":"reload", 
     "120:-2":"test" ,
@@ -97,6 +96,13 @@ LIM.INPUT.keyEvent=function (key,eve){
 }
 
 //修改场景管理
+SceneManager.setupErrorHandlers = function() {
+    window.addEventListener('error', this.onError.bind(this));
+    document.addEventListener('keydown', this.onKeyDown.bind(this));
+};
+SceneManager.initInput = function() {
+    TouchInput.initialize();
+};
 SceneManager.updateInputData = function() {
     LIM.INPUT.update();
     TouchInput.update();
@@ -105,7 +111,7 @@ SceneManager.setupErrorHandlers = function() {
     document.addEventListener('keydown', this.onKeyDown.bind(this));
     document.addEventListener('keyup', this.onKeyUp.bind(this));
     window.addEventListener('blur', this.onBlur.bind(this)); // 添加blur事件监听器
-};
+}
 SceneManager.onKeyDown = function({ keyCode }) {
     if (keyCode === 123) return;
     LIM.INPUT.registerCode(keyCode)
@@ -115,4 +121,3 @@ SceneManager.onKeyUp = function({ keyCode }) {
     LIM.INPUT.releaseCode(keyCode)
 };
 SceneManager.onBlur = function() {LIM.INPUT.codeTable={}};
-

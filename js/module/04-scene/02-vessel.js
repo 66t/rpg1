@@ -15,6 +15,8 @@ LIM.SCENE=LIM.SCENE||{};
         this._com.next=0
         this._name=name
         this._origin=origin
+        this._symbol=com.symbol||{}
+        this._se=com.se||{}
         Sprite.prototype.initialize.call(this);//;
     }
 
@@ -44,8 +46,8 @@ LIM.SCENE=LIM.SCENE||{};
         if(action.time < action.frame) {
             action.time++
         } else {
-            this._origin.triggerFun(action.fun)
             this._action.splice(0, 1)
+            if(action.com)  this._origin.triggerHandler(action.com)
         }
     }
     _.Vessel.prototype.refresh=function () {
@@ -66,19 +68,19 @@ LIM.SCENE=LIM.SCENE||{};
     _.Vessel.prototype.pushAction=function(mode,next){
         let fun=mode+"_"+next
         if(this._com.action[fun]){
-            let v=this._com.action[fun]
+            let item=this._com.action[fun]
             let data={}
             let x=LIM.UTILS.lengthNum(this._data.x)
             let y=LIM.UTILS.lengthNum(this._data.y)
             if(this.x!==x) data.x=[this.x,x]
             if(this.y!==y) data.y=[this.y,y]
             if(this.alpha!==this._data.alpha) data.alpha=[this.alpha,this._data.alpha]
-            if(v.frame) this._action.push({data:data,time:0,frame:v.frame,wave:v.wave,fun:v.fun})
+            if(item.frame) this._action.push({data:data,time:0,frame:item.frame,wave:item.wave,fun:item.fun})
             else {
                 this.x=x
                 this.y=y
                 this.alpha=this._data.alpha
-                this._origin.triggerFun(v.fun)
+                if(item.com)  this._origin.triggerHandler(item.com)
             }
         }
         else if(!this.isRun(0)) this.setRun(0,true)
@@ -137,6 +139,11 @@ LIM.SCENE=LIM.SCENE||{};
             if (current._action && current._action.length > 0) return c;
         }
         return 0;
+    }
+  
+    _.Vessel.prototype.PlaySe=function (name){
+        if(this._se&&this._se[name])
+          Conductor.start(this._se[name])
     }
 
     _.Vessel.prototype.getTotalValue = function(propertyName) {
