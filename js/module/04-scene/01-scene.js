@@ -13,13 +13,15 @@ LIM.SCENE=LIM.SCENE||{};
         this._bit = {}
         this._font = {}
         this._val = {}
+        this._nextScene=null
         DataManager.loadDataFile('$dataScene', 'scene/' + name + '.json');
         Scene_Base.prototype.initialize.call(this);
     }
     
 
     _.Scene.prototype.update = function () {
-        switch (this._load) {
+        if(this._nextScene) this.exit()
+        else switch (this._load) {
             case -5:
                 this.checkDataLoaded();
                 break;
@@ -41,7 +43,84 @@ LIM.SCENE=LIM.SCENE||{};
                 this.refresh();
         }
     }
-    
+    _.Scene.prototype.exit =function (){
+        if (this._nextScene.count === 0) this.setTransition();
+        this.applyTransition()
+        if (this._nextScene.count++ === this._nextScene.time)  this.goNextScene()
+    }
+    _.Scene.prototype.setTransition = function () {
+        switch (this._nextScene.mode) {
+                case 1: this.filters=[LIM.Filter("tiltX")];break
+                case 2: this.filters=[LIM.Filter("zoom")];break
+                case 3:
+                case 4: this.filters=[LIM.Filter("bulge")];break
+                case 5:
+                    this.filters=[LIM.Filter("glitch")];
+                    this.filters[0].uniforms.seed=Math.random()
+                    this.filters[0].uniforms.fillMode=4
+                    break
+                case 6:this.filters=[LIM.Filter("kawa")];break
+                case 7:this.filters=[LIM.Filter("pixel")];break
+                case 8:this.filters=[LIM.Filter("old")];
+                    this.filters[0].uniforms.sepia=0
+                    this.filters[0].uniforms.noise=0
+                    this.filters[0].uniforms.noiseSize=0
+                    this.filters[0].uniforms.scratch=0
+                    this.filters[0].uniforms.scratchDensity=0
+                    this.filters[0].uniforms.scratchWidth=1
+                    this.filters[0].uniforms.vignettingAlpha=1
+                    this.filters[0].uniforms.vignettingBlur=0.66
+                    break
+            }
+        
+    };
+    _.Scene.prototype.applyTransition = function () {
+        let r = LIM.UTILS.waveNum(2, this._nextScene.time, this._nextScene.count);
+        switch (this._nextScene.mode) {
+            case 1:
+                this.filters[0].uniforms.blur=r*100;
+                this.filters[0].uniforms.gradientBlur=1000-r*1000
+                this.alpha=1-r
+                break
+            case 2:
+                this.filters[0].uniforms.strength=r*0.5;
+                this.filters[0].uniforms.innerRadius=960-r*960
+                this.alpha=1-r
+                break
+            case 3:
+                this.filters[0].uniforms.strength=r*1;
+                this.filters[0].uniforms.radius=r*1000
+                this.alpha=1-r
+                break
+            case 4:
+                this.filters[0].uniforms.strength=r*-1;
+                this.filters[0].uniforms.radius=r*1000
+                this.alpha=1-r
+                break
+            case 5:
+                this.filters[0].uniforms.offset=r*200
+                this.filters[0].uniforms.direction=r*180
+                this.filters[0].uniforms.red=[r*50,r*-50]
+                this.filters[0].uniforms.green=[r*-50,r*50]
+                this.filters[0].uniforms.blue=[r*50,r*-50]
+                this.alpha=1-r
+                break
+            case 6:
+                this.filters[0].uniforms.blur=r*10
+                this.filters[0].uniforms.quality=r*10
+                this.alpha=1-r
+                break
+            case 7:
+                this.filters[0].uniforms.size=[1+r*9,1+r*9]
+                this.alpha=1-r
+                break
+            case 8:
+                this.filters[0].uniforms.vignetting=r
+                break
+        }
+    };
+    _.Scene.prototype.goNextScene = function () {SceneManager.goto(LIM.SCENE.Scene,this._nextScene.next)};
+
     _.Scene.prototype.run = function() {
         this._time = 0;
         this._load = 1;

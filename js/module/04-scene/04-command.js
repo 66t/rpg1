@@ -496,7 +496,7 @@ LIM.SCENE=LIM.SCENE||{};
             if(option.disable.indexOf(index)<0) {
                 let data = option.item[index].act || option.item[index].sel || option.item[index].def
                 option.active = index
-                this._interval[2] = data.time || 30
+                this._interval[2] = data.time || 15
                 this._roof = data.symbol
                 this.PlaySe("activation")
                 if (!this.isRun(3)) this.setRun(3, true)

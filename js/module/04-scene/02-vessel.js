@@ -18,6 +18,7 @@ LIM.SCENE=LIM.SCENE||{};
         this._symbol=com.symbol||{}
         this._se=com.se||{}
         Sprite.prototype.initialize.call(this);//;
+        this.setFilter()
     }
 
     _.Vessel.prototype.update = function () {
@@ -89,9 +90,21 @@ LIM.SCENE=LIM.SCENE||{};
         if(this.isRun(0)) this.setRun(0,false)
         this.x=LIM.UTILS.lengthNum(this._data.x)
         this.y=LIM.UTILS.lengthNum(this._data.y)
-        this.alpha=LIM.UTILS.lengthNum(this._data.alpha)
+        this.alpha=this._data.alpha
         this.triggerMove()
     }
+
+    _.Vessel.prototype.setFilter=function(){
+        if(this._com.filter){
+            this.filters=[LIM.Filter(this._com.filter.type)]
+            let filter= this.filters[0]
+            for(let key in this._com.filter.data)
+             filter.uniforms[key]=this._com.filter.data[key]
+        }
+        else  this.filters=[]
+    }
+   
+    
     _.Vessel.prototype.isActi=function(){return this._com.acti}
     _.Vessel.prototype.isRun=function(bit){return LIM.UTILS.atBit(this._com.run,bit)}
     _.Vessel.prototype.setRun=function(bit,bool){

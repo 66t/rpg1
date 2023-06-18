@@ -8,6 +8,9 @@ LIM.EVENT=LIM.EVENT||{};
         DataManager.loadDatabase()
     }
     _.exit=()=>{window.close();}
+    _.newgame=()=>{
+        SceneManager._scene._nextScene={mode:5,next:"theater",time:80,count:0}
+    }
     _.ready=()=>{return DataManager.isDatabaseLoaded()&&Graphics.isFontLoaded('GameFont')}
     _.reload=()=>{if (Utils.isNwjs()) {location.reload();}}
     _.test=()=>{if (Utils.isNwjs() && Utils.isOptionValid('test')) {require('nw.gui').Window.get().showDevTools();}

@@ -73,6 +73,8 @@ LIM.SCENE=LIM.SCENE||{};
             x: this._data.x,
             y: this._data.y,
             alpha: this._data.alpha,
+            angle: this._data.angle,
+            space: this._data.space,
             rota: this._data.rota,
             w: this._data.w,
             h: this._data.h,
@@ -94,7 +96,6 @@ LIM.SCENE=LIM.SCENE||{};
                     let anim = anime[key][i];
                     let r = waveNum(anim.wave, time[0] / (1 + anim.fre * 2), time[1]);
                     let v = lengthNum(anim.val1) + (lengthNum(anim.val2) - lengthNum(anim.val1)) * r;
-
                     switch (anim.count) {
                         case "add":
                             val += v;
@@ -118,7 +119,7 @@ LIM.SCENE=LIM.SCENE||{};
                filter = this.filters[data[i].id]
            else {
                this.filterType[data[i].id] = data[i].type
-               filter = this.typeFilter(data[i].type)
+               filter = LIM.Filter(data[i].type)
                this.setFilter(i, filter)
            }
            for(let key in data[i].data){
@@ -193,6 +194,7 @@ LIM.SCENE=LIM.SCENE||{};
         this._blendColor=item.blend||[0,0,0]
         this._refresh()
     }
+    
     _.Shape.prototype.shape=function(item){
         if(this.isRun(2)) this.setRun(2,false)
         this.cover(item);
@@ -204,8 +206,19 @@ LIM.SCENE=LIM.SCENE||{};
         let sy=item.adso > 6 ? this.height * this.scale.y * 0.5 :
                item.adso < 4 ? Graphics.height - this.height * this.scale.y * 0.5 :
                Graphics.height * 0.5;
-        this.x = sx+LIM.UTILS.lengthNum(item.x);
-        this.y = sy+LIM.UTILS.lengthNum(item.y);
+
+        if(item.space){
+            let arr=  LIM.UTILS.azimuth(
+                {x:sx + LIM.UTILS.lengthNum(item.x), y:sy + LIM.UTILS.lengthNum(item.y)},
+                (item.angle||0)*Math.PI/180,
+                LIM.UTILS.lengthNum(item.space))
+            this.x=arr.x;
+            this.y=arr.y
+        }
+        else {
+            this.x = sx + LIM.UTILS.lengthNum(item.x);
+            this.y = sy + LIM.UTILS.lengthNum(item.y);
+        }
         this.rotation = item.rota / 180 * Math.PI;
         this.alpha = item.alpha;
     }
@@ -231,7 +244,7 @@ LIM.SCENE=LIM.SCENE||{};
         this.filterType=[]
         if(item.filter&&item.filter.length)
         for(let i=0;i<item.filter.length;i++) {
-            let filter = this.typeFilter(item.filter[i].type)
+            let filter = LIM.Filter(item.filter[i].type)
             this.filterType[i]=item.filter[i].type
             this.setFilter(i,filter)
             for (let key in item.filter[i].data)
@@ -246,43 +259,6 @@ LIM.SCENE=LIM.SCENE||{};
             case 1:this.filters=[this.filters[0],filter];break
             case 2:this.filters=[this.filters[0],this.filters[1],filter];break
             case 3:this.filters=[this.filters[0],this.filters[1],this.filters[2],filter];break
-        }
-    }
-    _.Shape.prototype.typeFilter=function(type){
-        switch (type) {
-
-            //  alpha: 1 (透明度：1)
-            //  blue: 1 (蓝色：1)
-            //  brightness: 1 (亮度：1)
-            //  contrast: 1 (对比度：1)
-            //  curvature: 3.252466 (曲率：3.252466)
-            //  gamma: 1 (伽马：1)
-            //  green: 1 (绿色：1)
-            //  lineContrast: 0.8373767 (线条对比度：0.8373767)
-            //  lineWidth: 3.3495068 (线条宽度：3.3495068)
-            //  red: 1 (红色：1)
-            //  saturation: 1 (饱和度：1)
-            case "adj": return new PIXI.filters.AdjustmentFilter()
-            case "bloom": return new PIXI.filters.AdvancedBloomFilter()
-            case "ascii": return new PIXI.filters.AsciiFilter()
-            case "bulge": return new PIXI.filters.BulgePinchFilter()
-            case "colorRep": return new PIXI.filters.ColorReplaceFilter()
-            case "cross": return new PIXI.filters.CrossHatchFilter()
-            case "crt": return new PIXI.filters.CRTFilter()
-            case "dot": return new PIXI.filters.DotFilter()
-            case "emboss": return new PIXI.filters.EmbossFilter()
-            case "glitch": return new PIXI.filters.GlitchFilter()
-            case "glow": return new PIXI.filters.GlowFilter()
-            case "motion": return new PIXI.filters.MotionBlurFilter([100,100],3,10)
-            case "outline": return new PIXI.filters.OutlineFilter()
-            case "old": return new PIXI.filters.OldFilmFilter()
-            case "pixel": return new PIXI.filters.PixelateFilter()
-            case "radial": return new PIXI.filters.RadialBlurFilter(100,{x:0,y:0})
-            case "rgb": return new PIXI.filters.RGBSplitFilter([0,0],[0,0],[0,0])
-            case "tiltX": return new PIXI.filters.TiltShiftXFilter()
-            case "tiltY": return new PIXI.filters.TiltShiftYFilter()
-            case "twist": return new PIXI.filters.TwistFilter()
-            case "zoom": return new PIXI.filters.ZoomBlurFilter()
         }
     }
     

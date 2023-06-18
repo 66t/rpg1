@@ -25,7 +25,7 @@
       ],
       "action":{
         "-1_0":{"wave":1,"frame":0,"com":"show2"},
-        "0_1":{"wave":6,"frame":100}
+        "0_1":{"wave":7,"frame":100}
       }
     }
   },
@@ -58,7 +58,7 @@
             "itemText":{"x":0,"y":0,"padding":[10,10]},
             "item": {
               "0": {
-                "def":{"text":{"id":"start","verti":2,"align":2}}
+                "def":{"text":{"id":"start","verti":2,"align":2},"symbol":"newgame","time":15}
               },
               "1": {
                 "def":{"text":{"id":"continue","verti":2,"align":2}}
@@ -73,7 +73,7 @@
                 "def":{"text":{"id":"internet","verti":2,"align":2}}
               },
               "5": {
-                "def":{"text":{"id":"exit","verti":2,"align":2},"symbol":"exit","time":20}
+                "def":{"text":{"id":"exit","verti":2,"align":2},"symbol":"exit","time":15}
               }
             },
             "top":0,
@@ -698,6 +698,7 @@
     "c1_wheel":["#whell:c_1:%[1]"],
     "c1_select":["#select:c_1:%[1]"],
     "c1_cancel":["#select:c_1:%[1]"],
-    "exit":["%exit"]
+    "exit":["%exit"],
+    "newgame":["%newgame"]
   }
 }

@@ -62,8 +62,8 @@ LIM.SCENE=LIM.SCENE||{};
                     let content=this._origin.getText(item.id)
                     if(content) {
                         let sp = new Sprite(this.getTextBit(content[0],content[1],1))
-                        sp.x = item.x + padding0
-                        sp.y = item.y + padding1
+                        sp.x = LIM.UTILS.lengthNum(item.x) + padding0
+                        sp.y =  LIM.UTILS.lengthNum(item.y) + padding1
                         sp.type = 1
                         this.addChild(sp)
                     }

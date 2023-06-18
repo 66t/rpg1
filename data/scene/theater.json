@@ -1,0 +1,1133 @@
+{
+  "bit":{
+    "back":["img/scene_theater/","p1",0,true],
+    "p2":["img/scene_theater/","p2",0,true],
+    "p3":["img/scene_theater/","p3",0,true],
+    "p4":["img/scene_theater/","p4",0,true],
+    "p5":["img/scene_theater/","p5",64,true],
+    "p6":["img/scene_theater/","p6",128,true],
+    "null":["img/bg/","bg_0000",0,true]
+  },
+  "group": {
+    "s_back1":"v_1",
+    "s_q0":"v_1",
+    "s_q1":"v_1",
+    "s_q2":"v_1",
+    "s_q3":"v_1",
+    "s_w0":"v_1",
+    "s_w1":"v_1",
+    "s_w2":"v_1",
+    "s_w3":"v_1",
+    "s_w4":"v_1",
+    "s_e0":"v_1",
+    "s_e1":"v_1",
+    "s_e2":"v_1",
+    "s_e3":"v_1",
+    "s_e4":"v_1",
+    "s_r0":"v_1",
+    "s_r1":"v_1",
+    "s_r2":"v_1",
+    "s_r3":"v_1",
+    "s_u1":"v_1",
+    "s_u2":"v_1",
+    "s_t1":"v_1",
+    "s_t2":"v_1",
+    "s_t3":"v_1",
+    "s_h1":"v_1",
+    "s_h2":"v_1",
+    "s_h3":"v_1",
+    "s_h4":"v_1",
+    "s_h5":"v_1",
+    "s_a1":"v_1",
+    "s_a2":"v_1",
+    "s_a3":"v_1",
+    "s_a4":"v_1",
+    "s_a5":"v_1",
+    "s_a6":"v_1",
+    "s_b1":"v_1"
+    
+  },
+  "vessel":{
+    "1":{
+      "acti": true,
+      "run":0,
+      "ope":0,
+      "data":[
+        {"alpha":1,"x":-8,"y":-8,"index":10}
+      ],
+      "action":{},
+      "filter":{"type":"pixel","data":{"size":{"x":18,"y":18}}}
+    }
+  },
+  "window": {
+    "1":{
+      "acti": true,
+      "run":0,
+      "ope":0,
+      "data":[
+        {
+          "alpha":1,
+          "index":20,
+          "x":0,"y":0,"w":0,"h":0, "padding":[40,40],
+          "text": [{"x":0,"y":"80h", "id": "load"}]
+        }
+      ],
+      "action":{}
+    }
+  },
+  "command": {},
+  "shape": {
+    "back1": {
+      "acti": true,
+      "run":0,
+      "loop": false,
+      "data": [
+        {
+          "index":1,
+          "bit":"back",
+          "cover":1,
+          "adso": 7,
+          "w":"100w","h":"100h",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,800,600,0,0,800,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+        
+      ],
+      "action": {}
+    },
+    "stage": {
+      "acti": true,
+      "run":0,
+      "loop": false,
+      "data": [
+        {
+          "index":100,
+          "bit":"null",
+          "cover":1,
+          "adso": 7,
+          "w":"100w","h":"100w",
+          "x":0,"y":0,"rota":0,"alpha":0,
+          "filter":[],
+          "clip":[0,0,1,1,0,0,1024,1024],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {}
+    },
+    "q0": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":20,
+          "bit":"p2",
+          "cover":1,
+          "adso": 7,
+          "w":"80","h":"80",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,100,100,0,0,80,80],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {
+        "0": {
+          "frame":200,"change":200,"while": true,
+          "anime1":{
+            "rota":{"incre":true,"val":1},
+            "x":[{"count":"add","wave": 2,"val1":-80,"val2":20,"fre":0}],
+            "y":[{"count":"add","wave": 2,"val1":480,"val2":560,"fre":0}],
+            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+          }
+        }
+      }
+    },
+    "q1": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":20,
+          "bit":"p2",
+          "cover":1,
+          "adso": 7,
+          "w":"80","h":"80",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,100,100,0,0,80,80],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {
+        "0": {
+          "frame":200,"change":200,"while": true,
+          "anime1":{
+            "rota":{"incre":true,"val":1},
+            "x":[{"count":"add","wave": 2,"val1":20,"val2":120,"fre":0}],
+            "y":[{"count":"add","wave": 2,"val1":560,"val2":640,"fre":0}],
+            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+          }
+        }
+      }
+    },
+    "q2": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":20,
+          "bit":"p2",
+          "cover":1,
+          "adso": 7,
+          "w":"80","h":"80",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,100,100,0,0,80,80],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {
+        "0": {
+          "frame":200,"change":200,"while": true,
+          "anime1":{
+            "rota":{"incre":true,"val":1},
+            "x":[{"count":"add","wave": 2,"val1":120,"val2":220,"fre":0}],
+            "y":[{"count":"add","wave": 2,"val1":640,"val2":720,"fre":0}],
+            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+          }
+        }
+      }
+    },
+    "q3": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":20,
+          "bit":"p2",
+          "cover":1,
+          "adso": 7,
+          "w":"80","h":"80",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,100,100,0,0,80,80],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {
+        "0": {
+          "frame":200,"change":200,"while": true,
+          "anime1":{
+            "rota":{"incre":true,"val":1},
+            "x":[{"count":"add","wave": 2,"val1":220,"val2":320,"fre":0}],
+            "y":[{"count":"add","wave": 2,"val1":720,"val2":800,"fre":0}],
+            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+          }
+        }
+      }
+    },
+
+    "w4": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":20,
+          "bit":"p2",
+          "cover":1,
+          "adso": 7,
+          "w":"80","h":"80",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,100,100,0,0,80,80],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {
+        "0": {
+          "frame":200,"change":200,"while": true,
+          "anime1":{
+            "rota":{"incre":true,"val":1},
+            "x":[{"count":"add","wave": 2,"val1":1020,"val2":1120,"fre":0}],
+            "y":[{"count":"add","wave": 2,"val1":480,"val2":320,"fre":0}],
+            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+          }
+        }
+      }
+    },
+    "w0": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":20,
+          "bit":"p2",
+          "cover":1,
+          "adso": 7,
+          "w":"80","h":"80",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,100,100,0,0,80,80],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {
+        "0": {
+          "frame":200,"change":200,"while": true,
+          "anime1":{
+            "rota":{"incre":true,"val":1},
+            "x":[{"count":"add","wave": 2,"val1":920,"val2":1020,"fre":0}],
+            "y":[{"count":"add","wave": 2,"val1":560,"val2":480,"fre":0}],
+            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+          }
+        }
+      }
+    },
+    "w1": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":20,
+          "bit":"p2",
+          "cover":1,
+          "adso": 7,
+          "w":"80","h":"80",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,100,100,0,0,80,80],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {
+        "0": {
+          "frame":200,"change":200,"while": true,
+          "anime1":{
+            "rota":{"incre":true,"val":1},
+            "x":[{"count":"add","wave": 2,"val1":820,"val2":920,"fre":0}],
+            "y":[{"count":"add","wave": 2,"val1":640,"val2":560,"fre":0}],
+            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+          }
+        }
+      }
+    },
+    "w2": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":20,
+          "bit":"p2",
+          "cover":1,
+          "adso": 7,
+          "w":"80","h":"80",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,100,100,0,0,80,80],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {
+        "0": {
+          "frame":200,"change":200,"while": true,
+          "anime1":{
+            "rota":{"incre":true,"val":1},
+            "x":[{"count":"add","wave": 2,"val1":720,"val2":820,"fre":0}],
+            "y":[{"count":"add","wave": 2,"val1":720,"val2":640,"fre":0}],
+            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+          }
+        }
+      }
+    },
+    "w3": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":20,
+          "bit":"p2",
+          "cover":1,
+          "adso": 7,
+          "w":"80","h":"80",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,100,100,0,0,80,80],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {
+        "0": {
+          "frame":200,"change":200,"while": true,
+          "anime1":{
+            "rota":{"incre":true,"val":1},
+            "x":[{"count":"add","wave": 2,"val1":620,"val2":720,"fre":0}],
+            "y":[{"count":"add","wave": 2,"val1":800,"val2":720,"fre":0}],
+            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+          }
+        }
+      }
+    },
+
+    "e0": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":20,
+          "bit":"p2",
+          "cover":1,
+          "adso": 7,
+          "w":"80","h":"80",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,100,100,0,0,80,80],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {
+        "0": {
+          "frame":200,"change":200,"while": true,
+          "anime1":{
+            "rota":{"incre":true,"val":1},
+            "x":[{"count":"add","wave": 2,"val1":720,"val2":620,"fre":0}],
+            "y":[{"count":"add","wave": 2,"val1":0,"val2":-80,"fre":0}],
+            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+          }
+        }
+      }
+    },
+    "e1": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":20,
+          "bit":"p2",
+          "cover":1,
+          "adso": 7,
+          "w":"80","h":"80",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,100,100,0,0,80,80],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {
+        "0": {
+          "frame":200,"change":200,"while": true,
+          "anime1":{
+            "rota":{"incre":true,"val":1},
+            "x":[{"count":"add","wave": 2,"val1":820,"val2":720,"fre":0}],
+            "y":[{"count":"add","wave": 2,"val1":80,"val2":0,"fre":0}],
+            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+          }
+        }
+      }
+    },
+    "e2": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":20,
+          "bit":"p2",
+          "cover":1,
+          "adso": 7,
+          "w":"80","h":"80",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,100,100,0,0,80,80],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {
+        "0": {
+          "frame":200,"change":200,"while": true,
+          "anime1":{
+            "rota":{"incre":true,"val":1},
+            "x":[{"count":"add","wave": 2,"val1":920,"val2":820,"fre":0}],
+            "y":[{"count":"add","wave": 2,"val1":160,"val2":80,"fre":0}],
+            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+          }
+        }
+      }
+    },
+    "e3": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":20,
+          "bit":"p2",
+          "cover":1,
+          "adso": 7,
+          "w":"80","h":"80",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,100,100,0,0,80,80],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {
+        "0": {
+          "frame":200,"change":200,"while": true,
+          "anime1":{
+            "rota":{"incre":true,"val":1},
+            "x":[{"count":"add","wave": 2,"val1":1020,"val2":920,"fre":0}],
+            "y":[{"count":"add","wave": 2,"val1":240,"val2":160,"fre":0}],
+            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+          }
+        }
+      }
+    },
+    "e4": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":20,
+          "bit":"p2",
+          "cover":1,
+          "adso": 7,
+          "w":"80","h":"80",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,100,100,0,0,80,80],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {
+        "0": {
+          "frame":200,"change":200,"while": true,
+          "anime1":{
+            "rota":{"incre":true,"val":1},
+            "x":[{"count":"add","wave": 2,"val1":1120,"val2":1020,"fre":0}],
+            "y":[{"count":"add","wave": 2,"val1":320,"val2":240,"fre":0}],
+            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+          }
+        }
+      }
+    },
+
+    "r0": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":20,
+          "bit":"p2",
+          "cover":1,
+          "adso": 7,
+          "w":"80","h":"80",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,100,100,0,0,80,80],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {
+        "0": {
+          "frame":200,"change":200,"while": true,
+          "anime1":{
+            "rota":{"incre":true,"val":1},
+            "x":[{"count":"add","wave": 2,"val1":20,"val2":-80,"fre":0}],
+            "y":[{"count":"add","wave": 2,"val1":160,"val2":240,"fre":0}],
+            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+          }
+        }
+      }
+    },
+    "r1": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":20,
+          "bit":"p2",
+          "cover":1,
+          "adso": 7,
+          "w":"80","h":"80",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,100,100,0,0,80,80],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {
+        "0": {
+          "frame":200,"change":200,"while": true,
+          "anime1":{
+            "rota":{"incre":true,"val":1},
+            "x":[{"count":"add","wave": 2,"val1":120,"val2":20,"fre":0}],
+            "y":[{"count":"add","wave": 2,"val1":80,"val2":160,"fre":0}],
+            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+          }
+        }
+      }
+    },
+    "r2": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":20,
+          "bit":"p2",
+          "cover":1,
+          "adso": 7,
+          "w":"80","h":"80",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,100,100,0,0,80,80],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {
+        "0": {
+          "frame":200,"change":200,"while": true,
+          "anime1":{
+            "rota":{"incre":true,"val":1},
+            "x":[{"count":"add","wave": 2,"val1":220,"val2":120,"fre":0}],
+            "y":[{"count":"add","wave": 2,"val1":0,"val2":80,"fre":0}],
+            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+          }
+        }
+      }
+    },
+    "r3": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":20,
+          "bit":"p2",
+          "cover":1,
+          "adso": 7,
+          "w":"80","h":"80",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,100,100,0,0,80,80],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+
+      ],
+      "action": {
+        "0": {
+          "frame":200,"change":200,"while": true,
+          "anime1":{
+            "rota":{"incre":true,"val":1},
+            "x":[{"count":"add","wave": 2,"val1":320,"val2":220,"fre":0}],
+            "y":[{"count":"add","wave": 2,"val1":-80,"val2":0,"fre":0}],
+            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+          }
+        }
+      }
+    },
+
+    "u1": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":30,
+          "bit":"p3",
+          "cover":1,
+          "adso": 7,
+          "w":"100w","h":"50h",
+          "x":0,"y":"-50h","rota":0,"alpha":0.5,
+          "filter":[],
+          "clip":[0,0,800,200,0,0,800,200],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":130,"change":130,
+          "anime1":{
+            "y":[{"count":"add","wave": 3,"val1":"-50h","val2":0,"fre":0}]
+          }
+        }
+      }
+    },
+    "u2": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":30,
+          "bit":"p3",
+          "cover":1,
+          "adso": 7,
+          "w":"100w","h":"50h",
+          "x":0,"y":"100h","rota":0,"alpha":0.5,
+          "filter":[],
+          "clip":[0,0,800,200,0,0,800,200],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":130,"change":130,
+          "anime1":{
+            "y":[{"count":"add","wave": 3,"val1":"100h","val2":"50h","fre":0}]
+          }
+        }
+      }
+    },
+    
+    "t1": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":70,
+          "bit":"p4",
+          "cover":1,
+          "adso": 5,
+          "w":"10w","h":"10h",
+          "x":0,"y":0,"rota":0,"alpha":0.7,
+          "filter":[],
+          "clip":[0,0,169,169,0,0,169,169],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":70,"change":70,
+          "anime1":{
+            "w":[{"count":"add","wave": 3,"val1":"10w","val2":"20w","fre":0}]
+          }
+        }
+      }
+    },
+    "t2": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":71,
+          "bit":"p4",
+          "cover":1,
+          "adso": 5,
+          "w":"20w","h":"20h",
+          "x":0,"y":0,"rota":0,"alpha":0.5,
+          "filter":[],
+          "clip":[0,0,169,169,0,0,169,169],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":50,"change":50,
+          "anime1":{
+            "w":[{"count":"add","wave": 3,"val1":"20w","val2":"40w","fre":0}]
+          }
+        }
+      }
+    },
+    "t3": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":72,
+          "bit":"p4",
+          "cover":1,
+          "adso": 5,
+          "w":"30w","h":"30h",
+          "x":0,"y":0,"rota":0,"alpha":0.3,
+          "filter":[],
+          "clip":[0,0,169,169,0,0,169,169],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":90,"change":90,
+          "anime1":{
+            "w":[{"count":"add","wave": 3,"val1":"30w","val2":"60w","fre":0}]
+          }
+        }
+      }
+    },
+    
+    "h1": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":52,
+          "bit":"p5",
+          "cover":0,
+          "adso": 7,
+          "w":"20w","h":"100h",
+          "x":"-10W","y":0,"rota":0,"alpha":0.4,
+          "filter":[],
+          "clip":[0,0,160,600,0,0,160,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":270,"change":270,
+          "anime1":{
+            "h":[{"count":"add","wave": 3,"val1":"100h","val2":"30h","fre":0}]
+          }
+        }
+      }
+    },
+    "h2": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":52,
+          "bit":"p5",
+          "cover":0,
+          "adso": 7,
+          "w":"20w","h":"100h",
+          "x":"20w","y":0,"rota":0,"alpha":0.4,
+          "filter":[],
+          "clip":[0,0,160,600,0,0,160,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":370,"change":370,
+          "anime1":{
+            "h":[{"count":"add","wave": 3,"val1":"100h","val2":"60h","fre":0}]
+          }
+        }
+      }
+    },
+    "h3": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":52,
+          "bit":"p5",
+          "cover":0,
+          "adso": 5,
+          "w":"20w","h":"100h",
+          "x":0,"y":0,"rota":0,"alpha":0.4,
+          "filter":[],
+          "clip":[0,0,160,600,0,0,160,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":170,"change":170,
+          "anime1":{
+            "h":[{"count":"add","wave": 3,"val1":"100h","val2":"50h","fre":0}]
+          }
+        }
+      }
+    },
+    "h4": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":52,
+          "bit":"p5",
+          "cover":0,
+          "adso": 1,
+          "w":"20w","h":"100h",
+          "x":"60w","y":0,"rota":0,"alpha":0.4,
+          "filter":[],
+          "clip":[0,0,160,600,0,0,160,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":270,"change":270,
+          "anime1":{
+            "h":[{"count":"add","wave": 3,"val1":"100h","val2":"60h","fre":0}]
+          }
+        }
+      }
+    },
+    "h5": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":52,
+          "bit":"p5",
+          "cover":0,
+          "adso": 1,
+          "w":"20w","h":"100h",
+          "x":"80w","y":0,"rota":0,"alpha":0.4,
+          "filter":[],
+          "clip":[0,0,160,600,0,0,160,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":370,"change":370,
+          "anime1":{
+            "h":[{"count":"add","wave": 3,"val1":"100h","val2":"30h","fre":0}]
+          }
+        }
+      }
+    },
+
+    "a1": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":72,
+          "bit":"p6",
+          "cover":0,
+          "adso": 1,
+          "w":"20w","h":0,
+          "x":"-10W","y":0,"rota":0,"alpha":0.4,
+          "filter":[],
+          "clip":[0,0,160,600,0,0,160,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":270,"change":270,
+          "anime1":{
+            "h":[{"count":"add","wave": 3,"val1":0,"val2":"70h","fre":0}]
+          }
+        }
+      }
+    },
+    "a2": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":72,
+          "bit":"p6",
+          "cover":0,
+          "adso": 1,
+          "w":"20w","h":0,
+          "x":"20w","y":0,"rota":0,"alpha":0.4,
+          "filter":[],
+          "clip":[0,0,160,600,0,0,160,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":370,"change":370,
+          "anime1":{
+            "h":[{"count":"add","wave": 3,"val1":0,"val2":"40h","fre":0}]
+          }
+        }
+      }
+    },
+    "a3": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":72,
+          "bit":"p6",
+          "cover":0,
+          "adso": 7,
+          "w":"20w","h":0,
+          "x":"60w","y":0,"rota":0,"alpha":0.4,
+          "filter":[],
+          "clip":[0,0,160,600,0,0,160,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":270,"change":270,
+          "anime1":{
+            "h":[{"count":"add","wave": 3,"val1":0,"val2":"40h","fre":0}]
+          }
+        }
+      }
+    },
+    "a4": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":72,
+          "bit":"p6",
+          "cover":0,
+          "adso": 7,
+          "w":"20w","h":0,
+          "x":"80w","y":0,"rota":0,"alpha":0.4,
+          "filter":[],
+          "clip":[0,0,160,600,0,0,160,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":370,"change":370,
+          "anime1":{
+            "h":[{"count":"add","wave": 3,"val1":0,"val2":"70h","fre":0}]
+          }
+        }
+      }
+    },
+    "a5": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":72,
+          "bit":"p6",
+          "cover":0,
+          "adso": 8,
+          "w":"20w","h":0,
+          "x":0,"y":0,"rota":0,"alpha":0.4,
+          "filter":[],
+          "clip":[0,0,160,600,0,0,160,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":170,"change":170,
+          "anime1":{
+            "h":[{"count":"add","wave": 3,"val1":0,"val2":"25h","fre":0}]
+          }
+        }
+      }
+    },
+    "a6": {
+      "acti": true,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":72,
+          "bit":"p6",
+          "cover":0,
+          "adso": 2,
+          "w":"20w","h":0,
+          "x":0,"y":0,"rota":0,"alpha":0.4,
+          "filter":[],
+          "clip":[0,0,160,600,0,0,160,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":170,"change":170,
+          "anime1":{
+            "h":[{"count":"add","wave": 3,"val1":0,"val2":"25h","fre":0}]
+          }
+        }
+      }
+    }
+  },
+  "text": {
+    "load":{
+      "content": "0_7","anime":8,
+      "fontSize": 58,
+      "textColor":[
+        [0,0.33,"#000",0.75,"#888"],
+        [0,0.34,"#000",0.75,"#888"],
+        [0,0.35,"#000",0.75,"#888"],
+        [0,0.36,"#000",0.75,"#888"],
+        [0,0.37,"#000",0.75,"#888"],
+        [0,0.38,"#000",0.75,"#888"],
+        [0,0.39,"#000",0.75,"#888"],
+        [0,0.40,"#000",0.75,"#888"],
+        [0,0.39,"#000",0.75,"#888"],
+        [0,0.38,"#000",0.75,"#888"],
+        [0,0.37,"#000",0.75,"#888"],
+        [0,0.36,"#000",0.75,"#888"],
+        [0,0.35,"#000",0.75,"#888"],
+        [0,0.34,"#000",0.75,"#888"],
+        [0,0.33,"#000",0.75,"#888"]
+        
+      ],
+      "outlineWidth":10, "outlineColor":[
+        "#CC543A", "#CA7A2C", "#FFB11B", "#FAD689", "#838A2D", "#1B813E",
+        "#268785", "#33A6B8", "#51A8DD", "#005CAF", "#113285", "#8F77B5",
+        "#6F3381", "#C1328E", "#FEDFE1", "#60373E", "#AB3B3A"],
+      "fontItalic":false
+    }
+  },
+  "effector":{},
+  "handler":{}
+}
