@@ -1,0 +1,11 @@
+{
+ "miku":{
+   "name":"初音 未來",
+   "notation":"HATSUNE MIKU",
+   "color":"33CCBB",
+   "introduce":"",
+   "img":"miku",
+    "camp":"1",
+    "expert":1
+ }
+}
