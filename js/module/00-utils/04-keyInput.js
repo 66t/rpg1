@@ -120,7 +120,8 @@ SceneManager.onKeyUp = function({ keyCode }) {
 };
 SceneManager.onBlur = function() {LIM.INPUT.codeTable={}};
 DataManager._databaseFiles = [
-    {name: '$dataRole',       src: 'LIM_Role.json'}
+    {name: '$dataRole',       src: 'LIM_Role.json'},
+    {name: '$dataTree',       src: 'LIM_Tree.json'}
 ];
 Graphics._createGameFontLoader = function() {
     this._createFontLoader('GameFont');

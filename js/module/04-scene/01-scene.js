@@ -15,6 +15,7 @@ LIM.SCENE=LIM.SCENE||{};
         this._word = {}
         this._filter={}
         $dataScene=null
+      
         DataManager.loadDataFile('$dataScene', 'scene/' + name + '.json');
         Scene_Base.prototype.initialize.call(this);
     }
@@ -47,13 +48,14 @@ LIM.SCENE=LIM.SCENE||{};
     _.Scene.prototype.run = function() {
         this._time = 0;
         this._load = 1;
-        this._run = 0b11111;
+        this._run = 0b111111;
     };
     
     _.Scene.prototype.refresh = function(){
         if(this.isRun(2)) this.createItem();
         if(this.isRun(1)) this.showItem();
-        if(this.isRun(0)) for(let item of this.children) item.update();
+        if(this.isRun(0)) {for(let item of this.children) item.update();}
+        if(this.isRun(6)) this._story.update()
         if(this.isRun(3)) this.effector()
         if(this.isRun(4)) this.createFilter();
         this._time++
@@ -65,8 +67,11 @@ LIM.SCENE=LIM.SCENE||{};
         this.createWindow();
         this.createCommand();
         this.createShape();
+        this.createConsole();
     }
-
+    
+    
+    
     
     _.Scene.prototype.createFilter = function () {
         if (this.isRun(4)) {
@@ -184,7 +189,12 @@ LIM.SCENE=LIM.SCENE||{};
             }
         }
     }
-    
+    _.Scene.prototype.createConsole = function (){
+        if( this._data.story) {
+            this._item["story"]=  new LIM.SCENE.Vessel(this,"shory",{acti: true, run: 0, ope: 0, data: [{alpha: 1,x: 0,y: 0,index: 100}],action:{}})
+            this._story = new LIM.STORY.Console(this._item["story"])
+        }
+    }
     
     _.Scene.prototype.getText = function (key) {
         if(this._data.text[key]){
