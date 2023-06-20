@@ -113,7 +113,7 @@ LIM.UTILS=LIM.UTILS||{};
      * @method waveNum
      * @example LIM.UTILS.sinNum(0,4,1)
      * @param wave {int} 波形
-     * @param max {int} 周期(由0到1)
+     * @param max {int} 周期
      * @param i {int} 当前值
      * @return {int} 结果
      */
@@ -183,7 +183,37 @@ LIM.UTILS=LIM.UTILS||{};
                 return (Math.abs(x1) + Math.abs(y1)) / 2;
         }
     }
-    
+    _.countWave=function (wave,time,param){
+        let result = {};
+        for (let key in  wave) {
+            let data=wave[key]
+            let val=0
+            if(data.cor){
+                switch (data.type){
+                    case "seed":val=Math.random();break
+                    case "add": val=param[key]+data.val;break
+                }
+            }
+            else if (typeof wave[key] == "object")
+                for(let v of data){
+                let r = _.waveNum(v.wave, (v.frame||time[0]) / (1 + v.fre * 2), time[1]);
+                let num = _.lengthNum(v.val1) + (_.lengthNum(v.val2) - _.lengthNum(v.val1)) * r;
+                if(v.digit) num=Math.round(num)
+                switch (v.count) {
+                    case "+":
+                        val += num;
+                        break;
+                    case "*":
+                        val *= num;
+                        break;
+                  }
+                }
+            else val = LIM.UTILS.lengthNum(wave[key]);     
+            result[key]=val
+        }
+        return result
+    }
+
     /** 求a开b次方的方根
      * @module utils
      * @method rooting

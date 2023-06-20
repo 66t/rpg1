@@ -25,6 +25,8 @@ LIM.STORAGE=LIM.STORAGE||{};
                 init_seed:LIM.$data.init_seed,
                 count_seed:LIM.$data.count_seed,
                 inn:LIM.$data.inn,
+                bool:LIM.$bool.arr,
+                number:LIM.$number.arr,
             };
         }
         return CryptoJS.AES.encrypt(JSON.stringify(contents), LIM.STORAGE.key, { mode: CryptoJS.mode.ECB });
@@ -38,7 +40,7 @@ LIM.STORAGE=LIM.STORAGE||{};
      * @param data {String} 存档内容
      */
     _.loadSaveContents = function(savefileId,data) {
-        if(!data) return 
+        if(!data) return;
         else if (savefileId < 0) {
             let decrypted = CryptoJS.AES.decrypt(data, LIM.STORAGE.key, { mode: CryptoJS.mode.ECB });
             let contents = JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
@@ -52,6 +54,8 @@ LIM.STORAGE=LIM.STORAGE||{};
             LIM.$data.init_seed=contents.storage.init_seed
             LIM.$data.count_seed=contents.storage.count_seed
             LIM.$data.inn=contents.storage.inn
+            LIM.$bool.arr=contents.storage.bool
+            LIM.$number.arr=contents.storage.number
         }
     };
 

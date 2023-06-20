@@ -81,34 +81,12 @@ LIM.SCENE=LIM.SCENE||{};
             cover: this._data.cover,
             adso: this._data.adso,
         }
-        for (let key in anime) {
-            if(anime[key].incre) 
-                switch (key) {
-                    case "rota":
-                        data[key]=(this.rotation/Math.PI*180)+anime[key].val;
-                        break
-                }
-            else if (typeof anime[key] == "object") {
-                let val = 0;
-                let waveNum = LIM.UTILS.waveNum;
-                let lengthNum = LIM.UTILS.lengthNum;
-                for (let i = 0; i < anime[key].length; i++) {
-                    let anim = anime[key][i];
-                    let r = waveNum(anim.wave, time[0] / (1 + anim.fre * 2), time[1]);
-                    let v = lengthNum(anim.val1) + (lengthNum(anim.val2) - lengthNum(anim.val1)) * r;
-                    switch (anim.count) {
-                        case "add":
-                            val += v;
-                            break;
-                        case "mul":
-                            val *= v;
-                            break;
-                    }
-                }
-                data[key] = val;
-            }
-            else data[key] = LIM.UTILS.lengthNum(anime[key]);
+        let shape=LIM.UTILS.countWave(anime,time,data)
+        for(let key in shape){
+            data[key]=shape[key]
+            this._data[key]=data[key]
         }
+      
         this.shape(data);
     };
     _.Shape.prototype.executeFilter=function(data,time) {

@@ -40,8 +40,6 @@ LIM.INPUT.releaseCode=function (key){
     let codeTable = LIM.INPUT.codeTable[key];
     if (codeTable !== undefined) codeTable.upTime = Date.now();
 }
-
-
 LIM.INPUT.update = function() {
     let time = Date.now();
     for (let key in LIM.INPUT.codeTable) {
@@ -121,3 +119,20 @@ SceneManager.onKeyUp = function({ keyCode }) {
     LIM.INPUT.releaseCode(keyCode)
 };
 SceneManager.onBlur = function() {LIM.INPUT.codeTable={}};
+DataManager._databaseFiles = [
+    {name: '$dataRole',       src: 'LIM_Role.json'}
+];
+Graphics._createGameFontLoader = function() {
+    this._createFontLoader('GameFont');
+    this._createFontLoader('Font1');
+};
+Scene_Boot.prototype.isGameFontLoaded = function() {
+    if (Graphics.isFontLoaded('GameFont')&&Graphics.isFontLoaded('Font1')) {
+        return true;
+    } else if (!Graphics.canUseCssFontLoading()){
+        var elapsed = Date.now() - this._startDate;
+        if (elapsed >= 60000) {
+            throw new Error('Failed to load GameFont');
+        }
+    }
+};

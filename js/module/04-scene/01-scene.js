@@ -9,19 +9,19 @@ LIM.SCENE=LIM.SCENE||{};
 
     _.Scene.prototype.initialize = function (name) {
         this._run = 0
+        this._lock=false
         this._load = -5
         this._bit = {}
-        this._font = {}
-        this._val = {}
-        this._nextScene=null
+        this._word = {}
+        this._filter={}
+        $dataScene=null
         DataManager.loadDataFile('$dataScene', 'scene/' + name + '.json');
         Scene_Base.prototype.initialize.call(this);
     }
-    
-
     _.Scene.prototype.update = function () {
-        if(this._nextScene) this.exit()
-        else switch (this._load) {
+        this._lock=this.updateFilter()
+        LIM.$story.time++
+        switch (this._load) {
             case -5:
                 this.checkDataLoaded();
                 break;
@@ -43,88 +43,11 @@ LIM.SCENE=LIM.SCENE||{};
                 this.refresh();
         }
     }
-    _.Scene.prototype.exit =function (){
-        if (this._nextScene.count === 0) this.setTransition();
-        this.applyTransition()
-        if (this._nextScene.count++ === this._nextScene.time)  this.goNextScene()
-    }
-    _.Scene.prototype.setTransition = function () {
-        switch (this._nextScene.mode) {
-                case 1: this.filters=[LIM.Filter("tiltX")];break
-                case 2: this.filters=[LIM.Filter("zoom")];break
-                case 3:
-                case 4: this.filters=[LIM.Filter("bulge")];break
-                case 5:
-                    this.filters=[LIM.Filter("glitch")];
-                    this.filters[0].uniforms.seed=Math.random()
-                    this.filters[0].uniforms.fillMode=4
-                    break
-                case 6:this.filters=[LIM.Filter("kawa")];break
-                case 7:this.filters=[LIM.Filter("pixel")];break
-                case 8:this.filters=[LIM.Filter("old")];
-                    this.filters[0].uniforms.sepia=0
-                    this.filters[0].uniforms.noise=0
-                    this.filters[0].uniforms.noiseSize=0
-                    this.filters[0].uniforms.scratch=0
-                    this.filters[0].uniforms.scratchDensity=0
-                    this.filters[0].uniforms.scratchWidth=1
-                    this.filters[0].uniforms.vignettingAlpha=1
-                    this.filters[0].uniforms.vignettingBlur=0.66
-                    break
-            }
-        
-    };
-    _.Scene.prototype.applyTransition = function () {
-        let r = LIM.UTILS.waveNum(2, this._nextScene.time, this._nextScene.count);
-        switch (this._nextScene.mode) {
-            case 1:
-                this.filters[0].uniforms.blur=r*100;
-                this.filters[0].uniforms.gradientBlur=1000-r*1000
-                this.alpha=1-r
-                break
-            case 2:
-                this.filters[0].uniforms.strength=r*0.5;
-                this.filters[0].uniforms.innerRadius=960-r*960
-                this.alpha=1-r
-                break
-            case 3:
-                this.filters[0].uniforms.strength=r*1;
-                this.filters[0].uniforms.radius=r*1000
-                this.alpha=1-r
-                break
-            case 4:
-                this.filters[0].uniforms.strength=r*-1;
-                this.filters[0].uniforms.radius=r*1000
-                this.alpha=1-r
-                break
-            case 5:
-                this.filters[0].uniforms.offset=r*200
-                this.filters[0].uniforms.direction=r*180
-                this.filters[0].uniforms.red=[r*50,r*-50]
-                this.filters[0].uniforms.green=[r*-50,r*50]
-                this.filters[0].uniforms.blue=[r*50,r*-50]
-                this.alpha=1-r
-                break
-            case 6:
-                this.filters[0].uniforms.blur=r*10
-                this.filters[0].uniforms.quality=r*10
-                this.alpha=1-r
-                break
-            case 7:
-                this.filters[0].uniforms.size=[1+r*9,1+r*9]
-                this.alpha=1-r
-                break
-            case 8:
-                this.filters[0].uniforms.vignetting=r
-                break
-        }
-    };
-    _.Scene.prototype.goNextScene = function () {SceneManager.goto(LIM.SCENE.Scene,this._nextScene.next)};
-
+    
     _.Scene.prototype.run = function() {
         this._time = 0;
         this._load = 1;
-        this._run = 0b1111;
+        this._run = 0b11111;
     };
     
     _.Scene.prototype.refresh = function(){
@@ -132,18 +55,97 @@ LIM.SCENE=LIM.SCENE||{};
         if(this.isRun(1)) this.showItem();
         if(this.isRun(0)) for(let item of this.children) item.update();
         if(this.isRun(3)) this.effector()
-        
+        if(this.isRun(4)) this.createFilter();
         this._time++
     }
     _.Scene.prototype.createItem = function () {
-        if(this.isRun(2)) {
-            this.setRun(2,false)
-        }
+        if(this.isRun(2)) {this.setRun(2,false)}
         this._item = {}
         this.createVessel();
         this.createWindow();
         this.createCommand();
         this.createShape();
+    }
+
+    
+    _.Scene.prototype.createFilter = function () {
+        if (this.isRun(4)) {
+            this.setRun(4, false)
+        }
+        this._filter={}
+        for (let key in this._data.filter) {
+            let data=this._data.filter[key]
+            if (data.acti) {
+                this._filter[key] = {data: data, obj: LIM.Filter(data.type),time:this._time}
+                for(let uniforms in data.uniforms){
+                    let src=uniforms.split(".")
+                    let d1= this._filter[key].obj
+                    let d2= this._filter[key].obj.uniforms
+                    for(let i=0;i<src.length;i++){
+                        if(i==src.length-1) {
+                            if(d1) d1[src[i]]= data.uniforms[uniforms]
+                            if(d2) d2[src[i]]= data.uniforms[uniforms]
+                        }
+                        else {
+                            if(d1) d1=d1[src[i]];
+                            if(d2) d2=d2[src[i]]}
+                        
+                    }
+                }
+            }
+        }
+        this.showFilter()
+    }
+    _.Scene.prototype.showFilter = function () {
+        let key=Object.keys(this._filter)
+        switch (key.length){
+            case 0:this.filters=[]
+                break
+            case 1:
+                this.filters=[this._filter[key[0]].obj]
+                break
+            case 2:
+                this.filters=[this._filter[key[0]].obj,this._filter[key[1]].obj]
+                break
+        }
+        this.updateFilter()
+    }
+    _.Scene.prototype.updateFilter= function (){
+        let bool=false
+        let destroy=false
+        for(let key in this._filter){
+            let filter = this._filter[key]
+            bool=bool||filter.data.cease
+            let time=this._time-filter.time
+            let data=LIM.UTILS.countWave(filter.data.wave,[100,time],filter.obj.uniforms)
+            for(let uniforms in data){
+                let src=uniforms.split(".")
+                let d1= this._filter[key].obj
+                let d2= this._filter[key].obj.uniforms
+                for(let i=0;i<src.length;i++){
+                    if(i==src.length-1) {
+                        if(d1) d1[src[i]]= data[uniforms]
+                        if(d2) d2[src[i]]= data[uniforms]
+                    }
+                    else {
+                        if(d1) d1=d1[src[i]];
+                        if(d2) d2=d2[src[i]]}
+                }
+            }
+            if(filter.data.cycle>0&&time>filter.data.cycle){
+                filter.data.acti=false
+                delete this._filter[key]
+                this._lock=false
+                if(filter.data.comE) this.triggerHandler(filter.data.comE)
+                destroy=true
+            }
+        }
+        if(destroy)  this.showFilter()
+        return bool
+    }
+    _.Scene.prototype.actiFilter= function (key,bool){
+        this.setRun(4, true)
+        this._data.filter[key].acti=bool=="1"?true:false
     }
     
     _.Scene.prototype.createVessel = function () {
@@ -182,12 +184,12 @@ LIM.SCENE=LIM.SCENE||{};
             }
         }
     }
-
-
+    
+    
     _.Scene.prototype.getText = function (key) {
         if(this._data.text[key]){
             let item = this._data.text[key]
-            let content=this.getContent(this._font[item.content])[0]
+            let content=this.getContent(this._word[item.content])[0]
             return [content,item]
         }
         return null;
@@ -198,7 +200,7 @@ LIM.SCENE=LIM.SCENE||{};
             for(let item of text.arr) arr.push(item)
             for (let i = 0; i < arr.length; i++)
                 if (arr[i][0] == "@"){
-                    let cont = this.getContent(this._font[arr[i].splice(0, 1)])
+                    let cont = this.getContent(this._word[arr[i].splice(0, 1)])
                     arr[i]=cont[0]
                 }
                 else if (arr[i][0] == "#") {
@@ -236,6 +238,7 @@ LIM.SCENE=LIM.SCENE||{};
             }
     }
     
+    //触发器
     _.Scene.prototype.effector=function(){
         for(let key in this._data.effector)
             if (this._data.effector[key].count === 1 && this.judge(this._data.effector[key].judge)) {
@@ -248,12 +251,13 @@ LIM.SCENE=LIM.SCENE||{};
             case "%":return LIM.EVENT[judge.slice(1)]()
         }
     }
-
     _.Scene.prototype.triggerHandler=function(com,data) {
-        if(!com) return
+        if(!com||this._lock) return
         let handler=this._data.handler[com]
         if(handler) this.exCom(handler,data)
     }
+    
+    
     _.Scene.prototype.exCom=function(parser,data){
         for(let token of parser) {
             if(data) token=token.replacePlace(data)
@@ -296,6 +300,9 @@ LIM.SCENE=LIM.SCENE||{};
                if(this._item[eve[1]]&&this._item[eve[1]] instanceof _.Command)
                    this._item[eve[1]].select(eve[2])
                break
+           case "#filter":
+               if(eve[1]==="this") this.actiFilter(eve[2],eve[3])
+               break
         }
     }
 
@@ -316,7 +323,7 @@ LIM.SCENE=LIM.SCENE||{};
         DataManager.loadDataFile(file, 'text/' + file + '.json', this._loadFont);
     }
     _.Scene.prototype.loadFontIfNeeded = function (file) {
-        this._font[file] = null;
+        this._word[file] = null;
         file = file.split("_")[0];
         if (!this._loadFont[file]) this.loadFont(file);
     }
@@ -337,8 +344,8 @@ LIM.SCENE=LIM.SCENE||{};
             }
         let allTextLoaded = Object.values(this._loadFont).every(item => item.load == 2);
         if (allTextLoaded) {
-            for(let key in this._font)
-                this._font[key]=this._loadFont[key.split("_")[0]].data[key]
+            for(let key in this._word)
+                this._word[key]=this._loadFont[key.split("_")[0]].data[key]
             delete this._loadFont
             this.run();}
     }
@@ -374,4 +381,5 @@ LIM.SCENE=LIM.SCENE||{};
             return null;
         }
     }
+    //滤镜
 })(LIM.SCENE);

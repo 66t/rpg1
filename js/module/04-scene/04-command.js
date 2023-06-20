@@ -163,7 +163,7 @@ LIM.SCENE=LIM.SCENE||{};
             let rect={x1:0,x2:0,y1:0,y2:0};
             if (this._option[option.select]) rect = this._option[option.select];
             for (let key of cursorKeys) {
-                this.newCursor(option, key);
+                this.createCursor(option, key);
                 let item = option.cursor[key];
                 let index = parseInt(this._time / item.frame);
                 let data = item.image[index % item.image.length];
@@ -194,35 +194,35 @@ LIM.SCENE=LIM.SCENE||{};
                 if (typeof item.rota !== 'object') {
                     rotation = (data.rota + item.rota) / 180 * Math.PI;
                 } else {
-                    let r = LIM.UTILS.waveNum(item.rota.wave, item.rota.frae / (1 + item.rota.fre * 2), this._time);
+                    let r = LIM.UTILS.waveNum(item.rota.wave, item.rota.frame / (1 + item.rota.fre * 2), this._time);
                     rotation = (data.rota + item.rota.val1 + r * (item.rota.val2 - item.rota.val1)) / 180 * Math.PI;
                 }
 
                 if (typeof item.x !== 'object') {
                     x = LIM.UTILS.lengthNum(item.x) + sx;
                 } else {
-                    let r = LIM.UTILS.waveNum(item.x.wave, item.x.frae / (1 + item.x.fre * 2), this._time);
+                    let r = LIM.UTILS.waveNum(item.x.wave, item.x.frame / (1 + item.x.fre * 2), this._time);
                     x = LIM.UTILS.lengthNum(item.x.val1) + r * (LIM.UTILS.lengthNum(item.x.val2) - LIM.UTILS.lengthNum(item.x.val1)) + sx;
                 }
 
                if (typeof item.y !== 'object') {
                     y = LIM.UTILS.lengthNum(item.y) + sy;
                 } else {
-                    let r = LIM.UTILS.waveNum(item.y.wave, item.y.fra / (1 + item.y.fre * 2), this._time);
+                    let r = LIM.UTILS.waveNum(item.y.wave, item.y.frame / (1 + item.y.fre * 2), this._time);
                     y = LIM.UTILS.lengthNum(item.y.val1) + r * (LIM.UTILS.lengthNum(item.y.val2) - LIM.UTILS.lengthNum(item.y.val1)) + sy;
                 }
 
                 if (typeof item.sw !== 'object') {
                     scaleX = item.sw;
                 } else {
-                    let r = LIM.UTILS.waveNum(item.sw.wave, item.sw.fra / (1 + item.sw.fre * 2), this._time);
+                    let r = LIM.UTILS.waveNum(item.sw.wave, item.sw.frame / (1 + item.sw.fre * 2), this._time);
                     scaleX = item.sw.val1 + r * (item.sw.val2 - item.sw.val1);
                 }
 
                 if (typeof item.sh !== 'object') {
                     scaleY = item.sh;
                 } else {
-                    let r = LIM.UTILS.waveNum(item.sh.wave, item.sh.fra / (1 + item.sh.fre * 2), this._time);
+                    let r = LIM.UTILS.waveNum(item.sh.wave, item.sh.frame / (1 + item.sh.fre * 2), this._time);
                     scaleY = item.sh.val1 + r * (item.sh.val2 - item.sh.val1);
                 }
 
@@ -234,7 +234,7 @@ LIM.SCENE=LIM.SCENE||{};
             }
         }
     };
-    _.Command.prototype.newCursor=function (option,key){
+    _.Command.prototype.createCursor=function (option,key){
         if(!this._cursor[key]&&option.cursor[key]){
             this._cursor[key]= new Sprite()
             this._cursor[key].type = 4

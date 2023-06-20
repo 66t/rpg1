@@ -6,3 +6,16 @@
 // @version   Date(2023/6/18)
 // ©2023 limpid
 //===========================
+var LIM=LIM||{};
+LIM.STORAGE=LIM.STORAGE||{};
+(function(_){
+
+    _.Story=function(){this.initialize.apply(this,arguments)}
+    _.Story.prototype=Object.create(_.Story.prototype)
+    _.Story.prototype.constructor=_.Story
+    _.Story.prototype.initialize=function(){
+        this.time=0
+        this.exp={}
+    };
+
+})(LIM.STORAGE);

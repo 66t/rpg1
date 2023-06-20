@@ -2,6 +2,11 @@
     font-family: GameFont;
     src: url("Cubic.ttf");
 }
+@font-face {
+    font-family: Font1;
+    src: url("ChuangKeTieJinGangTi-2.otf");
+}
+
 
 .IIV::-webkit-media-controls-play-button,
 video::-webkit-media-controls-start-playback-button {

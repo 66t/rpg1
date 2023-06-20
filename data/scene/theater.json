@@ -47,16 +47,47 @@
     "s_b1":"v_1"
     
   },
-  "vessel":{
-    "1":{
+  "vessel": {
+    "1": {
       "acti": true,
-      "run":0,
-      "ope":0,
-      "data":[
-        {"alpha":1,"x":-8,"y":-8,"index":10}
+      "run": 0,
+      "ope": 0,
+      "data": [
+        {
+          "alpha": 1,
+          "x": -10,
+          "y": 10,
+          "index": 10,
+          "filter": {
+            "pixel": {
+              "type": "pixel",
+              "acti": true,
+              "cease": false,
+              "cycle": 0,
+              "time": 0,
+              "uniforms": {"size.0": 12, "size.1": 12},
+              "wave": {}
+            },
+            "bulge":{
+              "type":"bulge",
+              "acti":true,
+              "cease":false,
+              "cycle":0,
+              "time":0,
+              "uniforms":{
+                "radius":1000,
+                "strength":0.5,
+                "center.0":0.2,
+                "center.1":1
+              },
+              "wave":{
+                "center.0":[{"count":"+","wave": 3,"val1":0.3,"val2":0.7,"frame":600,"fre":0,"digit":false}]
+              }
+            }
+          }
+        }
       ],
-      "action":{},
-      "filter":{"type":"pixel","data":{"size":{"x":18,"y":18}}}
+      "action": {}
     }
   },
   "window": {
@@ -139,11 +170,11 @@
         "0": {
           "frame":200,"change":200,"while": true,
           "anime1":{
-            "rota":{"incre":true,"val":1},
-            "x":[{"count":"add","wave": 2,"val1":-80,"val2":20,"fre":0}],
-            "y":[{"count":"add","wave": 2,"val1":480,"val2":560,"fre":0}],
-            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
-            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+            "rota":{"cor":true,"type":"add","val":1},
+            "x":[{"count":"+","wave": 2,"val1":-80,"val2":20,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":480,"val2":560,"fre":0}],
+            "w":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}]
           }
         }
       }
@@ -170,11 +201,11 @@
         "0": {
           "frame":200,"change":200,"while": true,
           "anime1":{
-            "rota":{"incre":true,"val":1},
-            "x":[{"count":"add","wave": 2,"val1":20,"val2":120,"fre":0}],
-            "y":[{"count":"add","wave": 2,"val1":560,"val2":640,"fre":0}],
-            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
-            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+            "rota":{"cor":true,"type":"add","val":1},
+            "x":[{"count":"+","wave": 2,"val1":20,"val2":120,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":560,"val2":640,"fre":0}],
+            "w":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}]
           }
         }
       }
@@ -201,11 +232,11 @@
         "0": {
           "frame":200,"change":200,"while": true,
           "anime1":{
-            "rota":{"incre":true,"val":1},
-            "x":[{"count":"add","wave": 2,"val1":120,"val2":220,"fre":0}],
-            "y":[{"count":"add","wave": 2,"val1":640,"val2":720,"fre":0}],
-            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
-            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+            "rota":{"cor":true,"type":"add","val":1},
+            "x":[{"count":"+","wave": 2,"val1":120,"val2":220,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":640,"val2":720,"fre":0}],
+            "w":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}]
           }
         }
       }
@@ -232,11 +263,11 @@
         "0": {
           "frame":200,"change":200,"while": true,
           "anime1":{
-            "rota":{"incre":true,"val":1},
-            "x":[{"count":"add","wave": 2,"val1":220,"val2":320,"fre":0}],
-            "y":[{"count":"add","wave": 2,"val1":720,"val2":800,"fre":0}],
-            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
-            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+            "rota":{"cor":true,"type":"add","val":1},
+            "x":[{"count":"+","wave": 2,"val1":220,"val2":320,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":720,"val2":800,"fre":0}],
+            "w":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}]
           }
         }
       }
@@ -264,11 +295,11 @@
         "0": {
           "frame":200,"change":200,"while": true,
           "anime1":{
-            "rota":{"incre":true,"val":1},
-            "x":[{"count":"add","wave": 2,"val1":1020,"val2":1120,"fre":0}],
-            "y":[{"count":"add","wave": 2,"val1":480,"val2":320,"fre":0}],
-            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
-            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+            "rota":{"cor":true,"type":"add","val":1},
+            "x":[{"count":"+","wave": 2,"val1":1020,"val2":1120,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":480,"val2":320,"fre":0}],
+            "w":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}]
           }
         }
       }
@@ -295,11 +326,11 @@
         "0": {
           "frame":200,"change":200,"while": true,
           "anime1":{
-            "rota":{"incre":true,"val":1},
-            "x":[{"count":"add","wave": 2,"val1":920,"val2":1020,"fre":0}],
-            "y":[{"count":"add","wave": 2,"val1":560,"val2":480,"fre":0}],
-            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
-            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+            "rota":{"cor":true,"type":"add","val":1},
+            "x":[{"count":"+","wave": 2,"val1":920,"val2":1020,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":560,"val2":480,"fre":0}],
+            "w":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}]
           }
         }
       }
@@ -326,11 +357,11 @@
         "0": {
           "frame":200,"change":200,"while": true,
           "anime1":{
-            "rota":{"incre":true,"val":1},
-            "x":[{"count":"add","wave": 2,"val1":820,"val2":920,"fre":0}],
-            "y":[{"count":"add","wave": 2,"val1":640,"val2":560,"fre":0}],
-            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
-            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+            "rota":{"cor":true,"type":"add","val":1},
+            "x":[{"count":"+","wave": 2,"val1":820,"val2":920,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":640,"val2":560,"fre":0}],
+            "w":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}]
           }
         }
       }
@@ -357,11 +388,11 @@
         "0": {
           "frame":200,"change":200,"while": true,
           "anime1":{
-            "rota":{"incre":true,"val":1},
-            "x":[{"count":"add","wave": 2,"val1":720,"val2":820,"fre":0}],
-            "y":[{"count":"add","wave": 2,"val1":720,"val2":640,"fre":0}],
-            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
-            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+            "rota":{"cor":true,"type":"add","val":1},
+            "x":[{"count":"+","wave": 2,"val1":720,"val2":820,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":720,"val2":640,"fre":0}],
+            "w":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}]
           }
         }
       }
@@ -388,11 +419,11 @@
         "0": {
           "frame":200,"change":200,"while": true,
           "anime1":{
-            "rota":{"incre":true,"val":1},
-            "x":[{"count":"add","wave": 2,"val1":620,"val2":720,"fre":0}],
-            "y":[{"count":"add","wave": 2,"val1":800,"val2":720,"fre":0}],
-            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
-            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+            "rota":{"cor":true,"type":"add","val":1},
+            "x":[{"count":"+","wave": 2,"val1":620,"val2":720,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":800,"val2":720,"fre":0}],
+            "w":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}]
           }
         }
       }
@@ -420,11 +451,11 @@
         "0": {
           "frame":200,"change":200,"while": true,
           "anime1":{
-            "rota":{"incre":true,"val":1},
-            "x":[{"count":"add","wave": 2,"val1":720,"val2":620,"fre":0}],
-            "y":[{"count":"add","wave": 2,"val1":0,"val2":-80,"fre":0}],
-            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
-            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+            "rota":{"cor":true,"type":"add","val":1},
+            "x":[{"count":"+","wave": 2,"val1":720,"val2":620,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":0,"val2":-80,"fre":0}],
+            "w":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}]
           }
         }
       }
@@ -451,11 +482,11 @@
         "0": {
           "frame":200,"change":200,"while": true,
           "anime1":{
-            "rota":{"incre":true,"val":1},
-            "x":[{"count":"add","wave": 2,"val1":820,"val2":720,"fre":0}],
-            "y":[{"count":"add","wave": 2,"val1":80,"val2":0,"fre":0}],
-            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
-            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+            "rota":{"cor":true,"type":"add","val":1},
+            "x":[{"count":"+","wave": 2,"val1":820,"val2":720,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":80,"val2":0,"fre":0}],
+            "w":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}]
           }
         }
       }
@@ -482,11 +513,11 @@
         "0": {
           "frame":200,"change":200,"while": true,
           "anime1":{
-            "rota":{"incre":true,"val":1},
-            "x":[{"count":"add","wave": 2,"val1":920,"val2":820,"fre":0}],
-            "y":[{"count":"add","wave": 2,"val1":160,"val2":80,"fre":0}],
-            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
-            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+            "rota":{"cor":true,"type":"add","val":1},
+            "x":[{"count":"+","wave": 2,"val1":920,"val2":820,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":160,"val2":80,"fre":0}],
+            "w":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}]
           }
         }
       }
@@ -513,11 +544,11 @@
         "0": {
           "frame":200,"change":200,"while": true,
           "anime1":{
-            "rota":{"incre":true,"val":1},
-            "x":[{"count":"add","wave": 2,"val1":1020,"val2":920,"fre":0}],
-            "y":[{"count":"add","wave": 2,"val1":240,"val2":160,"fre":0}],
-            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
-            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+            "rota":{"cor":true,"type":"add","val":1},
+            "x":[{"count":"+","wave": 2,"val1":1020,"val2":920,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":240,"val2":160,"fre":0}],
+            "w":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}]
           }
         }
       }
@@ -544,11 +575,11 @@
         "0": {
           "frame":200,"change":200,"while": true,
           "anime1":{
-            "rota":{"incre":true,"val":1},
-            "x":[{"count":"add","wave": 2,"val1":1120,"val2":1020,"fre":0}],
-            "y":[{"count":"add","wave": 2,"val1":320,"val2":240,"fre":0}],
-            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
-            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+            "rota":{"cor":true,"type":"add","val":1},
+            "x":[{"count":"+","wave": 2,"val1":1120,"val2":1020,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":320,"val2":240,"fre":0}],
+            "w":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}]
           }
         }
       }
@@ -576,11 +607,11 @@
         "0": {
           "frame":200,"change":200,"while": true,
           "anime1":{
-            "rota":{"incre":true,"val":1},
-            "x":[{"count":"add","wave": 2,"val1":20,"val2":-80,"fre":0}],
-            "y":[{"count":"add","wave": 2,"val1":160,"val2":240,"fre":0}],
-            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
-            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+            "rota":{"cor":true,"type":"add","val":1},
+            "x":[{"count":"+","wave": 2,"val1":20,"val2":-80,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":160,"val2":240,"fre":0}],
+            "w":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}]
           }
         }
       }
@@ -607,11 +638,11 @@
         "0": {
           "frame":200,"change":200,"while": true,
           "anime1":{
-            "rota":{"incre":true,"val":1},
-            "x":[{"count":"add","wave": 2,"val1":120,"val2":20,"fre":0}],
-            "y":[{"count":"add","wave": 2,"val1":80,"val2":160,"fre":0}],
-            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
-            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+            "rota":{"cor":true,"type":"add","val":1},
+            "x":[{"count":"+","wave": 2,"val1":120,"val2":20,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":80,"val2":160,"fre":0}],
+            "w":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}]
           }
         }
       }
@@ -638,11 +669,11 @@
         "0": {
           "frame":200,"change":200,"while": true,
           "anime1":{
-            "rota":{"incre":true,"val":1},
-            "x":[{"count":"add","wave": 2,"val1":220,"val2":120,"fre":0}],
-            "y":[{"count":"add","wave": 2,"val1":0,"val2":80,"fre":0}],
-            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
-            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+            "rota":{"cor":true,"type":"add","val":1},
+            "x":[{"count":"+","wave": 2,"val1":220,"val2":120,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":0,"val2":80,"fre":0}],
+            "w":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}]
           }
         }
       }
@@ -669,11 +700,11 @@
         "0": {
           "frame":200,"change":200,"while": true,
           "anime1":{
-            "rota":{"incre":true,"val":1},
-            "x":[{"count":"add","wave": 2,"val1":320,"val2":220,"fre":0}],
-            "y":[{"count":"add","wave": 2,"val1":-80,"val2":0,"fre":0}],
-            "w":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}],
-            "h":[{"count":"add","wave": 3,"val1":80,"val2":100,"fre":0}]
+            "rota":{"cor":true,"type":"add","val":1},
+            "x":[{"count":"+","wave": 2,"val1":320,"val2":220,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":-80,"val2":0,"fre":0}],
+            "w":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}],
+            "h":[{"count":"+","wave": 3,"val1":80,"val2":100,"fre":0}]
           }
         }
       }
@@ -700,7 +731,7 @@
         "0": {
           "frame":130,"change":130,
           "anime1":{
-            "y":[{"count":"add","wave": 3,"val1":"-50h","val2":0,"fre":0}]
+            "y":[{"count":"+","wave": 3,"val1":"-50h","val2":0,"fre":0}]
           }
         }
       }
@@ -726,7 +757,7 @@
         "0": {
           "frame":130,"change":130,
           "anime1":{
-            "y":[{"count":"add","wave": 3,"val1":"100h","val2":"50h","fre":0}]
+            "y":[{"count":"+","wave": 3,"val1":"100h","val2":"50h","fre":0}]
           }
         }
       }
@@ -753,7 +784,7 @@
         "0": {
           "frame":70,"change":70,
           "anime1":{
-            "w":[{"count":"add","wave": 3,"val1":"10w","val2":"20w","fre":0}]
+            "w":[{"count":"+","wave": 3,"val1":"10w","val2":"20w","fre":0}]
           }
         }
       }
@@ -779,7 +810,7 @@
         "0": {
           "frame":50,"change":50,
           "anime1":{
-            "w":[{"count":"add","wave": 3,"val1":"20w","val2":"40w","fre":0}]
+            "w":[{"count":"+","wave": 3,"val1":"20w","val2":"40w","fre":0}]
           }
         }
       }
@@ -805,7 +836,7 @@
         "0": {
           "frame":90,"change":90,
           "anime1":{
-            "w":[{"count":"add","wave": 3,"val1":"30w","val2":"60w","fre":0}]
+            "w":[{"count":"+","wave": 3,"val1":"30w","val2":"60w","fre":0}]
           }
         }
       }
@@ -832,7 +863,7 @@
         "0": {
           "frame":270,"change":270,
           "anime1":{
-            "h":[{"count":"add","wave": 3,"val1":"100h","val2":"30h","fre":0}]
+            "h":[{"count":"+","wave": 3,"val1":"100h","val2":"30h","fre":0}]
           }
         }
       }
@@ -858,7 +889,7 @@
         "0": {
           "frame":370,"change":370,
           "anime1":{
-            "h":[{"count":"add","wave": 3,"val1":"100h","val2":"60h","fre":0}]
+            "h":[{"count":"+","wave": 3,"val1":"100h","val2":"60h","fre":0}]
           }
         }
       }
@@ -884,7 +915,7 @@
         "0": {
           "frame":170,"change":170,
           "anime1":{
-            "h":[{"count":"add","wave": 3,"val1":"100h","val2":"50h","fre":0}]
+            "h":[{"count":"+","wave": 3,"val1":"100h","val2":"50h","fre":0}]
           }
         }
       }
@@ -910,7 +941,7 @@
         "0": {
           "frame":270,"change":270,
           "anime1":{
-            "h":[{"count":"add","wave": 3,"val1":"100h","val2":"60h","fre":0}]
+            "h":[{"count":"+","wave": 3,"val1":"100h","val2":"60h","fre":0}]
           }
         }
       }
@@ -936,7 +967,7 @@
         "0": {
           "frame":370,"change":370,
           "anime1":{
-            "h":[{"count":"add","wave": 3,"val1":"100h","val2":"30h","fre":0}]
+            "h":[{"count":"+","wave": 3,"val1":"100h","val2":"30h","fre":0}]
           }
         }
       }
@@ -963,7 +994,7 @@
         "0": {
           "frame":270,"change":270,
           "anime1":{
-            "h":[{"count":"add","wave": 3,"val1":0,"val2":"70h","fre":0}]
+            "h":[{"count":"+","wave": 3,"val1":0,"val2":"70h","fre":0}]
           }
         }
       }
@@ -989,7 +1020,7 @@
         "0": {
           "frame":370,"change":370,
           "anime1":{
-            "h":[{"count":"add","wave": 3,"val1":0,"val2":"40h","fre":0}]
+            "h":[{"count":"+","wave": 3,"val1":0,"val2":"40h","fre":0}]
           }
         }
       }
@@ -1015,7 +1046,7 @@
         "0": {
           "frame":270,"change":270,
           "anime1":{
-            "h":[{"count":"add","wave": 3,"val1":0,"val2":"40h","fre":0}]
+            "h":[{"count":"+","wave": 3,"val1":0,"val2":"40h","fre":0}]
           }
         }
       }
@@ -1041,7 +1072,7 @@
         "0": {
           "frame":370,"change":370,
           "anime1":{
-            "h":[{"count":"add","wave": 3,"val1":0,"val2":"70h","fre":0}]
+            "h":[{"count":"+","wave": 3,"val1":0,"val2":"70h","fre":0}]
           }
         }
       }
@@ -1067,7 +1098,7 @@
         "0": {
           "frame":170,"change":170,
           "anime1":{
-            "h":[{"count":"add","wave": 3,"val1":0,"val2":"25h","fre":0}]
+            "h":[{"count":"+","wave": 3,"val1":0,"val2":"25h","fre":0}]
           }
         }
       }
@@ -1093,12 +1124,13 @@
         "0": {
           "frame":170,"change":170,
           "anime1":{
-            "h":[{"count":"add","wave": 3,"val1":0,"val2":"25h","fre":0}]
+            "h":[{"count":"+","wave": 3,"val1":0,"val2":"25h","fre":0}]
           }
         }
       }
     }
   },
+  "filter":{},
   "text": {
     "load":{
       "content": "0_7","anime":8,

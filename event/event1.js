@@ -9,9 +9,10 @@ LIM.EVENT=LIM.EVENT||{};
     }
     _.exit=()=>{window.close();}
     _.newgame=()=>{
-        SceneManager._scene._nextScene={mode:5,next:"theater",time:80,count:0}
+        SceneManager.goto(LIM.SCENE.Scene, "theater")
+        LIM.$story.time=0
     }
-    _.ready=()=>{return DataManager.isDatabaseLoaded()&&Graphics.isFontLoaded('GameFont')}
+    _.ready=()=>{return DataManager.isDatabaseLoaded()&&Graphics.isFontLoaded('GameFont')&&Graphics.isFontLoaded('Font1')}
     _.reload=()=>{if (Utils.isNwjs()) {location.reload();}}
     _.test=()=>{if (Utils.isNwjs() && Utils.isOptionValid('test')) {require('nw.gui').Window.get().showDevTools();}
         
