@@ -252,14 +252,11 @@ LIM.UTILS=LIM.UTILS||{};
      * @return {Array} 质数数组
      */
     _.angelPrime=function(num){
-        let arr=[2,3],i=5
-        while (arr.length<num) {
-            for(let num of arr)
-                if(num**2>i) {arr.push(i);break}
-                else if(i%num==0) break;
-            i+=(i%6==5?2:4)
-        }
-        return arr
+        let primes = [];
+        let sieve = new Array(num).fill(true);
+        for (let p = 2; p * p < num; p++) if (sieve[p]) for (let i = p * p; i < num; i += p) sieve[i] = false;
+        for (let p = 2; p < num; p++) if (sieve[p]) primes.push(p);
+        return primes;
     }
     
     /** 返回a b的最大公约数
@@ -314,9 +311,7 @@ LIM.UTILS=LIM.UTILS||{};
     _.fractionExp=function (num) {
         return _.fractionOth(num,Math.pow(10,num.toString().length))
     }
-
-
-
+    
     /**获得百分比*/
     _.lengthNum=function(num){
         try {
