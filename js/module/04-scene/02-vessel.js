@@ -54,6 +54,7 @@ LIM.SCENE=LIM.SCENE||{};
     }
     _.Vessel.prototype.refresh=function () {
         if(this._com.next!==this._com.mode) this.shiftMode()
+        if(this.isRun(4)) this.createFilter()
         if(this.isRun(0)) this.location()
         if(this.hasActions()==1) this.move()
         this._time++
@@ -66,7 +67,7 @@ LIM.SCENE=LIM.SCENE||{};
          let mode=this._com.mode
         this._com.mode=this._com.next
         this.pushAction(mode,this._com.next)
-        this.createFilter()
+        this.setRun(4,true)
     }
     _.Vessel.prototype.pushAction=function(mode,next){
         let fun=mode+"_"+next
@@ -96,7 +97,13 @@ LIM.SCENE=LIM.SCENE||{};
         this.triggerMove()
     }
 
+    _.Scene.prototype.actiFilter= function (key,bool){
+        this.setRun(4,true)
+        this._data.filter[key].acti=bool=="1"?true:false
+    }
+    
     _.Vessel.prototype.createFilter = function () {
+        if (this.isRun(4)) {this.setRun(4, false)}
         this._filter={}
         for (let key in this._data.filter) {
             let data=this._data.filter[key]
@@ -130,6 +137,9 @@ LIM.SCENE=LIM.SCENE||{};
                 break
             case 2:
                 this.filters=[this._filter[key[0]].obj,this._filter[key[1]].obj]
+                break
+            case 3:
+                this.filters=[this._filter[key[0]].obj,this._filter[key[1]].obj,this._filter[key[2]].obj]
                 break
         }
         this.updateFilter()
@@ -165,7 +175,7 @@ LIM.SCENE=LIM.SCENE||{};
     }
     _.Vessel.prototype.actiFilter= function (key,bool){
         this.setRun(4, true)
-        this._data.filter[key].acti==bool=="1"?true:false
+        this._data.filter[key].acti=(bool==="1"?true:false)
     }
     
     _.Vessel.prototype.hasActions=function () {

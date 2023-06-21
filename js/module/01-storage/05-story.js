@@ -17,5 +17,11 @@ LIM.STORAGE=LIM.STORAGE||{};
         this.time=0
         this.exp={}
     };
-
+    _.Story.prototype.getScript=function (){
+        $dataScript=null
+        for(let key in $dataTree){
+            DataManager.loadDataFile('$dataScript', 'script/' +key.replace(/_/g,"/") + '.json');
+            return
+        }
+    }
 })(LIM.STORAGE);

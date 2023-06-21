@@ -636,7 +636,7 @@
       "type":"glitch",
       "acti":false,
       "cease":true,
-      "cycle":180,
+      "cycle":240,
       "time":0,
       "comE":"newgame2",
       "uniforms":{
@@ -646,13 +646,13 @@
       },
       "wave":{
         "seed":{"cor":true,"type":"seed"},
-        "offset":[{"count":"+","wave": 2,"val1":0,"val2":40,"frame":180,"fre":0,"digit":true}],
-        "red.x":[{"count":"+","wave": 2,"val1":0,"val2":-20,"frame":180,"fre":0,"digit":true}],
-        "red.y":[{"count":"+","wave": 2,"val1":0,"val2":20,"frame":180,"fre":0,"digit":true}],
-        "blue.x":[{"count":"+","wave": 2,"val1":0,"val2":-20,"frame":180,"fre":0,"digit":true}],
-        "blue.y":[{"count":"+","wave": 2,"val1":0,"val2":-20,"frame":180,"fre":0,"digit":true}],
-        "green.x":[{"count":"+","wave": 2,"val1":0,"val2":20,"frame":180,"fre":0,"digit":true}],
-        "green.y":[{"count":"+","wave": 2,"val1":0,"val2":20,"frame":180,"fre":0,"digit":true}]
+        "offset":[{"count":"+","wave": 2,"val1":0,"val2":40,"frame":240,"fre":0,"digit":true}],
+        "red.x":[{"count":"+","wave": 2,"val1":0,"val2":-20,"frame":240,"fre":0,"digit":true}],
+        "red.y":[{"count":"+","wave": 2,"val1":0,"val2":20,"frame":240,"fre":0,"digit":true}],
+        "blue.x":[{"count":"+","wave": 2,"val1":0,"val2":-20,"frame":240,"fre":0,"digit":true}],
+        "blue.y":[{"count":"+","wave": 2,"val1":0,"val2":-20,"frame":240,"fre":0,"digit":true}],
+        "green.x":[{"count":"+","wave": 2,"val1":0,"val2":20,"frame":240,"fre":0,"digit":true}],
+        "green.y":[{"count":"+","wave": 2,"val1":0,"val2":20,"frame":240,"fre":0,"digit":true}]
       }
     },
     "old":{
@@ -663,17 +663,28 @@
       "time":0,
       "uniforms":{
         "sepia":0,
-        "noise":0,
-        "noiseSize":1,
+        "noise":0.1,
+        "noiseSize":0,
         "vignetting":0,
         "vignettingAlpha":1,
         "vignettingBlur":1
       },
       "wave":{
         "seed":{"cor":true,"type":"seed"},
-        "vignetting":[{"count":"+","wave": 2,"val1":0,"val2":1,"frame":180,"fre":0,"digit":false}],
-        "noise":[{"count":"+","wave": 2,"val1":0,"val2":0.2,"frame":90,"fre":0,"digit":false}],
-        "noiseSize":[{"count":"+","wave": 2,"val1":0,"val2":2,"frame":90,"fre":0,"digit":false}]
+        "vignetting":[{"count":"+","wave": 2,"val1":0,"val2":1,"frame":245,"fre":0,"digit":false}],
+        "noise":[{"count":"+","wave": 3,"val1":0.1,"val2":0.3,"frame":240,"fre":0,"digit":false}],
+        "noiseSize":[{"count":"+","wave": 3,"val1":0,"val2":2,"frame":240,"fre":0,"digit":false}]
+      }
+    },
+    "adj":{
+      "type":"adj",
+      "acti":false,
+      "cease":false,
+      "cycle":0,
+      "time":0,
+      "uniforms":{},
+      "wave":{
+        "alpha":[{"count":"+","wave": 1,"val1":1,"val2":0,"frame":240,"fre":0,"digit":false}]
       }
     }
   },
@@ -746,7 +757,7 @@
     "c1_select":["#select:c_1:%[1]"],
     "c1_cancel":["#select:c_1:%[1]"],
     "exit":["%exit"],
-    "newgame":["#filter:this:glitch:1","#filter:this:old:1"],
+    "newgame":["#filter:this:glitch:1","#filter:this:old:1","#filter:this:adj:1"],
     "newgame2":["%newgame"]
   }
 

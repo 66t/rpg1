@@ -15,7 +15,6 @@ LIM.SCENE=LIM.SCENE||{};
         this._word = {}
         this._filter={}
         $dataScene=null
-      
         DataManager.loadDataFile('$dataScene', 'scene/' + name + '.json');
         Scene_Base.prototype.initialize.call(this);
     }
@@ -48,14 +47,14 @@ LIM.SCENE=LIM.SCENE||{};
     _.Scene.prototype.run = function() {
         this._time = 0;
         this._load = 1;
-        this._run = 0b111111;
+        this._run = 0b11111;
     };
     
     _.Scene.prototype.refresh = function(){
         if(this.isRun(2)) this.createItem();
         if(this.isRun(1)) this.showItem();
         if(this.isRun(0)) {for(let item of this.children) item.update();}
-        if(this.isRun(6)) this._story.update()
+        if(this.isRun(5)) if(this._story) this._story.update()
         if(this.isRun(3)) this.effector()
         if(this.isRun(4)) this.createFilter();
         this._time++
@@ -74,9 +73,7 @@ LIM.SCENE=LIM.SCENE||{};
     
     
     _.Scene.prototype.createFilter = function () {
-        if (this.isRun(4)) {
-            this.setRun(4, false)
-        }
+        if (this.isRun(4)) {this.setRun(4, false)}
         this._filter={}
         for (let key in this._data.filter) {
             let data=this._data.filter[key]
@@ -111,6 +108,9 @@ LIM.SCENE=LIM.SCENE||{};
                 break
             case 2:
                 this.filters=[this._filter[key[0]].obj,this._filter[key[1]].obj]
+                break
+            case 3:
+                this.filters=[this._filter[key[0]].obj,this._filter[key[1]].obj,this._filter[key[2]].obj]
                 break
         }
         this.updateFilter()
@@ -150,7 +150,7 @@ LIM.SCENE=LIM.SCENE||{};
     }
     _.Scene.prototype.actiFilter= function (key,bool){
         this.setRun(4, true)
-        this._data.filter[key].acti=bool=="1"?true:false
+        this._data.filter[key].acti=(bool==="1"?true:false)
     }
     
     _.Scene.prototype.createVessel = function () {
@@ -191,8 +191,9 @@ LIM.SCENE=LIM.SCENE||{};
     }
     _.Scene.prototype.createConsole = function (){
         if( this._data.story) {
-            this._item["story"]=  new LIM.SCENE.Vessel(this,"shory",{acti: true, run: 0, ope: 0, data: [{alpha: 1,x: 0,y: 0,index: 100}],action:{}})
+            this._item["story"]=new LIM.SCENE.Vessel(this,"story",{acti: true, run: 0, ope: 0, data: [{alpha: 1,x: 0,y: 0,index: 100}],action:{}})
             this._story = new LIM.STORY.Console(this._item["story"])
+            this.setRun(5,true)
         }
     }
     
@@ -293,7 +294,15 @@ LIM.SCENE=LIM.SCENE||{};
             case "#sleep":
                  if(this._item[eve[1]])
                      this._item[eve[1]]._com.acti = false
-                 break    
+                 break
+            case "#hide":
+                if(this._item[eve[1]])
+                    this._item[eve[1]].alpha = 0
+                break
+            case "#show":
+                if(this._item[eve[1]])
+                    this._item[eve[1]].alpha = 1
+                break
             case "#on_effector":
                 if(this._data.effector[eve[1]])
                     this._data.effector[eve[1]].count++
@@ -312,6 +321,9 @@ LIM.SCENE=LIM.SCENE||{};
                break
            case "#filter":
                if(eve[1]==="this") this.actiFilter(eve[2],eve[3])
+               else if(this._item[eve[1]]&&this._item[eve[1]] instanceof _.Vessel){
+                   this._item[eve[1]].actiFilter(eve[2],eve[3])
+               }
                break
         }
     }

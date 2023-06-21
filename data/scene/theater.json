@@ -47,7 +47,7 @@
     "s_b1":"v_1"
     
   },
-  "vessel": {
+   "vessel": {
     "1": {
       "acti": true,
       "run": 0,
@@ -82,6 +82,23 @@
               },
               "wave":{
                 "center.0":[{"count":"+","wave": 3,"val1":0.3,"val2":0.7,"frame":600,"fre":0,"digit":false}]
+              }
+            },
+            "radial":{
+              "type":"radial",
+              "acti":false,
+              "cease":false,
+              "cycle":0,
+              "time":0,
+              "uniforms":{
+                "radius":1200,
+                "center.0":800,
+                "center.1":600,
+                "angle":0,
+                "kemelSize":5
+              },
+              "wave":{
+                "angle":[{"count":"+","wave": 2,"val1":0,"val2":180,"frame":600,"fre":0,"digit":false}]
               }
             }
           }
@@ -125,26 +142,6 @@
           "tone":[0,0,0,0],"blend":[0,0,0,0]
         }
         
-      ],
-      "action": {}
-    },
-    "stage": {
-      "acti": true,
-      "run":0,
-      "loop": false,
-      "data": [
-        {
-          "index":100,
-          "bit":"null",
-          "cover":1,
-          "adso": 7,
-          "w":"100w","h":"100w",
-          "x":0,"y":0,"rota":0,"alpha":0,
-          "filter":[],
-          "clip":[0,0,1,1,0,0,1024,1024],
-          "tone":[0,0,0,0],"blend":[0,0,0,0]
-        }
-
       ],
       "action": {}
     },
@@ -1130,7 +1127,21 @@
       }
     }
   },
-  "filter":{},
+  "filter":{
+    "adj":{
+      "type":"adj",
+      "acti":true,
+      "cease":false,
+      "cycle":180,
+      "time":0,
+      "uniforms":{
+        "alpha":1
+      },
+      "wave":{
+        "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"frame":180,"fre":0,"digit":false}]
+      }
+    }
+  },
   "text": {
     "load":{
       "content": "0_7","anime":8,
@@ -1161,6 +1172,8 @@
     }
   },
   "effector":{},
-  "handler":{},
+  "handler":{
+    "load":["#hide:w_1","#filter:v_1:radial:1"]
+  },
   "story":true
 }
