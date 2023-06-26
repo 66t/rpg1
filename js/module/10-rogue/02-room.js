@@ -1,6 +1,7 @@
 var LIM=LIM||{};
 LIM.RORUE=LIM.RORUE||{};
-(function(_) {
+
+((_)=> {
     _.Room=function(){this.initialize.apply(this,arguments)}
     _.Room.prototype=Object.create(_.Room.prototype)
     _.Room.prototype.constructor=_.Room

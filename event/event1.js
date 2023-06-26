@@ -1,7 +1,7 @@
 ﻿var LIM=LIM||{};
 LIM.EVENT=LIM.EVENT||{};
 
-(function(_) {
+((_)=> {
     _.true=()=>{return true}
     _.false=()=>{return false}
     _.load=()=>{

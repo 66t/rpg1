@@ -1,6 +1,6 @@
 var LIM=LIM||{};
 LIM.STORAGE=LIM.STORAGE||{};
-(function(_){
+((_)=>{
     /** 生成存档内容
      * @module storage
      * @method makeSaveContents

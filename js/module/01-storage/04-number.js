@@ -1,6 +1,6 @@
 var LIM=LIM||{};
 LIM.STORAGE=LIM.STORAGE||{};
-(function(_){
+((_)=>{
    
     _.MAX_Number=999999999 //最大数值
     _.MIN_Number=-999999999 //最小数值

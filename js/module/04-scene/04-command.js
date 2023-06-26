@@ -1,6 +1,6 @@
 ﻿var LIM=LIM||{};
 LIM.SCENE=LIM.SCENE||{};
-(function(_){
+((_)=>{
     _.Command=function(){this.initialize.apply(this,arguments)}
     _.Command.prototype = Object.create(_.Window.prototype)
     _.Command.prototype.constructor = _.Command;
@@ -88,49 +88,17 @@ LIM.SCENE=LIM.SCENE||{};
             for (let key of arrowKeys) {
                 this.newArrow(option, key);
                 let item = option.arrow[key];
-                let index = parseInt(this._time / item.frame);
+                let index = parseInt(this._time / item.cycle);
                 let data = item.image[index % item.image.length];
 
-                if (item.image.length > 1 && this._time % item.frame === 1) {
+                if (item.image.length > 1 && this._time % item.cycle === 1) {
                     let bit = this._origin.getBit(data.bit);
                     bit.addLoadListener(() => {
                         this._arrow[key].bitmap = new Bitmap(data.w, data.h);
                         this._arrow[key].bitmap.blt(bit, data.x, data.y, data.w, data.h, 0, 0);
                     });
                 }
-
-                let rotation, x, y, scaleX, scaleY;
-
-                if (typeof item.rota !== 'object') {rotation = (data.rota + item.rota) / 180 * Math.PI;}
-                else {
-                    let r = LIM.UTILS.waveNum(item.rota.wave, item.rota.frae / (1 + item.rota.fre * 2), this._time);
-                    rotation = (data.rota + item.rota.val1 + r * (item.rota.val2 - item.rota.val1)) / 180 * Math.PI;
-                }
-
-                if (typeof item.x !== 'object') {x = LIM.UTILS.lengthNum(item.x);}
-                else {
-                    let r = LIM.UTILS.waveNum(item.x.wave, item.x.frae / (1 + item.x.fre * 2), this._time);
-                    x = LIM.UTILS.lengthNum(item.x.val1) + r * (LIM.UTILS.lengthNum(item.x.val2) - LIM.UTILS.lengthNum(item.x.val1));
-                }
-
-                if (typeof item.y !== 'object') {y = LIM.UTILS.lengthNum(item.y);}
-                else {
-                    let r = LIM.UTILS.waveNum(item.y.wave, item.y.fra / (1 + item.y.fre * 2), this._time);
-                    y = LIM.UTILS.lengthNum(item.y.val1) + r * (LIM.UTILS.lengthNum(item.y.val2) - LIM.UTILS.lengthNum(item.y.val1));
-                }
-
-                if (typeof item.sw !== 'object') {scaleX = item.sw;}
-                else {
-                    let r = LIM.UTILS.waveNum(item.sw.wave, item.sw.fra / (1 + item.sw.fre * 2), this._time);
-                    scaleX = item.sw.val1 + r * (item.sw.val2 - item.sw.val1);
-                }
-
-                if (typeof item.sh !== 'object') {scaleY = item.sh;}
-                else {
-                    let r = LIM.UTILS.waveNum(item.sh.wave, item.sh.fra / (1 + item.sh.fre * 2), this._time);
-                    scaleY = item.sh.val1 + r * (item.sh.val2 - item.sh.val1);
-                }
-
+                let {rotation, x, y, scaleX, scaleY}=this.dataArrow(item, data);
                 this._arrow[key].rotation = rotation;
                 this._arrow[key].x = x;
                 this._arrow[key].y = y;
@@ -139,7 +107,6 @@ LIM.SCENE=LIM.SCENE||{};
             }
         }
     };
-    
     _.Command.prototype.updataArrow=function (option){
         if(this._arrow['up'])
             this._arrow['up'].alpha=option.top>0?1:0
@@ -165,10 +132,10 @@ LIM.SCENE=LIM.SCENE||{};
             for (let key of cursorKeys) {
                 this.createCursor(option, key);
                 let item = option.cursor[key];
-                let index = parseInt(this._time / item.frame);
+                let index = parseInt(this._time / item.cycle);
                 let data = item.image[index % item.image.length];
 
-                if (item.image.length > 1 && this._time % item.frame === 1) {
+                if (item.image.length > 1 && this._time % item.cycle === 1) {
                     let bit = this._origin.getBit(data.bit);
                     bit.addLoadListener(() => {
                         this._cursor[key].bitmap = new Bitmap(data.w, data.h);
@@ -189,42 +156,9 @@ LIM.SCENE=LIM.SCENE||{};
                 else if (data.item / 3 > 1) sy = rect.y1 + (rect.y2 - rect.y1) / 2;
                 else sy = rect.y2;
 
-                let rotation, x, y, scaleX, scaleY;
+                let rotation, x, y, scaleX, scaleY=this.dataCursor(item,data,sx,sy)
 
-                if (typeof item.rota !== 'object') {
-                    rotation = (data.rota + item.rota) / 180 * Math.PI;
-                } else {
-                    let r = LIM.UTILS.waveNum(item.rota.wave, item.rota.frame / (1 + item.rota.fre * 2), this._time);
-                    rotation = (data.rota + item.rota.val1 + r * (item.rota.val2 - item.rota.val1)) / 180 * Math.PI;
-                }
-
-                if (typeof item.x !== 'object') {
-                    x = LIM.UTILS.lengthNum(item.x) + sx;
-                } else {
-                    let r = LIM.UTILS.waveNum(item.x.wave, item.x.frame / (1 + item.x.fre * 2), this._time);
-                    x = LIM.UTILS.lengthNum(item.x.val1) + r * (LIM.UTILS.lengthNum(item.x.val2) - LIM.UTILS.lengthNum(item.x.val1)) + sx;
-                }
-
-               if (typeof item.y !== 'object') {
-                    y = LIM.UTILS.lengthNum(item.y) + sy;
-                } else {
-                    let r = LIM.UTILS.waveNum(item.y.wave, item.y.frame / (1 + item.y.fre * 2), this._time);
-                    y = LIM.UTILS.lengthNum(item.y.val1) + r * (LIM.UTILS.lengthNum(item.y.val2) - LIM.UTILS.lengthNum(item.y.val1)) + sy;
-                }
-
-                if (typeof item.sw !== 'object') {
-                    scaleX = item.sw;
-                } else {
-                    let r = LIM.UTILS.waveNum(item.sw.wave, item.sw.frame / (1 + item.sw.fre * 2), this._time);
-                    scaleX = item.sw.val1 + r * (item.sw.val2 - item.sw.val1);
-                }
-
-                if (typeof item.sh !== 'object') {
-                    scaleY = item.sh;
-                } else {
-                    let r = LIM.UTILS.waveNum(item.sh.wave, item.sh.frame / (1 + item.sh.fre * 2), this._time);
-                    scaleY = item.sh.val1 + r * (item.sh.val2 - item.sh.val1);
-                }
+          
 
                 this._cursor[key].rotation = rotation;
                 this._cursor[key].x = x;
@@ -234,6 +168,7 @@ LIM.SCENE=LIM.SCENE||{};
             }
         }
     };
+ 
     _.Command.prototype.createCursor=function (option,key){
         if(!this._cursor[key]&&option.cursor[key]){
             this._cursor[key]= new Sprite()
@@ -241,6 +176,77 @@ LIM.SCENE=LIM.SCENE||{};
             this._cursor[key].anchor.set(0.5, 0.5);
             this.addChild( this._cursor[key])
         }
+    }
+
+    _.Command.prototype.dataArrow = function(item, data){
+        let rotation, x, y, scaleX, scaleY
+        if (typeof item.rota !== 'object') {rotation = (data.rota + item.rota) / 180 * Math.PI;}
+        else {
+            let r = LIM.UTILS.waveNum(item.rota.wave, item.rota.frame / (1 + item.rota.fre * 2), this._time);
+            rotation = (data.rota + item.rota.val1 + r * (item.rota.val2 - item.rota.val1)) / 180 * Math.PI;
+        }
+
+        if (typeof item.x !== 'object') {x = LIM.UTILS.lengthNum(item.x);}
+        else {
+            let r = LIM.UTILS.waveNum(item.x.wave, item.x.frame / (1 + item.x.fre * 2), this._time);
+            x = LIM.UTILS.lengthNum(item.x.val1) + r * (LIM.UTILS.lengthNum(item.x.val2) - LIM.UTILS.lengthNum(item.x.val1));
+        }
+
+        if (typeof item.y !== 'object') {y = LIM.UTILS.lengthNum(item.y);}
+        else {
+            let r = LIM.UTILS.waveNum(item.y.wave, item.y.frame / (1 + item.y.fre * 2), this._time);
+            y = LIM.UTILS.lengthNum(item.y.val1) + r * (LIM.UTILS.lengthNum(item.y.val2) - LIM.UTILS.lengthNum(item.y.val1));
+        }
+
+        if (typeof item.sw !== 'object') {scaleX = item.sw;}
+        else {
+            let r = LIM.UTILS.waveNum(item.sw.wave, item.sw.frame / (1 + item.sw.fre * 2), this._time);
+            scaleX = item.sw.val1 + r * (item.sw.val2 - item.sw.val1);
+        }
+
+        if (typeof item.sh !== 'object') {scaleY = item.sh;}
+        else {
+            let r = LIM.UTILS.waveNum(item.sh.wave, item.sh.frame / (1 + item.sh.fre * 2), this._time);
+            scaleY = item.sh.val1 + r * (item.sh.val2 - item.sh.val1);
+        }
+        return { rotation, x, y, scaleX, scaleY };
+    }
+    _.Command.prototype.dataCursor = function(item, data,sx,sy){
+        let rotation, x, y, scaleX, scaleY
+        if (typeof item.rota !== 'object') {
+            rotation = (data.rota + item.rota) / 180 * Math.PI;
+        } else {
+            let r = LIM.UTILS.waveNum(item.rota.wave, item.rota.frame / (1 + item.rota.fre * 2), this._time);
+            rotation = (data.rota + item.rota.val1 + r * (item.rota.val2 - item.rota.val1)) / 180 * Math.PI;
+        }
+
+        if (typeof item.x !== 'object') {
+            x = LIM.UTILS.lengthNum(item.x) + sx;
+        } else {
+            let r = LIM.UTILS.waveNum(item.x.wave, item.x.frame / (1 + item.x.fre * 2), this._time);
+            x = LIM.UTILS.lengthNum(item.x.val1) + r * (LIM.UTILS.lengthNum(item.x.val2) - LIM.UTILS.lengthNum(item.x.val1)) + sx;
+        }
+
+        if (typeof item.y !== 'object') {
+            y = LIM.UTILS.lengthNum(item.y) + sy;
+        } else {
+            let r = LIM.UTILS.waveNum(item.y.wave, item.y.frame / (1 + item.y.fre * 2), this._time);
+            y = LIM.UTILS.lengthNum(item.y.val1) + r * (LIM.UTILS.lengthNum(item.y.val2) - LIM.UTILS.lengthNum(item.y.val1)) + sy;
+        }
+
+        if (typeof item.sw !== 'object') {
+            scaleX = item.sw;
+        } else {
+            let r = LIM.UTILS.waveNum(item.sw.wave, item.sw.frame / (1 + item.sw.fre * 2), this._time);
+            scaleX = item.sw.val1 + r * (item.sw.val2 - item.sw.val1);
+        }
+        if (typeof item.sh !== 'object') {
+            scaleY = item.sh;
+        } else {
+            let r = LIM.UTILS.waveNum(item.sh.wave, item.sh.frame / (1 + item.sh.fre * 2), this._time);
+            scaleY = item.sh.val1 + r * (item.sh.val2 - item.sh.val1);
+        }
+        return { rotation, x, y, scaleX, scaleY };
     }
     
     _.Command.prototype.drawOption = function(option) {

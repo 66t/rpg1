@@ -1,6 +1,6 @@
 ﻿var LIM=LIM||{};
 LIM.SCENE=LIM.SCENE||{};
-(function(_){
+((_)=>{
     _.Shape=function(){this.initialize.apply(this,arguments)}
     _.Shape.prototype = Object.create(Sprite.prototype)
     _.Shape.prototype.constructor = _.Shape;
@@ -46,10 +46,12 @@ LIM.SCENE=LIM.SCENE||{};
         if(item.time<item.change) {
             if(item.anime1)this.executeAnime(item.anime1, [item.change, item.time])
             if(item.filter1&&item.filter1.length) this.executeFilter(item.filter1,[item.change, item.time])
+            if(item.effect1) this.executeEffect()
         }
         else {
             if(item.anime2)this.executeAnime(item.anime2, [item.frame - item.change, item.time - item.change])
             if(item.filter2&&item.filter2.length) this.executeFilter(item.filter2,[item.frame - item.change, item.time - item.change])
+            if(item.effect2) this.executeEffect(item.effect2, [item.frame - item.change, item.time - item.change])
         }
         //执行方法
         if (item.time == 0) { 
@@ -67,6 +69,9 @@ LIM.SCENE=LIM.SCENE||{};
         }
         item.time++
     }
+    _.Shape.prototype.executeEffect = function (effect,time) {
+        console.log(time)
+    };
     _.Shape.prototype.executeAnime = function (anime, time) {
         if(!this._data)return
         let data = {
@@ -89,6 +94,7 @@ LIM.SCENE=LIM.SCENE||{};
       
         this.shape(data);
     };
+
     _.Shape.prototype.executeFilter=function(data,time) {
        if(data.length)
         for (let i=0;i<data.length;i++) {
@@ -151,20 +157,21 @@ LIM.SCENE=LIM.SCENE||{};
         let bit = this._origin.getBit(this._data.bit)
         let that=this
         bit.addLoadListener(function () {
-            that.setBitmap(bit)
+            that.setBitmap("bitmap",bit)
+            that.setBitmap("backups",bit)
             if(!this.isRun(1)) this.setRun(1,true)
             if(!this.isRun(2)) this.setRun(2,true)
             if(!this.isRun(3)) this.setRun(3,true)
            }.bind(this)
         )
     }
-    _.Shape.prototype.setBitmap=function(bit){
-        if(this._data.clip) this.clip(bit,this._data.clip)
-        else this.bitmap=bit
+    _.Shape.prototype.setBitmap=function(target,bit){
+        if(this._data.clip) this.clip(target,bit,this._data.clip)
+        else this[target]=bit
     }
-    _.Shape.prototype.clip=function(bit,clip) {
-        this.bitmap=new Bitmap(clip[6]+clip[4]*2,clip[7]+clip[5]*2)
-        this.bitmap.blt(bit,clip[0],clip[1],clip[2],clip[3],LIM.UTILS.lengthNum(clip[4]),LIM.UTILS.lengthNum(clip[5]),LIM.UTILS.lengthNum(clip[6]),LIM.UTILS.lengthNum(clip[7]))
+    _.Shape.prototype.clip=function(target,bit,clip) {
+        this[target]=new Bitmap(clip[6]+clip[4]*2,clip[7]+clip[5]*2)
+        this[target].blt(bit,clip[0],clip[1],clip[2],clip[3],LIM.UTILS.lengthNum(clip[4]),LIM.UTILS.lengthNum(clip[5]),LIM.UTILS.lengthNum(clip[6]),LIM.UTILS.lengthNum(clip[7]))
     }
     _.Shape.prototype.render=function(item){
         if(this.isRun(1)) this.setRun(1,false)

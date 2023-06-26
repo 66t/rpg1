@@ -1,15 +1,17 @@
 {
   "bit":{
-    "back":["img/scene_theater/","p1",0,true],
+    "c":["img/scene_theater/","p1",0,true],
     "p2":["img/scene_theater/","p2",0,true],
     "p3":["img/scene_theater/","p3",0,true],
     "p4":["img/scene_theater/","p4",0,true],
     "p5":["img/scene_theater/","p5",64,true],
     "p6":["img/scene_theater/","p6",128,true],
-    "null":["img/bg/","bg_0000",0,true]
+    "null":["img/bg/","bg_0000",0,true],
+    "null1":["img/bg/","bg_0001",0,true]
   },
   "group": {
-    "s_back1":"v_1",
+    "w_a":"v_1",
+    "s_c":"v_1",
     "s_q0":"v_1",
     "s_q1":"v_1",
     "s_q2":"v_1",
@@ -44,10 +46,12 @@
     "s_a4":"v_1",
     "s_a5":"v_1",
     "s_a6":"v_1",
-    "s_b1":"v_1"
+    "s_b1":"v_1",
+    "s_back":"v_story"
     
   },
-   "vessel": {
+  "vessel": {
+    "story":{"acti": true, "run": 0, "ope": 0, "data": [{"alpha": 1,"x": 0,"y": 0,"index": 100}],"action":{}},
     "1": {
       "acti": true,
       "run": 0,
@@ -125,14 +129,53 @@
   },
   "command": {},
   "shape": {
-    "back1": {
+    "back": {
       "acti": true,
       "run":0,
       "loop": false,
       "data": [
         {
           "index":1,
-          "bit":"back",
+          "bit":"null",
+          "cover":1,
+          "adso": 7,
+          "w":"100w","h":"100h",
+          "x":0,"y":0,"rota":0,"alpha":0,
+          "filter":[],
+          "clip":[0,0,1,1,0,0,1,1],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        },
+        {
+          "index":1,
+          "bit":"",
+          "cover":1,
+          "adso": 5,
+          "w":"100w","h":"100w",
+          "x":0,"y":"-10h","rota":0,"alpha":0,
+          "filter":[],
+          "clip":[0,0,800,800,0,0,800,800],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0_1": {
+          "frame":200,"change":1,
+          "anime2":{
+            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":"15h","val2":"-15h","fre":0}]
+          }
+        }
+      }
+    },
+    
+    "c0": {
+      "acti": true,
+      "run":0,
+      "loop": false,
+      "data": [
+        {
+          "index":1,
+          "bit":"c",
           "cover":1,
           "adso": 7,
           "w":"100w","h":"100h",
@@ -1171,9 +1214,9 @@
       "fontItalic":false
     }
   },
-  "effector":{},
+  "wave":{},
   "handler":{
-    "load":["#hide:w_1","#filter:v_1:radial:1"]
-  },
-  "story":true
+    "back_start":["#hide:w_1","#filter:v_1:radial:1","#data:s_back:1:bit:back","#mode:s_back:1"],
+    "back_load":["#load_bit:back:%[1]:%[2]:%[3]:%[4]:back_start"]
+  }
 }

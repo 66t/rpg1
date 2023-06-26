@@ -1,6 +1,6 @@
 var LIM=LIM||{};
 LIM.UTILS=LIM.UTILS||{};
-(function(_){
+((_)=>{
 
     /** 打乱数组
      * @module utils

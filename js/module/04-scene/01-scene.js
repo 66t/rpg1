@@ -1,7 +1,7 @@
 ﻿var LIM=LIM||{};
 LIM.SCENE=LIM.SCENE||{};
 
-(function(_) {
+((_)=> {
 
     _.Scene = function () { this.initialize.apply(this, arguments) }
     _.Scene.prototype = Object.create(Scene_Base.prototype);
@@ -47,7 +47,7 @@ LIM.SCENE=LIM.SCENE||{};
     _.Scene.prototype.run = function() {
         this._time = 0;
         this._load = 1;
-        this._run = 0b11111;
+        this._run = 0b111111;
     };
     
     _.Scene.prototype.refresh = function(){
@@ -66,12 +66,9 @@ LIM.SCENE=LIM.SCENE||{};
         this.createWindow();
         this.createCommand();
         this.createShape();
+        this.createWave();
         this.createConsole();
     }
-    
-    
-    
-    
     _.Scene.prototype.createFilter = function () {
         if (this.isRun(4)) {this.setRun(4, false)}
         this._filter={}
@@ -189,14 +186,20 @@ LIM.SCENE=LIM.SCENE||{};
             }
         }
     }
-    _.Scene.prototype.createConsole = function (){
-        if( this._data.story) {
-            this._item["story"]=new LIM.SCENE.Vessel(this,"story",{acti: true, run: 0, ope: 0, data: [{alpha: 1,x: 0,y: 0,index: 100}],action:{}})
-            this._story = new LIM.STORY.Console(this._item["story"])
-            this.setRun(5,true)
+    _.Scene.prototype.createWave = function () {
+        if(this._data.wave) {
+            for(let key in this._data.wave) {
+                let item = this._data.wave[key]
+                let name = 'w_' + key
+                this._item[name] = new LIM.SCENE.Wave(this, name, item)
+            }
         }
     }
-    
+    _.Scene.prototype.createConsole = function (){
+        if(this._item["v_story"]) 
+            this._story = new LIM.STORY.Console(this._item["v_story"])
+        
+    }
     _.Scene.prototype.getText = function (key) {
         if(this._data.text[key]){
             let item = this._data.text[key]
@@ -223,7 +226,6 @@ LIM.SCENE=LIM.SCENE||{};
         }
         return [text.text]
     }
-    
     _.Scene.prototype.showItem = function() {
         if(this.isRun(1)) {
             this.setRun(1,false)
@@ -268,7 +270,6 @@ LIM.SCENE=LIM.SCENE||{};
         if(handler) this.exCom(handler,data)
     }
     
-    
     _.Scene.prototype.exCom=function(parser,data){
         for(let token of parser) {
             if(data) token=token.replacePlace(data)
@@ -287,6 +288,10 @@ LIM.SCENE=LIM.SCENE||{};
                 if(this._item[eve[1]])
                     this._item[eve[1]]._com.next = eve[2]
                 break
+            case "#data":
+                  if(this._item[eve[1]])
+                      this._item[eve[1]]._com.data[eve[2]][eve[3]] = eve[4]
+                  break
             case "#activa":
                 if(this._item[eve[1]])
                     this._item[eve[1]]._com.acti = true
@@ -311,20 +316,25 @@ LIM.SCENE=LIM.SCENE||{};
                 if(this._data.effector[eve[1]])
                     this._data.effector[eve[1]].count=0
                 break
-           case "#whell":
+            case "#whell":
                if(this._item[eve[1]]&&this._item[eve[1]] instanceof _.Command)
                    this._item[eve[1]].topRow(eve[2])
                break
-           case "#select":
+            case "#select":
                if(this._item[eve[1]]&&this._item[eve[1]] instanceof _.Command)
                    this._item[eve[1]].select(eve[2])
                break
-           case "#filter":
+            case "#filter":
                if(eve[1]==="this") this.actiFilter(eve[2],eve[3])
                else if(this._item[eve[1]]&&this._item[eve[1]] instanceof _.Vessel){
                    this._item[eve[1]].actiFilter(eve[2],eve[3])
                }
                break
+            case "#load_bit":
+                this.loadBitmap(eve[1],[eve[2],eve[3],eve[4],eve[5]],eve[6])
+               break
+
+          
         }
     }
 
@@ -386,10 +396,15 @@ LIM.SCENE=LIM.SCENE||{};
         }
         else this.run()
     }
+    _.Scene.prototype.loadBitmap=function (key,item,call){
+        this._bit[key] = ImageManager.loadBitmap(item[0],item[1],item[2],item[3])
+        this._bit[key].addLoadListener(function () {if(call) this.triggerHandler(call)}.bind(this));
+    }
+    
+    
     _.Scene.prototype.checkResourcesLoaded = function () {
         if(this._bitload == 0) this._load = -2;
     }
-
     _.Scene.prototype.isRun=function(bit){
       return LIM.UTILS.atBit(this._run,bit)
     }

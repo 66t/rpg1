@@ -1,0 +1,47 @@
+{
+  "bit":{
+    "null1":["img/bg/","bg_0001",0,true]
+  },
+  "group": {},
+  "vessel": {},
+  "window": {},
+  "command": {},
+  "shape": {
+    "back": {
+      "acti": true,
+      
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":1,
+          "bit":"null1",
+          "cover":1,
+          "adso": 7,
+          "w":"100w","h":"100w",
+          "x":0,"y":0,"rota":0,"alpha":0,
+          "filter":[],
+          "clip":[0,0,800,800,0,0,800,800],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":201,"change":1,
+          "anime2":{
+            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":"15h","val2":"-15h","fre":0}]
+          },
+          "effect2":{
+            "mode":"shades"
+          }
+        }
+      }
+    }
+  },
+  "filter":{},
+  "text": {},
+  "effector":{},
+  "wave":{},
+  "handler":{}
+}

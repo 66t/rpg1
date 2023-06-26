@@ -1,6 +1,6 @@
 var LIM=LIM||{};
 LIM.STORAGE=LIM.STORAGE||{};
-(function(_){
+((_)=>{
     _.Bool=function(){this.initialize.apply(this,arguments)}
     _.Bool.prototype=Object.create(_.Bool.prototype)
     _.Bool.prototype.constructor=_.Bool

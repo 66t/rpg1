@@ -8,7 +8,7 @@
 //===========================
 var LIM=LIM||{};
 LIM.STORAGE=LIM.STORAGE||{};
-(function(_){
+((_)=>{
 
     _.Story=function(){this.initialize.apply(this,arguments)}
     _.Story.prototype=Object.create(_.Story.prototype)
@@ -19,9 +19,15 @@ LIM.STORAGE=LIM.STORAGE||{};
     };
     _.Story.prototype.getScript=function (){
         $dataScript=null
-        for(let key in $dataTree){
-            DataManager.loadDataFile('$dataScript', 'script/' +key.replace(/_/g,"/") + '.json');
-            return
+        try {
+            for(let key in $dataTree){
+                DataManager.loadDataFile('$dataScript', 'script/' +key.replace(/_/g,"/") + '.json');
+                return
+            }
         }
+        catch (e) {
+            
+        }
+     
     }
 })(LIM.STORAGE);

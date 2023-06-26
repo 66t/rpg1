@@ -1,6 +1,6 @@
 ﻿var LIM=LIM||{};
 LIM.SCENE=LIM.SCENE||{};
-(function(_){
+((_)=>{
     _.Vessel=function(){this.initialize.apply(this,arguments)}
     _.Vessel.prototype = Object.create(Sprite.prototype)
     _.Vessel.prototype.constructor = _.Vessel;

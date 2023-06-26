@@ -2,7 +2,7 @@
  */
 var LIM=LIM||{};
 LIM.STORAGE=LIM.STORAGE||{};
-(function(_){
+((_)=>{
     _.SEED_COUNT=256 //种子数量
     _.SEED_LINK="-" //连接符
     _.KEY_MATRIX=36 //KEY矩阵

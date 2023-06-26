@@ -87,7 +87,7 @@
                 "rota":180,
                 "sw":{"wave": 2,"val1":0.79,"val2":1,"fre":0,"frame":100},
                 "sh":{"wave": 2,"val1":0.79,"val2":1,"fre":0,"frame":100},
-                "frame":20,
+                "cycle":20,
                 "image":[{"bit":"ver","x":256,"y":3,"w":25,"h":19,"rota":0},{"bit":"ver","x":256,"y":3,"w":25,"h":19,"rota":0},{"bit":"ver","x":256,"y":29,"w":25,"h":19,"rota":0}]
               },
               "down":{
@@ -96,7 +96,7 @@
                 "rota":0,
                 "sw":{"wave": 2,"val1":0.79,"val2":1,"fre":0,"frame":100},
                 "sh":{"wave": 2,"val1":0.79,"val2":1,"fre":0,"frame":100},
-                "frame":20,
+                "cycle":20,
                 "image":[{"bit":"ver","x":256,"y":3,"w":25,"h":19,"rota":0},{"bit":"ver","x":256,"y":3,"w":25,"h":19,"rota":0},{"bit":"ver","x":256,"y":29,"w":25,"h":19,"rota":0}]
               }
             },
@@ -108,7 +108,7 @@
                 "rota":0,
                 "sw":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
                 "sh":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
-                "frame":30,
+                "cycle":30,
                 "image":[{"bit":"ver","x":287,"y":0,"w":27,"h":28,"rota":0},{"bit":"ver","x":320,"y":0,"w":27,"h":28,"rota":0}]
               },
               "b":{
@@ -118,7 +118,7 @@
                 "rota":90,
                 "sw":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
                 "sh":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
-                "frame":30,
+                "cycle":30,
                 "image":[{"bit":"ver","x":287,"y":0,"w":27,"h":28,"rota":0},{"bit":"ver","x":320,"y":0,"w":27,"h":28,"rota":0}]
               },
               "c":{
@@ -128,7 +128,7 @@
                 "rota":180,
                 "sw":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
                 "sh":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
-                "frame":30,
+                "cycle":30,
                 "image":[{"bit":"ver","x":287,"y":0,"w":27,"h":28,"rota":0},{"bit":"ver","x":320,"y":0,"w":27,"h":28,"rota":0}]
               },
               "d":{
@@ -138,7 +138,7 @@
                 "rota":270,
                 "sw":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
                 "sh":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
-                "frame":30,
+                "cycle":30,
                 "image":[{"bit":"ver","x":287,"y":0,"w":27,"h":28,"rota":0},{"bit":"ver","x":320,"y":0,"w":27,"h":28,"rota":0}]
               }
             }
@@ -760,5 +760,4 @@
     "newgame":["#filter:this:glitch:1","#filter:this:old:1","#filter:this:adj:1"],
     "newgame2":["%newgame"]
   }
-
 }

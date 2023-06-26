@@ -1,6 +1,6 @@
 ﻿var LIM=LIM||{};
 LIM.SCENE=LIM.SCENE||{};
-(function(_){
+((_)=>{
     _.Window=function(){this.initialize.apply(this,arguments)}
     _.Window.prototype = Object.create(_.Vessel.prototype)
     _.Window.prototype.constructor = _.Window;

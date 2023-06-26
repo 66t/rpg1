@@ -10,6 +10,6 @@ window.onload =  function () {
     LIM.$bool = new LIM.STORAGE.Bool()
     LIM.$story =new LIM.STORAGE.Story()
     LIM.$number = new LIM.STORAGE.Number()
-    SceneManager.run(LIM.SCENE.Scene, "title")
+    SceneManager.run(LIM.SCENE.Scene, "test")
 
 };

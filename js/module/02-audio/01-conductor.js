@@ -1,5 +1,5 @@
-function Conductor() {}
 
+var Conductor={}
 
 Conductor._path='audio';
 Conductor._VolVolume=1;
