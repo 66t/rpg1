@@ -47,7 +47,8 @@
     "s_a5":"v_1",
     "s_a6":"v_1",
     "s_b1":"v_1",
-    "s_back":"v_story"
+    "s_back":"v_story",
+    "t_text":"v_story"
     
   },
   "vessel": {
@@ -152,7 +153,13 @@
           "adso": 5,
           "w":"100w","h":"100w",
           "x":0,"y":"-10h","rota":0,"alpha":0,
-          "filter":[],
+          "filter":[{"type":"crt","data": {
+            "noise":0.2,
+            "noiseSize":2.5,
+            "#lineWidth":2,
+            "verticalLine":true,
+            "vignetting":0.4
+          }}],
           "clip":[0,0,800,800,0,0,800,800],
           "tone":[0,0,0,0],"blend":[0,0,0,0]
         }
@@ -161,8 +168,23 @@
         "0_1": {
           "frame":200,"change":1,
           "anime2":{
-            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}],
+            "alpha":[{"count":"+","wave": 2,"val1":1,"val2":1,"fre":0}],
             "y":[{"count":"+","wave": 2,"val1":"15h","val2":"-15h","fre":0}]
+          },
+          "filter2":[{
+            "id":0,"type":"crt",
+            "data":{
+              "noise":{"wave": 2,"val1":1,"val2":0.2,"fre":0},
+              "noiseSize":{"wave": 2,"val1":5,"val2":2.5,"fre":0},
+              "#lineWidth":{"wave": 2,"val1":5,"val2":2,"fre":0},
+              "verticalLine":true,
+              "vignetting":{"wave": 2,"val1":1,"val2":0.4,"fre":0}
+            }
+          }],
+          "effect2":{
+            "mode":"shades",
+            "block":2,
+            "x":14,"y":14
           }
         }
       }
@@ -1170,6 +1192,15 @@
       }
     }
   },
+  "tube":{
+    "text":{
+      "acti": true,
+      "index":50,
+      "w":"30w",
+      "h":"30h",
+      "x":"-35w","y":"-35h","rota":0,"alpha":1
+    }
+  },
   "filter":{
     "adj":{
       "type":"adj",
@@ -1216,6 +1247,7 @@
   },
   "wave":{},
   "handler":{
+    "show_text":[],
     "back_start":["#hide:w_1","#filter:v_1:radial:1","#data:s_back:1:bit:back","#mode:s_back:1"],
     "back_load":["#load_bit:back:%[1]:%[2]:%[3]:%[4]:back_start"]
   }

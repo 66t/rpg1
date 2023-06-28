@@ -29,14 +29,20 @@ LIM.SCENE=LIM.SCENE||{};
         }
     }
     _.Shape.prototype.refresh = function () {
+       
         if(this._action.length) this.executeAction()
         else if(this._com.next!==this._com.mode) this.shiftMode()
         else if(this._com.loop) this.loopMode()
-        
+
         if(this.isRun(0)) this.draw()
         if(this.isRun(1)) this.render(this._data)
         if(this.isRun(2)) this.shape(this._data)
         if(this.isRun(3)) this.filter(this._data)
+        
+        if(this.filters)
+            for(let item of this.filters)
+                item.seed = Math.random()
+        
         this._time++
     }
     _.Shape.prototype.executeAction=function() {
@@ -70,7 +76,31 @@ LIM.SCENE=LIM.SCENE||{};
         item.time++
     }
     _.Shape.prototype.executeEffect = function (effect,time) {
-        console.log(time)
+        if(!this.backups) return
+        let w = this.backups.width;
+        let h = this.backups.height;
+        let r = time[1] / time[0];
+        this.bitmap.clear();
+        let data=[]
+        switch (effect.mode){
+            case "shades":
+                data[0]=effect.block||4
+                data[1]=effect.x||4
+                data[2]=effect.y||4
+                data[3]=w/data[1]
+                data[4]=h/data[2]
+                for (let x = 0; x < data[1]; x++) {
+                    for (let y = 0; y < data[2]; y++) {
+                          if(r>=Math.random()*Math.random()){
+                              let startX = data[3] * x
+                              let startY = data[4] * y
+                              this.bitmap.blt(this.backups, startX, startY,  data[3],  data[4], startX, startY);
+                      }
+                  }
+                }
+             
+                break
+        }
     };
     _.Shape.prototype.executeAnime = function (anime, time) {
         if(!this._data)return
@@ -108,10 +138,15 @@ LIM.SCENE=LIM.SCENE||{};
            }
            for(let key in data[i].data){
                let r = LIM.UTILS.waveNum(data[i].data[key].wave, time[0]/(1+data[i].data[key].fre*2),time[1])
-               let val=LIM.UTILS.lengthNum(data[i].data[key].val1)+
-                   (LIM.UTILS.lengthNum(data[i].data[key].val2)-LIM.UTILS.lengthNum(data[i].data[key].val1))*r
-               if(key[0]=="#") filter.uniforms[key.slice(1)] = val
-               else  filter[key] = val
+               
+               let val=0
+               if (typeof data[i].data[key] === "object") {
+                  val= LIM.UTILS.lengthNum(data[i].data[key].val1) +
+                   (LIM.UTILS.lengthNum(data[i].data[key].val2) - LIM.UTILS.lengthNum(data[i].data[key].val1)) * r
+               }
+               else val= data[i].data[key]
+               filter.uniforms[key] = val
+               filter[key] = val
            }
        }
        else if(this.filterType.length){
@@ -122,9 +157,10 @@ LIM.SCENE=LIM.SCENE||{};
     
     
     _.Shape.prototype.shiftMode=function(){
+        this.backups=null
         let index1=this._index
         let index2=this._com.data[this._com.next]
-        if(index1!=index2&&!this._origin.isRun(1)) this._origin.setRun(1,true)
+        if(index1!==index2&&!this._origin.isRun(1)) this._origin.setRun(1,true)
         let mode=this._com.mode
         this._com.mode=this._com.next
         this.pushAction(mode,this._com.next)
@@ -228,13 +264,16 @@ LIM.SCENE=LIM.SCENE||{};
         this.filters=[]
         this.filterType=[]
         if(item.filter&&item.filter.length)
+            
         for(let i=0;i<item.filter.length;i++) {
             let filter = LIM.Filter(item.filter[i].type)
             this.filterType[i]=item.filter[i].type
             this.setFilter(i,filter)
-            for (let key in item.filter[i].data)
-                if(key[0]=="#") filter.uniforms[key.slice(1)] = item.filter[i].data[key.slice(1)]
-                else  filter[key] = item.filter[i].data[key]
+            for (let key in item.filter[i].data){
+                filter.uniforms[key] = item.filter[i].data[key]
+                filter[key] = item.filter[i].data[key]
+            }
+            
         }
     }
     

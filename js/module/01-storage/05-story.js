@@ -25,9 +25,7 @@ LIM.STORAGE=LIM.STORAGE||{};
                 return
             }
         }
-        catch (e) {
-            
-        }
+        catch (e) {}
      
     }
 })(LIM.STORAGE);

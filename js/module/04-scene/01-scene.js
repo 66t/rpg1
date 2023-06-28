@@ -66,6 +66,7 @@ LIM.SCENE=LIM.SCENE||{};
         this.createWindow();
         this.createCommand();
         this.createShape();
+        this.createTube();
         this.createWave();
         this.createConsole();
     }
@@ -186,6 +187,18 @@ LIM.SCENE=LIM.SCENE||{};
             }
         }
     }
+    _.Scene.prototype.createTube = function () {
+        if(this._data.tube) {
+            for(let key in this._data.tube) {
+                let item = this._data.tube[key]
+                let name = 't_' + key
+                this._item[name] = new LIM.SCENE.Tube(this, name, item)
+            }
+        }
+    }
+
+    
+    
     _.Scene.prototype.createWave = function () {
         if(this._data.wave) {
             for(let key in this._data.wave) {
@@ -235,6 +248,12 @@ LIM.SCENE=LIM.SCENE||{};
         for(let key in this._item)
             arr.push({key:key,index:this._item[key]._index||0})
         arr.sort(LIM.UTILS.sortBy("index",false))
+        
+        for(let item in this._data.group){
+            if(this._item[this._data.group[item]])
+                this._item[this._data.group[item]].children=[]
+        }
+        
         for(let item of arr)
             if(this._item[item.key]) {
                 if(this._data.group[item.key]&&this._item[this._data.group[item.key]]){

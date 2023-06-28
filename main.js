@@ -11,5 +11,4 @@ window.onload =  function () {
     LIM.$story =new LIM.STORAGE.Story()
     LIM.$number = new LIM.STORAGE.Number()
     SceneManager.run(LIM.SCENE.Scene, "test")
-
 };

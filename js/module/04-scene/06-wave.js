@@ -46,7 +46,6 @@ LIM.SCENE=LIM.SCENE||{};
     }
     
     
-    
     _.Wave.prototype.refresh = function () {
         const wave = [];
         const step = this._time * this._com.render.step;

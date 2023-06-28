@@ -383,7 +383,7 @@
           "comE":"start"
         },
         "0_1": {
-          "frame":50,"change":50,
+          "frame":50,"change":10,
           "anime1":{
             "alpha":[{"count":"+","wave": 2,"val1":1,"val2":0,"fre":0}],
             "w":[{"count":"+","wave": 2,"val1":600,"val2":200,"fre":0}],

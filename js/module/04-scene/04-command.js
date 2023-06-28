@@ -86,7 +86,7 @@ LIM.SCENE=LIM.SCENE||{};
         const arrowKeys = Object.keys(option.arrow);
         if (option.arrow) {
             for (let key of arrowKeys) {
-                this.newArrow(option, key);
+                this.createArrow(option, key);
                 let item = option.arrow[key];
                 let index = parseInt(this._time / item.cycle);
                 let data = item.image[index % item.image.length];
@@ -113,7 +113,7 @@ LIM.SCENE=LIM.SCENE||{};
         if(this._arrow['down'])
             this._arrow['down'].alpha=option.top<this.topMax(option)?1:0
     }
-    _.Command.prototype.newArrow=function (option,key){
+    _.Command.prototype.createArrow=function (option,key){
         if(!this._arrow[key]&&option.arrow[key]){
             this._arrow[key]= new Sprite()
             this._arrow[key].type = 3
@@ -122,7 +122,6 @@ LIM.SCENE=LIM.SCENE||{};
             this.updataArrow(option)
         }
     }
-    
     _.Command.prototype.drawCursor = function() {
         let option = this._data.option;
         const cursorKeys = Object.keys(option.cursor);
@@ -168,7 +167,6 @@ LIM.SCENE=LIM.SCENE||{};
             }
         }
     };
- 
     _.Command.prototype.createCursor=function (option,key){
         if(!this._cursor[key]&&option.cursor[key]){
             this._cursor[key]= new Sprite()
@@ -177,7 +175,6 @@ LIM.SCENE=LIM.SCENE||{};
             this.addChild( this._cursor[key])
         }
     }
-
     _.Command.prototype.dataArrow = function(item, data){
         let rotation, x, y, scaleX, scaleY
         if (typeof item.rota !== 'object') {rotation = (data.rota + item.rota) / 180 * Math.PI;}
@@ -249,6 +246,7 @@ LIM.SCENE=LIM.SCENE||{};
         return { rotation, x, y, scaleX, scaleY };
     }
     
+    
     _.Command.prototype.drawOption = function(option) {
         if(this.isRun(3)) this.setRun(3,false)
         this.cleanDraw(2)
@@ -319,8 +317,6 @@ LIM.SCENE=LIM.SCENE||{};
             }
         }
     }
-    
-    
     _.Command.prototype.getOptionState=function (option,key){
         let x=0b000
         if(option.active === key) x|=0b100
@@ -405,8 +401,6 @@ LIM.SCENE=LIM.SCENE||{};
                 break
         }
     };
- 
-
     _.Command.prototype.drawContent = function(sp,item,data){
         let content=this._origin.getText(item.text.id)
         if(content) {
@@ -434,8 +428,6 @@ LIM.SCENE=LIM.SCENE||{};
             }).map(([key]) => key);
         return  arr
     }
-       
-    
     _.Command.prototype.isTouch=function () {
         return TouchInput.x>this.getX()&&
             TouchInput.x<this.getX()+this.width&&
