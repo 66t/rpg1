@@ -9,13 +9,73 @@
   "shape": {},
   "filter":{},
   "text": {},
-  "tube":{
-    "text":{
+  "frac":{
+
+    "a":{
       "acti": true,
       "index":50,
       "w":"30w",
       "h":"30h",
-      "x":"-35w","y":"-35h","rota":0,"alpha":1
+      "x":"0","y":"0",
+      "rota":0,"alpha":1,
+
+      "mode":0,
+      "depth":8,"line":3
+    },
+    "b":{
+      "acti": true,
+      "index":50,
+      "w":"30w",
+      "h":"30h",
+      "x":"33w","y":"0",
+      "rota":0,"alpha":1,
+
+      "mode":1,
+      "depth":8,"line":7
+    },
+    "c":{
+      "acti": true,
+      "index":50,
+      "w":"30w",
+      "h":"30h",
+      "x":"-33w","y":"0",
+      "rota":0,"alpha":1,
+
+      "mode":2,
+      "depth":8,"line":2
+    },
+    "d":{
+      "acti": true,
+      "index":50,
+      "w":"30w",
+      "h":"30h",
+      "x":"-33w","y":"-33h",
+      "rota":0,"alpha":1,
+
+      "mode":3,
+      "depth":8,"line":1
+    },
+    "e":{
+      "acti": true,
+      "index":50,
+      "w":"30w",
+      "h":"30h",
+      "x":0,"y":"-33h",
+      "rota":0,"alpha":1,
+
+      "mode":4,
+      "depth":8,"line":0.5
+    },
+    "f":{
+      "acti": true,
+      "index":50,
+      "w":"30w",
+      "h":"30h",
+      "x":"33w","y":"-33h",
+      "rota":0,"alpha":1,
+
+      "mode":5,
+      "depth":8,"line":3
     }
   },
   "effector":{},

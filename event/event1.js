@@ -12,7 +12,7 @@ LIM.EVENT=LIM.EVENT||{};
         SceneManager.goto(LIM.SCENE.Scene, "theater")
         LIM.$story.time=0
     }
-    _.ready=()=>{return DataManager.isDatabaseLoaded()&&Graphics.isFontLoaded('GameFont')&&Graphics.isFontLoaded('Font1')}
+    _.ready=()=>{return DataManager.isDatabaseLoaded()&&Graphics.isFontLoaded('GameFont')&&Graphics.isFontLoaded('text')}
     _.reload=()=>{if (Utils.isNwjs()) {location.reload();}}
     _.test=()=>{if (Utils.isNwjs() && Utils.isOptionValid('test')) {require('nw.gui').Window.get().showDevTools();}
         

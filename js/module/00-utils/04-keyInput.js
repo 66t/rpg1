@@ -93,5 +93,3 @@ LIM.INPUT.keyEvent=function (key,eve){
         LIM.EVENT[LIM.INPUT.keyMapper[key+":"+eve]]()
 }
 
-
-

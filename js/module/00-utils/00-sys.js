@@ -39,10 +39,10 @@ DataManager._databaseFiles = [
 ];
 Graphics._createGameFontLoader = function() {
     this._createFontLoader('GameFont');
-    this._createFontLoader('Font1');
+    this._createFontLoader('text');
 };
 Scene_Boot.prototype.isGameFontLoaded = function() {
-    if (Graphics.isFontLoaded('GameFont')&&Graphics.isFontLoaded('Font1')) {
+    if (Graphics.isFontLoaded('GameFont')&&Graphics.isFontLoaded('text')) {
         return true;
     } else if (!Graphics.canUseCssFontLoading()){
         var elapsed = Date.now() - this._startDate;
@@ -50,4 +50,11 @@ Scene_Boot.prototype.isGameFontLoaded = function() {
             throw new Error('Failed to load GameFont');
         }
     }
+};
+
+
+
+document.onkeydown = function(event) {
+    var e = event || window.event || arguments.callee.caller.arguments[0];
+    if(e&& e.keyCode==116) location.reload();
 };

@@ -196,9 +196,6 @@ LIM.SCENE=LIM.SCENE||{};
             }
         }
     }
-
-    
-    
     _.Scene.prototype.createWave = function () {
         if(this._data.wave) {
             for(let key in this._data.wave) {
