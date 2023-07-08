@@ -32,6 +32,7 @@ LIM.SCENE=LIM.SCENE||{};
         this.drawCursor()
         this.processWheel()
         this.processTouch()
+        this.processKey()
     }
     _.Command.prototype.shiftMode=function(){
         this._arrow={}
@@ -80,7 +81,28 @@ LIM.SCENE=LIM.SCENE||{};
                     this._origin.triggerHandler(this._symbol["cancel"],[-1])
         }
     }
-
+    _.Command.prototype.processKey = function() {
+        if(this.hasActions()===0&&this.isOpe(2)&&!this.hasActiva()){
+            for(let key in this._com.key){
+                if(LIM.INPUT.X(key))
+                  this._origin.triggerHandler(this._com.key[key].handler,this.KeyData(this._com.key[key].data))
+                
+            }
+        }
+    }
+    _.Command.prototype.KeyData = function(data) {
+         let newdata=[]
+         for(let i=0;i<data.length;i++)
+             if(data[i]&&isNaN(data[i])) {
+                 if (data[i][0] === "$") {
+                     let s = data[i].substring(1, data[i].length)
+                     newdata.push(eval(s))
+                 }
+                 else newdata.push(data[i])
+             }
+             else newdata.push(data[i])
+         return newdata
+    }
     _.Command.prototype.drawArrow = function() {
         let option = this._data.option;
         const arrowKeys = Object.keys(option.arrow);
@@ -155,15 +177,14 @@ LIM.SCENE=LIM.SCENE||{};
                 else if (data.item / 3 > 1) sy = rect.y1 + (rect.y2 - rect.y1) / 2;
                 else sy = rect.y2;
 
-                let rotation, x, y, scaleX, scaleY=this.dataCursor(item,data,sx,sy)
+                let sd=this.dataCursor(item,data,sx,sy)
 
-          
-
-                this._cursor[key].rotation = rotation;
-                this._cursor[key].x = x;
-                this._cursor[key].y = y;
-                this._cursor[key].scale.x = scaleX;
-                this._cursor[key].scale.y = scaleY;
+                
+                this._cursor[key].rotation = sd.rotation;
+                this._cursor[key].x = sd.x;
+                this._cursor[key].y = sd.y;
+                this._cursor[key].scale.x = sd.scaleX;
+                this._cursor[key].scale.y = sd.scaleY;
             }
         }
     };
@@ -175,6 +196,7 @@ LIM.SCENE=LIM.SCENE||{};
             this.addChild( this._cursor[key])
         }
     }
+    
     _.Command.prototype.dataArrow = function(item, data){
         let rotation, x, y, scaleX, scaleY
         if (typeof item.rota !== 'object') {rotation = (data.rota + item.rota) / 180 * Math.PI;}

@@ -136,7 +136,6 @@ LIM.UTILS=LIM.UTILS||{};
      * @param str {desc} 降序 默认为升序
      */
     _.sortBy=function(property,desc){
-        
         return function (v1,v2) {return (v2[property]>v1[property]?1:-1)*(desc?1:-1)}
     }
 })(LIM.UTILS);

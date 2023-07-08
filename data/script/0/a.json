@@ -1,3 +1,25 @@
 {
-  "back":["img/bg/","bg_0001",0,true]
+  "back":["img/bg/","bg_0001",0,true],
+  "time":"1_2",
+  "location":"1_1",
+  "sound":[
+    [{"id":"bgm_star","traje":1,"config":{"attack":2}}],
+    [],
+    [{"id":"cyber1","traje":10,"config":{"attack":1,"release":1}}],
+    []
+  ],
+  "performer":["miku"],
+  "com":[
+    {"id":100,"data":[2,0,"miku"]},
+    {"id":101,"data":[2]},
+    {"id":75,"data":[2,"-1_0","se","se_0"]},
+    {"id":75,"data":[2,"-1_0","comE","next"]},
+    {"id":1},
+    {"id":2}
+    
+  ],
+  "text":{
+    "time":"1_2",
+    "location":"1_1"
+  }
 }

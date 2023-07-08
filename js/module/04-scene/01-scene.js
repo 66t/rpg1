@@ -14,6 +14,7 @@ LIM.SCENE=LIM.SCENE||{};
         this._bit = {}
         this._word = {}
         this._filter={}
+        this._sound=new Set()
         $dataScene=null
         DataManager.loadDataFile('$dataScene', 'scene/' + name + '.json');
         Scene_Base.prototype.initialize.call(this);
@@ -68,6 +69,7 @@ LIM.SCENE=LIM.SCENE||{};
         this.createShape();
         this.createTube();
         this.createWave();
+        this.createFractal();
         this.createConsole();
     }
     _.Scene.prototype.createFilter = function () {
@@ -118,7 +120,7 @@ LIM.SCENE=LIM.SCENE||{};
         let destroy=false
         for(let key in this._filter){
             let filter = this._filter[key]
-            bool=bool||filter.data.cease
+            bool=bool||filter.data.cease  //滤镜出现时不更新场景
             let time=this._time-filter.time
             let data=LIM.UTILS.countWave(filter.data.wave,[100,time],filter.obj.uniforms)
             for(let uniforms in data){
@@ -196,15 +198,26 @@ LIM.SCENE=LIM.SCENE||{};
             }
         }
     }
+
+    _.Scene.prototype.createFractal = function () {
+        if(this._data.frac) {
+            for(let key in this._data.frac) {
+                let item = this._data.frac[key]
+                let name = 't_' + key
+                this._item[name] = new LIM.SCENE.Fractal(this, name, item)
+            }
+        }
+    }
     _.Scene.prototype.createWave = function () {
         if(this._data.wave) {
             for(let key in this._data.wave) {
                 let item = this._data.wave[key]
-                let name = 'w_' + key
+                let name = 'a_' + key
                 this._item[name] = new LIM.SCENE.Wave(this, name, item)
             }
         }
     }
+    
     _.Scene.prototype.createConsole = function (){
         if(this._item["v_story"]) 
             this._story = new LIM.STORY.Console(this._item["v_story"])
@@ -223,7 +236,7 @@ LIM.SCENE=LIM.SCENE||{};
             let arr=[]
             for(let item of text.arr) arr.push(item)
             for (let i = 0; i < arr.length; i++)
-                if (arr[i][0] == "@"){
+                if (arr[i][0] === "@"){
                     let cont = this.getContent(this._word[arr[i].splice(0, 1)])
                     arr[i]=cont[0]
                 }
@@ -266,6 +279,24 @@ LIM.SCENE=LIM.SCENE||{};
                 else this.addChild(this._item[item.key])
             }
     }
+
+    _.Scene.prototype.playSound=function (id){
+       
+        if(this._data.sound&&this._data.sound[id]) {
+            let sound=this._data.sound[id]
+            Conductor.start(sound.id,sound.traje,sound.effect,sound.config)
+            if(sound.traje)  this._sound.add(sound.traje)
+        }
+    }
+    _.Scene.prototype.offSound=function (id){
+        if(this._data.sound&&this._data.sound[id]) {
+            this.stopSound(this._data.sound[id].traje)
+        }
+    }
+    _.Scene.prototype.stopSound=function (traje){
+        if(traje) Conductor.stop(traje) 
+        else for(let item of this._sound) Conductor.stop(item)
+    }
     
     //触发器
     _.Scene.prototype.effector=function(){
@@ -295,22 +326,96 @@ LIM.SCENE=LIM.SCENE||{};
                 if(LIM.EVENT[fun]) LIM.EVENT[fun]()
             }
             else if (token[0] == "#") this.exFun(token.split(":"))
-            else  this.triggerHandler(token)
+            else {
+                this.triggerHandler(token)
+            }
         }
     }
-    _.Scene.prototype.exFun=function(eve){
+    _.Scene.prototype.exFun=async function(eve){
           switch (eve[0]) {
+            case "#sound":
+                this.playSound(eve[1]);break
+            case "#stopSound":this.stopSound(eve[1]);break
+            case "#text":
+                if(this._data.text[eve[1]]) 
+                    this._data.text[eve[1]].content=eval(eve[2])
+                  break  
+            case "#size":
+                  if(this._item[eve[1]]){
+                      let com=this._item[eve[1]]._com.data[eve[2]]
+                      let bitmap=new Bitmap()
+                      let w=0
+                      let h=0
+                      for(let i=0;i<this._item[eve[1]]._com.data[eve[2]].text.length;i++){
+                          let item =this._item[eve[1]]._com.data[eve[2]].text[i]
+                          let font=this._item[eve[1]]._com.data[eve[2]].text[i].id
+                          let row =this._data.text[font].layout
+                          if(font) {
+                              let d=this._data.text[font]
+                              let word =this._data.text[font].content
+                              bitmap.fontSize = d.fontSize;
+                              bitmap.fontFace = 'GameFont';
+                              bitmap.outlineWidth = d.outlineWidth;
+                              bitmap.fontItalic =d.fontItalic;
+                              w = Math.max(w, bitmap.measureTextWidth(row?'因'.repeat(row):this._word[word].text) + item.x)
+                              h = Math.max(h, (row?parseInt(this._word[word].text.length/row+0.5):1)*d.fontSize + item.y)
+                          }
+                      }
+                      if(com.size) {
+                          w+=(com.padding[0]-(com.image.x2-com.image.x1))
+                          h+=(com.padding[1]-(com.image.y2-com.image.y1))
+                          com.size = [Math.round(w / (com.image.x3 - com.image.x2) + 0.5), Math.round(h / (com.image.y3 - com.image.y2) + 0.5)]
+                          com.w= (com.size[0]*(com.image.x3 - com.image.x2))+(com.image.x4-com.image.x3)+(com.image.x2-com.image.x1)
+                          com.h= (com.size[1]*(com.image.y3 - com.image.y2))+(com.image.y4-com.image.y3)+(com.image.y2-com.image.y1)
+                      }
+                      else {com.w=w;com.h=h}
+                  }
+                  break
+            case "#mask":
+                  if(this._item[eve[1]]&&this._item[eve[1]]._com.action[eve[2]]&&this._item[eve[1]]._com.data[eve[4]]){
+                      let action=this._item[eve[1]]._com.action[eve[2]]
+                      let item =this._item[eve[1]]._com.data[eve[4]]
+                      switch (eve[3]%9){
+                          case 8:
+                              action.mask[parseInt(eve[3]/9)].h[1]=item[eve[5]]
+                              break
+                          case 6:
+                              action.mask[parseInt(eve[3]/9)].w[1]=item[eve[5]]
+                              break
+                      }
+                  }
+                  break  
             case "#mode":
-                if(this._item[eve[1]])
+                if(this._item[eve[1]]) {
                     this._item[eve[1]]._com.next = eve[2]
+                }
                 break
+              
             case "#data":
                   if(this._item[eve[1]])
                       this._item[eve[1]]._com.data[eve[2]][eve[3]] = eve[4]
                   break
+              
+            case "#open":
+                if(this._item[eve[1]])
+                    this._item[eve[1]].setOpe(parseInt(eve[2]),!eve[3])
+                break
+            case "#run":
+                  if(this._item[eve[1]])
+                      this._item[eve[1]].setRun(parseInt(eve[2]),!eve[3])
+                  break
+              
             case "#activa":
                 if(this._item[eve[1]])
                     this._item[eve[1]]._com.acti = true
+                break
+            case "#setBit":
+                if(this._item[eve[1]]&&this._item[eve[1]]._com.data[eve[2]])
+                   this._item[eve[1]]._com.data[eve[2]].bit=eve[3]
+                break
+            case "#setActAttr":
+                if(this._item[eve[1]]&&this._item[eve[1]]._com.action[eve[2]])
+                    this._item[eve[1]]._com.action[eve[2]][eve[3]]=eve[4]
                 break
             case "#sleep":
                  if(this._item[eve[1]])
@@ -324,6 +429,7 @@ LIM.SCENE=LIM.SCENE||{};
                 if(this._item[eve[1]])
                     this._item[eve[1]].alpha = 1
                 break
+              
             case "#on_effector":
                 if(this._data.effector[eve[1]])
                     this._data.effector[eve[1]].count++
@@ -335,31 +441,36 @@ LIM.SCENE=LIM.SCENE||{};
             case "#whell":
                if(this._item[eve[1]]&&this._item[eve[1]] instanceof _.Command)
                    this._item[eve[1]].topRow(eve[2])
-               break
+                break
             case "#select":
                if(this._item[eve[1]]&&this._item[eve[1]] instanceof _.Command)
                    this._item[eve[1]].select(eve[2])
-               break
+                break
             case "#filter":
                if(eve[1]==="this") this.actiFilter(eve[2],eve[3])
                else if(this._item[eve[1]]&&this._item[eve[1]] instanceof _.Vessel){
                    this._item[eve[1]].actiFilter(eve[2],eve[3])
                }
-               break
+                break
             case "#load_bit":
                 this.loadBitmap(eve[1],[eve[2],eve[3],eve[4],eve[5]],eve[6])
-               break
-
-          
-        }
+                break
+            case "#console_load":
+                this._story.setLoad(parseInt(eve[1]))
+                break
+            case "#console_next":
+                this._story.next()
+                break    
+                
+          }
     }
-
     _.Scene.prototype.checkDataLoaded = function () {
         if ($dataScene){
             this._data = $dataScene;
             this._load = -4;
         }
     }
+    
     _.Scene.prototype.readyLoadFont = function () {
         this._load = -1;
         this._loadFont = {};
@@ -397,7 +508,11 @@ LIM.SCENE=LIM.SCENE||{};
             delete this._loadFont
             this.run();}
     }
-
+    _.Scene.prototype.setFont = function (data) {
+        for(let key in data)
+          this._word[key] = data[key];
+    }
+    
     _.Scene.prototype.loadResources = function () {
         if(this._data.bit) {
             this._bitload=0
@@ -416,7 +531,13 @@ LIM.SCENE=LIM.SCENE||{};
         this._bit[key] = ImageManager.loadBitmap(item[0],item[1],item[2],item[3])
         this._bit[key].addLoadListener(function () {if(call) this.triggerHandler(call)}.bind(this));
     }
-    
+    _.Scene.prototype.loadSound=function (bgm,bgs,se,voice){
+        for(let i=0;i<bgm.length;i++) this._data.sound["bgm_"+i]=bgm[i]
+        for(let i=0;i<bgs.length;i++) this._data.sound["bgs_"+i]=bgs[i]
+        for(let i=0;i<se.length;i++) this._data.sound["se_"+i]=se[i]
+        for(let i=0;i<voice.length;i++) this._data.sound["voice_"+i]=voice[i]
+    }
+
     
     _.Scene.prototype.checkResourcesLoaded = function () {
         if(this._bitload == 0) this._load = -2;

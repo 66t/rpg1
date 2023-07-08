@@ -314,9 +314,7 @@ LIM.UTILS=LIM.UTILS||{};
     _.fractionExp=function (num) {
         return _.fractionOth(num,Math.pow(10,num.toString().length))
     }
-
-
-
+    
     /**获得百分比*/
     _.lengthNum=function(num){
         try {

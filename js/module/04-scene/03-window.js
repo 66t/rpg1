@@ -23,13 +23,10 @@ LIM.SCENE=LIM.SCENE||{};
     _.Window.prototype.location=function(){
         _.Vessel.prototype.location.call(this);
     }
-    _.Window.prototype.setAnime =function (type,data){
-        if(this._anime[type]) this._anime[type].push(data)
-        else  this._anime[type]=[data]
-    }
+ 
+    
     _.Window.prototype.drawBack = function() {
         if(this.isRun(1)) this.setRun(1,false)
-        
         if(this._data.image && this._data.size) {
             let bit = this._origin.getBit(this._data.image.bit)
             let imageData = this._data.image
@@ -49,9 +46,9 @@ LIM.SCENE=LIM.SCENE||{};
         else{
             this.bitmap = new Bitmap(this._data.w, this._data.h)
             if(this._data.darw) this.drawBrush(this.bitmap,this._data.darw)
-            
         }
     }
+    
     _.Window.prototype.drawText = function() {
         if(this.isRun(2)) this.setRun(2,false)
         this.cleanDraw(1)
@@ -61,6 +58,7 @@ LIM.SCENE=LIM.SCENE||{};
             for(let item of this._data.text) {
                     let content=this._origin.getText(item.id)
                     if(content) {
+                        if(item.arrange) content[0]=content[0].substring(item.arrange[0],item.arrange[1])
                         let sp = new Sprite(this.getTextBit(content[0],content[1],1))
                         sp.x = LIM.UTILS.lengthNum(item.x) + padding0
                         sp.y =  LIM.UTILS.lengthNum(item.y) + padding1
@@ -85,13 +83,23 @@ LIM.SCENE=LIM.SCENE||{};
              bitmap.textColor=item.textColor[0]
              bitmap.outlineColor = item.outlineColor[0];   
          }
-         let width=bitmap.measureTextWidth(content)
-         bitmap._createCanvas(width,item.fontSize)
-         bitmap.drawText(content, 0, 0, width,item.fontSize,'center')
+         let w= bitmap.measureTextWidth(item.layout?'因'.repeat(item.layout):content)
+         let h = (item.layout?parseInt(content.length/item.layout+0.5):1)*item.fontSize
+         bitmap._createCanvas(w,h)
+        if(item.layout){
+            for(let i=0;i*item.layout<content.length;i++)
+                bitmap.drawText(content.substring(i,i+item.layout), 0, i*item.fontSize, w, item.fontSize, 'center')
+        }
+        else bitmap.drawText(content, 0, 0, w,h,'center')
          return  bitmap;
     }
-    
+
+    _.Window.prototype.setAnime =function (type,data){
+        if(this._anime[type]) this._anime[type].push(data)
+        else  this._anime[type]=[data]
+    }
     _.Window.prototype.updateAnime=function (){
+        if(this._time%2>0)return
         for(let key in this._anime){
            for(let index in this._anime[key]){
                let bitmap=this._anime[key][index][0]
@@ -102,12 +110,20 @@ LIM.SCENE=LIM.SCENE||{};
                    bitmap.clear()
                    bitmap.textColor = item.textColor[t % item.textColor.length]
                    bitmap.outlineColor = item.outlineColor[t % item.outlineColor.length];
-                   let width = bitmap.measureTextWidth(content)
-                   bitmap.drawText(content, 0, 0, width, item.fontSize, 'center')
+                   let w= bitmap.measureTextWidth(item.layout?'因'.repeat(item.layout):content)
+                   let h = (item.layout?parseInt(content.length/item.layout+0.5):1)*item.fontSize
+                   if(item.layout){
+                       for(let i=0;i*item.layout<content.length;i++)
+                           bitmap.drawText(content.substring(i,i+item.layout), 0, i*item.fontSize, w, item.fontSize, 'center')
+                       
+                   }
+                   else 
+                   bitmap.drawText(content, 0, 0, w, h, 'center')
                }
            }
         }
     }
+    
     _.Window.prototype.drawBrush=function (bitmap,com){
         if(com)
           for(let item of com){

@@ -1,82 +1,135 @@
 {
   "bit":{
-    "null1":["img/bg/","bg_0001",0,true]
+    "t":["img/scene_title/","t",0,true]
   },
   "group": {},
   "vessel": {},
-  "window": {},
+  "window": {
+  },
   "command": {},
-  "shape": {},
-  "filter":{},
-  "text": {},
-  "frac":{
-
-    "a":{
+  "shape": {
+    "back1": {
       "acti": true,
-      "index":50,
-      "w":"30w",
-      "h":"30h",
-      "x":"0","y":"0",
-      "rota":0,"alpha":1,
-
-      "mode":0,
-      "depth":8,"line":3
+      "run":0,
+      "loop": false,
+      "data": [
+        {
+          "index":1,
+          "bit":"t",
+          "cover":1,
+          "adso": 7,
+          "w":"50h","h":"50h",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,873,873,0,0,873,873],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "-1_0": {
+          "frame":200,"change":1,
+          "anime2":{
+            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}]
+          },
+          "effect2":{
+            "mode":"crt",
+            "s":2,"v":false
+          }
+        }
+      }
     },
-    "b":{
+    "back2": {
       "acti": true,
-      "index":50,
-      "w":"30w",
-      "h":"30h",
-      "x":"33w","y":"0",
-      "rota":0,"alpha":1,
-
-      "mode":1,
-      "depth":8,"line":7
+      "run":0,
+      "loop": false,
+      "data": [
+        {
+          "index":1,
+          "bit":"t",
+          "cover":1,
+          "adso": 7,
+          "w":"50h","h":"50h",
+          "x":"50h","y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,873,873,0,0,873,873],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "-1_0": {
+          "frame":200,"change":1,
+          "anime2":{
+            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}]
+          },
+          "effect2":{
+            "mode":"line",
+            "s":2,"v":false
+          }
+        }
+      }
     },
-    "c":{
+    "back3": {
       "acti": true,
-      "index":50,
-      "w":"30w",
-      "h":"30h",
-      "x":"-33w","y":"0",
-      "rota":0,"alpha":1,
-
-      "mode":2,
-      "depth":8,"line":2
+      "run":0,
+      "loop": false,
+      "data": [
+        {
+          "index":1,
+          "bit":"t",
+          "cover":1,
+          "adso": 7,
+          "w":"50h","h":"50h",
+          "x":0,"y":"50h","rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,873,873,0,0,873,873],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "-1_0": {
+          "frame":200,"change":1,
+          "anime2":{
+            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}]
+          },
+          "effect2":{
+            "mode":"shades",
+            "s":2,"v":false
+          }
+        }
+      }
     },
-    "d":{
+    "back4": {
       "acti": true,
-      "index":50,
-      "w":"30w",
-      "h":"30h",
-      "x":"-33w","y":"-33h",
-      "rota":0,"alpha":1,
-
-      "mode":3,
-      "depth":8,"line":1
-    },
-    "e":{
-      "acti": true,
-      "index":50,
-      "w":"30w",
-      "h":"30h",
-      "x":0,"y":"-33h",
-      "rota":0,"alpha":1,
-
-      "mode":4,
-      "depth":8,"line":0.5
-    },
-    "f":{
-      "acti": true,
-      "index":50,
-      "w":"30w",
-      "h":"30h",
-      "x":"33w","y":"-33h",
-      "rota":0,"alpha":1,
-
-      "mode":5,
-      "depth":8,"line":3
+      "run":0,
+      "loop": false,
+      "data": [
+        {
+          "index":1,
+          "bit":"t",
+          "cover":1,
+          "adso": 7,
+          "w":"50h","h":"50h",
+          "x":"50h","y":"50h","rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,873,873,0,0,873,873],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "-1_0": {
+          "frame":200,"change":1,
+          "anime2":{
+            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}]
+          },
+          "effect2":{
+            "mode":"eliminate"
+          }
+        }
+      }
     }
+  },
+  "filter":{},
+  "text": {
   },
   "effector":{},
   "wave":{},

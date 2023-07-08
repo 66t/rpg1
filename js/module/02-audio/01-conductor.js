@@ -7,19 +7,27 @@ Conductor._TrajeVolume=[];
 Conductor._Buffer={};
 Conductor._Effect={}
 
-Conductor.start=function(id,traje){
+Conductor.start=function(id,traje,effect,config){
     let v=$Musical[id]
+    config=config||{}
     if(v) {
         let sound = new Pz.Sound(`${Conductor._path}/${v.folder}/${v.name}.ogg`, () => {
-             sound.attack = v.attack || 0;
-             sound.release = v.release || 0;
-             sound.loop = v.loop || false;
-             sound.volume = (v.volume || 1) * Conductor._VolVolume * (Conductor._TrajeVolume[traje] ? Conductor._TrajeVolume[traje] : 1);
-             sound.attackCurve = v.attackCurve || 'linear';
-             sound.releaseCurve = v.releaseCurve || 'linear';
-             sound.play()
-        })
-        if(traje) Conductor._Buffer[traje]=sound
+                sound.attack = config.attack || 0;
+                sound.release = config.release || 0;
+                sound.loop = config.loop || false;
+                sound.volume = (config.volume || 1) * Conductor._VolVolume * (Conductor._TrajeVolume[traje] ? Conductor._TrajeVolume[traje] : 1);
+                sound.attackCurve = config.attackCurve || 'linear';
+                sound.releaseCurve = config.releaseCurve || 'linear';
+                sound.play()
+                if(effect){
+                    Conductor._Buffer[0]=sound
+                    for(let item of effect) Conductor.effect(0,item.type,item.id,item.data)
+                }
+            })
+        if(traje) {
+            Conductor.stop(traje)
+            Conductor._Buffer[traje]=sound
+        }
     }
 }
 Conductor.pause=function(traje,time){
@@ -42,7 +50,7 @@ Conductor.effect=function (traje,type,id,data) {
             Conductor._Buffer[traje].removeEffect(Conductor._Effect[traje+"-"+id])
         switch (type) {
             default :break
-            case "delay":
+            case "delay": //回声
                 Conductor._Effect[traje+"-"+id]=new Pizzicato.Effects.Delay();break
             case "delayE":
                 Conductor._Effect[traje+"-"+id]=new Pizzicato.Effects.Delay({

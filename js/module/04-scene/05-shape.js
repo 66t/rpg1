@@ -29,7 +29,6 @@ LIM.SCENE=LIM.SCENE||{};
         }
     }
     _.Shape.prototype.refresh = function () {
-       
         if(this._action.length) this.executeAction()
         else if(this._com.next!==this._com.mode) this.shiftMode()
         else if(this._com.loop) this.loopMode()
@@ -71,6 +70,7 @@ LIM.SCENE=LIM.SCENE||{};
         }
         if(item.time>=item.frame){
             if(this._action[0].comE) this._origin.triggerHandler(this._action[0].comE)
+            if(this._action[0].se) this._origin.offSound(this._action[0].se)
             this._action.splice(0,1)
         }
         item.time++
@@ -79,10 +79,13 @@ LIM.SCENE=LIM.SCENE||{};
         if(!this.backups) return
         let w = this.backups.width;
         let h = this.backups.height;
-        let r = time[1] / time[0];
+        let r = LIM.UTILS.sinNum(1,time[1] / time[0]);
         this.bitmap.clear();
         let data=[]
-        switch (effect.mode){
+        if(time[1]===time[0])
+            this.bitmap.blt(this.backups, 0, 0, w,h,0,0);
+        else    
+           switch (effect.mode){
             case "shades":
                 data[0]=effect.block||4
                 data[1]=effect.x||4
@@ -98,7 +101,54 @@ LIM.SCENE=LIM.SCENE||{};
                       }
                   }
                 }
-             
+                break
+            case "crt":
+                const shuffleArray = n => Array.from({length: n + 1}, (_, i) => i).sort(() => Math.random() - 0.5);
+                const shuffledArray = shuffleArray(effect.v?h:w);
+                if(effect.v)
+                    for (let y = 0; y < h; y++) {
+                        if(r<0.3)  this.bitmap.blt(this.backups, 0, y,  w,  effect.s, 0, shuffledArray[y]);
+                        else  this.bitmap.blt(this.backups, 0, y,  w,  effect.s, 0, h*((r-0.3)/0.7)<=y?shuffledArray[y]:y);
+                    }
+                else
+                    for (let x = 0; x < w; x++) {
+                        let q1=Math.random()
+                        let q2=Math.random()
+                        let q3=Math.random()
+                        if(r<0.3)  this.bitmap.blt(this.backups, x, 0.5*h*q1*(1-r),  effect.s,h-(h*q2)*(1-r),  shuffledArray[x],h*q3*(1-r), effect.s,h);
+                        else  this.bitmap.blt(this.backups, x, 0.5*h*q1*(1-r),  effect.s,h-(h*q2)*(1-r), w*((r-0.3)/0.7)<=x?shuffledArray[x]:x, h*q3*(1-r), effect.s,h);
+                    }
+                break
+            case "line":
+                for (let i = 0; i < 15; i++) {
+                    for (let j = 0; j < 15; j++) {
+                        this.bitmap.blt(this.backups, i * w / 15, j * h / 15, w / 15 * r, h / 15 * r,
+                            (i) * w / 15 + w / 15 * (1 - r) + (w/2-w * (Math.random())) * (1 - r),
+                            (j) * h / 15 + w / 15 * (1 - r) + (h/2-h * (Math.random()))*(1 - r),
+                            w / (15 + 30 * (1 - r + (Math.random() * (1 - r)))),
+                            h / (15 + 30 * (1 - r + (Math.random() * (1 - r)))));
+                    }
+                }
+                break
+            case "eliminate":
+                if(r<0.5) {
+                    let f = w/16 * (1 - r)+1
+                    for (let x = 0; x < w / f; x++) {
+                        this.bitmap.blt(this.backups, x * f, 0, f, h, w - x * f, 0);
+                        this.bitmap.blt(this.backups, w-x * f, 0, f, h,  x * f, 0);
+                    }
+                }
+                else {
+                    let f = w/8 * (1 - r)+1
+                    let t=((r-0.5)*2)*(w/f)
+                    for (let x = 0; x < w / f; x++)
+                        if(x<t)
+                          this.bitmap.blt(this.backups, w-x*f, 0, f, h, w-x*f,  0);
+                         else {
+                            this.bitmap.blt(this.backups, x*f, 0, f, h, w-x*f,  0);
+                            this.bitmap.blt(this.backups, w-x*f, 0, f, h, x*f,  0);
+                        }
+                }
                 break
         }
     };
@@ -179,6 +229,7 @@ LIM.SCENE=LIM.SCENE||{};
         if(this._com.action&&this._com.action[fun]){
             this._com.action[fun].time=0
             this._action.push(this._com.action[fun])
+            this._origin.playSound(this._com.action[fun].se)
         }
         else if(!this.isRun(0)) {
             this._data=this._com.data[this._com.next]
@@ -191,8 +242,10 @@ LIM.SCENE=LIM.SCENE||{};
     _.Shape.prototype.draw=function() {
         if(this.isRun(0)) this.setRun(0,false)
         let bit = this._origin.getBit(this._data.bit)
+        if(!bit) return
         let that=this
         bit.addLoadListener(function () {
+            bit=that.matrixTransform(bit,that._com.matrix)
             that.setBitmap("bitmap",bit)
             that.setBitmap("backups",bit)
             if(!this.isRun(1)) this.setRun(1,true)
@@ -201,6 +254,28 @@ LIM.SCENE=LIM.SCENE||{};
            }.bind(this)
         )
     }
+    _.Shape.prototype.matrixTransform=function(bit,mode) {
+        if(mode) {
+            let newbit = new Bitmap(bit.width, bit.height)
+            let w=bit.width
+            let h=bit.height
+            switch (mode){
+                case 1:
+                    for(let i=0;i<w;i++)
+                        newbit.blt(bit,w-i,0,1,h,i,0)
+                    break
+                case 2:
+                    for(let i=0;i<h;i++)
+                        newbit.blt(bit,0,h-i,w,1,0,i)
+                    break
+                   
+            }
+            return newbit
+        }
+        else return bit
+    }
+    
+    
     _.Shape.prototype.setBitmap=function(target,bit){
         if(this._data.clip) this.clip(target,bit,this._data.clip)
         else this[target]=bit

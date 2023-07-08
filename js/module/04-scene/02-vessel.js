@@ -19,8 +19,14 @@ LIM.SCENE=LIM.SCENE||{};
         this._symbol=com.symbol||{}
         this._se=com.se||{}
         Sprite.prototype.initialize.call(this);//;
+        this.newMask()
     }
-
+    _.Vessel.prototype.newMask = function () {
+        this._mask= new PIXI.Graphics();
+        this._mask.beginFill()
+        this._mask.drawRect(0,0,Graphics.width,Graphics.height)
+        this._mask.endFill();
+    }
     _.Vessel.prototype.update = function () {
         this.updateFilter()
         if(this.isActi()) {
@@ -31,8 +37,24 @@ LIM.SCENE=LIM.SCENE||{};
     _.Vessel.prototype.move = function() {
         let action = this._action[0]
         if(action.time > 0) {
-            let actionData = action.data
             let r = LIM.UTILS.waveNum(action.wave, action.frame, action.time)
+            this._mask.clear()
+            this._mask.beginFill()
+            if(!action.mask||action.mask.length===0) 
+                this._mask.drawRect(0,0,Graphics.width,Graphics.height)
+            else {
+                for(let item of action.mask){
+                   let r1=item.wave&&item.wave!==action.wave?LIM.UTILS.waveNum(item.wave, action.frame, action.time):r
+                   let x= ((item.x[1]-item.x[0])*r1+item.x[0])
+                   let y= ((item.y[1]-item.y[0])*r1+item.y[0])
+                   let w= ((item.w[1]-item.w[0])*r1+item.w[0])
+                   let h= ((item.h[1]-item.h[0])*r1+item.h[0])
+                    this._mask.drawRect(x+this.x,y+this.y,w,h)
+                }
+            }
+            this._mask.endFill();
+            let actionData = action.data
+         
             let bool = false
             for (let key of Object.keys(actionData)) {
                 let v = r * (actionData[key][1] - actionData[key][0]) + actionData[key][0]
@@ -45,6 +67,8 @@ LIM.SCENE=LIM.SCENE||{};
             }
             if(bool) this.triggerMove()
         }
+        
+        
         if(action.time < action.frame) {
             action.time++
         } else {
@@ -56,14 +80,14 @@ LIM.SCENE=LIM.SCENE||{};
         if(this._com.next!==this._com.mode) this.shiftMode()
         if(this.isRun(4)) this.createFilter()
         if(this.isRun(0)) this.location()
-        if(this.hasActions()==1) this.move()
+        if(this.hasActions()===1) this.move()
         this._time++
     }
     _.Vessel.prototype.shiftMode=function(){
         let index1=this._index
         this._data=this._com.data[this._com.next]
         let index2=this._index
-        if(index1!=index2&&!this._origin.isRun(1)) this._origin.setRun(1,true)
+        if(index1!==index2&&!this._origin.isRun(1)) this._origin.setRun(1,true)
          let mode=this._com.mode
         this._com.mode=this._com.next
         this.pushAction(mode,this._com.next)
@@ -79,7 +103,8 @@ LIM.SCENE=LIM.SCENE||{};
             if(this.x!==x) data.x=[this.x,x]
             if(this.y!==y) data.y=[this.y,y]
             if(this.alpha!==this._data.alpha) data.alpha=[this.alpha,this._data.alpha]
-            if(item.frame) this._action.push({data:data,time:0,frame:item.frame,wave:item.wave,fun:item.fun})
+            
+            if(item.frame) this._action.push({data:data,time:0,frame:item.frame,wave:item.wave,com:item.com,mask:item.mask})
             else {
                 this.x=x
                 this.y=y
@@ -95,11 +120,6 @@ LIM.SCENE=LIM.SCENE||{};
         this.y=LIM.UTILS.lengthNum(this._data.y)
         this.alpha=this._data.alpha
         this.triggerMove()
-    }
-
-    _.Scene.prototype.actiFilter= function (key,bool){
-        this.setRun(4,true)
-        this._data.filter[key].acti=bool=="1"?true:false
     }
     
     _.Vessel.prototype.createFilter = function () {
@@ -155,7 +175,7 @@ LIM.SCENE=LIM.SCENE||{};
                 let d1= this._filter[key].obj
                 let d2= this._filter[key].obj.uniforms
                 for(let i=0;i<src.length;i++){
-                    if(i==src.length-1) {
+                    if(i===src.length-1) {
                         if(d1) d1[src[i]]= data[uniforms]
                         if(d2) d2[src[i]]= data[uniforms]
                     }
@@ -175,7 +195,7 @@ LIM.SCENE=LIM.SCENE||{};
     }
     _.Vessel.prototype.actiFilter= function (key,bool){
         this.setRun(4, true)
-        this._data.filter[key].acti=(bool==="1"?true:false)
+        this._data.filter[key].acti=(bool==="1")
     }
     
     _.Vessel.prototype.hasActions=function () {
@@ -227,10 +247,9 @@ LIM.SCENE=LIM.SCENE||{};
                 }
     }
     
-    
     _.Vessel.prototype.PlaySe=function (name){
         if(this._se&&this._se[name])
-          Conductor.start(this._se[name])
+          this._origin.playSound(this._se[name])
     }
     
     _.Vessel.prototype.getTotalValue = function(propertyName) {

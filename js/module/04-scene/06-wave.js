@@ -45,7 +45,6 @@ LIM.SCENE=LIM.SCENE||{};
         this.bitmap=new Bitmap(LIM.UTILS.lengthNum(this._com.w),LIM.UTILS.lengthNum(this._com.h))
     }
     
-    
     _.Wave.prototype.refresh = function () {
         const wave = [];
         const step = this._time * this._com.render.step;
@@ -54,7 +53,11 @@ LIM.SCENE=LIM.SCENE||{};
             let val = 0;
             for (let index in this._com.wave) {
                 const data = this._com.wave[index];
-                const v = this.wave(data.mode, data.max,parseInt((i * data.view / render.drop) + step + data.phase), data.f, data.r) / data.sample;
+                const v = this.wave(
+                    data.mode, 
+                    data.max,
+                    parseInt((i * data.view / render.drop) + step + data.phase), 
+                    data.f, data.r) / data.sample;
                 switch (data.count) {
                     case "+":
                         val += v;
@@ -182,10 +185,6 @@ LIM.SCENE=LIM.SCENE||{};
         }
         return value*(r?-1:1);
     }
-    _.Wave.prototype.isActi=function(){return this._com.acti}
-    _.Wave.prototype.isRun=function(){return true}
-
-    
     _.Wave.prototype.drawWave=function (wave,angle,color,width){
         this.bitmap.clear()
         let context = this.bitmap.context;
@@ -311,7 +310,6 @@ LIM.SCENE=LIM.SCENE||{};
         }
     }
     
-
     _.Wave.prototype.draw6=function (wave,angle,color,width){
         this.bitmap.clear()
         let context = this.bitmap.context;
@@ -381,4 +379,7 @@ LIM.SCENE=LIM.SCENE||{};
             context.stroke();
         }
     }
+
+    _.Wave.prototype.isActi=function(){return this._com.acti}
+    _.Wave.prototype.isRun=function(){return true}
 })(LIM.SCENE)

@@ -25,7 +25,7 @@
       ],
       "action":{
         "-1_0":{"wave":1,"frame":0,"com":"show2"},
-        "0_1":{"wave":7,"frame":100}
+        "0_1":{"wave":7,"frame":100,"com":"show3"}
       }
     }
   },
@@ -34,7 +34,7 @@
     "1":{
       "acti": true,
       "run":0,
-      "ope":3,
+      "ope":0,
       "data":[
         {
           "alpha":1,
@@ -151,12 +151,18 @@
         "cancel":"c1_cancel",
         "select":"c1_select"
       },
+      "key":{
+        "a":{"handler":"c1_select","data":["$this._data.option.select"]},
+        "b":{"handler":"c1_cancel","data":[-1]},
+        "up":{"handler":"c1_wheel","data":[1]},
+        "down":{"handler":"c1_wheel","data":[-1]}
+      },
       "se":{
-        "wheel":"main_wheel",
-        "cancel":"main_cancel",
-        "select":"main_select",
-        "disable":"main_disable",
-        "activation":"main_activation"
+        "wheel":"wheel",
+        "cancel":"cancel",
+        "select":"select",
+        "disable":"disable",
+        "activation":"activation"
       }
     }
   },
@@ -383,7 +389,7 @@
           "comE":"start"
         },
         "0_1": {
-          "frame":50,"change":10,
+          "frame":50,"change":50,
           "anime1":{
             "alpha":[{"count":"+","wave": 2,"val1":1,"val2":0,"fre":0}],
             "w":[{"count":"+","wave": 2,"val1":600,"val2":200,"fre":0}],
@@ -631,6 +637,54 @@
       }
     }
   },
+  "text": {
+    "start":{
+      "content": "0_1","anime":7,
+      "fontSize": 34, 
+      "textColor":[
+        [0,0.11,"#f00",0.55,"#000"], 
+        [0,0.22,"#f00",0.6,"#000"],
+        [0,0.33,"#f00",0.65,"#000"],
+        [0,0.44,"#f00",0.7,"#000"],
+        [0,0.55,"#f00",0.75,"#000"],
+        [0,0.66,"#f00",0.8,"#000"]
+      ],
+      "outlineWidth":2, "outlineColor":["#000"],
+      "fontItalic":false
+    },
+    "continue":{
+      "content": "0_2","anime":7,
+      "fontSize": 34,   "textColor":[
+        [0,0.11,"#f00",0.55,"#000"],
+        [0,0.22,"#f00",0.6,"#000"],
+        [0,0.33,"#f00",0.65,"#000"],
+        [0,0.44,"#f00",0.7,"#000"],
+        [0,0.55,"#f00",0.75,"#000"],
+        [0,0.66,"#f00",0.8,"#000"]
+      ],
+      "outlineWidth":2, "outlineColor":["#000"], "fontItalic":false
+    },
+    "cmd":{
+      "content": "0_3",
+      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
+      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
+    },
+    "history":{
+      "content": "0_4",
+      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
+      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
+    },
+    "internet":{
+      "content": "0_5",
+      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
+      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
+    },
+    "exit":{
+      "content": "0_6",
+      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
+      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
+    }
+  },
   "filter":{
     "glitch":{
       "type":"glitch",
@@ -688,54 +742,13 @@
       }
     }
   },
-  "text": {
-    "start":{
-      "content": "0_1","anime":7,
-      "fontSize": 34, 
-      "textColor":[
-        [0,0.11,"#f00",0.55,"#000"], 
-        [0,0.22,"#f00",0.6,"#000"],
-        [0,0.33,"#f00",0.65,"#000"],
-        [0,0.44,"#f00",0.7,"#000"],
-        [0,0.55,"#f00",0.75,"#000"],
-        [0,0.66,"#f00",0.8,"#000"]
-      ],
-      "outlineWidth":2, "outlineColor":["#000"],
-      "fontItalic":false
-    },
-    "continue":{
-      "content": "0_2",
-      "fontSize": 34, "textColor":["#f00"],
-      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
-    },
-    "cmd":{
-      "content": "0_3",
-      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
-      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
-    },
-    "history":{
-      "content": "0_4",
-      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
-      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
-    },
-    "internet":{
-      "content": "0_5",
-      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
-      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
-    },
-    "exit":{
-      "content": "0_6",
-      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
-      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
-    }
-  },
   "effector":{
     "load":{"count":1,"judge":"%true","com":"load"},
     "ready":{"count":0,"judge":"%ready","com":"ready"}
   },
   "handler":{
     "load":["%load"],
-    "start":["#on_effector:ready"],
+    "start":["#on_effector:ready","#sound:bgm"],
     "ready":["#activa:s_back"],
     "back1":["#mode:s_back:1"],
     "back2":["#activa:s_trochaR","#activa:s_floor","#activa:s_back1","#activa:s_back2"],
@@ -748,6 +761,7 @@
     "back9":["#sleep:s_trochaB"],
     "show1":["#activa:v_1"],
     "show2":["#mode:v_1:1"],
+    "show3":["#open:c_1:0","#open:c_1:1","#open:c_1:2"],
     "trocha1": ["#activa:s_trocha","#activa:s_name","#activa:s_ver","#sleep:s_title"],
     "cof1": ["#activa:s_cof1","#activa:s_cof2"],
     "ver":["#mode:s_ver:1"],
@@ -757,7 +771,16 @@
     "c1_select":["#select:c_1:%[1]"],
     "c1_cancel":["#select:c_1:%[1]"],
     "exit":["%exit"],
-    "newgame":["#filter:this:glitch:1","#filter:this:old:1","#filter:this:adj:1"],
+    "newgame":["#stopSound","#filter:this:glitch:1","#filter:this:old:1","#filter:this:adj:1"],
     "newgame2":["%newgame"]
+  },
+  "sound":{
+    "bgm":{"id":"main_bgm","traje":1,"config":{"attack":5,"release":8,"loop":true,"volume":1,"attackCurve":"exponential","releaseCurve":"exponential"}},
+    "wheel":{"id":"main_wheeel","effect":[{"type":"quad","id":0}]},
+    "cancel":{"id":"main_cancel","effect":[{"type":"quad","id":0}]},
+    "select":{"id":"main_select","effect":[{"type":"quad","id":0}]},
+    "disable":{"id":"main_disable","effect":[{"type":"quad","id":0}]},
+    "activation":{"id":"main_activation","effect":[{"type":"quad","id":0}]}
   }
+
 }

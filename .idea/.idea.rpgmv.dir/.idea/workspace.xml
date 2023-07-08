@@ -13,18 +13,43 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="022b3a10-94e5-42d6-b94a-cfdedd324291" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/js/module/04-scene/08-fractal.js" afterDir="false" />
+    <list default="true" id="022b3a10-94e5-42d6-b94a-cfdedd324291" name="Default Changelist" comment="分形/弃用">
+      <change afterPath="$PROJECT_DIR$/audio/bgm/star.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/audio/se/cyber-1.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/audio/se/theater_load.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/audio/se/theater_noise.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/audio/se/theater_show.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/load.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.rpgmv.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.rpgmv.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/me/Defeat1.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/me/Gameover1.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/me/Victory1.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/Map001.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/Map001.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/System.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/System.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/scene/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/scene/test.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/scene/test/wave.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/scene/test/wave.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/scene/theater.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/scene/theater.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/scene/title.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/scene/title.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event/event1.js" beforeDir="false" afterPath="$PROJECT_DIR$/event/event1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonts/gamefont.css" beforeDir="false" afterPath="$PROJECT_DIR$/fonts/gamefont.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/00-utils/00-sys.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/00-utils/00-sys.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/00-utils/04-keyInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/00-utils/04-keyInput.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/script/0/a.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/script/0/a.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/text/1.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/text/1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/titles1/900123.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/titles1/Castle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/titles1/aa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/titles1/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/titles1/shade.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/00-utils/02-math.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/00-utils/02-math.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/00-utils/03-algorithm.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/00-utils/03-algorithm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/02-audio/01-conductor.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/02-audio/01-conductor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/02-audio/02-musical.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/02-audio/02-musical.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/module/04-scene/01-scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/01-scene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/04-scene/07-tube.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/07-tube.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/04-scene/02-vessel.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/02-vessel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/04-scene/03-window.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/03-window.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/04-scene/04-command.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/04-command.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/04-scene/05-shape.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/05-shape.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/04-scene/06-wave.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/06-wave.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/04-scene/07-tube.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/04-scene/08-fractal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/05-story/02-console.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/05-story/02-console.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,10 +59,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="JSON File" />
-        <option value="TypeScript File" />
         <option value="JavaScript File" />
+        <option value="TypeScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -101,6 +126,9 @@
         <option value="$PROJECT_DIR$/a.html" />
       </list>
     </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectId" id="2PxPmppYqPIgyVl7l7i2nEhqmXI" />
@@ -263,7 +291,24 @@
       <workItem from="1688101250890" duration="7635000" />
       <workItem from="1688109997952" duration="7008000" />
       <workItem from="1688163897210" duration="934000" />
-      <workItem from="1688172305900" duration="3076000" />
+      <workItem from="1688172305900" duration="19692000" />
+      <workItem from="1688206779770" duration="13286000" />
+      <workItem from="1688272563952" duration="454000" />
+      <workItem from="1688274957721" duration="5911000" />
+      <workItem from="1688284687085" duration="8164000" />
+      <workItem from="1688298195136" duration="10341000" />
+      <workItem from="1688311491509" duration="3202000" />
+      <workItem from="1688346912314" duration="12652000" />
+      <workItem from="1688477325507" duration="2320000" />
+      <workItem from="1688480917773" duration="191000" />
+      <workItem from="1688481709644" duration="2266000" />
+      <workItem from="1688516429867" duration="21730000" />
+      <workItem from="1688600894583" duration="7841000" />
+      <workItem from="1688622423883" duration="5190000" />
+      <workItem from="1688629245969" duration="3824000" />
+      <workItem from="1688676459121" duration="1934000" />
+      <workItem from="1688698129395" duration="2953000" />
+      <workItem from="1688774747827" duration="29142000" />
     </task>
     <task id="LOCAL-00001" summary="11">
       <created>1684404192045</created>
@@ -461,7 +506,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687919515996</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="分形/弃用">
+      <created>1688175650989</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1688175650989</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -533,80 +585,71 @@
     <MESSAGE value="引入TS" />
     <MESSAGE value="更新 动效" />
     <MESSAGE value="字体" />
-    <option name="LAST_COMMIT_MESSAGE" value="字体" />
+    <MESSAGE value="分形/弃用" />
+    <option name="LAST_COMMIT_MESSAGE" value="分形/弃用" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>62</line>
+          <line>63</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/05-shape.js</url>
-          <line>239</line>
+          <line>294</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/05-shape.js</url>
-          <line>255</line>
+          <line>310</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>320</line>
+          <line>342</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/05-shape.js</url>
-          <line>262</line>
+          <line>317</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>274</line>
+          <line>276</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/03-window.js</url>
-          <line>29</line>
-          <option name="timeStamp" value="44" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
-          <line>351</line>
+          <line>352</line>
           <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
-          <line>314</line>
+          <line>315</line>
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>178</line>
+          <line>179</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>53</line>
+          <line>54</line>
           <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>253</line>
+          <line>255</line>
           <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>266</line>
+          <line>268</line>
           <option name="timeStamp" value="59" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js</url>
-          <line>71</line>
-          <option name="timeStamp" value="60" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
@@ -615,17 +658,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
-          <line>69</line>
+          <line>70</line>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/05-shape.js</url>
-          <line>104</line>
+          <line>126</line>
           <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
-          <line>475</line>
+          <line>476</line>
           <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -635,7 +678,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
-          <line>454</line>
+          <line>455</line>
           <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -650,12 +693,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
-          <line>65</line>
+          <line>66</line>
           <option name="timeStamp" value="98" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js</url>
-          <line>190</line>
+          <line>207</line>
           <option name="timeStamp" value="99" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -675,17 +718,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>305</line>
+          <line>325</line>
           <option name="timeStamp" value="109" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>319</line>
+          <line>341</line>
           <option name="timeStamp" value="110" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/05-shape.js</url>
-          <line>195</line>
+          <line>225</line>
           <option name="timeStamp" value="115" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -695,127 +738,97 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>248</line>
+          <line>250</line>
           <option name="timeStamp" value="118" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>157</line>
+          <line>158</line>
           <option name="timeStamp" value="120" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>311</line>
+          <line>331</line>
           <option name="timeStamp" value="124" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>142</line>
+          <line>143</line>
           <option name="timeStamp" value="130" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>184</line>
+          <line>185</line>
           <option name="timeStamp" value="131" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js</url>
-          <line>30</line>
-          <option name="timeStamp" value="132" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js</url>
-          <line>244</line>
+          <line>260</line>
           <option name="timeStamp" value="133" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>299</line>
+          <line>319</line>
           <option name="timeStamp" value="134" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js</url>
-          <line>23</line>
-          <option name="timeStamp" value="137" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js</url>
-          <line>61</line>
-          <option name="timeStamp" value="138" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/05-shape.js</url>
-          <line>24</line>
-          <option name="timeStamp" value="144" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/05-shape.js</url>
-          <line>47</line>
+          <line>46</line>
           <option name="timeStamp" value="145" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/03-window.js</url>
-          <line>110</line>
-          <option name="timeStamp" value="146" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/03-window.js</url>
-          <line>71</line>
-          <option name="timeStamp" value="148" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>258</line>
+          <line>260</line>
           <option name="timeStamp" value="155" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>430</line>
+          <line>458</line>
           <option name="timeStamp" value="156" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>77</line>
+          <line>78</line>
           <option name="timeStamp" value="159" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js</url>
-          <line>54</line>
+          <line>76</line>
           <option name="timeStamp" value="160" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js</url>
-          <line>104</line>
+          <line>121</line>
           <option name="timeStamp" value="161" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
-          <line>250</line>
+          <line>251</line>
           <option name="timeStamp" value="163" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>158</line>
+          <line>159</line>
           <option name="timeStamp" value="164" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/05-shape.js</url>
-          <line>153</line>
+          <line>183</line>
           <option name="timeStamp" value="165" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/05-shape.js</url>
-          <line>223</line>
+          <line>278</line>
           <option name="timeStamp" value="168" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
-          <line>430</line>
+          <line>431</line>
           <option name="timeStamp" value="169" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/02-audio/01-conductor.js</url>
-          <line>29</line>
+          <line>37</line>
           <option name="timeStamp" value="176" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -840,73 +853,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
-          <line>416</line>
+          <line>417</line>
           <option name="timeStamp" value="192" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
-          <line>249</line>
+          <line>250</line>
           <option name="timeStamp" value="193" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
-          <line>136</line>
+          <line>137</line>
           <option name="timeStamp" value="194" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/06-wave.js</url>
-          <line>266</line>
-          <option name="timeStamp" value="196" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/06-wave.js</url>
-          <line>95</line>
-          <option name="timeStamp" value="200" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/06-wave.js</url>
-          <line>219</line>
-          <option name="timeStamp" value="202" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/06-wave.js</url>
-          <line>290</line>
-          <option name="timeStamp" value="203" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/06-wave.js</url>
-          <line>346</line>
-          <option name="timeStamp" value="205" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/06-wave.js</url>
-          <line>314</line>
-          <option name="timeStamp" value="206" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/06-wave.js</url>
-          <line>202</line>
-          <option name="timeStamp" value="207" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/06-wave.js</url>
-          <line>38</line>
-          <option name="timeStamp" value="208" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/06-wave.js</url>
-          <line>369</line>
-          <option name="timeStamp" value="209" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/06-wave.js</url>
-          <line>141</line>
-          <option name="timeStamp" value="210" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/06-wave.js</url>
-          <line>150</line>
-          <option name="timeStamp" value="211" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/10-rogue/02-room.js</url>
@@ -924,21 +882,6 @@
           <option name="timeStamp" value="214" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/load.js</url>
-          <line>21</line>
-          <option name="timeStamp" value="217" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/06-wave.js</url>
-          <line>188</line>
-          <option name="timeStamp" value="219" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/06-wave.js</url>
-          <line>243</line>
-          <option name="timeStamp" value="220" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/rpg_managers.js</url>
           <line>171</line>
           <option name="timeStamp" value="224" />
@@ -950,37 +893,32 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>149</line>
-          <option name="timeStamp" value="226" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>163</line>
+          <line>164</line>
           <option name="timeStamp" value="227" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>375</line>
+          <line>397</line>
           <option name="timeStamp" value="231" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>426</line>
+          <line>454</line>
           <option name="timeStamp" value="232" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>442</line>
+          <line>474</line>
           <option name="timeStamp" value="233" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>441</line>
+          <line>473</line>
           <option name="timeStamp" value="234" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/02-audio/01-conductor.js</url>
-          <line>24</line>
+          <line>32</line>
           <option name="timeStamp" value="235" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -990,58 +928,48 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
-          <line>124</line>
+          <line>125</line>
           <option name="timeStamp" value="239" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
-          <line>403</line>
+          <line>404</line>
           <option name="timeStamp" value="240" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
-          <line>478</line>
+          <line>479</line>
           <option name="timeStamp" value="241" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/05-shape.js</url>
-          <line>218</line>
+          <line>251</line>
           <option name="timeStamp" value="242" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/05-shape.js</url>
-          <line>261</line>
+          <line>316</line>
           <option name="timeStamp" value="243" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/05-shape.js</url>
-          <line>190</line>
+          <line>220</line>
           <option name="timeStamp" value="244" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>250</line>
+          <line>252</line>
           <option name="timeStamp" value="245" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js</url>
-          <line>199</line>
+          <line>216</line>
           <option name="timeStamp" value="246" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/06-wave.js</url>
-          <line>100</line>
-          <option name="timeStamp" value="248" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>61</line>
+          <line>62</line>
           <option name="timeStamp" value="249" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/07-tube.js</url>
-          <line>31</line>
-          <option name="timeStamp" value="253" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/00-utils/04-keyInput.js</url>
@@ -1054,66 +982,185 @@
           <option name="timeStamp" value="257" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/06-wave.js</url>
-          <line>32</line>
-          <option name="timeStamp" value="258" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/06-wave.js</url>
-          <line>49</line>
-          <option name="timeStamp" value="260" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>46</line>
+          <line>47</line>
           <option name="timeStamp" value="261" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/07-tube.js</url>
-          <line>151</line>
-          <option name="timeStamp" value="264" />
+          <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
+          <line>110</line>
+          <option name="timeStamp" value="280" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/06-wave.js</url>
+          <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
+          <line>178</line>
+          <option name="timeStamp" value="281" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
+          <line>140</line>
+          <option name="timeStamp" value="282" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
+          <line>6</line>
+          <option name="timeStamp" value="286" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
           <line>48</line>
-          <option name="timeStamp" value="265" />
+          <option name="timeStamp" value="289" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/08-fractal.js</url>
-          <line>161</line>
-          <option name="timeStamp" value="266" />
+          <url>file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js</url>
+          <line>83</line>
+          <option name="timeStamp" value="290" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/08-fractal.js</url>
-          <line>162</line>
-          <option name="timeStamp" value="269" />
+          <url>file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js</url>
+          <line>146</line>
+          <option name="timeStamp" value="291" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js</url>
+          <line>29</line>
+          <option name="timeStamp" value="292" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js</url>
+          <line>163</line>
+          <option name="timeStamp" value="293" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js</url>
+          <line>93</line>
+          <option name="timeStamp" value="302" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/load.ts</url>
+          <option name="timeStamp" value="308" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/03-window.js</url>
+          <line>95</line>
+          <option name="timeStamp" value="317" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js</url>
+          <line>113</line>
+          <option name="timeStamp" value="319" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/03-window.js</url>
+          <line>69</line>
+          <option name="timeStamp" value="320" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js</url>
+          <line>82</line>
+          <option name="timeStamp" value="321" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/02-vessel.js</url>
+          <line>90</line>
+          <option name="timeStamp" value="322" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
+          <line>169</line>
+          <option name="timeStamp" value="324" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/04-command.js</url>
+          <line>403</line>
+          <option name="timeStamp" value="325" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
-          <line>389</line>
-          <option name="timeStamp" value="271" />
+          <line>384</line>
+          <option name="timeStamp" value="329" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/08-fractal.js</url>
-          <line>91</line>
-          <option name="timeStamp" value="274" />
+          <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
+          <line>354</line>
+          <option name="timeStamp" value="330" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/08-fractal.js</url>
-          <line>108</line>
-          <option name="timeStamp" value="277" />
+          <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
+          <line>362</line>
+          <option name="timeStamp" value="331" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/08-fractal.js</url>
-          <line>247</line>
+          <url>file://$PROJECT_DIR$/js/load.js</url>
+          <line>10</line>
+          <option name="timeStamp" value="332" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/libs/pixi-tilemap.js</url>
+          <line>809</line>
+          <option name="timeStamp" value="333" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/libs/pixi-tilemap.js</url>
+          <line>580</line>
+          <option name="timeStamp" value="334" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/libs/pixi-tilemap.js</url>
+          <line>1</line>
+          <option name="timeStamp" value="336" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/libs/pixi-tilemap.js</url>
+          <line>530</line>
+          <option name="timeStamp" value="337" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/libs/pixi-tilemap.js</url>
+          <line>487</line>
+          <option name="timeStamp" value="338" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
+          <line>74</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="278" />
+          <option name="timeStamp" value="339" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/js/module/04-scene/08-fractal.js</url>
-          <line>131</line>
+          <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
+          <line>100</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="279" />
+          <option name="timeStamp" value="340" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
+          <line>547</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="342" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/05-shape.js</url>
+          <line>154</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="343" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/05-story/02-console.js</url>
+          <line>27</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="344" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/05-story/02-console.js</url>
+          <line>58</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="345" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/08-tube.js</url>
+          <line>41</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="346" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
