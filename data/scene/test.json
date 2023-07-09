@@ -8,128 +8,18 @@
   },
   "command": {},
   "shape": {
-    "back1": {
-      "acti": true,
-      "run":0,
-      "loop": false,
-      "data": [
-        {
-          "index":1,
-          "bit":"t",
-          "cover":1,
-          "adso": 7,
-          "w":"50h","h":"50h",
-          "x":0,"y":0,"rota":0,"alpha":1,
-          "filter":[],
-          "clip":[0,0,873,873,0,0,873,873],
-          "tone":[0,0,0,0],"blend":[0,0,0,0]
-        }
-      ],
-      "action": {
-        "-1_0": {
-          "frame":200,"change":1,
-          "anime2":{
-            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}]
-          },
-          "effect2":{
-            "mode":"crt",
-            "s":2,"v":false
-          }
-        }
-      }
-    },
-    "back2": {
-      "acti": true,
-      "run":0,
-      "loop": false,
-      "data": [
-        {
-          "index":1,
-          "bit":"t",
-          "cover":1,
-          "adso": 7,
-          "w":"50h","h":"50h",
-          "x":"50h","y":0,"rota":0,"alpha":1,
-          "filter":[],
-          "clip":[0,0,873,873,0,0,873,873],
-          "tone":[0,0,0,0],"blend":[0,0,0,0]
-        }
-      ],
-      "action": {
-        "-1_0": {
-          "frame":200,"change":1,
-          "anime2":{
-            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}]
-          },
-          "effect2":{
-            "mode":"line",
-            "s":2,"v":false
-          }
-        }
-      }
-    },
-    "back3": {
-      "acti": true,
-      "run":0,
-      "loop": false,
-      "data": [
-        {
-          "index":1,
-          "bit":"t",
-          "cover":1,
-          "adso": 7,
-          "w":"50h","h":"50h",
-          "x":0,"y":"50h","rota":0,"alpha":1,
-          "filter":[],
-          "clip":[0,0,873,873,0,0,873,873],
-          "tone":[0,0,0,0],"blend":[0,0,0,0]
-        }
-      ],
-      "action": {
-        "-1_0": {
-          "frame":200,"change":1,
-          "anime2":{
-            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}]
-          },
-          "effect2":{
-            "mode":"shades",
-            "s":2,"v":false
-          }
-        }
-      }
-    },
-    "back4": {
-      "acti": true,
-      "run":0,
-      "loop": false,
-      "data": [
-        {
-          "index":1,
-          "bit":"t",
-          "cover":1,
-          "adso": 7,
-          "w":"50h","h":"50h",
-          "x":"50h","y":"50h","rota":0,"alpha":1,
-          "filter":[],
-          "clip":[0,0,873,873,0,0,873,873],
-          "tone":[0,0,0,0],"blend":[0,0,0,0]
-        }
-      ],
-      "action": {
-        "-1_0": {
-          "frame":200,"change":1,
-          "anime2":{
-            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}]
-          },
-          "effect2":{
-            "mode":"eliminate"
-          }
-        }
-      }
+ 
+  },
+  "tube":{
+    "text":{
+      "acti": false,
+      "index":100,
+      "x":"1.5w","y":"79h","w":"97w","h":"20h"
     }
   },
   "filter":{},
   "text": {
+    
   },
   "effector":{},
   "wave":{},

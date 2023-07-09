@@ -6,7 +6,10 @@
     font-family: text;
     src: url("ChuangKeTieJinGangTi-2.otf");
 }
-
+@font-face {
+    font-family: name;
+    src: url("ZiXinFangShenShiHei-2.ttf");
+}
 
 .IIV::-webkit-media-controls-play-button,
 video::-webkit-media-controls-start-playback-button {

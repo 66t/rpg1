@@ -2,7 +2,7 @@
 var Conductor={}
 
 Conductor._path='audio';
-Conductor._VolVolume=1;
+Conductor._VolVolume=0;
 Conductor._TrajeVolume=[];
 Conductor._Buffer={};
 Conductor._Effect={}
@@ -16,8 +16,6 @@ Conductor.start=function(id,traje,effect,config){
                 sound.release = config.release || 0;
                 sound.loop = config.loop || false;
                 sound.volume = (config.volume || 1) * Conductor._VolVolume * (Conductor._TrajeVolume[traje] ? Conductor._TrajeVolume[traje] : 1);
-                sound.attackCurve = config.attackCurve || 'linear';
-                sound.releaseCurve = config.releaseCurve || 'linear';
                 sound.play()
                 if(effect){
                     Conductor._Buffer[0]=sound
@@ -50,7 +48,7 @@ Conductor.effect=function (traje,type,id,data) {
             Conductor._Buffer[traje].removeEffect(Conductor._Effect[traje+"-"+id])
         switch (type) {
             default :break
-            case "delay": //回声
+            case "delay":
                 Conductor._Effect[traje+"-"+id]=new Pizzicato.Effects.Delay();break
             case "delayE":
                 Conductor._Effect[traje+"-"+id]=new Pizzicato.Effects.Delay({

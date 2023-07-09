@@ -20,12 +20,10 @@ LIM.module=[
         {src:"rpg_windows"},
         {src:"plugins"},
         {src:"module",data:[
-            {src:"00-utils",data:[{src:"01-string"},{src:"02-math"},{src:"03-algorithm"},{src:"04-keyInput"},{src:"05-filter"},{src:"00-sys"}]},
+            {src:"00-utils",data:[{src:"01-string"},{src:"02-math"},{src:"03-algorithm"},{src:"04-keyInput"},{src:"05-filter"},{src:"06-entity"},{src:"00-sys"}]},
             {src:"01-storage",data:[{src:"01-main"},{src:"02-save"},{src:"03-boolean"},{src:"04-number"},{src:"05-story"}]},
             {src:"02-audio",data:[{src:"01-conductor"},{src:"02-musical"}]},
-            {src:"04-scene",data:[{src:"01-scene"},{src:"02-vessel"},{src:"03-window"},{src:"04-command"},
-                    {src:"05-shape"},{src:"06-wave"},{src:"07-fractal"},{src:"08-tube"}]}, 
-            {src:"05-story",data:[{src:"01-role"},{src:"02-console"}]},
+            {src:"04-scene",data:[{src:"01-scene"}]},
             {src:"10-rogue",data:[{src:"01-main"},{src:"02-room"}]}
         ]}]},
     {src:"event",data:[{src:"event1"}]},

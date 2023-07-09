@@ -40,9 +40,10 @@ DataManager._databaseFiles = [
 Graphics._createGameFontLoader = function() {
     this._createFontLoader('GameFont');
     this._createFontLoader('text');
+    this._createFontLoader('name');
 };
 Scene_Boot.prototype.isGameFontLoaded = function() {
-    if (Graphics.isFontLoaded('GameFont')&&Graphics.isFontLoaded('text')) {
+    if (Graphics.isFontLoaded('GameFont')&&Graphics.isFontLoaded('text')&&Graphics.isFontLoaded('name')) {
         return true;
     } else if (!Graphics.canUseCssFontLoading()){
         var elapsed = Date.now() - this._startDate;

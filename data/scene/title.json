@@ -248,7 +248,7 @@
           "comE":"back1"
         },
         "0_1": {
-          "frame":250,"change":125,"reserve": true,
+          "frame":250,"change":125,
           "anime1":{"alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}]},
           "anime2":{"alpha":[{"count":"+","wave": 2,"val1":1,"val2":0,"fre":0}]},
           "filter1":[{
@@ -637,6 +637,9 @@
       }
     }
   },
+  
+  
+  
   "text": {
     "start":{
       "content": "0_1","anime":7,
@@ -742,6 +745,12 @@
       }
     }
   },
+  
+  
+  
+  
+  
+  
   "effector":{
     "load":{"count":1,"judge":"%true","com":"load"},
     "ready":{"count":0,"judge":"%ready","com":"ready"}
@@ -774,8 +783,12 @@
     "newgame":["#stopSound","#filter:this:glitch:1","#filter:this:old:1","#filter:this:adj:1"],
     "newgame2":["%newgame"]
   },
+  
+  
+  
+  
   "sound":{
-    "bgm":{"id":"main_bgm","traje":1,"config":{"attack":5,"release":8,"loop":true,"volume":1,"attackCurve":"exponential","releaseCurve":"exponential"}},
+    "bgm":{"id":"main_bgm","traje":10,"config":{"attack":5,"release":8,"loop":true,"volume":1,"attackCurve":"exponential","releaseCurve":"exponential"}},
     "wheel":{"id":"main_wheeel","effect":[{"type":"quad","id":0}]},
     "cancel":{"id":"main_cancel","effect":[{"type":"quad","id":0}]},
     "select":{"id":"main_select","effect":[{"type":"quad","id":0}]},

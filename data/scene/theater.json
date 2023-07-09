@@ -49,12 +49,9 @@
     "s_a6":"v_1",
     "s_b1":"v_1",
     
-    
-    
-
     "s_back":"v_story",
+    "s_tier":"v_story",
     "t_text":"v_story",
-
     "s_stage_1":"v_story",
     "s_stage_2":"v_story",
     "s_stage_3":"v_story",
@@ -68,7 +65,8 @@
   "vessel": {
     "story":{"acti": true, "run": 0, "ope": 0, "data": [{"alpha": 1,"x": 0,"y": 0,"index": 100}],"action":{}},
     "ban":
-    {"acti": true, "run": 0, "ope": 0, "data":
+    {"acti": true, "run": 0, "ope": 0, 
+      "data":
       [
         {"alpha": 1,"x": 0,"y": 0,"index": 150,"filter": {
         "glow": {
@@ -94,7 +92,7 @@
         }},
         {"alpha": 0,"x": 0,"y": 0,"index": 150,"filter": {"glow": {
           "type": "glow","acti": true,"cease": false,
-          "cycle": 0,"time": 0, "uniforms": {"color": "#000"}, "wave": {}}}}
+          "cycle": 0,"time": 0, "uniforms": {"color":3385016}, "wave": {}}}}
       ],
       "action":{
         "0_1":{
@@ -387,7 +385,7 @@
           "cover":1,
           "adso": 7,
           "w":80,"h":80,
-          "x":0,"y":0,"rota":0,"alpha":1,
+          "x":0,"y":0,"rota":0,"alpha":0,
           "filter":[],
           "clip":[0,0,100,100,0,0,100,100],
           "tone":[0,0,0,0],"blend":[0,0,0,0]
@@ -1418,19 +1416,7 @@
       "run":0,
       "matrix":0,
       "loop": false,
-      "data": [
-        {
-          "index":50,
-          "bit":"",
-          "cover":0,
-          "adso": 1,
-          "w":500,"h":686.6,
-          "x":0,"y":0,"rota":0,"alpha":0,
-          "filter":[],
-          "clip":[0,0,600,824,0,0,600,824],
-          "tone":[0,0,0,0],"blend":[0,0,0,0]
-        }
-      ],
+      "data": [],
       "action": {
         "-1_0": {
           "frame":120,"change":1,
@@ -1449,19 +1435,7 @@
       "run":0,
       "matrix":0,
       "loop": false,
-      "data": [
-        {
-          "index":50,
-          "bit":"",
-          "cover":0,
-          "adso": 2,
-          "w":500,"h":686.6,
-          "x":0,"y":0,"rota":0,"alpha":0,
-          "filter":[],
-          "clip":[0,0,600,824,0,0,600,824],
-          "tone":[0,0,0,0],"blend":[0,0,0,0]
-        }
-      ],
+      "data": [],
       "action": {
         "-1_0": {
           "frame":120,"change":1,
@@ -1480,19 +1454,7 @@
       "run":0,
       "matrix":0,
       "loop": false,
-      "data": [
-        {
-          "index":50,
-          "bit":"",
-          "cover":0,
-          "adso": 3,
-          "w":500,"h":686.6,
-          "x":0,"y":0,"rota":0,"alpha":1,
-          "filter":[],
-          "clip":[0,0,600,824,0,0,600,824],
-          "tone":[0,0,0,0],"blend":[0,0,0,0]
-        }
-      ],
+      "data": [],
       "action": {
         "-1_0": {
           "frame":120,"change":0,
@@ -1511,7 +1473,8 @@
   "tube":{
     "text":{
       "acti": false,
-      "index":250
+      "index":100,
+      "x":"1.5w","y":"79h","w":"97w","h":"20h"
     }
   },
   "wave":{},
@@ -1520,9 +1483,9 @@
       "acti": true,
       "index":500,
       "w":"20w",
-      "h":"20h",
-      "x":"45w","y":"45h",
-      "rota":0,"alpha":0.15,
+      "h":"20w",
+      "x":"-45w","y":"-45h",
+      "rota":180,"alpha":0.1,
       "mode":4,
       "depth":3,"line":4
     },
@@ -1530,29 +1493,9 @@
       "acti": true,
       "index":500,
       "w":"20w",
-      "h":"20h",
-      "x":"-45w","y":"45h",
-      "rota":90,"alpha":0.15,
-      "mode":4,
-      "depth":3,"line":4
-    },
-    "e3":{
-      "acti": true,
-      "index":500,
-      "w":"20w",
-      "h":"20h",
-      "x":"-45w","y":"-45h",
-      "rota":180,"alpha":0.15,
-      "mode":4,
-      "depth":3,"line":4
-    },
-    "e4":{
-      "acti": true,
-      "index":500,
-      "w":"20w",
-      "h":"20h",
+      "h":"20w",
       "x":"45w","y":"-45h",
-      "rota":270,"alpha":0.15,
+      "rota":270,"alpha":0.1,
       "mode":4,
       "depth":3,"line":4
     }
@@ -1648,7 +1591,8 @@
     
     
     "load":["#load_bit:back:%[1]:%[2]:%[3]:%[4]:start","#activa:s_site_tile"],
-    "start":["#sound:bgm_0","#text:site:$dataScript.location","#text:time:$dataScript.time","#hide:w_1","#filter:v_1:radial:1","#data:s_back:1:bit:back","#data:s_back:2:bit:back","#mode:s_back:1"],
+    "start":["#sound:bgm_0","#text:site:$dataScript.location","#text:time:$dataScript.time",
+             "#hide:w_1","#filter:v_1:radial:1","#setData:s_back:1:bit:back","#setData:s_back:2:bit:back","#mode:s_back:1"],
     
     "open":["#mode:s_back:2","#mode:v_ban:1"],
     "console":["#console_load:0"],
@@ -1665,6 +1609,6 @@
   "sound":{
     "load":{"id":"theater_load"},
     "show":{"id":"theater_show"},
-    "noise":{"id":"theater_noise","traje":1,"config":{"release":12}}
+    "noise":{"id":"theater_noise","traje":10,"config":{"release":12}}
   }
 }

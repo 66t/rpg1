@@ -82,8 +82,14 @@ DataManager.loadDataFile = function(name,src,origin) {
     xhr.overrideMimeType('application/json');
     xhr.onload = function() {
         if (xhr.status < 400) {
-            if(origin) origin[name]={data:JSON.parse(xhr.responseText),load:1};
-            else window[name] = JSON.parse(xhr.responseText);
+            if(xhr.responseText[0]==="{"||xhr.responseText[0]==="["){
+                if(origin) origin[name]={data:JSON.parse(xhr.responseText),load:1};
+                else window[name] = JSON.parse(xhr.responseText); 
+            }
+            else {
+                if(origin) origin[name]={data:xhr.responseText,load:1};
+                else window[name] = xhr.responseText;
+            }
             DataManager.onLoad(window[name]);
         }
     };

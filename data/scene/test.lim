@@ -1,0 +1,33 @@
+-)data
+-)pushBit -> bit_cof1   -> @arr|-|img/scene_title/|-|cof1        |-|0!int|-|T!bool 
+-)pushBit -> bit_cof2   -> @arr|-|img/scene_title/|-|cof2        |-|0!int|-|T!bool 
+-)pushBit -> bit_back   -> @arr|-|img/scene_title/|-|back        |-|0!int|-|T!bool 
+-)pushBit -> bit_floor  -> @arr|-|img/scene_title/|-|floor       |-|0!int|-|T!bool 
+-)pushBit -> bit_t      -> @arr|-|img/scene_title/|-|t           |-|0!int|-|T!bool 
+-)pushBit -> bit_title  -> @arr|-|img/scene_title/|-|title       |-|0!int|-|T!bool 
+-)pushBit -> bit_ver    -> @arr|-|img/scene_title/|-|com12       |-|0!int|-|T!bool 
+-)pushBit -> bit_b      -> @arr|-|img/scene_title/|-|AtlasCommon |-|0!int|-|T!bool 
+-)pushBit -> bit_cursor -> @arr|-|img/scene_title/|-|cursor      |-|0!int|-|T!bool 
+
+-)pushVes -> ves_com
+
+-)pushSou -> sou_com
+-)portSou -> sou_com  -> id -> main_bgm
+-)portSou -> sou_com  -> traje -> 10!int
+-)confSou -> sou_com  -> attack -> 5!int
+-)confSou -> sou_com  -> release -> 8!int
+-)confSou -> sou_com  -> loop -> T!bool
+-)confSou -> sou_com  -> attack -> 5!int
+-)pushSou -> sou_wheel
+-)portSou -> sou_wheel  -> id -> main_wheel
+-)pushSou -> sou_cancel
+-)portSou -> sou_cancel  -> id -> main_cancel
+-)pushSou -> sou_select
+-)portSou -> sou_select  -> id -> main_select
+-)pushSou -> sou_disable
+-)portSou -> sou_disable  -> id -> main_disable
+-)pushSou -> sou_activation
+-)portSou -> sou_activation  -> id -> main_activation
+
+
+

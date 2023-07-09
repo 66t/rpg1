@@ -3,23 +3,39 @@
   "time":"1_2",
   "location":"1_1",
   "sound":[
-    [{"id":"bgm_star","traje":1,"config":{"attack":2}}],
+    [{"id":"bgm_star","traje":10,"config":{"attack":2,"loop":true}}],
     [],
-    [{"id":"cyber1","traje":10,"config":{"attack":1,"release":1}}],
+    [{"id":"cyber1","traje":20,"config":{"attack":1,"release":1}}],
     []
   ],
   "performer":["miku"],
   "com":[
-    {"id":100,"data":[2,0,"miku"]},
-    {"id":101,"data":[2]},
+    {"id":70,"data":[2,0]},
+    {"id":71,"data":[2,0,[
+      ["index",50], ["bit","p_miku"],
+      ["cover",0], ["adso",2],["filter",[]],
+      ["x",0],["y",0],["rota",0],["alpha",0],
+      ["clip",[0,0,600,824,0,0,600,824]], ["tone",[0,0,0,0]], ["blend",[0,0,0,0]]
+    ]]},
+
+
     {"id":75,"data":[2,"-1_0","se","se_0"]},
     {"id":75,"data":[2,"-1_0","comE","next"]},
-    {"id":1},
-    {"id":2}
     
+    {"id":100,"data":[2]},
+    
+    {"id":1},
+    {"id":4},
+    {"id":10,"data":"miku"},
+    {"id":11,"data":["1_3","1_4","1_5"]},
+    {"id":5},{"id":6},
+    {"id":0}
   ],
   "text":{
-    "time":"1_2",
-    "location":"1_1"
+    "a1":"1_2",
+    "a2":"1_1",
+    "b1":"1_3",
+    "b2":"1_4",
+    "b3":"1_5"
   }
 }
