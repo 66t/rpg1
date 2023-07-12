@@ -2,7 +2,7 @@
 var Conductor={}
 
 Conductor._path='audio';
-Conductor._VolVolume=0;
+Conductor._VolVolume=1;
 Conductor._TrajeVolume=[];
 Conductor._Buffer={};
 Conductor._Effect={}

@@ -24,7 +24,8 @@ LIM.ENTITY.Scene=function(){
         command:{}, //命令行 
         shape:{},   //图形
         wave:{},    //波
-        frac:{},    //分形
+        fica:{},    //分形
+        
         tube:{}    //管道
     }
 }
@@ -37,9 +38,43 @@ LIM.ENTITY.Vessel=function(){
         action:{},  //动作
     }
 }
+LIM.ENTITY.Shape=function(){
+    return {
+        acti:false, //激活
+        run:0,      //运行
+        loop: true,
+        data:[],    //数据
+        action:{},  //动作
+    }
+}
+LIM.ENTITY.Command=function(){
+    return {
+        acti:false, //激活
+        run:0,      //运行
+        ope:0,      //操作
+        data:[],    //数据
+        action:{},  //动作
+        symbol:{},
+        se:{},
+        input:{}
+    }
+}
+LIM.ENTITY.SceneFilter=function(){
+    return {
+        type:"",
+        acti:false,
+        cease:false,
+        cycle:0,
+        time:0,
+        com:"",
+        uniforms:{},
+        wave:{}
+    }
+}
+
 LIM.ENTITY.Text=function(){
     return {
-        connect:"", //文本
+        content:"", //文本
         anime:0,    //动画
         fontSize:20,
         textColor:[],
@@ -86,3 +121,11 @@ LIM.ENTITY.ShapeData=function(){
         blend:[0,0,0,0]
     }
 }
+LIM.ENTITY.Effector=function() {
+    return {
+        count: 1,
+        judge:"",
+        com:"",
+    }
+}
+

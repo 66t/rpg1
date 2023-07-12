@@ -54,8 +54,12 @@ Scene_Boot.prototype.isGameFontLoaded = function() {
 };
 
 
-
 document.onkeydown = function(event) {
     var e = event || window.event || arguments.callee.caller.arguments[0];
     if(e&& e.keyCode==116) location.reload();
 };
+
+
+window.addEventListener('message', function(event) {
+    SceneManager._scene.startRunning(JSON.parse(event.data))
+});

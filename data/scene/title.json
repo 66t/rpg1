@@ -637,9 +637,6 @@
       }
     }
   },
-  
-  
-  
   "text": {
     "start":{
       "content": "0_1","anime":7,
@@ -691,7 +688,7 @@
   "filter":{
     "glitch":{
       "type":"glitch",
-      "acti":false,
+      "acti":true,
       "cease":true,
       "cycle":240,
       "time":0,
@@ -748,9 +745,6 @@
   
   
   
-  
-  
-  
   "effector":{
     "load":{"count":1,"judge":"%true","com":"load"},
     "ready":{"count":0,"judge":"%ready","com":"ready"}
@@ -783,9 +777,6 @@
     "newgame":["#stopSound","#filter:this:glitch:1","#filter:this:old:1","#filter:this:adj:1"],
     "newgame2":["%newgame"]
   },
-  
-  
-  
   
   "sound":{
     "bgm":{"id":"main_bgm","traje":10,"config":{"attack":5,"release":8,"loop":true,"volume":1,"attackCurve":"exponential","releaseCurve":"exponential"}},
