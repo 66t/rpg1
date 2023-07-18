@@ -214,8 +214,6 @@ LIM.SCENE=LIM.SCENE||{};
 
 
         this.darwBox()
-        console.log(this._per)
-        
         
         this.brand[0].fontSize=48
         this.brand[0].fontFace = 'name';

@@ -91,8 +91,8 @@
         {
           "count":"+",
           "sample":1,
-          "max":800,
           "phase":0,
+          "max":800,
           "view":800,
           "f":1,
           "r":false,

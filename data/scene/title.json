@@ -1,6 +1,6 @@
 {
   "bit":{
-    "cof1":["img/scene_title/","cof1",0,true],
+    "cof1":["img/scene_title/","cof1",128,true],
     "cof2":["img/scene_title/","cof2",0,true],
     "back":["img/scene_title/","back",0,true],
     "floor":["img/scene_title/","floor",0,true],
@@ -417,10 +417,10 @@
       ],
       "action": {
         "-1_0": {
-        "frame":61,"change":1,
-        "anime2":{"y":[{"count":"+","wave": 2,"val1":"50h","val2":"20h","fre":0}]},
-        "comE": "back5"
-      }}
+          "frame":61,"change":1,
+          "anime2":{"y":[{"count":"+","wave": 2,"val1":"50h","val2":"20h","fre":0}]},
+          "comE": "back5"
+        }}
     },
 
     "name": {
@@ -640,9 +640,9 @@
   "text": {
     "start":{
       "content": "0_1","anime":7,
-      "fontSize": 34, 
+      "fontSize": 34,
       "textColor":[
-        [0,0.11,"#f00",0.55,"#000"], 
+        [0,0.11,"#f00",0.55,"#000"],
         [0,0.22,"#f00",0.6,"#000"],
         [0,0.33,"#f00",0.65,"#000"],
         [0,0.44,"#f00",0.7,"#000"],
@@ -692,7 +692,7 @@
       "cease":true,
       "cycle":240,
       "time":0,
-      "comE":"newgame2",
+      "com":"newgame2",
       "uniforms":{
         "direction":100,
         "fillMode":3,
@@ -700,13 +700,19 @@
       },
       "wave":{
         "seed":{"cor":true,"type":"seed"},
-        "offset":[{"count":"+","wave": 2,"val1":0,"val2":40,"frame":240,"fre":0,"digit":true}],
-        "red.x":[{"count":"+","wave": 2,"val1":0,"val2":-20,"frame":240,"fre":0,"digit":true}],
-        "red.y":[{"count":"+","wave": 2,"val1":0,"val2":20,"frame":240,"fre":0,"digit":true}],
-        "blue.x":[{"count":"+","wave": 2,"val1":0,"val2":-20,"frame":240,"fre":0,"digit":true}],
-        "blue.y":[{"count":"+","wave": 2,"val1":0,"val2":-20,"frame":240,"fre":0,"digit":true}],
-        "green.x":[{"count":"+","wave": 2,"val1":0,"val2":20,"frame":240,"fre":0,"digit":true}],
-        "green.y":[{"count":"+","wave": 2,"val1":0,"val2":20,"frame":240,"fre":0,"digit":true}]
+        "offset":[
+          {"count":"add","val1":0,"val2":40,"frame":480,"phase":0,"wave":304,"freq":2,"digit":true,"sample":1,"reve":false},
+          {"count":"add","val1":0,"val2":40,"frame":480,"phase":0,"wave":304,"freq":2,"digit":true,"sample":1,"reve":false},
+          {"count":"add","val1":0,"val2":40,"frame":480,"phase":0,"wave":304,"freq":2,"digit":true,"sample":1,"reve":false},
+          {"count":"add","val1":0,"val2":40,"frame":480,"phase":0,"wave":304,"freq":2,"digit":true,"sample":1,"reve":false}
+
+        ],
+        "red.0":[{"count":"add","wave": 304,"val1":0,"val2":-20,"frame":480,"freq":2,"digit":true,"phase":0,"sample":1,"reve":false}],
+        "red.1":[{"count":"add","wave": 304,"val1":0,"val2":20,"frame":480,"freq":2,"digit":true,"phase":0,"sample":1,"reve":false}],
+        "blue.0":[{"count":"add","wave": 304,"val1":0,"val2":-20,"frame":480,"freq":2,"digit":true,"phase":0,"sample":1,"reve":false}],
+        "blue.1":[{"count":"add","wave": 304,"val1":0,"val2":-20,"frame":480,"freq":2,"digit":true,"phase":0,"sample":1,"reve":false}],
+        "green.0":[{"count":"add","wave": 304,"val1":0,"val2":20,"frame":480,"freq":2,"digit":true,"phase":0,"sample":1,"reve":false}],
+        "green.1":[{"count":"add","wave": 304,"val1":0,"val2":20,"frame":480,"freq":2,"digit":true,"phase":0,"sample":1,"reve":false}]
       }
     },
     "old":{
@@ -742,9 +748,9 @@
       }
     }
   },
-  
-  
-  
+
+
+
   "effector":{
     "load":{"count":1,"judge":"%true","com":"load"},
     "ready":{"count":0,"judge":"%ready","com":"ready"}
@@ -777,14 +783,38 @@
     "newgame":["#stopSound","#filter:this:glitch:1","#filter:this:old:1","#filter:this:adj:1"],
     "newgame2":["%newgame"]
   },
-  
   "sound":{
-    "bgm":{"id":"main_bgm","traje":10,"config":{"attack":5,"release":8,"loop":true,"volume":1,"attackCurve":"exponential","releaseCurve":"exponential"}},
-    "wheel":{"id":"main_wheeel","effect":[{"type":"quad","id":0}]},
-    "cancel":{"id":"main_cancel","effect":[{"type":"quad","id":0}]},
-    "select":{"id":"main_select","effect":[{"type":"quad","id":0}]},
-    "disable":{"id":"main_disable","effect":[{"type":"quad","id":0}]},
-    "activation":{"id":"main_activation","effect":[{"type":"quad","id":0}]}
+    "bgm":{
+      "traje":0,
+      "revers":false,
+      "type":"bgm",
+      "name":"星空のメロディー",
+      "volume":1,
+      "rate":1,
+      "time":[0,0],
+      "fade":[0,0,"linear","linear"],
+      "pan":[0,0],
+      "loop":[true,0,0],
+      "dis":[0,"none"],
+      "bit":[1,0],
+      "filter":["none",10,-12,0,0]
+    },
+    "bgm1":{
+      "traje":1,
+      "revers":false,
+      "type":"bgm",
+      "name":"melo",
+      "volume":1,
+      "rate":1,
+      "time":[0,0],
+      "fade":[0,0,"linear","linear"],
+      "pan":[0,0],
+      "loop":[true,0,0],
+      "dis":[0,"none"],
+      "bit":[1,0],
+      "filter":["none",10,-12,0,0]
+      
+    }
   }
 
 }

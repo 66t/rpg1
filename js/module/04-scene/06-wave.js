@@ -59,10 +59,10 @@ LIM.SCENE=LIM.SCENE||{};
                     parseInt((i * data.view / render.drop) + step + data.phase), 
                     data.f, data.r) / data.sample;
                 switch (data.count) {
-                    case "+":
+                    case "add":
                         val += v;
                         break;
-                    case "*":
+                    case "mul":
                         val *= v;
                         break;
                 }

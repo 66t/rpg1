@@ -1181,7 +1181,6 @@ Object.defineProperty(AudioManager, 'seVolume', {
 });
 
 AudioManager.playBgm = function(bgm, pos) {
-    console.log(bgm)
     if (this.isCurrentBgm(bgm)) {
         this.updateBgmParameters(bgm);
     } else {

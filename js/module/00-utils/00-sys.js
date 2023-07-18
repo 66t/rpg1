@@ -61,5 +61,12 @@ document.onkeydown = function(event) {
 
 
 window.addEventListener('message', function(event) {
-    SceneManager._scene.startRunning(JSON.parse(event.data))
+    switch (event.data[0]) {
+        case "0":  SceneManager._scene.startRunning(JSON.parse(event.data.substring(1)));break
+        case "1": 
+            let b=JSON.parse(event.data.substring(1))
+            b.traje=1
+            Conductor.start(b);break
+    }
+  
 });

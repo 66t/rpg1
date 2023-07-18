@@ -85,28 +85,21 @@ LIM.ENTITY.Text=function(){
 }
 LIM.ENTITY.Sound=function(){
     return {
-         id:"",
-         traje:0,
-         config:LIM.ENTITY.SoundConfig(),
-         effect:[]
+        traje:0,
+        type:"bgm",
+        name:"",
+        volume:1,
+        rate:1,
+        time:[0,0],
+        "fade":[0,0,"linear","linear"],
+        "pan":[0,0],
+        "loop":[true,0,0],
+        "dis":[0,"none"],
+        "bit":[1,0],
+        "filter":["none",10,-12,0,0]
     }
 }
-LIM.ENTITY.SoundConfig=function(){
-    return {
-        attack:0, //淡入时间
-        release:0, //淡出时间
-        loop:false, //开始循环
-        volume:1,  //音量
-    }
-}
-LIM.ENTITY.SoundEffect=function(){
-    return {
-        traje:0, //音轨
-        id:0,    //混响频道
-        type:"", //混响效果
-        data:{}  //参数
-    }
-}
+
 LIM.ENTITY.ShapeData=function(){
     return {
         index:0,   //层级

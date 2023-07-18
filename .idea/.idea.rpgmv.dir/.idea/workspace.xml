@@ -14,42 +14,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="022b3a10-94e5-42d6-b94a-cfdedd324291" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/data/scene/test/edi.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/scene/test/vue.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/libs/vue.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/00-utils/05-entity.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/03-scene/01-scene.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/03-scene/02-filter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/04-scene/02-vessel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/04-scene/03-window.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/04-scene/04-command.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/04-scene/05-shape.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/04-scene/06-wave.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/04-scene/07-fractal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/04-scene/08-tube.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/05-story/01-role.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/05-story/02-console.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edi/scene/css.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edi/scene/js/handle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edi/scene/js/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edi/scene/main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edi/scene/old/edi.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edi/scene/old/edi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edi/scene/star.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edi/vue.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edi/wave.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/libs/tone.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/module/03-scene/03-Vessel.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.rpgmv.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.rpgmv.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/scene/test.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/scene/test.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/scene/test.lim" beforeDir="false" afterPath="$PROJECT_DIR$/data/scene/test.lim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/scene/theater.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/scene/theater.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/MapInfos.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/MapInfos.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/System.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/System.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/scene/test/edi.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/scene/test/vue.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/scene/test/wave.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/scene/title.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/scene/title.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/libs/pizzicato.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/js/load.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/load.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/module/00-utils/00-sys.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/00-utils/00-sys.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/00-utils/05-filter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/00-utils/06-entity.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/00-utils/02-math.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/00-utils/02-math.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/00-utils/05-entity.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/00-utils/05-entity.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/module/02-audio/01-conductor.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/02-audio/01-conductor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/04-scene/01-scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/01-scene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/_04-scene/01-scene.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/_04-scene/02-vessel.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/_04-scene/03-window.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/_04-scene/04-command.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/_04-scene/05-shape.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/_04-scene/06-wave.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/_04-scene/07-fractal.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/_04-scene/08-tube.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/_05-story/01-role.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/_05-story/02-console.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/02-audio/02-musical.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/03-scene/01-scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/03-scene/01-scene.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/03-scene/02-filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/03-scene/02-filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/04-scene/06-wave.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/06-wave.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/04-scene/08-tube.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-scene/08-tube.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/rpg_managers.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/rpg_managers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,9 +54,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JSON File" />
         <option value="TypeScript File" />
         <option value="HTML File" />
+        <option value="Reason Module" />
+        <option value="JSON File" />
         <option value="JavaScript File" />
       </list>
     </option>
@@ -322,6 +317,22 @@
       <workItem from="1689127866099" duration="24846000" />
       <workItem from="1689156422370" duration="1951000" />
       <workItem from="1689161753338" duration="14900000" />
+      <workItem from="1689215444536" duration="133000" />
+      <workItem from="1689215594224" duration="53000" />
+      <workItem from="1689296577496" duration="268000" />
+      <workItem from="1689296857780" duration="54000" />
+      <workItem from="1689296922074" duration="209000" />
+      <workItem from="1689297142204" duration="82000" />
+      <workItem from="1689297233868" duration="10000" />
+      <workItem from="1689297255064" duration="939000" />
+      <workItem from="1689298212242" duration="29375000" />
+      <workItem from="1689387169989" duration="717000" />
+      <workItem from="1689424731824" duration="598000" />
+      <workItem from="1689486174066" duration="18985000" />
+      <workItem from="1689509838737" duration="8037000" />
+      <workItem from="1689560193035" duration="23625000" />
+      <workItem from="1689646177676" duration="28491000" />
+      <workItem from="1689685485277" duration="1080000" />
     </task>
     <task id="LOCAL-00001" summary="11">
       <created>1684404192045</created>
@@ -743,7 +754,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/data/scene/test/edi.html</url>
-          <line>205</line>
+          <line>208</line>
           <option name="timeStamp" value="372" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -778,15 +789,75 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/js/module/03-scene/01-scene.js</url>
-          <line>277</line>
-          <properties lambdaOrdinal="-1" />
+          <line>278</line>
           <option name="timeStamp" value="382" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/data/scene/test/edi.html</url>
-          <line>207</line>
-          <properties lambdaOrdinal="-1" />
+          <line>210</line>
           <option name="timeStamp" value="383" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/data/scene/test/edi.js</url>
+          <line>69</line>
+          <option name="timeStamp" value="385" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/data/scene/test/edi.js</url>
+          <line>104</line>
+          <option name="timeStamp" value="386" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/rpg_core.js</url>
+          <line>1330</line>
+          <option name="timeStamp" value="387" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/00-utils/05-entity.js</url>
+          <line>11</line>
+          <option name="timeStamp" value="391" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/00-utils/05-entity.js</url>
+          <line>31</line>
+          <option name="timeStamp" value="392" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/02-audio/01-conductor.js</url>
+          <line>10</line>
+          <option name="timeStamp" value="400" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/02-audio/01-conductor.js</url>
+          <line>42</line>
+          <option name="timeStamp" value="401" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/03-scene/01-scene.js</url>
+          <line>327</line>
+          <option name="timeStamp" value="402" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/edi/scene/js/handle.js</url>
+          <line>174</line>
+          <option name="timeStamp" value="404" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/edi/scene/js/handle.js</url>
+          <line>6</line>
+          <option name="timeStamp" value="405" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/04-scene/01-scene.js</url>
+          <line>157</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="406" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/module/03-scene/01-scene.js</url>
+          <line>323</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="408" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -22,6 +22,7 @@ LIM.SCENE=LIM.SCENE||{};
     //开始运行
     _.Scene.prototype.startRunning = function (json) {
         $dataScene=json||null
+        this.edi=json?false:true
         this.children=[]
         this._load = -1
         this._cease = false
@@ -62,8 +63,7 @@ LIM.SCENE=LIM.SCENE||{};
                         break
                 }
                 break
-
-
+            
             case 0:
             case "#data":
                 this._data=LIM.ENTITY.Scene()
@@ -224,7 +224,7 @@ LIM.SCENE=LIM.SCENE||{};
             this.createFilter()
             this.a=new Sprite(this._bit["t"])
             this.addChild(this.a)
-            this.openEdi()
+            if(this.edi) this.openEdi()
         }
         if(this.isRun(0)) {for(let item of this.children) item.update();}
 
@@ -267,18 +267,22 @@ LIM.SCENE=LIM.SCENE||{};
     }
 
 
+    //打开编辑器
     _.Scene.prototype.openEdi = function () {
         let parameter = JSON.stringify($dataScene)
         let encodedParameter = encodeURIComponent(parameter);
         let base = require('path').dirname(process.mainModule.filename);
-        let url = base+"/data/scene/test/edi.html?param=" + encodedParameter;
+        let url = base+"/edi/scene/main.html?param=" + encodedParameter;
         let win= window.open(url,"edi");
     }
     
     _.Scene.prototype.loadBit = function (key,val) {
         this._bitload.push(key)
         this._bit[key] =ImageManager.loadBitmap(val[0],val[1],val[2],val[3])
-        this._bit[key].addLoadListener(function () {this._bitload.splice(this._bitload.indexOf(key),1)}.bind(this));
+        this._bit[key].addLoadListener(function () {
+            this._bit[key].adjustTone(val[4]||0,val[5]||0,val[6]||0)
+            this._bitload.splice(this._bitload.indexOf(key),1)
+        }.bind(this));
     }
     _.Scene.prototype.loadFont = function (val) {
         this._word[val] = null;

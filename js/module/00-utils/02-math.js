@@ -108,81 +108,126 @@ LIM.UTILS=LIM.UTILS||{};
      */
     _.sinNum=function(max,i){return Math.sin(Math.PI/2/max*i).toFixed(7)}
 
-    /** 计算波
-     * @module utils
-     * @method waveNum
-     * @example LIM.UTILS.sinNum(0,4,1)
-     * @param wave {int} 波形
-     * @param max {int} 周期
-     * @param i {int} 当前值
-     * @return {int} 结果
-     */
-    _.waveNum=function(mode,max,i) {
-        i = i % (max*2);
-        let t = i / max;
-        switch (parseInt(mode)) {
-            default: // 方波形
-                return t >= 1 ? 1 : 0;
-            case 1: // 三角波
-                return parseInt(t) % 2 == 1 ? 1 - (t % 1.0) : (t % 1.0);
-            case 2: // 正弦波
-                return Math.abs(_.sinNum(max, i));
-            case 3:
-                return Math.abs(_.sinNum(max/2, i));
-            case 4: // 斜波
-                return t - Math.floor(t)
-            case 5: // 指数衰减
-                return Math.pow(1.11, -i);
-            case 6: // 调幅波
-                return 1 / (i + 1.11);
-            case 7: // 平方根过渡
-                return Math.sqrt(i / max);
-            case 8: // 平方过渡
-                return Math.pow(i / max, 2);
-            case 9: // 高斯函数
-                let sigma = max / 6;
-                return Math.exp(-Math.pow(i - max, 2) / (2 * Math.pow(sigma, 2)));
-            case 10: // 三次贝塞尔曲线过渡
-                return 3 * t * Math.pow(1 - t, 2) + 3 * Math.pow(t, 2) * (1 - t) + Math.pow(t, 3);
-            case 11: // 弹性过渡
-                return Math.pow(2, -10 * i / max) * Math.sin((i / max - 0.1) * (2 * Math.PI) / 0.4) + 1;
-            case 12: // 回弹过渡
-                let s = 1.70158;
-                return ((t = i / max - 1) * t * ((s + 1) * t + s) + 1);
-            case 13: // 阻尼振荡过渡
-                let p = 0.3;
-                let s1 = p / 4;
-                return Math.pow( 2, -10 * t) * Math.sin((t - s1) * (2 * Math.PI) / p) + 1;
-            case 14: // 心型
-                let x = (2 * i - max) / max;
-                let y = (2 * Math.pow(x, 2) - 1) * Math.sqrt(1 - Math.pow(x, 2));
-                return (y + 1) / 2;
-            case 15: // 平滑步进波形
-                return Math.floor(t /0.1) * 0.1;
-            case 16: // 半圆波
-                return Math.sqrt(1 - Math.pow((t - 1), 2));
-            case 17: // Sine-Cosine波
-                return (Math.sin(i) + Math.cos(i)) / 2;
-            case 18: // 反弹过渡
-                let s2 = 1.5;
-                return 1 - ((t = i / max - 1) * t * ((s2 + 1) * t + s2) + 1);
-            case 19: // 径向渐变
-                let centerX = max / 2;
-                let centerY = max / 2;
-                let distance = Math.sqrt(Math.pow(i - centerX, 2) + Math.pow(i - centerY, 2));
-                return distance / max;
-            case 20: // 曲线过渡
-                return Math.sin(i * Math.PI / max);
-            case 21://震荡波
-                return Math.sin(i) * Math.cos(i);
-            case 22: // 斐波那契螺旋
-                let angle = 0.5 * Math.sqrt(i);
-                let radius = Math.sqrt(i / max);
+
+    _.waveNum=function(mode,max,i,f,r) {
+        if(mode%5==0) i*=2
+        let p=parseInt(i/(max/(1/f)))%2===1?-1:1
+        let o=parseInt(i/(max/(1/f)))%4%2===1?-1:1
+        let q=i%(max/f)
+        let value=0;
+        switch (mode) {
+            //弦
+            case 104://方波 
+                value=(Math.sin((Math.PI * 2 / max * q)) >= 0 ? 1 : -1)*
+                    (Math.sin((Math.PI * 2 / (max/2) * q)) >= 0 ? 0 : 1)
+                break;
+            case 204://三角波
+                value = (2 / Math.PI) * Math.asin(Math.sin((2 * Math.PI / max) * q));
+                break;
+            case 304://正弦波
+                value = Math.sin((Math.PI * 2 / max* q));break
+            case 404://平滑波
+                value=Math.floor((2 / Math.PI) * Math.asin(Math.sin((2 * Math.PI / max) * q))*10+0.5)/10;
+                break;
+
+            case 105: //半圆波  
+                value=  Math.sqrt(1 - Math.pow(((q%max)*2/max-1),4))*p;break
+            case 205: //方根波
+                value = Math.sqrt(Math.abs(Math.sin((Math.PI/max*q))))*p;break;
+            case 305: //方根波 
+                let s = Math.E;
+                value=(1-((q/max-1)*(q/max) * ((s+1)*(q/max)+s)+1))*p;break
+            case 405: //弹跳波
+                value= Math.exp(-Math.pow(q*2 - max,2) / (2 * Math.pow(max / 6, 2)))
+                value=p>0?value:1-value
+                value=o>0?value:(1-value)*-1;
+                break
+            case 505: //平方三角
+                value =  Math.pow((2 / Math.PI) * Math.asin(Math.sin((2 * Math.PI / max) * q)),2)*p;break
+            case 605: //平方正弦
+                value = Math.pow(Math.sin((Math.PI * 2 / max* q)),2)*p;break
+            case 705: //斐波那契 //
+                let angle = 0.5 * Math.sqrt(p>0?q:max-q);
+                let radius = Math.sqrt(q/ max);
                 let x1 = radius * Math.cos(angle);
                 let y1 = radius * Math.sin(angle);
-                return (Math.abs(x1) + Math.abs(y1)) / 2;
+                value=(Math.abs(x1)+Math.abs(y1))*p
+                break
+
+
+            //随机
+            case 101: //振荡
+                value= Math.sin(q);break
+            case 201: //振荡余弦
+                value= Math.cos(q)*Math.sin(q);break
+            case 301: //振荡正切
+                value= Math.tan(q);break
+            case 401: //平均振荡
+                value= (Math.sin(q) + Math.cos(q)) / 2;break
+
+
+            //过渡
+            case 102: //指数
+                value = 1-Math.pow(1.03,-q)
+                break
+            case 202: //反比例
+                value = 1 /(q+100)*q
+                break
+            case 302:  //弦反比例
+                value = (0.14/(Math.abs(Math.sin((Math.PI * 2 / max* (max-q)/4)))+0.14))
+                break
+            case 402:  //方根
+                value= Math.sqrt(q/max);break
+            case 502:  //平方
+                value= Math.pow(q/max,2);break
+            case 602:  //正态
+                value= Math.exp(-Math.pow(q*1 - max,2) / (2 * Math.pow(max / 6, 2)));break
+            case 702:  //弹性
+                value=  Math.pow(2, -10 * q / max) * Math.sin((q / max - 0.1) * (2 * Math.PI) / 0.4) + 1;break
+            case 802:  //贝塞尔
+                value= 3 * (q/max) * Math.pow(1 -  (q/max) , 2) + 3 * Math.pow( (q/max) , 2) * (1 -  (q/max) ) + Math.pow( (q/max) , 3);break
+            case 902:  //阻尼振荡
+                let f = 0.3;
+                let s1 = f / 4;
+                value=  Math.pow( 2, -10 *  (q/max)) * Math.sin(( (q/max) - s1) * (2 * Math.PI)) + 1;
         }
+        return value*(r?-1:1);
     }
+    _.waveArr=function (val,time,data) {
+        for(let v of data){
+            let r = _.waveNum(v.wave, (v.frame||time[0]),time[1]+(parseInt(v.phase)),v.freq,v.reve)/v.sample;
+            let num = _.lengthNum(v.val1) + (_.lengthNum(v.val2) - _.lengthNum(v.val1)) * r;
+            if(v.digit) num=Math.round(num)
+            switch (v.count) {
+                case "add":
+                    val += num;
+                    break;
+                case "mul":
+                    val *= num;
+                    break;
+                case "and":
+                    val = val&num;
+                    break;
+                case "or":
+                    val = val|num;
+                    break;
+                case "xor":
+                    val = val^num;
+                    break;
+                case "max":
+                    val = Math.max(val,num);
+                    break;
+                case "min":
+                    val = Math.min(val,num);
+                    break;
+                case "pow":
+                    val=Math.pow(val,num)
+                    break
+            }
+        }
+        return val
+    }
+    
     _.countWave=function (wave,time,param){
         let result = {};
         for (let key in  wave) {
@@ -194,20 +239,7 @@ LIM.UTILS=LIM.UTILS||{};
                     case "add": val=param[key]+data.val;break
                 }
             }
-            else if (typeof wave[key] == "object")
-                for(let v of data){
-                let r = _.waveNum(v.wave, (v.frame||time[0]) / (1 + v.fre * 2), time[1]);
-                let num = _.lengthNum(v.val1) + (_.lengthNum(v.val2) - _.lengthNum(v.val1)) * r;
-                if(v.digit) num=Math.round(num)
-                switch (v.count) {
-                    case "+":
-                        val += num;
-                        break;
-                    case "*":
-                        val *= num;
-                        break;
-                  }
-                }
+            else if (typeof wave[key] == "object") val+=_.waveArr(val,time,data)
             else val = LIM.UTILS.lengthNum(wave[key]);     
             result[key]=val
         }
