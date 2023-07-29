@@ -6,6 +6,7 @@
     <script src="../vue.min.js"></script>
     <script src="../../js/libs/pixi.js"></script>
     <script src="../../js/libs/pixi-filters.js"></script>
+    
     <script src="../../js/module/00-utils/05-entity.js"></script>
     <script src="../../js/module/00-utils/02-math.js"></script>
     <script src="../../js/module/03-scene/02-filter.js"></script>
@@ -27,21 +28,27 @@
     </div>
 
     <div class="view_main">
-        <div class="list">
-            <table v-if="D_tree[0]" class="tool">
+        <div  v-if="D_tree[0]&&src[0]!=='group'" class="list">
+            <table class="tool">
                 <tr>
                     <td><input class="input"  @click="F_handle(handle.additem,[0])"  value="add" type="button"></td>
                     <td><input class="input"  @click="F_handle(handle.subitem,[0])"  value="remove" type="button"></td>
                 </tr>
             </table>
-            <div v-if="D_tree[0]" class="sidebar">
+            <div   class="sidebar">
                 <div class="sidebar-item hover2" :class="src[1]!==key?'':'hover2-acti'"
                      @click="F_handle(handle.src,[1,key])"  v-for="(val,key) of D_tree[0]">
                     <input  @input="ediId(1)"  v-model="key">
                 </div>
             </div>
         </div>
-        <div v-if="D_tree[1]&&src[0]==='bit'" class="box">
+        <div v-if="json" @dblclick="json=false;"  class="box">
+            <textarea disabled v-model="JSON.stringify(basedata)"></textarea>
+        </div>
+        <div v-if="!json&&ejson" @dblclick="ejson='';"  class="box">
+            <textarea disabled v-model="ejson"></textarea>
+        </div>
+        <div :style="{'opacity':json||ejson?0:1}" v-if="D_tree[1]&&src[0]==='bit'" class="box">
             <div id="img_bit" :style="{backgroundImage: 'url(../../' + D_tree[1][0] + D_tree[1][1] + '.png)',filter: 'hue-rotate(' + D_tree[1][2] + 'deg)'}">
                 <div class="img-size">{{img_size[0]}}×{{img_size[1]}}</div>
             </div>
@@ -60,7 +67,7 @@
                 </table>
             </div>
         </div>
-        <div v-if="D_tree[1]&&src[0]==='sound'" class="box">
+        <div :style="{'opacity':json||ejson?0:1}" v-if="D_tree[1]&&src[0]==='sound'" class="box">
             <table class="table">
                 <tr>
                     <td style="font-size: 13px">
@@ -267,14 +274,14 @@
                 </tr>
             </table>
         </div>
-        <div v-if="D_tree[1]&&src[0]==='filter'"  class="box">
+        <div :style="{'opacity':json||ejson?0:1}" v-if="D_tree[1]&&src[0]==='filter'"  class="box">
           <table class="table">
               <tr>
                   <td>
                       <table style="width: 100%">
                           <tr>
                               <td>type</td>
-                              <td><select @change="F_filerUniforms"  v-model="D_tree[1].type">
+                              <td><select @change="F_filerUniforms(1)"  v-model="D_tree[1].type">
                                   <option value="adj">调整</option>
                                   <option value="bloom">高级泛光</option>
                                   <option value="ascii">Ascii</option>
@@ -333,7 +340,7 @@
                                       <tr>
                                           <td colspan="2">
                                               {{src[3]}}
-                                              <input  @change="exWave()"  type="checkbox"  v-model="D_tree[3].cor">
+                                              <input  @change="exWave(false,2)"  type="checkbox"  v-model="D_tree[3].cor">
                                           </td>
                                       </tr>
                                       <tr>
@@ -350,11 +357,11 @@
                                           <td><input class="conf" type="number" v-model="D_tree[3].val"></td>
                                       </tr>
                                   </table>
-                                  <table v-else style="width:100%">
-                                      <tr v-if="D_tree[3]">
+                                  <table v-else-if="D_tree[3]" style="width:100%">
+                                      <tr>
                                           <td colspan="2">
                                               {{src[3]}}
-                                              <input @change="exWave(true)"  type="checkbox">
+                                              <input @change="exWave(true,2)"  type="checkbox">
                                           </td>
                                       </tr>
                                       <tr>
@@ -461,7 +468,7 @@
                       <table width="100%">
                           <tr><td colspan="4">uniforms</td></tr>
                           <tr>
-                              <td class="flex" style="height: calc(100vh - 200px);overflow:auto">
+                              <td class="flex" style="height: calc(100vh - 180px);overflow:auto">
                                   <div style="font-size:12px;border:2px silver solid"  v-for="(val,key,index) of D_tree[1].uniforms">
                                       {{key}}<br>
                                       <input style="min-width:60px" class="conf" v-model="D_tree[1].uniforms[key]">
@@ -473,20 +480,691 @@
               </tr>
           </table>
         </div>
-        <div v-if="D_tree[1]&&src[0]==='text'" class="box">
+        <div :style="{'opacity':json||ejson?0:1}" v-if="D_tree[1]&&src[0]==='text'" class="box">
             {{D_tree[1]}}
+        </div>
+        <div :style="{'opacity':json||ejson?0:1}" v-if="D_tree[1]&&src[0]==='vessel'" class="box">
+          <table width="100%" class="table">
+              <tr>
+                  <td width="60px">acti<input type="checkbox" v-model="D_tree[1].acti"></td>
+                  <td height="65px">
+                      <table v-if="src[2]=='data'&&D_tree[3]">
+                          <tr>
+                              <td>index</td><td>alpha</td><td>x</td><td>y</td>
+                          </tr>
+                          <tr>
+                              <td><input class="conf" v-model="D_tree[3].index"></td>
+                              <td><input class="conf" v-model="D_tree[3].alpha"></td>
+                              <td><input class="conf" v-model="D_tree[3].x"></td>
+                              <td><input class="conf" v-model="D_tree[3].y"></td>
+                          </tr>
+                      </table>
+                      <table v-if="src[2]=='action'&&D_tree[3]">
+                          <tr>
+                              <td>wave</td><td>frame</td><td>com</td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <select v-model="D_tree[3].wave">
+                                      <option value=104>方波</option>
+                                      <option value=204>三角波</option>
+                                      <option value=304>正弦波</option>
+                                      <option value=404>平滑波</option>
+
+                                      <option value=105>半圆波</option>
+                                      <option value=205>方根波</option>
+                                      <option value=305>E波</option>
+                                      <option value=405>弹跳波</option>
+                                      <option value=505>平方三角</option>
+                                      <option value=605>平方正弦</option>
+                                      <option value=705>斐波那契</option>
+
+                                      <option value=101>振荡波</option>
+                                      <option value=201>振荡余弦</option>
+                                      <option value=301>振荡正切</option>
+                                      <option value=401>平均振荡</option>
+
+                                      <option value=102>指数</option>
+                                      <option value=202>反比例</option>
+                                      <option value=302>弦反比例</option>
+                                      <option value=402>方根波</option>
+                                      <option value=502>平方波</option>
+                                      <option value=602>正态波</option>
+                                      <option value=702>弹性波</option>
+                                      <option value=802>贝塞尔</option>
+                                      <option value=902>阻尼</option>
+                                  </select>
+                              </td>
+                              <td><input class="conf" v-model="D_tree[3].frame"></td>
+                              <td>
+                                  <select  v-model="D_tree[3].com">
+                                      <option v-for="(val,key) of $data.basedata.handler"  :value="key">{{key}}</option>
+                                  </select>
+                              </td>
+                          </tr>
+                      </table>
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="2">
+                      <table>
+                          <tr>
+                              <td>data<td>
+                              <td width="55px"><input class="input"  @click="F_handle(handle.src,[2,'data']);F_handle(handle.additem,[2])" type="button" value="add"></td>
+                              <td width="102px"><input class="input"  @click="F_handle(handle.subarr,[2])" type="button" value="remove"></td>
+                              <td @click="F_handle(handle.src,[2,'data']);F_handle(handle.src,[3,key])"
+                                  :class="src[3]!==key?'btn':'btn-hover'"
+                                  v-for="(val,key) of D_tree[1].data" >{{key}}</td>
+                          </tr>
+                      </table>
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="2">
+                      <table width="100%">
+                          <tr>
+                              <td style="vertical-align: top">
+                                  <table width="100%">
+                                      <tr><td colspan="2">action</td></tr>
+                                      <tr>
+                                          <td><input class="input"  @click="F_handle(handle.src,[2,'action']);F_handle(handle.additem,[2])" type="button" value="add"></td>
+                                          <td><input class="input"  @click="F_handle(handle.subitem,[2])" type="button" value="remove"></td>
+                                      </tr>
+                                      <tr>
+                                          <td colspan="2"  style="min-width: 157px">
+                                              <div class="parameter" style="height: calc(100vh - 260px)">
+                                                  <button   class="hover3" :class="src[3]!==key?'':'hover3-acti'"
+                                                            @click="F_handle(handle.src,[2,'action']);F_handle(handle.src,[3,key])"
+                                                            v-for="(item,key) of D_tree[1].action">
+                                                      <input style="width:120px" :style="{'color':item.cor?'var(--w-color)':'var(--y-color)'}"
+                                                             @input="ediId(3)"  v-model="key">
+                                                  </button>
+                                              </div>
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                              <td width="100%">
+                                  <table v-if="D_tree[3]" width="100%">
+                                      <tr>
+                                          <td v-if="src[2]==='data'">
+                                              <table width="100%">
+                                                  <tr>
+                                                      <td style="vertical-align: top"  width="159px">
+                                                          <table  width="100%">
+                                                              <tr><td colspan="2">filter</td><tr>
+                                                              <tr>
+                                                                  <td><input class="input"  @click="F_handle(handle.src,[4,'filter']);F_handle(handle.additem,[4])" type="button" value="add"></td>
+                                                                  <td><input class="input"  @click="F_handle(handle.subitem,[4])" type="button" value="remove"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="2">
+                                                                      <div class="parameter" style="height: calc(100vh - 265px)">
+                                                                          <button   class="hover3" :class="src[5]!==key?'':'hover3-acti'"
+                                                                                    @click="F_handle(handle.src,[4,'filter']);F_handle(handle.src,[5,key])"
+                                                                                    v-for="(item,key) of D_tree[3].filter">
+                                                                              <input style="width:120px" :style="{'color':item.cor?'var(--w-color)':'var(--y-color)'}"
+                                                                                     @input="ediId(5)"  v-model="key">
+                                                                          </button>
+                                                                      </div>
+                                                                  </td>
+                                                              </tr>
+                                                          </table>
+                                                      </td>
+                                                      <td>
+                                                        <table v-if="D_tree[5]" class="table">
+                                                              <tr>
+                                                                  <td>
+                                                                      <table style="width: 100%">
+                                                                          <tr>
+                                                                              <td>type</td>
+                                                                              <td><select @change="F_filerUniforms(5)"  v-model="D_tree[5].type">
+                                                                                  <option value="adj">调整</option>
+                                                                                  <option value="bloom">高级泛光</option>
+                                                                                  <option value="ascii">Ascii</option>
+                                                                                  <option value="bulge">凸起收缩</option>
+                                                                                  <option value="convo">卷积</option>
+                                                                                  <option value="colorRep">颜色替换</option>
+                                                                                  <option value="cross">交叉线</option>
+                                                                                  <option value="crt">CRT</option>
+                                                                                  <option value="dot">像素点</option>
+                                                                                  <option value="emboss">浮雕</option>
+                                                                                  <option value="glitch">故障</option>
+                                                                                  <option value="glow">发光</option>
+                                                                                  <option value="godray">光束</option>
+                                                                                  <option value="motion">运动模糊</option>
+                                                                                  <option value="old">老电影</option>
+                                                                                  <option value="outline">轮廓</option>
+                                                                                  <option value="pixel">像素化</option>
+                                                                                  <option value="kawa">模糊</option>
+                                                                                  <option value="radial">径向模糊</option>
+                                                                                  <option value="rgb">RGB分离</option>
+                                                                                  <option value="shock">冲击波</option>
+                                                                                  <option value="tiltX">倾斜X轴</option>
+                                                                                  <option value="tiltY">倾斜Y轴</option>
+                                                                                  <option value="twist">扭曲</option>
+                                                                                  <option value="zoom">缩放模糊</option>
+                                                                              </select></td>
+                                                                          </tr>
+                                                                          <tr>
+                                                                              <td>com</td>
+                                                                              <td>
+                                                                                  <select  v-model="D_tree[5].com">
+                                                                                      <option v-for="(val,key) of $data.basedata.handler"  :value="key">{{key}}</option>
+                                                                                  </select>
+                                                                              </td>
+                                                                          </tr>
+                                                                      </table>
+                                                                  </td>
+                                                                  <td>
+                                                                      <table style="width: 100%">
+                                                                          <tr><td>cycle</td><td><input  v-model="D_tree[5].cycle" type="number"></td></tr>
+                                                                          <tr><td>time</td><td><input   v-model="D_tree[5].time" type="number"></td></tr>
+                                                                      </table>
+                                                                  </td>
+                                                                  <td>
+                                                                      <table style="width: 100%">
+                                                                          <tr><td>activa</td><td><input v-model="D_tree[5].acti" type="checkbox"></td></tr>
+                                                                          <tr><td>cease</td><td><input v-model="D_tree[5].cease" type="checkbox"></td></tr>
+                                                                      </table>
+                                                                  </td>
+                                                                  <td rowspan="2">
+<!--                                                                      编辑-->
+                                                                      <table width="100%">
+                                                                          <tr>
+                                                                              <td colspan="2" style="max-width:180px ">parameter</td>
+                                                                              <td rowspan="3" style="vertical-align: top;min-width:275px">
+                                                                                  <table v-if="D_tree[7]&&D_tree[7].cor"  style="width:100%">
+                                                                                      <tr>
+                                                                                          <td colspan="2">
+                                                                                              {{src[7]}}
+                                                                                              <input  @change="exWave(false,6)"  type="checkbox"  v-model="D_tree[7].cor">
+                                                                                          </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                          <td>type</td>
+                                                                                          <td>val</td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                          <td>
+                                                                                              <select  v-model="D_tree[7].type">
+                                                                                                  <option value="seed">seed</option>
+                                                                                                  <option value="add">add</option>
+                                                                                              </select>
+                                                                                          </td>
+                                                                                          <td><input class="conf" type="number" v-model="D_tree[7].val"></td>
+                                                                                      </tr>
+                                                                                  </table>
+                                                                                  <table v-else-if="D_tree[7]" style="width:100%">
+                                                                                      <tr>
+                                                                                          <td colspan="2">
+                                                                                              {{src[7]}}
+                                                                                              <input @change="exWave(true,6)"  type="checkbox">
+                                                                                          </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                          <td><input class="input"  @click="F_handle(handle.additem,[7])" type="button" value="add"></td>
+                                                                                          <td><input class="input"  @click="F_handle(handle.subarr,[7])" type="button" value="remove"></td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                          <td colspan="2" >
+                                                                                              <table>
+                                                                                                  <tr>
+                                                                                                      <td @click="F_handle(handle.src,[8,key])" :class="src[8]!==key?'btn':'btn-hover'" v-for="(item,key) of D_tree[7]">
+                                                                                                          {{key}}
+                                                                                                      </td>
+                                                                                                  </tr>
+                                                                                              </table>
+
+                                                                                          </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                          <td colspan="2">
+                                                                                              <table v-if="key==src[8]"  v-for="(item,key) in D_tree[7]">
+                                                                                                  <tr>
+                                                                                                      <td>count</td><td><select  v-model="item.count">
+                                                                                                      <option value="add">add</option>
+                                                                                                      <option value="mul">mul</option>
+                                                                                                      <option value="and">and</option>
+                                                                                                      <option value="or">or</option>
+                                                                                                      <option value="xor">xor</option>
+                                                                                                      <option value="max">max</option>
+                                                                                                      <option value="min">min</option>
+                                                                                                      <option value="pow">pow</option>
+                                                                                                  </select></td>
+                                                                                                      <td>wave</td><td><select v-model="item.wave">
+                                                                                                      <option value=104>方波</option>
+                                                                                                      <option value=204>三角波</option>
+                                                                                                      <option value=304>正弦波</option>
+                                                                                                      <option value=404>平滑波</option>
+
+                                                                                                      <option value=105>半圆波</option>
+                                                                                                      <option value=205>方根波</option>
+                                                                                                      <option value=305>E波</option>
+                                                                                                      <option value=405>弹跳波</option>
+                                                                                                      <option value=505>平方三角</option>
+                                                                                                      <option value=605>平方正弦</option>
+                                                                                                      <option value=705>斐波那契</option>
+
+                                                                                                      <option value=101>振荡波</option>
+                                                                                                      <option value=201>振荡余弦</option>
+                                                                                                      <option value=301>振荡正切</option>
+                                                                                                      <option value=401>平均振荡</option>
+
+                                                                                                      <option value=102>指数</option>
+                                                                                                      <option value=202>反比例</option>
+                                                                                                      <option value=302>弦反比例</option>
+                                                                                                      <option value=402>方根波</option>
+                                                                                                      <option value=502>平方波</option>
+                                                                                                      <option value=602>正态波</option>
+                                                                                                      <option value=702>弹性波</option>
+                                                                                                      <option value=802>贝塞尔</option>
+                                                                                                      <option value=902>阻尼</option>
+                                                                                                  </select></td>
+                                                                                                  </tr>
+                                                                                                  <tr>
+                                                                                                      <td>digit</td><td><input   type="checkbox" v-model="item.digit"></td>
+                                                                                                      <td>reve</td><td><input    type="checkbox" v-model="item.reve"></td>
+                                                                                                  </tr>
+                                                                                                  <tr>
+                                                                                                      <td>frame</td><td><input  class="conf" type="number" v-model="item.frame"></td>
+                                                                                                      <td>phase</td><td><input  class="conf" type="number" v-model="item.phase"></td>
+                                                                                                  </tr>
+                                                                                                  <tr>
+                                                                                                      <td>freq</td><td><input   class="conf"  type="number" v-model="item.freq"></td>
+                                                                                                      <td>sample</td><td><input  class="conf" type="number" v-model="item.sample"></td>
+                                                                                                  </tr>
+                                                                                                  <tr>
+                                                                                                      <td>val1</td><td><input class="conf"  type="number" v-model="item.val1"></td>
+                                                                                                      <td>val2</td><td><input class="conf"  type="number" v-model="item.val2"></td>
+                                                                                                  </tr>
+                                                                                              </table>
+                                                                                          </td>
+                                                                                      </tr>
+                                                                                  </table>
+                                                                              </td>
+                                                                          </tr>
+                                                                          
+                                                                          <tr>
+                                                                              <td><input class="input"  @click="F_handle(handle.src,[6,'wave']);F_handle(handle.additem,[6])" type="button" value="add"></td>
+                                                                              <td><input class="input"  @click="F_handle(handle.subitem,[6])" type="button" value="remove"></td>
+                                                                          </tr>
+                                                                          <tr>
+                                                                              <td colspan="2" style="max-width:180px">
+                                                                                  <div class="parameter">
+                                                                                      <button  class="hover3" :class="src[7]!==key?'':'hover3-acti'"
+                                                                                               @click="F_handle(handle.src,[6,'wave']);F_handle(handle.src,[7,key])" 
+                                                                                               v-for="(item,key) of D_tree[5].wave">
+                                                                                         <input style="width:120px" :style="{'color':item.cor?'var(--w-color)':'var(--y-color)'}"  @input="ediId(3)"  v-model="key">
+                                                                                      </button>
+                                                                                  </div>
+                                                                              </td>
+                                                                          </tr>
+                                                                      </table>
+                                                                  </td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td colspan="3" style="vertical-align: top;max-width:300px">
+                                                                      <table width="100%">
+                                                                          <tr><td colspan="4">uniforms</td></tr>
+                                                                          <tr>
+                                                                              <td class="flex" style="height: calc(100vh - 310px);overflow:auto">
+                                                                                  <div style="font-size:12px;border:2px silver solid"  v-for="(val,key,index) of D_tree[5].uniforms">
+                                                                                      {{key}}<br>
+                                                                                      <input style="min-width:60px" class="conf" v-model="D_tree[5].uniforms[key]">
+                                                                                  </div>
+                                                                              </td>
+                                                                          </tr>
+                                                                      </table>
+                                                                  </td>
+                                                              </tr>
+                                                          </table>
+                                                      </td>
+                                                  </tr>
+                                              </table>
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                      </table>
+                  </td>
+              </tr>
+          </table>
+        </div>
+        <div :style="{'opacity':json||ejson?0:1}" v-if="src[0]==='group'" 
+             class="box" style="width:100vw; overflow-y: auto;">
+          <table class="table">
+            <tr v-for="(item,key) of basedata.vessel">
+                <td>v_{{key}}</td>
+                <td @change="F_handle(handle.group,['v_'+key])" v-if="D_tree[0]['v_'+key]">
+                    <select  v-model="D_tree[0]['v_'+key]">
+                        <option value=""></option>
+                        <option  v-if="key!=k"   v-for="(v,k) of basedata.vessel"  :value="'v_'+k">v_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.window"  :value="'w_'+k">w_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.command" :value="'c_'+k">c_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.shape"   :value="'s_'+k">s_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.wave"    :value="'a_'+k">a_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.fica"    :value="'f_'+k">f_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.tube"    :value="'t_'+key">t_{{k}}</option>
+                    </select>
+                </td>
+                <td @change="F_handle(handle.group,['v_'+key])" v-else>
+                    <select>
+                        <option value=""></option>
+                        <option v-if="key!=k"     v-for="(v,k) of basedata.vessel"  :value="'v_'+k">v_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.window"  :value="'w_'+k">w_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.command" :value="'c_'+k">c_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.shape"   :value="'s_'+k">s_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.wave"    :value="'a_'+k">a_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.fica"    :value="'f_'+k">f_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.tube"    :value="'t_'+key">t_{{k}}</option>
+                    </select>
+                </td>
+                <td width="100%"></td>
+            </tr>
+            <tr  v-for="(item,key) of basedata.window">
+                <td>w_{{key}}</td>
+                <td @change="F_handle(handle.group,['w_'+key])"  v-if="D_tree[0]['w_'+key]">
+                    <select  v-model="D_tree[0]['w_'+key]">
+                        <option value=""></option>
+                        <option  v-for="(v,k) of basedata.vessel"  :value="'v_'+k">v_{{k}}</option>
+                        <option  v-if="key!=k"   v-for="(v,k) of basedata.window"  :value="'w_'+k">w_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.command" :value="'c_'+k">c_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.shape"   :value="'s_'+k">s_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.wave"    :value="'a_'+k">a_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.fica"    :value="'f_'+k">f_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.tube"    :value="'t_'+key">t_{{k}}</option>
+                    </select>
+                </td>
+                <td @change="F_handle(handle.group,['w_'+key])"  v-else>
+                    <select>
+                        <option value=""></option>
+                        <option  v-for="(v,k) of basedata.vessel"  :value="'v_'+k">v_{{k}}</option>
+                        <option  v-if="key!=k"    v-for="(v,k) of basedata.window"  :value="'w_'+k">w_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.command" :value="'c_'+k">c_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.shape"   :value="'s_'+k">s_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.wave"    :value="'a_'+k">a_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.fica"    :value="'f_'+k">f_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.tube"    :value="'t_'+key">t_{{k}}</option>
+                    </select>
+                </td>
+                <td width="100%"></td>
+            </tr>
+            <tr  v-for="(item,key) of basedata.command">
+                <td>c_{{key}}</td>
+                <td @change="F_handle(handle.group,['c_'+key])"  v-if="D_tree[0]['c_'+key]">
+                    <select  v-model="D_tree[0]['c_'+key]">
+                        <option value=""></option>
+                        <option  v-for="(v,k) of basedata.vessel"  :value="'v_'+k">v_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.window"  :value="'w_'+k">w_{{k}}</option>
+                        <option v-if="key!=k"   v-for="(v,k) of basedata.command" :value="'c_'+k">c_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.shape"   :value="'s_'+k">s_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.wave"    :value="'a_'+k">a_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.fica"    :value="'f_'+k">f_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.tube"    :value="'t_'+key">t_{{k}}</option>
+                    </select>
+                </td>
+                <td @change="F_handle(handle.group,['c_'+key])"  v-else>
+                    <select>
+                        <option value=""></option>
+                        <option  v-for="(v,k) of basedata.vessel"  :value="'v_'+k">v_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.window"  :value="'w_'+k">w_{{k}}</option>
+                        <option  v-if="key!=k"   v-for="(v,k) of basedata.command" :value="'c_'+k">c_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.shape"   :value="'s_'+k">s_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.wave"    :value="'a_'+k">a_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.fica"    :value="'f_'+k">f_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.tube"    :value="'t_'+key">t_{{k}}</option>
+                    </select>
+                </td>
+                <td width="100%"></td>
+            </tr>
+            <tr  v-for="(item,key) of basedata.shape">
+                <td>s_{{key}}</td>
+                <td @change="F_handle(handle.group,['s_'+key])"  v-if="D_tree[0]['s_'+key]">
+                    <select  v-model="D_tree[0]['s_'+key]">
+                        <option value=""></option>
+                        <option  v-for="(v,k) of basedata.vessel"  :value="'v_'+k">v_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.window"  :value="'w_'+k">w_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.command" :value="'c_'+k">c_{{k}}</option>
+                        <option v-if="key!=k"   v-for="(v,k) of basedata.shape"   :value="'s_'+k">s_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.wave"    :value="'a_'+k">a_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.fica"    :value="'f_'+k">f_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.tube"    :value="'t_'+key">t_{{k}}</option>
+                    </select>
+                </td>
+                <td @change="F_handle(handle.group,['s_'+key])"  v-else>
+                    <select>
+                        <option value=""></option>
+                        <option  v-for="(v,k) of basedata.vessel"  :value="'v_'+k">v_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.window"  :value="'w_'+k">w_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.command" :value="'c_'+k">c_{{k}}</option>
+                        <option  v-if="key!=k"  v-for="(v,k) of basedata.shape"   :value="'s_'+k">s_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.wave"    :value="'a_'+k">a_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.fica"    :value="'f_'+k">f_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.tube"    :value="'t_'+key">t_{{k}}</option>
+                    </select>
+                </td>
+                <td width="100%"></td>
+            </tr>
+            <tr  v-for="(item,key) of basedata.wave">
+                <td>a_{{key}}</td>
+                <td @change="F_handle(handle.group,['a_'+key])"  v-if="D_tree[0]['a_'+key]">
+                    <select  v-model="D_tree[0]['a_'+key]">
+                        <option value=""></option>
+                        <option  v-for="(v,k) of basedata.vessel"  :value="'v_'+k">v_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.window"  :value="'w_'+k">w_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.command" :value="'c_'+k">c_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.shape"   :value="'s_'+k">s_{{k}}</option>
+                        <option v-if="key!=k"   v-for="(v,k) of basedata.wave"    :value="'a_'+k">a_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.fica"    :value="'f_'+k">f_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.tube"    :value="'t_'+key">t_{{k}}</option>
+                    </select>
+                </td>
+                <td @change="F_handle(handle.group,['a_'+key])"  v-else>
+                    <select>
+                        <option value=""></option>
+                        <option  v-for="(v,k) of basedata.vessel"  :value="'v_'+k">v_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.window"  :value="'w_'+k">w_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.command" :value="'c_'+k">c_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.shape"   :value="'s_'+k">s_{{k}}</option>
+                        <option v-if="key!=k"  v-for="(v,k) of basedata.wave"    :value="'a_'+k">a_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.fica"    :value="'f_'+k">f_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.tube"    :value="'t_'+key">t_{{k}}</option>
+                    </select>
+                </td>
+                <td width="100%"></td>
+            </tr>
+            <tr  v-for="(item,key) of basedata.fica">
+                <td>f_{{key}}</td>
+                <td @change="F_handle(handle.group,['f_'+key])"  v-if="D_tree[0]['f_'+key]">
+                    <select  v-model="D_tree[0]['f_'+key]">
+                        <option value=""></option>
+                        <option  v-for="(v,k) of basedata.vessel"  :value="'v_'+k">v_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.window"  :value="'w_'+k">w_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.command" :value="'c_'+k">c_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.shape"   :value="'s_'+k">s_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.wave"    :value="'a_'+k">a_{{k}}</option>
+                        <option v-if="key!=k"  v-for="(v,k) of basedata.fica"    :value="'f_'+k">f_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.tube"    :value="'t_'+key">t_{{k}}</option>
+                    </select>
+                </td>
+                <td @change="F_handle(handle.group,['f_'+key])"  v-else>
+                    <select>
+                        <option value=""></option>
+                        <option  v-for="(v,k) of basedata.vessel"  :value="'v_'+k">v_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.window"  :value="'w_'+k">w_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.command" :value="'c_'+k">c_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.shape"   :value="'s_'+k">s_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.wave"    :value="'a_'+k">a_{{k}}</option>
+                        <option  v-if="key!=k"  v-for="(v,k) of basedata.fica"    :value="'f_'+k">f_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.tube"    :value="'t_'+key">t_{{k}}</option>
+                    </select>
+                </td>
+                <td width="100%"></td>
+            </tr>
+            <tr  v-for="(item,key) of basedata.tube">
+                <td>t_{{key}}</td>
+                <td @change="F_handle(handle.group,['t_'+key])"  v-if="D_tree[0]['t_'+key]">
+                    <select  v-model="D_tree[0]['t_'+key]">
+                        <option value=""></option>
+                        <option  v-for="(v,k) of basedata.vessel"  :value="'v_'+k">v_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.window"  :value="'w_'+k">w_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.command" :value="'c_'+k">c_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.shape"   :value="'s_'+k">s_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.wave"    :value="'a_'+k">a_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.fica"    :value="'f_'+k">f_{{k}}</option>
+                        <option v-if="key!=k"  v-for="(v,k) of basedata.tube"    :value="'t_'+key">t_{{k}}</option>
+                    </select>
+                </td>
+                <td @change="F_handle(handle.group,['t_'+key])"  v-else>
+                    <select>
+                        <option value=""></option>
+                        <option  v-for="(v,k) of basedata.vessel"  :value="'v_'+k">v_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.window"  :value="'w_'+k">w_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.command" :value="'c_'+k">c_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.shape"   :value="'s_'+k">s_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.wave"    :value="'a_'+k">a_{{k}}</option>
+                        <option  v-for="(v,k) of basedata.fica"    :value="'f_'+k">f_{{k}}</option>
+                        <option v-if="key!=k"  v-for="(v,k) of basedata.tube"    :value="'t_'+key">t_{{k}}</option>
+                    </select>
+                </td>
+                <td width="100%"></td>
+            </tr>
+          </table>
+        </div>
+        <div :style="{'opacity':json||ejson?0:1}" v-if="D_tree[1]&&src[0]==='handler'" 
+             class="box"  style="overflow-y: auto;">
+            <table width="100%">
+                <tr v-if="!D_tree[1].length">
+                    <td>
+                        <input @click="F_handle(handle.addhand,[0])" style="width:100%"
+                               value="add" type="button">
+                    </td>
+                </tr>
+                <tr v-for="(item,key) of D_tree[1]">
+                    <td width="100%">
+                        <table class="handler">
+                            <tr><td colspan="3" width="100%">
+                                <table width="100%">
+                                    <tr>
+                                        <td>
+                                            <input @click="F_handle(handle.addhand,[key])" style="width:100%"
+                                                   value="add" type="button">
+                                        </td>
+                                        <td>
+                                            <input @click="F_handle(handle.removehand,[key])" style="width:100%"
+                                                   value="remove" type="button">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td></tr>
+                            <tr>
+                                <td>
+                                    <select @change="F_handle(handle.changecom,[key])"  v-model="item.type">
+                                        <option value="0">event</option>
+                                        <option value="1">command</option>
+                                    </select>
+                                </td>
+                                <td v-if="item.type!='1'"  width="100%">
+                                    <input class="conf" style="width:100%"  v-model=item.exe[0]>
+                                </td>
+                                <td v-else  width="100%">
+                                    <select class="conf" style="width:100%"  v-model=item.exe[0]>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>1</option>
+                                    </select>
+                                </td>
+                                <td v-if="item.type=='1'">
+                                    <input @click="F_handle(handle.addcom,[key])" style="width:80px"
+                                           value="add" type="button">
+                                </td>
+                            </tr>
+                            <tr v-if="item.type=='1'&&k>0" v-for="(v,k) of item.exe">
+                               <td colspan="2">
+                                   <input class="conf" style="width:100%"  v-model=item.exe[k]>
+                               </td>
+                               <td>
+                                   <input @click="F_handle(handle.removecom,[key,k])" style="width:80px"
+                                          value="remove" type="button">
+                               </td> 
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div :style="{'opacity':json||ejson?0:1}" v-if="D_tree[1]&&src[0]==='effector'">
+            <table class="table">
+                <tr>
+                    <td>count</td>
+                    <td><input @change="D_tree[1].count=D_tree[1].count?1:0"  v-model="D_tree[1].count" type="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>judeg</td>
+                    <td><input v-model="D_tree[1].judge"></td>
+                </tr>
+                <tr>
+                    <td>com</td>
+                    <td><input v-model="D_tree[1].com"></td>
+                </tr>
+            </table>
+        </div>
+        <div :style="{'opacity':json||ejson?0:1}" v-if="D_tree[1]&&src[0]==='fica'" class="box">
+            <table class="table">
+                <tr>
+                    <td>acti</td>
+                    <td><input v-model="D_tree[1].acti" type="checkbox"></td>
+                    <td>index</td>
+                    <td><input v-model="D_tree[1].index" class="conf"></td>
+                </tr>
+                <tr>
+                    <td>mode</td>
+                    <td>
+                        <select v-model="D_tree[1].mode">
+                            <option value="0">谢尔宾三角形</option>
+                            <option value="1">龙曲线</option>
+                            <option value="2">分形树</option>
+                            <option value="3">庞加莱圆盘</option>
+                            <option value="4">电子云</option>
+                            <option value="5">科赫曲线</option>
+                        </select>
+                    </td>
+                    <td>depth</td>
+                    <td><input v-model="D_tree[1].depth" class="conf"></td>
+                </tr>
+                <tr>
+                    <td>w</td>
+                    <td><input v-model="D_tree[1].w" class="conf"></td>
+                    <td>h</td>
+                    <td><input v-model="D_tree[1].h" class="conf"></td>
+                </tr>
+                <tr>
+                    <td>x</td>
+                    <td><input v-model="D_tree[1].x" class="conf"></td>
+                    <td>y</td>
+                    <td><input v-model="D_tree[1].y" class="conf"></td>
+                </tr>
+                <tr>
+                    <td>rota</td>
+                    <td><input v-model="D_tree[1].rota" class="conf"></td>
+                    <td>alpha</td>
+                    <td><input v-model="D_tree[1].alpha" class="conf"></td>
+                </tr>
+                <tr>
+                    <td>line</td>
+                    <td><input v-model="D_tree[1].line" class="conf"></td>
+                </tr>
+            </table>
         </div>
     </div>
     <div class="src_main">
-        <div class="src_main-item hover1"  :class="(index===src.length-1)?'hover1-acti':''"
-             @click="F_handle(handle.src,[index,key])" v-for="(key,index) of src">
-            {{key}}
-        </div>
+        <table class="src_main-item hover1"  :class="(index===src.length-1)?'hover1-acti':''" v-for="(key,index) of src">
+            <tr><td style="font-weight: 800;background-color:#000;color: var(--r-color)" @click="F_text(index)">@</td><td @click="F_handle(handle.src,[index,key])">{{key}}</td></tr>
+        </table>
     </div>
     <img id="load_bit" :src="src[0]==='bit'&&src[1]?'../../'+D_tree[1][0]+D_tree[1][1]+'.png':''" style="display: none;">
-    <div v-if="json" @dblclick="json=false"  class="json">
-        <textarea disabled v-model="JSON.stringify(basedata)"></textarea>
-    </div>
 </div>
 <div id="load"></div>
 

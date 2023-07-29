@@ -71,7 +71,8 @@ LIM.SCENE=LIM.SCENE||{};
         
         if(action.time < action.frame) {
             action.time++
-        } else {
+        } 
+        else {
             this._action.splice(0, 1)
             if(action.com)  this._origin.triggerHandler(action.com)
         }

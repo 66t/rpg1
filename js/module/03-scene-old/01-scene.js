@@ -252,9 +252,7 @@ LIM.SCENE=LIM.SCENE||{};
         return [text.text]
     }
     _.Scene.prototype.showItem = function() {
-        if(this.isRun(1)) {
-            this.setRun(1,false)
-        }
+        if(this.isRun(1)) {this.setRun(1,false)}
         this.children=[]
         let arr=[]
         for(let key in this._item)

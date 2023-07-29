@@ -9,7 +9,7 @@ LIM.SCENE=LIM.SCENE||{};
     _.Filter.prototype.initialize = function () {this.filter={}}
     _.Filter.prototype.createFilter = function (key,val) {
         let app=this.dataFilter(val.type)
-        this.filter[key]={app:app,data:val,acti:val.acti}
+        this.filter[key]={app:app,data:val,acti:val.acti,time:0}
         for(let uniforms in val.uniforms){
             let src=uniforms.split(".")
             let d1= app
@@ -29,12 +29,12 @@ LIM.SCENE=LIM.SCENE||{};
     _.Filter.prototype.updateFilter = function () {
         let bool=false
         let s=""
+        let com=""
         for(let key in this.filter) {
             let filter = this.filter[key]
             if (filter.acti) {
-            bool = bool || filter.data.cease
             s+=":"+key
-            let time = filter.data.time++
+            let time = filter.time++
             let data = LIM.UTILS.countWave(filter.data.wave, [100, time], filter.app.uniforms)
             for (let uniforms in data) {
                 let src = uniforms.split(".")
@@ -50,10 +50,14 @@ LIM.SCENE=LIM.SCENE||{};
                     }
                 }
             }
-            if (filter.data.cycle > 0 && time > filter.data.cycle) {filter.acti = false}
+            if ((filter.data.time > 0 && time > filter.data.time)) {
+                filter.acti = false
+                com=filter.data.com
+            }
+            else  bool = bool || filter.data.cease
            }
         }
-        return [bool,s]
+        return [bool,s,com]
     }
     _.Filter.prototype.dataFilter = function (type){
         switch (type) {

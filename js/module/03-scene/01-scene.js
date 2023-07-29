@@ -16,6 +16,7 @@ LIM.SCENE=LIM.SCENE||{};
     _.Scene.prototype.constructor = _.Scene;
     _.Scene.prototype.initialize = function (name) {
         this._name=name
+        this._lock=false
         this.startRunning();
         Scene_Base.prototype.initialize.call(this);
     }
@@ -24,25 +25,55 @@ LIM.SCENE=LIM.SCENE||{};
         $dataScene=json||null
         this.edi=json?false:true
         this.children=[]
+        
         this._load = -1
-        this._cease = false
+        this._filkey=""
         this._run = 0;
         this._time = 0;
-        
         this._bitload =[]
-        
         this._data={}
+        this._item = {}
         this._bit ={}
         this._txt ={}
         this._word={}
-
         this._heap = {}
         this._filter=new LIM.SCENE.Filter()
-        this._filkey=""
         if(this._name&&!json) DataManager.loadDataFile('$dataScene', 'scene/' + this._name + '.json');
+    }
+    //触发器
+    _.Scene.prototype.effector=function(){
+        for(let key in this._data.effector)
+            if (this._data.effector[key].count === 1 && this.judge(this._data.effector[key].judge)) {
+                this._data.effector[key].count++
+                this.triggerHandler(this._data.effector[key].com)
+            }
+    }
+    _.Scene.prototype.judge=function (judge){
+        switch (judge[0]){
+            case "%":return LIM.EVENT[judge.slice(1)]()
+        }
     }
     
     //执行
+    _.Scene.prototype.triggerHandler=function(com,data) {
+        if(!com||this._lock) return
+        let handler=this._data.handler[com]
+        if(handler) this.exCom(handler,data)
+    }
+    _.Scene.prototype.exCom=function(parser,data){
+        for(let token of parser) {
+            if(data) token=token.replacePlace(data)
+            if (token[0] === "%")
+            {
+                let fun=token.slice(1)
+                if(LIM.EVENT[fun]) LIM.EVENT[fun]()
+            }
+            else if (token[0] == "#") this.exFun(token.split(":"))
+            else {
+                this.triggerHandler(token)
+            }
+        }
+    }
     _.Scene.prototype.exFun= function(eve){
         switch (eve[0]) {
             case -2:
@@ -122,14 +153,12 @@ LIM.SCENE=LIM.SCENE||{};
 
             case 71:
             case "#pushFic":
-                this._data.fica[eve[1]]=LIM.ENTITY.Shape()
+                this._data.fica[eve[1]]=LIM.ENTITY.Fica()
                 break
             case 72:
             case "#portFic":
                 this._data.fica[eve[1]][eve[2]]=this.getVal(eve[3])
                 break
-
-
             case 81:
             case "#pushSou":
                 this._data.sound[eve[1]]=LIM.ENTITY.Sound()
@@ -195,9 +224,7 @@ LIM.SCENE=LIM.SCENE||{};
                 break
         }
     }
-
-
-
+    
     _.Scene.prototype.run = function() {
         this._time = 0;
         this._load = 1;
@@ -219,19 +246,71 @@ LIM.SCENE=LIM.SCENE||{};
     }
     _.Scene.prototype.refresh = function() {
         this._time++
-        if(this._time===1)
-        {
-            this.createFilter()
-            this.a=new Sprite(this._bit["t"])
-            this.addChild(this.a)
-            if(this.edi) this.openEdi()
+        if(this._time===1&&this.edi) this.openEdi()
+        this._lock=this.refreshFilter()
+        if(!this._lock) {
+            if (this.isRun(2)) this.createItem()
+            if (this.isRun(1)) this.showItem();
+            if (this.isRun(0)) for (let item of this.children) item.update();
+            if (this.isRun(4)) this.createFilter()
         }
-        if(this.isRun(0)) {for(let item of this.children) item.update();}
-
-        let key = this.updateFilter()[1]
-        if(key!==this._filkey) {
+    }
+    _.Scene.prototype.createItem = function () {
+        if(this.isRun(2)) {this.setRun(2,false)}
+        this._item = {}
+        this.createVessel();
+        this.createFractal();
+    }
+    _.Scene.prototype.showItem = function() {
+        if(this.isRun(1)) {this.setRun(1,false)}
+        this.children=[]
+        let arr=[]
+        for(let key in this._item) arr.push({key:key,index:this._item[key]._index||0})
+        arr.sort(LIM.UTILS.sortBy("index",false))
+        
+        for(let item in this._data.group){
+            if(this._item[this._data.group[item]])
+                this._item[this._data.group[item]].children=[]
+        }
+        for(let item of arr)
+            if(this._item[item.key]) {
+                if(this._data.group[item.key]&&this._item[this._data.group[item.key]]){
+                    let pant=this._item[this._data.group[item.key]]
+                    let index=item.index
+                    if(pant.children.length)
+                        for(let i=0;i<pant.children.length;i++){
+                            if(pant.children[i]._com) if(index<pant.children[i]._com.index) {pant.addChildAt(this._item[item.key],i);i=pant.children.length}
+                            else if(i==pant.children.length-1)pant.addChild(this._item[item.key])
+                        }
+                    else pant.addChild(this._item[item.key])
+                }
+                else this.addChild(this._item[item.key])
+            }
+    }
+    _.Scene.prototype.createVessel = function () {
+        if(this._data.vessel) {
+            for(let key in this._data.vessel) {
+                let item = this._data.vessel[key]
+                let name = 'v_' + key
+                this._item[name] = new LIM.SCENE.Vessel(this, name, item)
+            }
+        }
+    }
+    _.Scene.prototype.createFractal = function () {
+        if(this._data.fica) {
+            for(let key in this._data.fica) {
+                let item = this._data.fica[key]
+                let name = 'f_' + key
+                this._item[name] = new LIM.SCENE.Fractal(this, name, item)
+            }
+        }
+    }
+    
+    _.Scene.prototype.refreshFilter =function (){
+        let data = this.updateFilter()
+        if(data[1]!==this._filkey) {
             this._filkey.key
-            let s = key.split(":").slice(1)
+            let s = data[1].split(":").slice(1)
             switch (s.length) {
                 case 0:
                     this.filters = [];
@@ -242,19 +321,40 @@ LIM.SCENE=LIM.SCENE||{};
                 case 2:
                     this.filters = [this._filter.filter[s[0]].app, this._filter.filter[s[1]].app];
                     break
+                case 3:
+                    this.filters = [this._filter.filter[s[0]].app, this._filter.filter[s[1]].app, 
+                                    this._filter.filter[s[2]].app];
+                    break
+                case 4:
+                    this.filters = [this._filter.filter[s[0]].app, this._filter.filter[s[1]].app, 
+                                    this._filter.filter[s[2]].app, this._filter.filter[s[3]].app];
+                    break
+                case 5:
+                    this.filters =  [this._filter.filter[s[0]].app, this._filter.filter[s[1]].app,
+                                     this._filter.filter[s[2]].app, this._filter.filter[s[3]].app, this._filter.filter[s[4]].app];
+                    break
+                case 6:
+                    this.filters = [this._filter.filter[s[0]].app, this._filter.filter[s[1]].app,this._filter.filter[s[2]].app, 
+                                    this._filter.filter[s[3]].app, this._filter.filter[s[4]].app,this._filter.filter[s[5]].app];
+                    break
+                case 7:
+                    this.filters = [this._filter.filter[s[0]].app, this._filter.filter[s[1]].app,
+                                    this._filter.filter[s[2]].app, this._filter.filter[s[3]].app, 
+                                    this._filter.filter[s[4]].app, this._filter.filter[s[5]].app,this._filter.filter[s[5]].app];
+                    break
             }
         }
+        if(data[2])  this.triggerHandler(data[2])
+        return data[0]
     }
-    
-    
     _.Scene.prototype.updateFilter = function () {
         return this._filter.updateFilter()
     }
     _.Scene.prototype.createFilter = function () {
+        if (this.isRun(4)) {this.setRun(4, false)}
         for(let key in this._data.filter)
             this._filter.createFilter(key,this._data.filter[key])
     }
-    
     
     //已加载
     _.Scene.prototype.DataLoaded = function () {
@@ -265,8 +365,6 @@ LIM.SCENE=LIM.SCENE||{};
             this._load = 0;
         }
     }
-
-
     //打开编辑器
     _.Scene.prototype.openEdi = function () {
         let parameter = JSON.stringify($dataScene)
@@ -330,6 +428,13 @@ LIM.SCENE=LIM.SCENE||{};
     }
     _.Scene.prototype.setRun=function(bit,bool){
         this._run = LIM.UTILS.setBit(this._run,bit,bool);
+    }
+    _.Scene.prototype.getBit = function (key) {
+        if(this._bit[key]) {
+            return this._bit[key];
+        } else {
+            return null;
+        }
     }
 
 })(LIM.SCENE);

@@ -64,8 +64,7 @@
   },
   "vessel": {
     "story":{"acti": true, "run": 0, "ope": 0, "data": [{"alpha": 1,"x": 0,"y": 0,"index": 100}],"action":{}},
-    "ban":
-    {"acti": true, "run": 0, "ope": 0, 
+    "ban":{"acti": true, "run": 0, "ope": 0, 
       "data":
       [
         {"alpha": 1,"x": 0,"y": 0,"index": 150,"filter": {

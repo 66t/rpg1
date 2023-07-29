@@ -7,13 +7,14 @@ var btn = ["load","json"]
 function init() {
     $vue=new Vue({
         el: '#window',
-        data:{
+        data:{ 
             basedata:$data,//数据源
             src:[],
             img_size:[],
             audio_time:0,
             audio:null,
-            json:false
+            json:false,
+            ejson:""
         },
         mixins:[bris.handle()],
         methods:{
@@ -25,6 +26,7 @@ function init() {
         },
         created: function () {
             document.getElementById("load").remove()
+           
         },
     })
 }
@@ -51,6 +53,7 @@ window.onload = function() {
     let load_bit = document.getElementById('load_bit');
     var loadBit=function (){
         let divElement = document.getElementById("img_bit")
+        if(!divElement) return
         if(divElement.clientWidth<load_bit.width||divElement.clientHeight<load_bit.height)
             divElement.style.backgroundSize = 'contain'
         else  divElement.style.backgroundSize = 'auto'

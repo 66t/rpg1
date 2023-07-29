@@ -3,9 +3,8 @@ var bris=bris||{};//;
 bris.handle=function () {
     return{
         methods:{
-            
-            F_handle(handle,data){
-                for(let item of handle) {
+            F_handle(hand,data){
+                for(let item of hand) {
                     switch (item.id) {
                         case 0:
                             switch (data[0]){
@@ -24,38 +23,84 @@ bris.handle=function () {
                             this.src.splice(data[0])
                             this.src.push(data[1])
                             if(this.src[0]==="sound"&&data[0]===1) this.F_audioDuration()
-                            if(this.src[0]==="filter"&&data[0]===1) this.F_filerUniforms()
+                            if(this.src[0]==="filter"&&data[0]===1) this.F_filerUniforms(data[0])
                             break
                         case 20:
                             let i=0
                             while (this.D_tree[data[0]]['new_'+i]) i++
+                            let name="new_"+i
                             switch (this.src[0]){
                                 case "bit":
-                                    this.D_tree[data[0]]['new_'+i]=['','',0,true]
+                                    this.D_tree[data[0]][name]=['','',0,true]
                                     break
                                 case "filter":
                                     switch (data[0]){
                                         case 0:
-                                            this.D_tree[data[0]]['new_'+i]=LIM.ENTITY.SceneFilter()
+                                            this.D_tree[data[0]][name]=LIM.ENTITY.SceneFilter()
                                             break
                                         case 2:
-                                            this.D_tree[data[0]]['new_'+i]={cor:true,type:"seed",val:0}
+                                            this.D_tree[data[0]][name]={cor:true,type:"seed",val:0}
                                             break
                                         case 3:
                                             this.D_tree[data[0]].push({
                                                 count:"add",val1:0,val2:0,frame:0,
                                                 phase:0,wave:304,freq:2,digit:true,sample:1,reve:false
                                             })
+                                            name= this.D_tree[data[0]].length-1
                                             break
                                     }
                                     break
                                 case "sound":
-                                    this.D_tree[data[0]]['new_'+i]=LIM.ENTITY.Sound()
-                                    $vue.audio_time
+                                    this.D_tree[data[0]][name]=LIM.ENTITY.Sound();break
+                                case "handler":
+                                    this.D_tree[data[0]][name]=[]   
+                                    break
+                                case "vessel":
+                                    switch (data[0]){
+                                        case 0:this.D_tree[data[0]][name]=LIM.ENTITY.Vessel();break
+                                        case 2:
+                                            switch (this.src[2]){
+                                                case "action": this.D_tree[data[0]][name]={wave:"",frame:0,com:""};break
+                                                case "data": 
+                                                    this.D_tree[data[0]].push({index:0,alpha:1,x:0,y:0,filter:{}});
+                                                    name= this.D_tree[data[0]].length-1
+                                                    break
+                                            }
+                                            break
+                                        case 4:
+                                            this.D_tree[data[0]][name]=LIM.ENTITY.SceneFilter();break
+                                        case 6:
+                                            this.D_tree[data[0]][name]={cor:true,type:"seed",val:0};break
+                                        case 7:
+                                            this.D_tree[data[0]].push({
+                                                count:"add",val1:0,val2:0,frame:0,
+                                                phase:0,wave:304,freq:2,digit:true,sample:1,reve:false
+                                            })
+                                            name= this.D_tree[data[0]].length-1
+                                            break
+                                    }
+                                    break
+                                case "fica":
+                                    this.D_tree[data[0]][name]=LIM.ENTITY.Fica()
                                     break
                             }
                             this.src.splice(data[0]+1)
-                            this.src.push("new_"+i)
+                            this.src.push(name)
+                            break
+                        case 21:
+                            this.D_tree[1][data[0]].exe.push("")
+                            break
+                        case 22:
+                            this.D_tree[1][data[0]].exe=[""]
+                            break
+                        case 23:
+                            this.D_tree[1][data[0]].exe.splice(data[1],1)
+                            break
+                        case 24:
+                            this.D_tree[1].splice(data[0],0,{"type":0,"exe":[]})
+                            break
+                        case 25:
+                            this.D_tree[1].splice(data[0],1)
                             break
                         case 30:
                             if(!this.src[data[0]+1]) continue
@@ -72,20 +117,24 @@ bris.handle=function () {
                             if(this.src[data[0]+1]!=null) {
                                 this.D_tree[data[0]].splice(this.src[data[0]+1],1)
                                 if(this.D_tree[data[0]].length===0) this.src.splice(data[0]+1)
-                                else if(this.src[data[0]+1]>=this.D_tree[data[0]].length)
-                                this.src[data[0]+1]=this.D_tree[data[0]].length-1
+                                else if(this.src[data[0]+1]>=this.D_tree[data[0]].length){
+                                    
+                                this.F_handle(handle.src,[data[0]+1,parseInt(this.D_tree[data[0]].length-1)])
+                                }
                             }
                             break
                         case 40:
                             if(this.$refs[data[0]])
                             this.$refs[data[0]].click();
                             break
+                        case 50:
+                            if(event.target.value) this.D_tree[0][data[0]]=event.target.value
+                            else  delete this.D_tree[0][data[0]]
+                            break
                     }
                     this.$forceUpdate()
                 }
             },
-             
-            
             F_bitSrc(event){
                 const file = event.target.files[0];
                 if (file) {
@@ -122,8 +171,8 @@ bris.handle=function () {
                 });
                 this.audio.load();
             },
-            F_filerUniforms(){
-                let a= ()=>{switch (this.D_tree[1].type) {
+            F_filerUniforms(index){
+                let a= ()=>{switch (this.D_tree[index].type) {
                     case "adj": return new PIXI.filters.AdjustmentFilter()
                     case "bloom": return new PIXI.filters.AdvancedBloomFilter()
                     case "ascii": return new PIXI.filters.AsciiFilter()
@@ -156,18 +205,18 @@ bris.handle=function () {
                     case "zoom": return new PIXI.filters.ZoomBlurFilter()
                 }}
                 let f= a()
-                let w=JSON.parse(JSON.stringify(this.D_tree[1].uniforms))
-                this.D_tree[1].uniforms={}
+                let w=JSON.parse(JSON.stringify(this.D_tree[index].uniforms))
+                this.D_tree[index].uniforms={}
                 for(let key of Object.keys(f.uniforms)) {
                     if(key!=='displacementMap'){
                         let k=key
                         let v=f.uniforms[key]
                         if(v instanceof Object){
                             for(let key1 in v){
-                                this.D_tree[1].uniforms[k+"."+key1]=w[k+'.'+key1]||v[key1]
+                                this.D_tree[index].uniforms[k+"."+key1]=w[k+'.'+key1]||v[key1]
                             }
                         }
-                        else this.D_tree[1].uniforms[k]=w[k]||v
+                        else this.D_tree[index].uniforms[k]=w[k]||v
                     }
                 }
                 this.$forceUpdate();
@@ -188,12 +237,14 @@ bris.handle=function () {
                 }
                 this.$forceUpdate();
             },
-
-            exWave(bool){
-                if(bool) {this.D_tree[2][this.src[3]] = {cor: true, type: "seed", val: 0}}
-                else {this.D_tree[2][this.src[3]]=[];}
-                this.F_handle(handle.src,[3,this.src[3]])
+            exWave(bool,index){
+                if(bool) {this.D_tree[index][this.src[index+1]] = {cor: true, type: "seed", val: 0}}
+                else {this.D_tree[index][this.src[index+1]]=[];}
+                this.F_handle(handle.src,[index+1,this.src[index+1]])
             },
+            F_text(index){
+                this.ejson=JSON.stringify(this.D_tree[index])
+            }
         },
         computed: {
             /**数据树*/
@@ -237,9 +288,15 @@ var handle ={
     play:[{id:1}],
     src:[{id:10}],
     additem:[{id:20}],
+    addcom:[{id:21}],
+    changecom:[{id:22}],
+    removecom:[{id:23}],
+    addhand:[{id:24}],
+    removehand:[{id:25}],
     subitem:[{id:30}],
     subarr:[{id:31}],
-    click:[{id:40}]
+    click:[{id:40}],
+    group:[{id:50}],
 }
 
 

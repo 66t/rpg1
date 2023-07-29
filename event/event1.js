@@ -9,8 +9,8 @@ LIM.EVENT=LIM.EVENT||{};
     }
     _.exit=()=>{window.close();}
     _.newgame=()=>{
-        SceneManager.goto(LIM.SCENE.Scene, "theater")
-        LIM.$story.time=0
+       // SceneManager.goto(LIM.SCENE.Scene, "theater")
+       // LIM.$story.time=0
     }
     _.ready=()=>{return DataManager.isDatabaseLoaded()&&Graphics.isFontLoaded('GameFont')&&Graphics.isFontLoaded('text')}
     _.reload=()=>{if (Utils.isNwjs()) {location.reload();}}

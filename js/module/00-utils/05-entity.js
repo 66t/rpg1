@@ -47,6 +47,17 @@ LIM.ENTITY.Shape=function(){
         action:{},  //动作
     }
 }
+LIM.ENTITY.Fica=function(){
+    return {
+            acti: true,index:0,
+            w:0,h:0,
+            x:0,y:0,
+            rota:0,alpha:1,
+            mode:0,depth:1,line:1
+        }
+}
+
+
 LIM.ENTITY.Command=function(){
     return {
         acti:false, //激活
@@ -99,6 +110,20 @@ LIM.ENTITY.Sound=function(){
         "filter":["none",10,-12,0,0]
     }
 }
+
+LIM.ENTITY.SceneFilter=function(){
+    return {
+        type:"",
+        acti:false,
+        cease:false,
+        cycle:0,
+        time:0,
+        com:"",
+        uniforms:{},
+        wave:{}
+    }
+}
+
 
 LIM.ENTITY.ShapeData=function(){
     return {

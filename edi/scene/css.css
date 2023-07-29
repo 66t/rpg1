@@ -14,7 +14,7 @@
     --o-color:#f32;
     --o2-color:#f32d;
 }
-
+::-webkit-scrollbar {display: none;}
 body {
     color:var(--g-color);
     font-family: 'Courier New', monospace;
@@ -46,7 +46,7 @@ html,body{height: 100%;overflow: hidden;position: relative}
 .input {width: 100%;background-color:var( --bk-color);color:var( --y-color);cursor: pointer;font-weight:800;font-size:16px}
 .conf{width:85%;font-weight:800;font-size:12px;background-color:var(--b-color);color:var(--g-color)}
 .input:hover{opacity: 0.8}
-.parameter{height: calc(100vh - 120px);font-size:12px;overflow-y: scroll;background-color:#fff0}
+.parameter{height: calc(100vh - 155px);font-size:12px;overflow-y: scroll;background-color:#fff0}
 .tool_main{
     display: flex;
     flex-wrap: wrap;
@@ -74,7 +74,7 @@ html,body{height: 100%;overflow: hidden;position: relative}
     font-size: 15px;
     line-height: 30px;
 }
-.json{width:100vw;height:100vh;background:var(--b-color);position: absolute;top:0;left:0}
+
 .tool_main-item:first-letter,.fun_main-item:first-letter {
     color: var( --r-color);
     font-weight: 800;
@@ -134,7 +134,7 @@ html,body{height: 100%;overflow: hidden;position: relative}
 
 .tool{width:100%;height:35px;background-color:var(--pl-color);}
 .box{width:calc(100% - 200px);height:100%;background-color:var(--pl-color)}
-
+.box textarea{background-color:#0000;color: var(--y-color);font-weight:800}
 .hover1:hover,.hover1-acti{
     background-color: var( --c8-color);;
     color: var( --w-color);;
@@ -172,3 +172,7 @@ html,body{height: 100%;overflow: hidden;position: relative}
     width: 100%; height:90px;
     background-color: var(--a-color);
 }
+
+.group td{border:1px var(--w-color) solid}
+.handler{background:var(--b-color);border:3px var(--w-color) solid;width:100%;margin-top:10px}
+.handler td{border:1px var(--w-color) solid}
