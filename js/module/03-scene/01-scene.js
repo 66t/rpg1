@@ -21,9 +21,7 @@ LIM.SCENE=LIM.SCENE||{};
         Scene_Base.prototype.initialize.call(this);
     }
     //开始运行
-    _.Scene.prototype.startRunning = function (json) {
-        $dataScene=json||null
-        this.edi=json?false:true
+    _.Scene.prototype.startRunning = function () {
         this.children=[]
         
         this._load = -1
@@ -36,21 +34,27 @@ LIM.SCENE=LIM.SCENE||{};
         this._bit ={}
         this._txt ={}
         this._word={}
-        this._heap = {}
         this._filter=new LIM.SCENE.Filter()
-        if(this._name&&!json) DataManager.loadDataFile('$dataScene', 'scene/' + this._name + '.json');
+        DataManager.loadDataFile('$dataScene', 'scene/' + this._name + '.json');
     }
     //触发器
     _.Scene.prototype.effector=function(){
-        for(let key in this._data.effector)
+        for(let key in this._data.effector) {
             if (this._data.effector[key].count === 1 && this.judge(this._data.effector[key].judge)) {
                 this._data.effector[key].count++
                 this.triggerHandler(this._data.effector[key].com)
             }
+        }
     }
     _.Scene.prototype.judge=function (judge){
         switch (judge[0]){
             case "%":return LIM.EVENT[judge.slice(1)]()
+        }
+    }
+    _.Scene.prototype.playSound=function (id){
+        if(this._data.sound&&this._data.sound[id]) {
+            let sound=this._data.sound[id]
+            Conductor.start(sound)
         }
     }
     
@@ -68,7 +72,7 @@ LIM.SCENE=LIM.SCENE||{};
                 let fun=token.slice(1)
                 if(LIM.EVENT[fun]) LIM.EVENT[fun]()
             }
-            else if (token[0] == "#") this.exFun(token.split(":"))
+            else if (token[0] === "#") this.exFun(token.split(":"))
             else {
                 this.triggerHandler(token)
             }
@@ -76,151 +80,28 @@ LIM.SCENE=LIM.SCENE||{};
     }
     _.Scene.prototype.exFun= function(eve){
         switch (eve[0]) {
-            case -2:
-            case "#heap":
-                switch (eve[2]){
-                    case "arr":
-                        this._heap[eve[1]]=[]
-                        for(let i=3;i<eve.length;i++)
-                            this._heap[eve[1]].push(this.getVal(eve[i]))
-                        break
-                    case "obj":
-                        this._heap[eve[1]]={}
-                        if(eve.length%2===1)
-                            for(let i=3;i<eve.length;i+=2){
-                                let key=this.getVal(eve[i])
-                                this._heap[eve[1]][key]=this.getVal(eve[i+1])
-                            }
-                        break
+            case "#activa":
+                if(this._item[eve[1]])
+                    this._item[eve[1]]._com.acti = true
+                break
+            case "#close":
+                if(this._item[eve[1]])
+                    this._item[eve[1]]._com.acti = false
+                break
+            case "#mode":
+                if(this._item[eve[1]]) {
+                    this._item[eve[1]]._com.next = eve[2]
                 }
                 break
-            
-            case 0:
-            case "#data":
-                this._data=LIM.ENTITY.Scene()
+            case "#sound":
+                this.playSound(eve[1]);break
+            case "#add_effector":
+                if(this._data.effector[eve[1]])
+                    this._data.effector[eve[1]].count++
                 break
-            case 11:
-            case "#pushBit":
-                this._data.bit[eve[1]]=this.getVal(eve[2])
-                break
-
-            case 21:
-            case "#pushVes":
-                this._data.vessel[eve[1]]=LIM.ENTITY.Vessel()
-                break
-            case 22:
-            case "#portVes":
-                this._data.vessel[eve[1]][eve[2]]=this.getVal(eve[3])
-                break
-
-
-            case 31:
-            case "#pushWin":
-                this._data.window[eve[1]]=LIM.ENTITY.Vessel()
-                break
-            case 32:
-            case "#portWin":
-                this._data.window[eve[1]][eve[2]]=this.getVal(eve[3])
-                break
-
-            case 41:
-            case "#pushCom":
-                this._data.command[eve[1]]=LIM.ENTITY.Command()
-                break
-            case 42:
-            case "#portCom":
-                this._data.command[eve[1]][eve[2]]=this.getVal(eve[3])
-                break
-
-            case 51:
-            case "#pushSha":
-                this._data.shape[eve[1]]=LIM.ENTITY.Shape()
-                break
-            case 52:
-            case "#portSha":
-                this._data.shape[eve[1]][eve[2]]=this.getVal(eve[3])
-                break
-
-
-            case 61:
-            case "#pushWav":
-                this._data.wave[eve[1]]=LIM.ENTITY.Shape()
-                break
-            case 62:
-            case "#portWav":
-                this._data.wave[eve[1]][eve[2]]=this.getVal(eve[3])
-                break
-
-            case 71:
-            case "#pushFic":
-                this._data.fica[eve[1]]=LIM.ENTITY.Fica()
-                break
-            case 72:
-            case "#portFic":
-                this._data.fica[eve[1]][eve[2]]=this.getVal(eve[3])
-                break
-            case 81:
-            case "#pushSou":
-                this._data.sound[eve[1]]=LIM.ENTITY.Sound()
-                break
-            case 82:
-            case "#portSou":
-                this._data.sound[eve[1]][eve[2]]=this.getVal(eve[3])
-                break
-            case 83:
-            case "#confSou":
-                this._data.sound[eve[1]].config[eve[2]]=this.getVal(eve[3])
-                break
-            case 84:
-            case "#addEffect":
-                this._data.sound[eve[1]].effect[eve[2]]=LIM.ENTITY.SoundEffect()
-                break
-            case 85:
-            case "#portEffect":
-                this._data.sound[eve[1]].effect[eve[2]][eve[3]]=this.getVal(eve[4])
-                break
-
-
-            case 91:
-            case "#pushTxt":
-                this._data.text[eve[1]]=LIM.ENTITY.Text()
-                break
-            case 92:
-            case "#portTxt":
-                this._data.text[eve[1]][eve[2]]=this.getVal(eve[3])
-                break
-
-            case 100:
-            case "#pushGro":
-                this._data.group[eve[2]]=this.getVal(eve[1])
-                break
-            case 110:
-            case "#pushFil":
-                this._data.filter[eve[1]]=LIM.ENTITY.SceneFilter()
-                break
-            case 111:
-            case "#portFil":
-                this._data.filter[eve[1]][eve[2]]=this.getVal(eve[3])
-                break
-            case 112:
-            case "#uniFil":
-                this._data.filter[eve[1]].uniforms[eve[2]]=this.getVal(eve[3])
-                break
-
-
-            case 120:
-            case "#pushEff":
-                this._data.effector[eve[1]]=LIM.ENTITY.Effector()
-                break
-            case 121:
-            case "#portEff":
-                this._data.effector[eve[1]][eve[2]]=this.getVal(eve[3])
-                break
-
-            case 500:
-            case "#run":
-                if(eve[1]) this._item[eve[1]].setRun(parseInt(eve[2]),!eve[3])
-                else  this.setRun(parseInt(eve[2]),!eve[3])
+            case "#zero_effector":
+                if(this._data.effector[eve[1]])
+                    this._data.effector[eve[1]].count=0
                 break
         }
     }
@@ -246,12 +127,12 @@ LIM.SCENE=LIM.SCENE||{};
     }
     _.Scene.prototype.refresh = function() {
         this._time++
-        if(this._time===1&&this.edi) this.openEdi()
         this._lock=this.refreshFilter()
         if(!this._lock) {
             if (this.isRun(2)) this.createItem()
             if (this.isRun(1)) this.showItem();
             if (this.isRun(0)) for (let item of this.children) item.update();
+            if (this.isRun(3)) this.effector()
             if (this.isRun(4)) this.createFilter()
         }
     }
@@ -259,8 +140,39 @@ LIM.SCENE=LIM.SCENE||{};
         if(this.isRun(2)) {this.setRun(2,false)}
         this._item = {}
         this.createVessel();
+        this.createWindow();
+        this.createCommand();
+        this.createShape()
+        this.createWave();
         this.createFractal();
     }
+    _.Scene.prototype.getText = function (key) {
+        if(this._data.text[key]){
+            let item = this._data.text[key]
+            let content=this.getContent(this._word[item.content])[0]
+            return [content,item]
+        }
+        return null;
+    }
+    _.Scene.prototype.getContent=function(text){
+        if(text.arr&&text.arr.length) {
+            let arr=[]
+            for(let item of text.arr) arr.push(item)
+            for (let i = 0; i < arr.length; i++)
+                if (arr[i][0] === "@"){
+                    let cont = this.getContent(this._word[arr[i].splice(0, 1)])
+                    arr[i]=cont[0]
+                }
+                else if (arr[i][0] === "#") {
+                    let num =arr[i].splice(0, 1)
+                    arr[i] = LIM.$number.get(num)
+                }
+            let str = text.text.replacePlace(arr)
+            return [str]
+        }
+        return [text.text]
+    }
+    
     _.Scene.prototype.showItem = function() {
         if(this.isRun(1)) {this.setRun(1,false)}
         this.children=[]
@@ -280,7 +192,7 @@ LIM.SCENE=LIM.SCENE||{};
                     if(pant.children.length)
                         for(let i=0;i<pant.children.length;i++){
                             if(pant.children[i]._com) if(index<pant.children[i]._com.index) {pant.addChildAt(this._item[item.key],i);i=pant.children.length}
-                            else if(i==pant.children.length-1)pant.addChild(this._item[item.key])
+                            else if(i===pant.children.length-1)pant.addChild(this._item[item.key])
                         }
                     else pant.addChild(this._item[item.key])
                 }
@@ -296,12 +208,50 @@ LIM.SCENE=LIM.SCENE||{};
             }
         }
     }
+    _.Scene.prototype.createWindow = function () {
+        if(this._data.window) {
+            for(let key in this._data.window) {
+                let item = this._data.window[key]
+                let name = 'w_' + key
+                this._item[name] = new LIM.SCENE.Window(this, name, item)
+            }
+        }
+    }
+
+    _.Scene.prototype.createCommand = function () {
+        if(this._data.command) {
+            for(let key in this._data.command) {
+                let item = this._data.command[key]
+                let name = 'c_' + key
+                this._item[name] = new LIM.SCENE.Command(this, name, item)
+            }
+        }
+    }
+    
+    _.Scene.prototype.createShape  = function () {
+        if(this._data.shape) {
+            for(let key in this._data.shape) {
+                let item = this._data.shape[key]
+                let name = 's_' + key
+                this._item[name] = new LIM.SCENE.Shape(this, name, item)
+            }
+        }
+    }
     _.Scene.prototype.createFractal = function () {
         if(this._data.fica) {
             for(let key in this._data.fica) {
                 let item = this._data.fica[key]
                 let name = 'f_' + key
                 this._item[name] = new LIM.SCENE.Fractal(this, name, item)
+            }
+        }
+    }
+    _.Scene.prototype.createWave = function () {
+        if(this._data.wave) {
+            for(let key in this._data.wave) {
+                let item = this._data.wave[key]
+                let name = 'a_' + key
+                this._item[name] = new LIM.SCENE.Wave(this, name, item)
             }
         }
     }
@@ -365,14 +315,6 @@ LIM.SCENE=LIM.SCENE||{};
             this._load = 0;
         }
     }
-    //打开编辑器
-    _.Scene.prototype.openEdi = function () {
-        let parameter = JSON.stringify($dataScene)
-        let encodedParameter = encodeURIComponent(parameter);
-        let base = require('path').dirname(process.mainModule.filename);
-        let url = base+"/edi/scene/main.html?param=" + encodedParameter;
-        let win= window.open(url,"edi");
-    }
     
     _.Scene.prototype.loadBit = function (key,val) {
         this._bitload.push(key)
@@ -398,7 +340,7 @@ LIM.SCENE=LIM.SCENE||{};
                 for (let key in data) {
                     let arr = data[key].arr;
                     for (let p of arr) {
-                        if (p[0] == "@") {
+                        if (p[0] === "@") {
                             p = p.slice(1);
                             this.loadFont(p);
                         }
@@ -422,7 +364,6 @@ LIM.SCENE=LIM.SCENE||{};
     _.Scene.prototype.isLoad =function (){
         return (!this._bitload.length)&&Object.values(this._txt).every(item => item.load === 3);
     }
-
     _.Scene.prototype.isRun=function(bit){
         return LIM.UTILS.atBit(this._run,bit)
     }

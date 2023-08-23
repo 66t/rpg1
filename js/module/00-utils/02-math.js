@@ -68,7 +68,7 @@ LIM.UTILS=LIM.UTILS||{};
             u=Math.random()*2-1
             v=Math.random()*2-1
             w=u*u+v*v
-        } while (w==0||w>1)
+        } while (w===0||w>1)
         c=Math.sqrt((-2*Math.log(w))/w)
         return u*c;
     }
@@ -80,7 +80,7 @@ LIM.UTILS=LIM.UTILS||{};
      * @param num {any} 验证值
      * @return {boolean} 是数字(true) 不是数字(false)
      */
-    _.isNum=function(num){return (num!=null&&num!=''&&!isNaN(num))}
+    _.isNum=function(num){return (num!=null&&num!==''&&!isNaN(num))}
 
     
     /** 获取二进制位
@@ -110,12 +110,12 @@ LIM.UTILS=LIM.UTILS||{};
 
 
     _.waveNum=function(mode,max,i,f,r) {
-        if(mode%5==0) i*=2
+        if(mode%5===0) i*=2
         let p=parseInt(i/(max/(1/f)))%2===1?-1:1
         let o=parseInt(i/(max/(1/f)))%4%2===1?-1:1
         let q=i%(max/f)
         let value=0;
-        switch (mode) {
+        switch (parseInt(mode)) {
             //弦
             case 104://方波 
                 value=(Math.sin((Math.PI * 2 / max * q)) >= 0 ? 1 : -1)*
@@ -125,7 +125,8 @@ LIM.UTILS=LIM.UTILS||{};
                 value = (2 / Math.PI) * Math.asin(Math.sin((2 * Math.PI / max) * q));
                 break;
             case 304://正弦波
-                value = Math.sin((Math.PI * 2 / max* q));break
+                value = Math.sin((Math.PI * 2 / max* q))
+                ;break
             case 404://平滑波
                 value=Math.floor((2 / Math.PI) * Math.asin(Math.sin((2 * Math.PI / max) * q))*10+0.5)/10;
                 break;
@@ -193,36 +194,44 @@ LIM.UTILS=LIM.UTILS||{};
         }
         return value*(r?-1:1);
     }
-    _.waveArr=function (val,time,data) {
+    _.waveArr=function (val,time,data,param) {
         for(let v of data){
-            let r = _.waveNum(v.wave, (v.frame||time[0]),time[1]+(parseInt(v.phase)),v.freq,v.reve)/v.sample;
-            let num = _.lengthNum(v.val1) + (_.lengthNum(v.val2) - _.lengthNum(v.val1)) * r;
-            if(v.digit) num=Math.round(num)
-            switch (v.count) {
-                case "add":
-                    val += num;
-                    break;
-                case "mul":
-                    val *= num;
-                    break;
-                case "and":
-                    val = val&num;
-                    break;
-                case "or":
-                    val = val|num;
-                    break;
-                case "xor":
-                    val = val^num;
-                    break;
-                case "max":
-                    val = Math.max(val,num);
-                    break;
-                case "min":
-                    val = Math.min(val,num);
-                    break;
-                case "pow":
-                    val=Math.pow(val,num)
-                    break
+            if(v.cor){
+                switch (v.count){
+                    case "add":
+                        val=param+v.val;break
+                }
+            }
+            else {
+                let r = _.waveNum(v.wave, (v.frame || time[0]), time[1] + (parseInt(v.phase)), v.freq, v.reve) / v.sample;
+                let num = _.lengthNum(v.val1) + (_.lengthNum(v.val2) - _.lengthNum(v.val1)) * r;
+                if (v.digit) num = Math.round(num)
+                switch (v.count) {
+                    case "add":
+                        val += num;
+                        break;
+                    case "mul":
+                        val *= num;
+                        break;
+                    case "and":
+                        val = val & num;
+                        break;
+                    case "or":
+                        val = val | num;
+                        break;
+                    case "xor":
+                        val = val ^ num;
+                        break;
+                    case "max":
+                        val = Math.max(val, num);
+                        break;
+                    case "min":
+                        val = Math.min(val, num);
+                        break;
+                    case "pow":
+                        val = Math.pow(val, num)
+                        break
+                }
             }
         }
         return val
@@ -233,13 +242,7 @@ LIM.UTILS=LIM.UTILS||{};
         for (let key in  wave) {
             let data=wave[key]
             let val=0
-            if(data.cor){
-                switch (data.type){
-                    case "seed":val=Math.random();break
-                    case "add": val=param[key]+data.val;break
-                }
-            }
-            else if (typeof wave[key] == "object") val+=_.waveArr(val,time,data)
+            if (typeof wave[key] == "object") val+=_.waveArr(val,time,data,param[key])
             else val = LIM.UTILS.lengthNum(wave[key]);     
             result[key]=val
         }
@@ -274,7 +277,8 @@ LIM.UTILS=LIM.UTILS||{};
      * @param angle {number} 角度
      * @return {Object} 极坐标 {x,y}
      */
-    _.azimuth=function (dual,angle,d) {return {x:dual.x+d*Math.cos(angle),y:dual.y+d*Math.sin(angle)}}
+    _.azimuth=function (dual,angle,d)
+    {return {x:dual.x+d*Math.cos(angle),y:dual.y+d*Math.sin(angle)}}
     
     /** 返回质数组
      * @module utils
@@ -288,8 +292,8 @@ LIM.UTILS=LIM.UTILS||{};
         while (arr.length<num) {
             for(let num of arr)
                 if(num**2>i) {arr.push(i);break}
-                else if(i%num==0) break;
-            i+=(i%6==5?2:4)
+                else if(i%num===0) break;
+            i+=(i%6===5?2:4)
         }
         return arr
     }
@@ -303,7 +307,7 @@ LIM.UTILS=LIM.UTILS||{};
      * @return {int} 最大公约数
      */
     _.commonDiv=function (a,b) {
-        if(b==0)return a
+        if(b===0)return a
         return _.commonDiv(b,a%b)
     }
 
@@ -340,7 +344,6 @@ LIM.UTILS=LIM.UTILS||{};
      * @module utils
      * @method fractionExp
      * @example LIM.UTILS.fractionExp(2.5)
-     * @param son {number} 小数
      * @return {Array} 分子式[son,mun]
      */
     _.fractionExp=function (num) {

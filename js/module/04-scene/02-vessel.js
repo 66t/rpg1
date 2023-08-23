@@ -23,9 +23,6 @@ LIM.SCENE=LIM.SCENE||{};
     }
     _.Vessel.prototype.newMask = function () {
         this._mask= new PIXI.Graphics();
-        this._mask.beginFill()
-        this._mask.drawRect(0,0,Graphics.width,Graphics.height)
-        this._mask.endFill();
     }
     _.Vessel.prototype.update = function () {
         this.updateFilter()
@@ -38,21 +35,6 @@ LIM.SCENE=LIM.SCENE||{};
         let action = this._action[0]
         if(action.time > 0) {
             let r = LIM.UTILS.waveNum(action.wave, action.frame, action.time)
-            this._mask.clear()
-            this._mask.beginFill()
-            if(!action.mask||action.mask.length===0) 
-                this._mask.drawRect(0,0,Graphics.width,Graphics.height)
-            else {
-                for(let item of action.mask){
-                   let r1=item.wave&&item.wave!==action.wave?LIM.UTILS.waveNum(item.wave, action.frame, action.time):r
-                   let x= ((item.x[1]-item.x[0])*r1+item.x[0])
-                   let y= ((item.y[1]-item.y[0])*r1+item.y[0])
-                   let w= ((item.w[1]-item.w[0])*r1+item.w[0])
-                   let h= ((item.h[1]-item.h[0])*r1+item.h[0])
-                    this._mask.drawRect(x+this.x,y+this.y,w,h)
-                }
-            }
-            this._mask.endFill();
             let actionData = action.data
          
             let bool = false
@@ -71,8 +53,7 @@ LIM.SCENE=LIM.SCENE||{};
         
         if(action.time < action.frame) {
             action.time++
-        } 
-        else {
+        } else {
             this._action.splice(0, 1)
             if(action.com)  this._origin.triggerHandler(action.com)
         }

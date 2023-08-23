@@ -1,391 +1,67 @@
 {
   "bit":{
-    "cof1":["img/scene_title/","cof1",128,true],
+    "cof1":["img/scene_title/","cof1",0,true],
     "cof2":["img/scene_title/","cof2",0,true],
-    "back":["img/scene_title/","back",0,true],
-    "floor":["img/scene_title/","floor",0,true],
-    "t":["img/scene_title/","t",0,true],
     "title":["img/scene_title/","title",0,true],
-    "ver":["img/scene_title/","com12",0,true],
+    "back":["img/scene_title/","back",0,true],
+    "t":["img/scene_title/","t",0,true],
     "b":["img/scene_title/","AtlasCommon",0,true],
-    "cursor":["img/system/","cursor",0,true]
+    "floor":["img/scene_title/","floor",0,true]
   },
   "sound":{
-    "bgm":{
-      "traje":0,
-      "revers":false,
-      "type":"bgm",
-      "name":"星空のメロディー",
-      "volume":1,
-      "rate":1,
-      "time":[0,0],
-      "fade":[0,0,"linear","linear"],
-      "pan":[0,0],
-      "loop":[true,0,0],
-      "dis":[0,"none"],
-      "bit":[1,0],
-      "filter":["none",10,-12,0,0]
-    },
-    "bgm1":{
-      "traje":1,
-      "revers":false,
-      "type":"bgm",
-      "name":"melo",
-      "volume":1,
-      "rate":1,
-      "time":[0,0],
-      "fade":[0,0,"linear","linear"],
-      "pan":[0,0],
-      "loop":[true,0,0],
-      "dis":[0,"none"],
-      "bit":[1,0],
-      "filter":["none",10,-12,0,0]
-
-    }
+    "bgm":{"type":"bgm","name":"ShadyGirls",
+      "reverse":false,"volume":1,"time":[0,0],"loop":[true,0,0],"fade":[6,4],"traje":1}
   },
   "group": {
-    "s_cof3":"v_1",
-    "c_1":"v_1"
+    "s_cof3":"v_view",
+    "c_cmd":"v_view"
   },
   "vessel":{
-    "1":{
+    "view":{
       "acti": false,
       "run":0,
       "ope":0,
       "data":[
-        {"alpha":1,"x":500,"y":0,"index":60,"filter": {}},
-        {"alpha":1,"x":0,"y":0, "index":60,"filter": {}}
+        {"alpha":1,"x":0,"y":0,"index":60},
+        {"alpha":1,"x":0,"y":0, "index":60}
       ],
       "action":{
-        "-1_0":{"wave":304,"frame":0,"com":"show2"},
-        "0_1":{"wave":304,"frame":100,"com":"show3"}
-      }
-    },
-    "ban":{"acti": true, "run": 0, "ope": 0,
-      "data":
-      [
-        {"alpha": 1,"x": 0,"y": 0,"index": 150,"filter": {
-          "glow": {
-            "type": "glow",
-            "acti": true,
-            "cease": false,
-            "cycle": 0,
-            "time": 0,
-            "uniforms": {"color": "#000"},
-            "wave": {}
-          }
-        }},
-        {"alpha": 1,"x": 0,"y": 0,"index": 150,"filter": {
-          "glow": {
-            "type": "glow",
-            "acti": true,
-            "cease": false,
-            "cycle": 0,
-            "time": 0,
-            "uniforms": {"color": "#000"},
-            "wave": {}
-          }
-        }},
-        {"alpha": 0,"x": 0,"y": 0,"index": 150,"filter": {"glow": {
-          "type": "glow","acti": true,"cease": false,
-          "cycle": 0,"time": 0, "uniforms": {"color":3385016}, "wave": {}}}}
-      ],
-      "action":{
-        "0_1":{
-          "wave":304,"frame":105,"com":"ban_next"
+        "-1_0":{
+          "wave":304,"frame":0,"freq":0,"show":false,
+          "com":"show2"
         },
-        "1_2":{
-          "wave":304,"frame":35,"com":"hide_ban"
+        "0_1":{
+          "wave":405,"frame":1000,"freq":4,
+          "mask":[{"x":[0,0],"y":[0,0],"w":[50,100],"h":[50,100],"wave":304,"freq":4}]
         }
-      }},
-    "2": {
-      "acti": true,
-      "run": 0,
-      "ope": 0,
-      "data": [
-        {
-          "alpha": 1,
-          "x": -10,
-          "y": 10,
-          "index": 10,
-          "filter": {
-            "pixel": {
-              "type": "pixel",
-              "acti": true,
-              "cease": false,
-              "cycle": 0,
-              "time": 0,
-              "uniforms": {"size.0": 12, "size.1": 12},
-              "wave": {}
-            },
-            "bulge":{
-              "type":"bulge",
-              "acti":true,
-              "cease":false,
-              "cycle":0,
-              "time":0,
-              "uniforms":{
-                "radius":1000,
-                "strength":0.5,
-                "center.0":0.2,
-                "center.1":1
-              },
-              "wave":{
-                "center.0":[{"count":"add","wave":304,"val1":0.3,"val2":0.7,"frame":600,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]
-              }
-            },
-            "radial":{
-              "type":"radial",
-              "acti":false,
-              "cease":false,
-              "cycle":0,
-              "time":0,
-              "uniforms":{
-                "radius":1200,
-                "center.0":800,
-                "center.1":600,
-                "angle":0,
-                "kemelSize":5
-              },
-              "wave":{
-                "angle":[{"count":"add","wave":304,"val1":0,"val2":180,"frame":600,"phase":0,"freq":2,"digit":true,"sample":1,"reve":false}]
-              }
-            }
-          }
-        }
-      ],
-      "action": {}
-    }
-  },
-  "filter":{
-    "glitch":{
-      "type":"glitch",
-      "acti":true,
-      "cease":false,
-      "cycle":240,
-      "time":240,
-      "com":"newgame2",
-      "uniforms":{
-        "direction":100,
-        "fillMode":3,
-        "slices":3
-      },
-      "wave":{
-        "seed":{"cor":true,"type":"seed"},
-        "offset":[
-          {"count":"add","val1":0,"val2":40,"frame":480,"phase":0,"wave":304,"freq":2,"digit":true,"sample":1,"reve":false},
-          {"count":"add","val1":0,"val2":40,"frame":480,"phase":0,"wave":304,"freq":2,"digit":true,"sample":1,"reve":false},
-          {"count":"add","val1":0,"val2":40,"frame":480,"phase":0,"wave":304,"freq":2,"digit":true,"sample":1,"reve":false},
-          {"count":"add","val1":0,"val2":40,"frame":480,"phase":0,"wave":304,"freq":2,"digit":true,"sample":1,"reve":false}
-
-        ],
-        "red.0":[{"count":"add","wave": 304,"val1":0,"val2":-20,"frame":480,"freq":2,"digit":true,"phase":0,"sample":1,"reve":false}],
-        "red.1":[{"count":"add","wave": 304,"val1":0,"val2":20,"frame":480,"freq":2,"digit":true,"phase":0,"sample":1,"reve":false}],
-        "blue.0":[{"count":"add","wave": 304,"val1":0,"val2":-20,"frame":480,"freq":2,"digit":true,"phase":0,"sample":1,"reve":false}],
-        "blue.1":[{"count":"add","wave": 304,"val1":0,"val2":-20,"frame":480,"freq":2,"digit":true,"phase":0,"sample":1,"reve":false}],
-        "green.0":[{"count":"add","wave": 304,"val1":0,"val2":20,"frame":480,"freq":2,"digit":true,"phase":0,"sample":1,"reve":false}],
-        "green.1":[{"count":"add","wave": 304,"val1":0,"val2":20,"frame":480,"freq":2,"digit":true,"phase":0,"sample":1,"reve":false}]
-      }
-    },
-    "old":{
-      "type":"old",
-      "acti":false,
-      "cease":false,
-      "cycle":0,
-      "time":0,
-      "uniforms":{
-        "sepia":0,
-        "noise":0.1,
-        "noiseSize":0,
-        "vignetting":0,
-        "vignettingAlpha":1,
-        "vignettingBlur":1
-      },
-      "wave":{
-        "seed":{"cor":true,"type":"seed"},
-        "vignetting":[{"count":"+","wave": 2,"val1":0,"val2":1,"frame":245,"fre":0,"digit":false}],
-        "noise":[{"count":"+","wave": 3,"val1":0.1,"val2":0.3,"frame":240,"fre":0,"digit":false}],
-        "noiseSize":[{"count":"+","wave": 3,"val1":0,"val2":2,"frame":240,"fre":0,"digit":false}]
-      }
-    },
-    "adj":{
-      "type":"adj",
-      "acti":false,
-      "cease":false,
-      "cycle":0,
-      "time":0,
-      "uniforms":{},
-      "wave":{
-        "alpha":[{"count":"+","wave": 1,"val1":1,"val2":0,"frame":240,"fre":0,"digit":false}]
       }
     }
   },
-  "handler":{
-    "load":[{"type":0,"exe":["load"]}],
-    "start":[{"type":1,"exe":["on_effector","ready"]},{"type":0,"exe":["sound","bgm"]}]
-  },
-  "effector":{
-    "load":{"count":1,"judge":"%true","com":"load"},
-    "ready":{"count":0,"judge":"%ready","com":"ready"}
-  },
-  "fica":{
-    "e1":{
-      "acti": true,
-      "index":500,
-      "w":"20w",
-      "h":"20w",
-      "x":"-45w","y":"-45h",
-      "rota":180,"alpha":0.1,
-      "mode":4,"depth":3,"line":4
-    },
-    "e2":{
-      "acti": true,
-      "index":500,
-      "w":"20w",
-      "h":"20w",
-      "x":"45w","y":"-45h",
-      "rota":270,"alpha":0.1,
-      "mode":4,"depth":3,"line":4
-    }
-  },
-  
   "window": {},
   "command": {
-    "1":{
+    "cmd":{
       "acti": true,
       "run":0,
       "ope":0,
       "data":[
         {
           "alpha":1,
-          "index":2,
+          "index":200,
           "x":"100w-400","y":"100h-500",
+          "size":[1,1],
+          "image": {"bit":"b","x1":291,"x2":311,"x3":331,"x4":351,"y1":268,"y2":288,"y3":308,"y4":328},
           "w":400,"h":500,
-          "padding":[20,20],
-          "option":{
-            "mode": 0,
-            "row": 6,
-            "cols":1,
-            "margin":[5,5],
-            "useUi":{
-              "def":{"bit":"ver","x1":6,"x2":20,"x3":35,"x4":49,"y1":0,"y2":20,"y3":32,"y4":51},
-              "dis":{"bit":"ver","x1":56,"x2":70,"x3":85,"x4":99,"y1":0,"y2":20,"y3":32,"y4":51},
-              "sel":{"bit":"ver","x1":106,"x2":120,"x3":135,"x4":149,"y1":0,"y2":20,"y3":32,"y4":51},
-              "dse":{"bit":"ver","x1":156,"x2":170,"x3":185,"x4":199,"y1":0,"y2":20,"y3":32,"y4":51},
-              "act":{"bit":"ver","x1":206,"x2":220,"x3":235,"x4":249,"y1":0,"y2":20,"y3":32,"y4":51}
-            },
-            "offset":[20,0],
-            "itemText":{"x":0,"y":0,"padding":[10,10]},
-            "item": {
-              "0": {
-                "def":{"text":{"id":"start","verti":2,"align":2},"symbol":"newgame","time":15}
-              },
-              "1": {
-                "def":{"text":{"id":"continue","verti":2,"align":2}}
-              },
-              "2": {
-                "def":{"text":{"id":"cmd","verti":2,"align":2}}
-              },
-              "3": {
-                "def":{"text":{"id":"history","verti":2,"align":2}}
-              },
-              "4": {
-                "def":{"text":{"id":"internet","verti":2,"align":2}}
-              },
-              "5": {
-                "def":{"text":{"id":"exit","verti":2,"align":2},"symbol":"exit","time":15}
-              }
-            },
-            "top":0,
-            "select": -1,
-            "active":-1,
-            "disable": [2,3,4],
-            "arrow":{
-              "up":{
-                "x":230,
-                "y":15,
-                "rota":180,
-                "sw":{"wave": 2,"val1":0.79,"val2":1,"fre":0,"frame":100},
-                "sh":{"wave": 2,"val1":0.79,"val2":1,"fre":0,"frame":100},
-                "cycle":20,
-                "image":[{"bit":"ver","x":256,"y":3,"w":25,"h":19,"rota":0},{"bit":"ver","x":256,"y":3,"w":25,"h":19,"rota":0},{"bit":"ver","x":256,"y":29,"w":25,"h":19,"rota":0}]
-              },
-              "down":{
-                "x":230,
-                "y":385,
-                "rota":0,
-                "sw":{"wave": 2,"val1":0.79,"val2":1,"fre":0,"frame":100},
-                "sh":{"wave": 2,"val1":0.79,"val2":1,"fre":0,"frame":100},
-                "cycle":20,
-                "image":[{"bit":"ver","x":256,"y":3,"w":25,"h":19,"rota":0},{"bit":"ver","x":256,"y":3,"w":25,"h":19,"rota":0},{"bit":"ver","x":256,"y":29,"w":25,"h":19,"rota":0}]
-              }
-            },
-            "cursor":{
-              "a":{
-                "mode":3,
-                "x":0,
-                "y":0,
-                "rota":0,
-                "sw":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
-                "sh":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
-                "cycle":30,
-                "image":[{"bit":"ver","x":287,"y":0,"w":27,"h":28,"rota":0},{"bit":"ver","x":320,"y":0,"w":27,"h":28,"rota":0}]
-              },
-              "b":{
-                "mode":1,
-                "x":0,
-                "y":0,
-                "rota":90,
-                "sw":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
-                "sh":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
-                "cycle":30,
-                "image":[{"bit":"ver","x":287,"y":0,"w":27,"h":28,"rota":0},{"bit":"ver","x":320,"y":0,"w":27,"h":28,"rota":0}]
-              },
-              "c":{
-                "mode":7,
-                "x":0,
-                "y":0,
-                "rota":180,
-                "sw":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
-                "sh":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
-                "cycle":30,
-                "image":[{"bit":"ver","x":287,"y":0,"w":27,"h":28,"rota":0},{"bit":"ver","x":320,"y":0,"w":27,"h":28,"rota":0}]
-              },
-              "d":{
-                "mode":9,
-                "x":0,
-                "y":0,
-                "rota":270,
-                "sw":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
-                "sh":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
-                "cycle":30,
-                "image":[{"bit":"ver","x":287,"y":0,"w":27,"h":28,"rota":0},{"bit":"ver","x":320,"y":0,"w":27,"h":28,"rota":0}]
-              }
-            }
-          }
+          "padding":[120,120]
         }
       ],
-      "action":{},
-      "symbol":{
-        "wheel":"c1_wheel",
-        "cancel":"c1_cancel",
-        "select":"c1_select"
-      },
-      "key":{
-        "a":{"handler":"c1_select","data":["$this._data.option.select"]},
-        "b":{"handler":"c1_cancel","data":[-1]},
-        "up":{"handler":"c1_wheel","data":[1]},
-        "down":{"handler":"c1_wheel","data":[-1]}
-      },
-      "se":{
-        "wheel":"wheel",
-        "cancel":"cancel",
-        "select":"select",
-        "disable":"disable",
-        "activation":"activation"
+      "action":{
+        "-1_0": {
+          "frame":0,"change":0,"freq":0,"show":true
+        }
       }
     }
   },
+  
   "shape": {
     "back1": {
       "acti": false,
@@ -399,15 +75,16 @@
           "adso": 7,
           "w":"100w","h":"100h",
           "x":0,"y":0,"rota":0,"alpha":1,
-          "filter":[],
+          "filter":{},
           "clip":[0,0,800,600,0,0,800,600],
           "tone":[0,0,0,0],"blend":[0,0,0,0]
         }
       ],
       "action": {
         "0": {
-          "frame":600,"change":600,"while": true,
-          "anime1":{"x":[{"count":"+","wave": 1,"val1":0,"val2":"100w","fre":0}]}
+          "frame":600,"change":600,
+          "anime1":{"x":[{"count":"add","wave": 204,"val1":0,"val2":"100w",
+                          "frame":2400,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]}
         }
       }
     },
@@ -423,15 +100,15 @@
           "adso": 7,
           "w":"100w","h":"100h",
           "x":"-100w","y":0,"rota":0,"alpha":1,
-          "filter":[],
+          "filter":{},
           "clip":[0,0,800,600,0,0,800,600],
           "tone":[0,0,0,0],"blend":[0,0,0,0]
         }
       ],
       "action": {
         "0": {
-          "frame":600,"change":600,"while": true,
-          "anime1":{"x":[{"count":"+","wave": 1,"val1":"-100w","val2":0,"fre":0}]}
+          "frame":600,"change":600,
+          "anime1":{"x":[{"count":"add","wave": 204,"val1":"-100w","val2":0,"frame":2400,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]}
         }
       }
     },
@@ -440,24 +117,24 @@
       "run":0,
       "data": [
         {
-          "index":5,
+          "index":4,
           "bit":"back",
           "cover":1,
           "adso": 7,
           "w":"100w","h":"100h",
           "x":0,"y":0,"rota":0,"alpha":0,
-          "filter":[{"type":"crt","data": {"vignettingBlur":1,"vignetting":1,"vignettingAlpha":1}}],
           "clip":[0,0,800,600,0,0,800,600],
+          "filter": {},
           "tone":[0,0,0,0],"blend":[0,0,0,0]
         },
         {
-          "index":5,
+          "index":4,
           "bit":"back",
           "cover":1,
           "adso": 7,
           "w":"100w","h":"100h",
           "x":0,"y":0,"rota":0,"alpha":1,
-          "filter":[{"type":"crt","data": {"lineWidth":3,"vignettingBlur":1,"vignetting":1,"vignettingAlpha":0.9}}],
+          "filter": {},
           "clip":[0,0,800,600,0,0,800,600],
           "tone":[0,0,0,0],"blend":[0,0,0,0]
         }
@@ -465,33 +142,47 @@
       "action": {
         "-1_0": {
           "frame":0,"change":0,
-          "comE":"back1"
+          "com2":"back1"
         },
         "0_1": {
           "frame":250,"change":125,
-          "anime1":{"alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}]},
-          "anime2":{"alpha":[{"count":"+","wave": 2,"val1":1,"val2":0,"fre":0}]},
-          "filter1":[{
-            "id":0,"type":"crt",
-            "data":{
-              "lineWidth":{"wave": 2,"val1":0,"val2":3,"fre":0},
-              "vignettingAlpha":{"wave": 2,"val1":1,"val2":0.9,"fre":0}
+          "anime1":{"alpha":[{"count":"add","wave": 304,"val1":0,"val2":1,"frame":500,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]},
+          "anime2":{"alpha":[{"count":"add","wave": 304,"val1":1,"val2":0,"frame":500,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]},
+          "filter1":
+          {
+            "crt": {
+              "type": "crt",
+              "acti": true,
+              "cease": false,
+              "time": 0,
+              "uniforms": {"vignettingBlur":1.0,"vignettingAlpha":1.0},
+              "wave": {
+                "vignetting":[{"count":"add","wave":304,"val1":1,"val2":0.33,"frame":500,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}],
+                "lineWidth":[{"count":"add","wave":204,"val1":1,"val2":3,"frame":500,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}],
+                "vignettingAlpha":[{"count":"add","wave":204,"val1":1,"val2":0.9,"frame":500,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]
+              }
             }
-          }],
-          "filter2":[{
-            "id":0,"type":"crt",
-            "data":{
-              "vignetting":{"wave": 2,"val1":1,"val2":0.33,"fre":0},
-              "vignettingAlpha":{"wave": 2,"val1":0.9,"val2":0.78,"fre":0},
-              "vignettingBlur":{"wave": 2,"val1":1,"val2":0.8,"fre":0}
+          },
+          "filter2":
+          {
+            "crt": {
+              "type": "crt",
+              "acti": true,
+              "cease": false,
+              "time": 0,
+              "uniforms": {"vignettingBlur":1.0,"vignettingAlpha":0.9,"lineWidth":3},
+              "wave": {
+                "vignetting":[{"count":"add","wave":204,"val1":0.33,"val2":0.33,"frame":500,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}],
+                "vignettingAlpha":[{"count":"add","wave":204,"val1":0.9,"val2":0.78,"frame":250,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}],
+                "vignettingBlur":[{"count":"add","wave":204,"val1":1,"val2":0.8,"frame":250,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]
+              }
             }
-          }],
-          "comC":"back2",
-          "comE":"back7"
+          },
+          "com1":"back2",
+          "com2":"back7"
         }
       }
     },
-
     "trochaR": {
       "acti": false,
       "run":0,
@@ -502,8 +193,8 @@
           "cover":2,
           "adso": 7,
           "w":"125w","h":"125h",
-          "x":"-6w","y":0,"rota":0,"alpha":0,
-          "filter":[],
+          "x":"-9.5w","y":0,"rota":0,"alpha":0,
+          "filter":{},
           "clip":[0,0,873,1294,0,0,873,1294],
           "tone":[0,0,0,0],"blend":[128,0,0,255]
         }
@@ -512,11 +203,11 @@
         "-1_0": {
           "frame":120,"change":20,
           "anime2":{
-            "x":[{"count":"+","wave": 2,"val1":"-6w","val2":0,"fre":0}],
-            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":0.2,"fre":0}]
+            "x":[{"count":"add","wave": 304,"val1":"-9.5w","val2":0,"frame":400,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}],
+            "alpha":[{"count":"add","wave": 304,"val1":0,"val2":0.2,"frame":400,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]
           },
-          "comC":"back3",
-          "comE":"back6"
+          "com1":"back3",
+          "com2":"back6"
         }
       }
     },
@@ -530,8 +221,8 @@
           "cover":2,
           "adso": 7,
           "w":"125w","h":"125h",
-          "x":"-13.5w","y":"-7.5h","rota":0,"alpha":0,
-          "filter":[],
+          "x":"-9.5w","y":"-7.5h","rota":0,"alpha":0,
+          "filter":{},
           "clip":[0,0,873,1294,0,0,873,1294],
           "tone":[0,0,0,0],"blend":[0,128,0,255]
         }
@@ -540,11 +231,11 @@
         "-1_0": {
           "frame":120,"change":20,
           "anime2":{
-            "y":[{"count":"+","wave": 2,"val1":"-7.5h","val2":"-1.5h","fre":0}],
-            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":0.2,"fre":0}]
+            "y":[{"count":"add","wave": 304,"val1":"-7.5h","val2":"-1.5h","frame":400,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}],
+            "alpha":[{"count":"add","wave": 304,"val1":0,"val2":0.2,"frame":400,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]
           },
-          "comC": "back4",
-          "comE": "back8"
+          "com1": "back4",
+          "com2": "back8"
         }
       }
     },
@@ -558,37 +249,39 @@
           "cover":2,
           "adso": 7,
           "w":"125w","h":"125h",
-          "x":"13.5w","y":"6h","rota":0,"alpha":0,
-          "filter":[],
+          "x":"9.5w","y":"7.5h","rota":0,"alpha":0,
+          "filter":{},
           "clip":[0,0,873,1294,0,0,873,1294],
-          "tone":[0,0,0,0],"blend":[0,0,125,255]
+          "tone":[0,0,0,0],"blend":[0,0,128,255]
         }
       ],
       "action": {
         "-1_0": {
           "frame":120,"change":20,
           "anime2":{
-            "y":[{"count":"+","wave": 2,"val1":"6h","val2":0,"fre":0}],
-            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":0.2,"fre":0}]
+            "y":[{"count":"add","wave": 304,"val1":"7.5h","val2":0,"frame":400,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}],
+            "alpha":[{"count":"add","wave": 304,"val1":0,"val2":0.2,"frame":400,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]
           },
-          "comE": "back9"
+          "com2": "back9"
         }
       }
     },
     "title": {
       "acti": true,
       "run":0,
+      "loop": true,
+      "matrix":0,
       "data": [
         {
-          "index":15,
+          "index":5,
           "bit":"title",
-          "cover":1,
+          "cover":2,
           "adso": 5,
           "w":600,"h":600,
           "x":0,"y":0,"rota":0,"alpha":0,
-          "filter":[],
           "clip":[0,0,3001,3001,0,0,600,600],
-          "tone":[0,0,0,0],"blend":[0,0,0,0]
+          "tone":[0,0,0,0],"blend":[0,0,0,0],
+          "filter": {}
         },
         {
           "index":5,
@@ -604,18 +297,23 @@
       ],
       "action": {
         "-1_0": {
-          "frame":111,"change":1,
-          "anime2":{"alpha":[{"count":"+","wave": 2,"val1":0,"val2":0.33333,"fre":0},{"count":"*","wave": 1,"val1":0,"val2":3,"fre":0}]},
-          "comE":"start"
+          "frame":111,"change":0,
+          "anime2":{
+            "alpha":[
+              {"count":"add","wave":204,"val1":0,"val2":0.333,"frame":444,"phase":0,"freq":1,"digit":false,"sample":1,"reve":false},
+              {"count":"mul","wave":304,"val1":0,"val2":3,"frame":444,"phase":0,"freq":1,"digit":false,"sample":1,"reve":false}
+            ]
+          },
+          "com2":"start"
         },
         "0_1": {
           "frame":50,"change":50,
           "anime1":{
-            "alpha":[{"count":"+","wave": 2,"val1":1,"val2":0,"fre":0}],
-            "w":[{"count":"+","wave": 2,"val1":600,"val2":200,"fre":0}],
-            "h":[{"count":"+","wave": 2,"val1":600,"val2":200,"fre":0}]
+            "alpha":[{"count":"add","wave": 304,"val1":1,"val2":0,"frame":200,"phase":0,"freq":1,"digit":false,"sample":1,"reve":false}],
+            "w":[{"count":"add","wave": 304,"val1":600,"val2":200,"frame":200,"phase":0,"freq":1,"digit":false,"sample":1,"reve":false}],
+            "h":[{"count":"add","wave": 304,"val1":600,"val2":200,"frame":200,"phase":0,"freq":1,"digit":false,"sample":1,"reve":false}]
           },
-          "comE": "trocha1"
+          "com2": "trocha1"
         }
       }
     },
@@ -630,19 +328,60 @@
           "adso": 7,
           "w":"100w","h":"100h",
           "x":0,"y":"50h","rota":0,"alpha":1,
-          "filter":[],
+          "filter":{},
           "clip":[0,0,800,600,0,0,800,600],
           "tone":[0,0,0,0],"blend":[0,0,0,0]
         }
       ],
       "action": {
         "-1_0": {
-          "frame":61,"change":1,
-          "anime2":{"y":[{"count":"+","wave": 2,"val1":"50h","val2":"20h","fre":0}]},
-          "comE": "back5"
+          "frame":60,"change":1,
+          "anime2":{
+            "y":[{"count":"add","wave": 304,"val1":"50h","val2":"20h","frame":240,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]
+          },
+          "com2": "back5"
         }}
     },
-
+    "trochaT": {
+      "acti": false,
+      "run":0,
+      "data": [
+        {
+          "index":40,
+          "bit":"t",
+          "cover":2,
+          "adso": 7,
+          "w":"125w","h":"125h",
+          "x":"3.5w","y":-275,"rota":0,"alpha":0,
+          "filter":{},
+          "clip":[0,0,873,1294,0,0,873,1294],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "-1_0": {
+          "frame":120,"change":20,
+          "anime2":{
+            "alpha":[{"count":"add","wave": 304,"val1":0,"val2":1,"frame":400,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}],
+            "y":[{"count":"add","wave": 304,"val1":-275,"val2":0,"frame":400,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]
+          },
+          "filter2":{
+            "tiltY": {
+              "type": "tiltY",
+              "acti": true,
+              "cease": false,
+              "time": 100,
+              "uniforms": {},
+              "wave": {
+                "blur":[{"count":"add","wave": 304,"val1":20,"val2":0,"frame":400,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}],
+                "gradientBlur":[{"count":"add","wave": 304,"val1":20,"val2":0,"frame":400,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]
+              }
+            }
+          },
+          "com2": "trocha2"
+        }
+      }
+    },
     "name": {
       "acti": false,
       "run":0,
@@ -661,13 +400,13 @@
       ],
       "action": {
         "-1_0": {
-          "frame":100,"change":20,
+          "frame":80,"change":0,
           "anime2":{
-            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}],
-            "y":[{"count":"+","wave": 2,"val1":-150,"val2":-60,"fre":0}]
+            "alpha":[{"count":"add","wave": 304,"val1":0,"val2":1,"frame":320,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}],
+            "y":[{"count":"add","wave": 304,"val1":-150,"val2":-60,"frame":320,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]
           },
-          "comC": "cof1",
-          "comE": "cof2"
+          "com1": "cof1",
+          "com2": "cof2"
         }
       }
     },
@@ -703,59 +442,22 @@
         "-1_0": {
           "frame":100,"change":20,
           "anime2":{
-            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}],
-            "w":[{"count":"+","wave": 2,"val1":100,"val2":258,"fre":0}],
-            "x":[{"count":"+","wave": 2,"val1":-150,"val2":-78,"fre":0}]
-          },
-          "comE": "ver"
-        },
-        "1": {
-          "frame":80,"change":40,"while": true,
-          "anime1":{
-            "w":[{"count":"+","wave": 1,"val1":258,"val2":240,"fre":0}],
-            "y":[{"count":"+","wave": 1,"val1":163,"val2":170,"fre":0}],
-            "x":[{"count":"+","wave": 1,"val1":-78,"val2":-87,"fre":0}]},
-
-          "anime2":{
-            "w":[{"count":"+","wave": 1,"val1":240,"val2":258,"fre":0}],
-            "y":[{"count":"+","wave": 1,"val1":170,"val2":163,"fre":0}],
-            "x":[{"count":"+","wave": 1,"val1":-87,"val2":-78,"fre":0}]}
-        }
-      }
-    },
-    "cof2": {
-      "acti": false,
-      "loop": true,
-      "run":0,
-      "data": [
-        {
-          "index":34,
-          "bit":"cof2",
-          "cover":2,
-          "adso": 7,
-          "w":657,"h":657,
-          "x":"100w-425","y":"100h","rota":0,"alpha":0,
-          "filter":[],
-          "clip":[0,0,844,844,0,0,657,657],
-          "tone":[0,0,0,0],"blend":[0,0,0,0]
-        }
-      ],
-      "action": {
-        "-1_0": {
-          "frame":81,"change":1,
-          "anime2":{
-            "rota":{"cor":true,"type":"add","val":0.1},
-            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}],
-            "y":[{"count":"+","wave": 2,"val1":"100h","val2":"100h-425","fre":0}]
+            "alpha":[{"count":"add","wave": 304,"val1":0,"val2":1,"frame":320,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}],
+            "w":[{"count":"add","wave": 304,"val1":100,"val2":258,"frame":320,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}],
+            "x":[{"count":"add","wave": 304,"val1":-150,"val2":-78,"frame":320,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]
           }
         },
         "0": {
-          "frame":25,"change":25,"while": true,
+          "frame":80,"change":40,
           "anime1":{
-            "rota":{"cor":true,"type":"add","val":0.1},
-            "alpha":1,
-            "y":"100h-425"
-          }
+            "w":[{"count":"add","wave": 204,"val1":258,"val2":240,"frame":160,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}],
+            "y":[{"count":"add","wave": 204,"val1":163,"val2":170,"frame":160,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}],
+            "x":[{"count":"add","wave": 204,"val1":-78,"val2":-87,"frame":160,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]},
+
+          "anime2":{
+            "w":[{"count":"add","wave": 204,"val1":240,"val2":258,"frame":160,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}],
+            "y":[{"count":"add","wave": 204,"val1":170,"val2":163,"frame":160,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}],
+            "x":[{"count":"add","wave": 204,"val1":-87,"val2":-78,"frame":160,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]}
         }
       }
     },
@@ -780,56 +482,55 @@
         "-1_0": {
           "frame":81,"change":1,
           "anime2":{
-            "rota":{"cor":true,"type":"add","val":-0.5},
-            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}],
-            "y":[{"count":"+","wave": 2,"val1":"100h","val2":"100h-425","fre":0}]
+            "rota":[{"cor":true,"count":"add","val":-0.5}],
+            "alpha":[{"count":"add","wave": 304,"val1":0,"val2":1,"frame":320,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}],
+            "y":[{"count":"add","wave": 304,"val1":"100h","val2":"100h-425","frame":320,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]
           },
-          "comE":"show1"
+          "com1":"show1"
         },
         "0": {
-          "frame":25,"change":25,"while": true,
+          "frame":25,"change":25,
           "anime1":{
-            "rota":{"cor":true,"type":"add","val":-0.5},
-            "alpha":1,
-            "y":"100h-425"
-          }
+            "rota":[{"cor":true,"count":"add","val":-0.5}],
+            "alpha":1, "y":"100h-425"}
         }
       }
     },
-    "trocha": {
+    "cof2": {
       "acti": false,
+      "loop": true,
       "run":0,
       "data": [
         {
-          "index":40,
-          "bit":"t",
+          "index":34,
+          "bit":"cof2",
           "cover":2,
           "adso": 7,
-          "w":"125w","h":"125h",
-          "x":"3.5w","y":-275,"rota":0,"alpha":0,
-          "clip":[0,0,873,1294,0,0,873,1294],
+          "w":657,"h":657,
+          "x":"100w-425","y":"100h","rota":0,"alpha":0,
+          "filter":[],
+          "clip":[0,0,844,844,0,0,657,657],
           "tone":[0,0,0,0],"blend":[0,0,0,0]
         }
       ],
       "action": {
         "-1_0": {
-          "frame":120,"change":20,
+          "frame":81,"change":1,
           "anime2":{
-            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":0.9,"fre":0}],
-            "y":[{"count":"+","wave": 2,"val1":-275,"val2":0,"fre":0}]
-          },
-          "filter2":[{
-            "id":0,"type":"tiltY",
-            "data":{
-              "blur":{"wave": 2,"val1":20,"val2":0,"fre":0},
-              "gradientBlur":{"wave": 2,"val1":20,"val2":0,"fre":0}
-            }
-          }],
-          "comE": "trocha2"
+            "rota":[{"cor":true,"count":"add","val":0.1}],
+            "alpha":[{"count":"add","wave": 304,"val1":0,"val2":1,"frame":320,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}],
+            "y":[{"count":"add","wave": 304,"val1":"100h","val2":"100h-425","frame":320,"phase":0,"freq":2,"digit":false,"sample":1,"reve":false}]
+          }
+        },
+        "0": {
+          "frame":25,"change":25,
+          "anime1":{
+            "rota":[{"cor":true,"count":"add","val":0.1}],
+            "alpha":1, "y":"100h-425"
+          }
         }
       }
     },
-
     "cof3": {
       "acti": true,
       "loop": true,
@@ -849,63 +550,44 @@
       ],
       "action": {
         "0": {
-          "frame":25,"change":25,"while": true,
+          "frame":25,"change":25,
           "anime1":{
-            "rota":{"cor":true,"type":"add","val":-0.5}
+            "rota":[{"cor":true,"count":"add","val":-0.5}]
           }
         }
       }
     }
   },
-  "text": {
-    "start":{
-      "content": "0_1","anime":7,
-      "fontSize": 34,
-      "textColor":[
-        [0,0.11,"#f00",0.55,"#000"],
-        [0,0.22,"#f00",0.6,"#000"],
-        [0,0.33,"#f00",0.65,"#000"],
-        [0,0.44,"#f00",0.7,"#000"],
-        [0,0.55,"#f00",0.75,"#000"],
-        [0,0.66,"#f00",0.8,"#000"]
-      ],
-      "outlineWidth":2, "outlineColor":["#000"],
-      "fontItalic":false
-    },
-    "continue":{
-      "content": "0_2","anime":7,
-      "fontSize": 34,   "textColor":[
-        [0,0.11,"#f00",0.55,"#000"],
-        [0,0.22,"#f00",0.6,"#000"],
-        [0,0.33,"#f00",0.65,"#000"],
-        [0,0.44,"#f00",0.7,"#000"],
-        [0,0.55,"#f00",0.75,"#000"],
-        [0,0.66,"#f00",0.8,"#000"]
-      ],
-      "outlineWidth":2, "outlineColor":["#000"], "fontItalic":false
-    },
-    "cmd":{
-      "content": "0_3",
-      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
-      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
-    },
-    "history":{
-      "content": "0_4",
-      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
-      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
-    },
-    "internet":{
-      "content": "0_5",
-      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
-      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
-    },
-    "exit":{
-      "content": "0_6",
-      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
-      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
-    }
-  }
-  
+  "filter":{},
+  "handler":{
+    "load":["%load"],
+    "start":["#add_effector:ready","#sound:bgm","%newgame"],
+    "ready":["#activa:s_back"],
+    "back1":["#mode:s_back:1"],
+    "back2":["#activa:s_trochaR","#activa:s_floor","#activa:s_back1","#activa:s_back2"],
+    "back3":["#activa:s_trochaG"],
+    "back4":["#activa:s_trochaB"],
+    "back5":["#close:s_floor"],
+    "back6":["#close:s_trochaR"],
+    "back7":["#mode:s_title:1","#close:s_back"],
+    "back8":["#close:s_trochaG"],
+    "back9":["#close:s_trochaB"],
+    "trocha1": ["#activa:s_trochaT","#activa:s_name","#activa:s_ver","#close:s_title"],
+    "trocha2":["#close:s_trochaT"],
+    "cof1": ["#activa:s_cof1","#activa:s_cof2"],
+    "cof2": ["#close:s_name"],
+
+    "show1":["#activa:v_view"],
+    "show2":["#mode:v_view:1"]
+  },
+  "effector":{
+    "load": {"count":1,"judge":"%true","com":"load"},
+    "ready":{"count":0,"judge":"%ready","com":"ready"}
+  },
+  "fica":{},
+  "wave":{},
+  "text": {}
+
 
 
 

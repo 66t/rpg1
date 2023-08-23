@@ -1,0 +1,790 @@
+{
+  "bit":{
+    "cof1":["img/scene_title/","cof1",0,true],
+    "cof2":["img/scene_title/","cof2",0,true],
+    "back":["img/scene_title/","back",0,true],
+    "floor":["img/scene_title/","floor",0,true],
+    "t":["img/scene_title/","t",0,true],
+    "title":["img/scene_title/","title",0,true],
+    "ver":["img/scene_title/","com12",0,true],
+    "b":["img/scene_title/","AtlasCommon",0,true],
+    "cursor":["img/system/","cursor",0,true]
+  },
+  "group": {
+    "s_cof3":"v_1",
+    "c_1":"v_1"
+  },
+  "vessel":{
+    "1":{
+      "acti": false,
+      "run":0,
+      "ope":0,
+      "data":[
+        {"alpha":1,"x":500,"y":0,"index":60},
+        {"alpha":1,"x":0,"y":0, "index":60}
+      ],
+      "action":{
+        "-1_0":{"wave":1,"frame":0,"com":"show2"},
+        "0_1":{"wave":7,"frame":100,"com":"show3"}
+      }
+    }
+  },
+  "window": {},
+  "command": {
+    "1":{
+      "acti": true,
+      "run":0,
+      "ope":0,
+      "data":[
+        {
+          "alpha":1,
+          "index":2,
+          "x":"100w-400","y":"100h-500",
+          "w":400,"h":500,
+          "padding":[20,20],
+          "option":{
+            "mode": 0,
+            "row": 6,
+            "cols":1,
+            "margin":[5,5],
+            "useUi":{
+              "def":{"bit":"ver","x1":6,"x2":20,"x3":35,"x4":49,"y1":0,"y2":20,"y3":32,"y4":51},
+              "dis":{"bit":"ver","x1":56,"x2":70,"x3":85,"x4":99,"y1":0,"y2":20,"y3":32,"y4":51},
+              "sel":{"bit":"ver","x1":106,"x2":120,"x3":135,"x4":149,"y1":0,"y2":20,"y3":32,"y4":51},
+              "dse":{"bit":"ver","x1":156,"x2":170,"x3":185,"x4":199,"y1":0,"y2":20,"y3":32,"y4":51},
+              "act":{"bit":"ver","x1":206,"x2":220,"x3":235,"x4":249,"y1":0,"y2":20,"y3":32,"y4":51}
+            },
+            "offset":[20,0],
+            "itemText":{"x":0,"y":0,"padding":[10,10]},
+            "item": {
+              "0": {
+                "def":{"text":{"id":"start","verti":2,"align":2},"symbol":"newgame","time":15}
+              },
+              "1": {
+                "def":{"text":{"id":"continue","verti":2,"align":2}}
+              },
+              "2": {
+                "def":{"text":{"id":"cmd","verti":2,"align":2}}
+              },
+              "3": {
+                "def":{"text":{"id":"history","verti":2,"align":2}}
+              },
+              "4": {
+                "def":{"text":{"id":"internet","verti":2,"align":2}}
+              },
+              "5": {
+                "def":{"text":{"id":"exit","verti":2,"align":2},"symbol":"exit","time":15}
+              }
+            },
+            "top":0,
+            "select": -1,
+            "active":-1,
+            "disable": [2,3,4],
+            "arrow":{
+              "up":{
+                "x":230,
+                "y":15,
+                "rota":180,
+                "sw":{"wave": 2,"val1":0.79,"val2":1,"fre":0,"frame":100},
+                "sh":{"wave": 2,"val1":0.79,"val2":1,"fre":0,"frame":100},
+                "cycle":20,
+                "image":[{"bit":"ver","x":256,"y":3,"w":25,"h":19,"rota":0},{"bit":"ver","x":256,"y":3,"w":25,"h":19,"rota":0},{"bit":"ver","x":256,"y":29,"w":25,"h":19,"rota":0}]
+              },
+              "down":{
+                "x":230,
+                "y":385,
+                "rota":0,
+                "sw":{"wave": 2,"val1":0.79,"val2":1,"fre":0,"frame":100},
+                "sh":{"wave": 2,"val1":0.79,"val2":1,"fre":0,"frame":100},
+                "cycle":20,
+                "image":[{"bit":"ver","x":256,"y":3,"w":25,"h":19,"rota":0},{"bit":"ver","x":256,"y":3,"w":25,"h":19,"rota":0},{"bit":"ver","x":256,"y":29,"w":25,"h":19,"rota":0}]
+              }
+            },
+            "cursor":{
+              "a":{
+                "mode":3,
+                "x":0,
+                "y":0,
+                "rota":0,
+                "sw":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
+                "sh":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
+                "cycle":30,
+                "image":[{"bit":"ver","x":287,"y":0,"w":27,"h":28,"rota":0},{"bit":"ver","x":320,"y":0,"w":27,"h":28,"rota":0}]
+              },
+              "b":{
+                "mode":1,
+                "x":0,
+                "y":0,
+                "rota":90,
+                "sw":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
+                "sh":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
+                "cycle":30,
+                "image":[{"bit":"ver","x":287,"y":0,"w":27,"h":28,"rota":0},{"bit":"ver","x":320,"y":0,"w":27,"h":28,"rota":0}]
+              },
+              "c":{
+                "mode":7,
+                "x":0,
+                "y":0,
+                "rota":180,
+                "sw":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
+                "sh":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
+                "cycle":30,
+                "image":[{"bit":"ver","x":287,"y":0,"w":27,"h":28,"rota":0},{"bit":"ver","x":320,"y":0,"w":27,"h":28,"rota":0}]
+              },
+              "d":{
+                "mode":9,
+                "x":0,
+                "y":0,
+                "rota":270,
+                "sw":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
+                "sh":{"wave": 2,"val1":0.79,"val2":1.1,"fre":0,"frame":100},
+                "cycle":30,
+                "image":[{"bit":"ver","x":287,"y":0,"w":27,"h":28,"rota":0},{"bit":"ver","x":320,"y":0,"w":27,"h":28,"rota":0}]
+              }
+            }
+          }
+        }
+      ],
+      "action":{},
+      "symbol":{
+        "wheel":"c1_wheel",
+        "cancel":"c1_cancel",
+        "select":"c1_select"
+      },
+      "key":{
+        "a":{"handler":"c1_select","data":["$this._data.option.select"]},
+        "b":{"handler":"c1_cancel","data":[-1]},
+        "up":{"handler":"c1_wheel","data":[1]},
+        "down":{"handler":"c1_wheel","data":[-1]}
+      },
+      "se":{
+        "wheel":"wheel",
+        "cancel":"cancel",
+        "select":"select",
+        "disable":"disable",
+        "activation":"activation"
+      }
+    }
+  },
+  "shape": {
+    "back1": {
+      "acti": false,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":1,
+          "bit":"back",
+          "cover":1,
+          "adso": 7,
+          "w":"100w","h":"100h",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,800,600,0,0,800,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":600,"change":600,"while": true,
+          "anime1":{"x":[{"count":"+","wave": 1,"val1":0,"val2":"100w","fre":0}]}
+        }
+      }
+    },
+    "back2": {
+      "acti": false,
+      "run":0,
+      "loop": true,
+      "data": [
+        {
+          "index":1,
+          "bit":"back",
+          "cover":1,
+          "adso": 7,
+          "w":"100w","h":"100h",
+          "x":"-100w","y":0,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,800,600,0,0,800,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":600,"change":600,"while": true,
+          "anime1":{"x":[{"count":"+","wave": 1,"val1":"-100w","val2":0,"fre":0}]}
+        }
+      }
+    },
+    "back": {
+      "acti": false,
+      "run":0,
+      "data": [
+        {
+          "index":5,
+          "bit":"back",
+          "cover":1,
+          "adso": 7,
+          "w":"100w","h":"100h",
+          "x":0,"y":0,"rota":0,"alpha":0,
+          "filter":[{"type":"crt","data": {"vignettingBlur":1,"vignetting":1,"vignettingAlpha":1}}],
+          "clip":[0,0,800,600,0,0,800,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        },
+        {
+          "index":5,
+          "bit":"back",
+          "cover":1,
+          "adso": 7,
+          "w":"100w","h":"100h",
+          "x":0,"y":0,"rota":0,"alpha":1,
+          "filter":[{"type":"crt","data": {"lineWidth":3,"vignettingBlur":1,"vignetting":1,"vignettingAlpha":0.9}}],
+          "clip":[0,0,800,600,0,0,800,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "-1_0": {
+          "frame":0,"change":0,
+          "comE":"back1"
+        },
+        "0_1": {
+          "frame":250,"change":125,
+          "anime1":{"alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}]},
+          "anime2":{"alpha":[{"count":"+","wave": 2,"val1":1,"val2":0,"fre":0}]},
+          "filter1":[{
+            "id":0,"type":"crt",
+            "data":{
+              "lineWidth":{"wave": 2,"val1":0,"val2":3,"fre":0},
+              "vignettingAlpha":{"wave": 2,"val1":1,"val2":0.9,"fre":0}
+            }
+          }],
+          "filter2":[{
+            "id":0,"type":"crt",
+            "data":{
+              "vignetting":{"wave": 2,"val1":1,"val2":0.33,"fre":0},
+              "vignettingAlpha":{"wave": 2,"val1":0.9,"val2":0.78,"fre":0},
+              "vignettingBlur":{"wave": 2,"val1":1,"val2":0.8,"fre":0}
+            }
+          }],
+          "comC":"back2",
+          "comE":"back7"
+        }
+      }
+    },
+
+    "trochaR": {
+      "acti": false,
+      "run":0,
+      "data": [
+        {
+          "index":10,
+          "bit":"t",
+          "cover":2,
+          "adso": 7,
+          "w":"125w","h":"125h",
+          "x":"-6w","y":0,"rota":0,"alpha":0,
+          "filter":[],
+          "clip":[0,0,873,1294,0,0,873,1294],
+          "tone":[0,0,0,0],"blend":[128,0,0,255]
+        }
+      ],
+      "action": {
+        "-1_0": {
+          "frame":120,"change":20,
+          "anime2":{
+            "x":[{"count":"+","wave": 2,"val1":"-6w","val2":0,"fre":0}],
+            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":0.2,"fre":0}]
+          },
+          "comC":"back3",
+          "comE":"back6"
+        }
+      }
+    },
+    "trochaG": {
+      "acti": false,
+      "run":0,
+      "data": [
+        {
+          "index":11,
+          "bit":"t",
+          "cover":2,
+          "adso": 7,
+          "w":"125w","h":"125h",
+          "x":"-13.5w","y":"-7.5h","rota":0,"alpha":0,
+          "filter":[],
+          "clip":[0,0,873,1294,0,0,873,1294],
+          "tone":[0,0,0,0],"blend":[0,128,0,255]
+        }
+      ],
+      "action": {
+        "-1_0": {
+          "frame":120,"change":20,
+          "anime2":{
+            "y":[{"count":"+","wave": 2,"val1":"-7.5h","val2":"-1.5h","fre":0}],
+            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":0.2,"fre":0}]
+          },
+          "comC": "back4",
+          "comE": "back8"
+        }
+      }
+    },
+    "trochaB": {
+      "acti": false,
+      "run":0,
+      "data": [
+        {
+          "index":12,
+          "bit":"t",
+          "cover":2,
+          "adso": 7,
+          "w":"125w","h":"125h",
+          "x":"13.5w","y":"6h","rota":0,"alpha":0,
+          "filter":[],
+          "clip":[0,0,873,1294,0,0,873,1294],
+          "tone":[0,0,0,0],"blend":[0,0,125,255]
+        }
+      ],
+      "action": {
+        "-1_0": {
+          "frame":120,"change":20,
+          "anime2":{
+            "y":[{"count":"+","wave": 2,"val1":"6h","val2":0,"fre":0}],
+            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":0.2,"fre":0}]
+          },
+          "comE": "back9"
+        }
+      }
+    },
+    "title": {
+      "acti": true,
+      "run":0,
+      "data": [
+        {
+          "index":15,
+          "bit":"title",
+          "cover":1,
+          "adso": 5,
+          "w":600,"h":600,
+          "x":0,"y":0,"rota":0,"alpha":0,
+          "filter":[],
+          "clip":[0,0,3001,3001,0,0,600,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        },
+        {
+          "index":5,
+          "bit":"title",
+          "cover":1,
+          "adso": 5,
+          "w":200,"h":200,
+          "x":0,"y":0,"rota":0,"alpha":0,
+          "filter":[],
+          "clip":[0,0,3001,3001,0,0,600,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "-1_0": {
+          "frame":111,"change":1,
+          "anime2":{"alpha":[{"count":"+","wave": 2,"val1":0,"val2":0.33333,"fre":0},{"count":"*","wave": 1,"val1":0,"val2":3,"fre":0}]},
+          "comE":"start"
+        },
+        "0_1": {
+          "frame":50,"change":50,
+          "anime1":{
+            "alpha":[{"count":"+","wave": 2,"val1":1,"val2":0,"fre":0}],
+            "w":[{"count":"+","wave": 2,"val1":600,"val2":200,"fre":0}],
+            "h":[{"count":"+","wave": 2,"val1":600,"val2":200,"fre":0}]
+          },
+          "comE": "trocha1"
+        }
+      }
+    },
+    "floor": {
+      "acti": false,
+      "run":0,
+      "data": [
+        {
+          "index":20,
+          "bit":"floor",
+          "cover":1,
+          "adso": 7,
+          "w":"100w","h":"100h",
+          "x":0,"y":"50h","rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,800,600,0,0,800,600],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "-1_0": {
+          "frame":61,"change":1,
+          "anime2":{"y":[{"count":"+","wave": 2,"val1":"50h","val2":"20h","fre":0}]},
+          "comE": "back5"
+        }}
+    },
+
+    "name": {
+      "acti": false,
+      "run":0,
+      "data": [
+        {
+          "index":30,
+          "bit":"title",
+          "cover":2,
+          "adso": 9,
+          "w":330,"h":330,
+          "x":"-20","y":-150,"rota":0,"alpha":0,
+          "filter":[],
+          "clip":[0,0,3001,3001,0,0,330,330],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "-1_0": {
+          "frame":100,"change":20,
+          "anime2":{
+            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":-150,"val2":-60,"fre":0}]
+          },
+          "comC": "cof1",
+          "comE": "cof2"
+        }
+      }
+    },
+    "ver": {
+      "acti": false,
+      "loop": true,
+      "run":0,
+      "data": [
+        {
+          "index":30,
+          "bit":"b",
+          "cover":2,
+          "adso": 9,
+          "w":100,"h":42,
+          "x":"-150","y":163,"rota":0,"alpha":0,
+          "filter":[],
+          "clip":[368,684,258,42,0,0,258,42],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        },
+        {
+          "index":30,
+          "bit":"b",
+          "cover":2,
+          "adso": 9,
+          "w":258,"h":42,
+          "x":"-78","y":163,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[368,684,258,42,0,0,258,42],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "-1_0": {
+          "frame":100,"change":20,
+          "anime2":{
+            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}],
+            "w":[{"count":"+","wave": 2,"val1":100,"val2":258,"fre":0}],
+            "x":[{"count":"+","wave": 2,"val1":-150,"val2":-78,"fre":0}]
+          },
+          "comE": "ver"
+        },
+        "1": {
+          "frame":80,"change":40,"while": true,
+          "anime1":{
+            "w":[{"count":"+","wave": 1,"val1":258,"val2":240,"fre":0}],
+            "y":[{"count":"+","wave": 1,"val1":163,"val2":170,"fre":0}],
+            "x":[{"count":"+","wave": 1,"val1":-78,"val2":-87,"fre":0}]},
+
+          "anime2":{
+            "w":[{"count":"+","wave": 1,"val1":240,"val2":258,"fre":0}],
+            "y":[{"count":"+","wave": 1,"val1":170,"val2":163,"fre":0}],
+            "x":[{"count":"+","wave": 1,"val1":-87,"val2":-78,"fre":0}]}
+        }
+      }
+    },
+    "cof2": {
+      "acti": false,
+      "loop": true,
+      "run":0,
+      "data": [
+        {
+          "index":34,
+          "bit":"cof2",
+          "cover":2,
+          "adso": 7,
+          "w":657,"h":657,
+          "x":"100w-425","y":"100h","rota":0,"alpha":0,
+          "filter":[],
+          "clip":[0,0,844,844,0,0,657,657],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "-1_0": {
+          "frame":81,"change":1,
+          "anime2":{
+            "rota":{"cor":true,"type":"add","val":0.1},
+            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":"100h","val2":"100h-425","fre":0}]
+          }
+        },
+        "0": {
+          "frame":25,"change":25,"while": true,
+          "anime1":{
+            "rota":{"cor":true,"type":"add","val":0.1},
+            "alpha":1,
+            "y":"100h-425"
+          }
+        }
+      }
+    },
+    "cof1": {
+      "acti": false,
+      "loop": true,
+      "run":0,
+      "data": [
+        {
+          "index":35,
+          "bit":"cof1",
+          "cover":2,
+          "adso": 7,
+          "w":200,"h":200,
+          "x":"100w-425","y":"100h","rota":0,"alpha":0,
+          "filter":[],
+          "clip":[0,0,916,916,0,0,200,200],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "-1_0": {
+          "frame":81,"change":1,
+          "anime2":{
+            "rota":{"cor":true,"type":"add","val":-0.5},
+            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":1,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":"100h","val2":"100h-425","fre":0}]
+          },
+          "comE":"show1"
+        },
+        "0": {
+          "frame":25,"change":25,"while": true,
+          "anime1":{
+            "rota":{"cor":true,"type":"add","val":-0.5},
+            "alpha":1,
+            "y":"100h-425"
+          }
+        }
+      }
+    },
+    "trocha": {
+      "acti": false,
+      "run":0,
+      "data": [
+        {
+          "index":40,
+          "bit":"t",
+          "cover":2,
+          "adso": 7,
+          "w":"125w","h":"125h",
+          "x":"3.5w","y":-275,"rota":0,"alpha":0,
+          "clip":[0,0,873,1294,0,0,873,1294],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "-1_0": {
+          "frame":120,"change":20,
+          "anime2":{
+            "alpha":[{"count":"+","wave": 2,"val1":0,"val2":0.9,"fre":0}],
+            "y":[{"count":"+","wave": 2,"val1":-275,"val2":0,"fre":0}]
+          },
+          "filter2":[{
+            "id":0,"type":"tiltY",
+            "data":{
+              "blur":{"wave": 2,"val1":20,"val2":0,"fre":0},
+              "gradientBlur":{"wave": 2,"val1":20,"val2":0,"fre":0}
+            }
+          }],
+          "comE": "trocha2"
+        }
+      }
+    },
+
+    "cof3": {
+      "acti": true,
+      "loop": true,
+      "run":0,
+      "data": [
+        {
+          "index":1,
+          "bit":"cof1",
+          "cover":2,
+          "adso": 9,
+          "w":120,"h":120,
+          "x":-265,"y":215,"rota":0,"alpha":1,
+          "filter":[],
+          "clip":[0,0,916,916,0,0,120,120],
+          "tone":[0,0,0,0],"blend":[0,0,0,0]
+        }
+      ],
+      "action": {
+        "0": {
+          "frame":25,"change":25,"while": true,
+          "anime1":{
+            "rota":{"cor":true,"type":"add","val":-0.5}
+          }
+        }
+      }
+    }
+  },
+  "text": {
+    "start":{
+      "content": "0_1","anime":7,
+      "fontSize": 34,
+      "textColor":[
+        [0,0.11,"#f00",0.55,"#000"],
+        [0,0.22,"#f00",0.6,"#000"],
+        [0,0.33,"#f00",0.65,"#000"],
+        [0,0.44,"#f00",0.7,"#000"],
+        [0,0.55,"#f00",0.75,"#000"],
+        [0,0.66,"#f00",0.8,"#000"]
+      ],
+      "outlineWidth":2, "outlineColor":["#000"],
+      "fontItalic":false
+    },
+    "continue":{
+      "content": "0_2","anime":7,
+      "fontSize": 34,   "textColor":[
+        [0,0.11,"#f00",0.55,"#000"],
+        [0,0.22,"#f00",0.6,"#000"],
+        [0,0.33,"#f00",0.65,"#000"],
+        [0,0.44,"#f00",0.7,"#000"],
+        [0,0.55,"#f00",0.75,"#000"],
+        [0,0.66,"#f00",0.8,"#000"]
+      ],
+      "outlineWidth":2, "outlineColor":["#000"], "fontItalic":false
+    },
+    "cmd":{
+      "content": "0_3",
+      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
+      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
+    },
+    "history":{
+      "content": "0_4",
+      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
+      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
+    },
+    "internet":{
+      "content": "0_5",
+      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
+      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
+    },
+    "exit":{
+      "content": "0_6",
+      "fontSize": 34, "textColor":[[0,0.1,"#f00",0.5,"#000"]],
+      "outlineWidth":2, "outlineColor":["#0f0"], "fontItalic":false
+    }
+  },
+  "filter":{
+    "glitch":{
+      "type":"glitch",
+      "acti":true,
+      "cease":true,
+      "cycle":240,
+      "time":0,
+      "comE":"newgame2",
+      "uniforms":{
+        "direction":100,
+        "fillMode":3,
+        "slices":3
+      },
+      "wave":{
+        "seed":{"cor":true,"type":"seed"},
+        "offset":[{"count":"+","wave": 2,"val1":0,"val2":40,"frame":240,"fre":0,"digit":true}],
+        "red.x":[{"count":"+","wave": 2,"val1":0,"val2":-20,"frame":240,"fre":0,"digit":true}],
+        "red.y":[{"count":"+","wave": 2,"val1":0,"val2":20,"frame":240,"fre":0,"digit":true}],
+        "blue.x":[{"count":"+","wave": 2,"val1":0,"val2":-20,"frame":240,"fre":0,"digit":true}],
+        "blue.y":[{"count":"+","wave": 2,"val1":0,"val2":-20,"frame":240,"fre":0,"digit":true}],
+        "green.x":[{"count":"+","wave": 2,"val1":0,"val2":20,"frame":240,"fre":0,"digit":true}],
+        "green.y":[{"count":"+","wave": 2,"val1":0,"val2":20,"frame":240,"fre":0,"digit":true}]
+      }
+    },
+    "old":{
+      "type":"old",
+      "acti":false,
+      "cease":false,
+      "cycle":0,
+      "time":0,
+      "uniforms":{
+        "sepia":0,
+        "noise":0.1,
+        "noiseSize":0,
+        "vignetting":0,
+        "vignettingAlpha":1,
+        "vignettingBlur":1
+      },
+      "wave":{
+        "seed":{"cor":true,"type":"seed"},
+        "vignetting":[{"count":"+","wave": 2,"val1":0,"val2":1,"frame":245,"fre":0,"digit":false}],
+        "noise":[{"count":"+","wave": 3,"val1":0.1,"val2":0.3,"frame":240,"fre":0,"digit":false}],
+        "noiseSize":[{"count":"+","wave": 3,"val1":0,"val2":2,"frame":240,"fre":0,"digit":false}]
+      }
+    },
+    "adj":{
+      "type":"adj",
+      "acti":false,
+      "cease":false,
+      "cycle":0,
+      "time":0,
+      "uniforms":{},
+      "wave":{
+        "alpha":[{"count":"+","wave": 1,"val1":1,"val2":0,"frame":240,"fre":0,"digit":false}]
+      }
+    }
+  },
+
+
+
+  "effector":{
+    "load":{"count":1,"judge":"%true","com":"load"},
+    "ready":{"count":0,"judge":"%ready","com":"ready"}
+  },
+  "handler":{
+    "load":["%load"],
+    "start":["#on_effector:ready","#sound:bgm"],
+    "ready":["#activa:s_back"],
+    "back1":["#mode:s_back:1"],
+    "back2":["#activa:s_trochaR","#activa:s_floor","#activa:s_back1","#activa:s_back2"],
+    "back3":["#activa:s_trochaG"],
+    "back4":["#activa:s_trochaB"],
+    "back5":["#sleep:s_floor"],
+    "back6":["#sleep:s_trochaR"],
+    "back7":["#mode:s_title:1","#sleep:s_back"],
+    "back8":["#sleep:s_trochaG"],
+    "back9":["#sleep:s_trochaB"],
+    "show1":["#activa:v_1"],
+    "show2":["#mode:v_1:1"],
+    "show3":["#open:c_1:0","#open:c_1:1","#open:c_1:2"],
+    "trocha1": ["#activa:s_trocha","#activa:s_name","#activa:s_ver","#sleep:s_title"],
+    "cof1": ["#activa:s_cof1","#activa:s_cof2"],
+    "ver":["#mode:s_ver:1"],
+    "cof2": ["#sleep:s_name"],
+    "trocha2":["#sleep:s_trocha"],
+    "c1_wheel":["#whell:c_1:%[1]"],
+    "c1_select":["#select:c_1:%[1]"],
+    "c1_cancel":["#select:c_1:%[1]"],
+    "exit":["%exit"],
+    "newgame":["#stopSound","#filter:this:glitch:1","#filter:this:old:1","#filter:this:adj:1"],
+    "newgame2":["%newgame"]
+  },
+
+  "sound":{
+    "bgm":{"id":"main_bgm","traje":10,"config":{"attack":5,"release":8,"loop":true,"volume":1,"attackCurve":"exponential","releaseCurve":"exponential"}},
+    "wheel":{"id":"main_wheeel","effect":[{"type":"quad","id":0}]},
+    "cancel":{"id":"main_cancel","effect":[{"type":"quad","id":0}]},
+    "select":{"id":"main_select","effect":[{"type":"quad","id":0}]},
+    "disable":{"id":"main_disable","effect":[{"type":"quad","id":0}]},
+    "activation":{"id":"main_activation","effect":[{"type":"quad","id":0}]}
+  }
+
+}

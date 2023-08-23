@@ -44,8 +44,7 @@ LIM.SCENE=LIM.SCENE||{};
         this.alpha = this._com.alpha;
         this.bitmap=new Bitmap(LIM.UTILS.lengthNum(this._com.w),LIM.UTILS.lengthNum(this._com.h))
     }
-
-
+    
     _.Fractal.prototype.refresh = function () {
         this._com.acti=false
         this.bitmap.clear()
@@ -53,7 +52,7 @@ LIM.SCENE=LIM.SCENE||{};
         this.ctx.lineWidth=this._com.line
         const promise = new Promise((resolve) => {
             let min=Math.min(this.height,this.width)
-            let depth=1+Math.floor(this._time/this._com.depth)%2==1?this._com.depth-(this._time%this._com.depth):(this._time%this._com.depth)
+            let depth=1+Math.floor(this._time/this._com.depth)%2===1?this._com.depth-(this._time%this._com.depth):(this._time%this._com.depth)
                 switch (this._com.mode){
                     case 0:
                     case "0":
@@ -123,7 +122,6 @@ LIM.SCENE=LIM.SCENE||{};
             return Promise.all([promise1, promise2, promise3]);
         }
     }
-    
     _.Fractal.prototype.drawDragonCurve=function (x,y,length,angle) {
         this.ctx.strokeStyle = "#fff"
         const endX = x + Math.cos(angle) * length;
@@ -156,7 +154,6 @@ LIM.SCENE=LIM.SCENE||{};
             return Promise.all([promise1, promise2]);
         }
     }
-    
     _.Fractal.prototype.drawFractalTree=function (x,x2, y,y2, length, angle, depth) {
         this.ctx.beginPath();
         this.ctx.moveTo(x, y);
@@ -166,7 +163,7 @@ LIM.SCENE=LIM.SCENE||{};
         this.ctx.stroke();
     }
     _.Fractal.prototype.recurFractalTree=function (x,y,length,angle,depth) {
-        if (depth === 0) return 
+        if (depth === 0) {}
         else {
             const x2 = x + Math.cos(angle) * length;
             const y2 = y + Math.sin(angle) * length;
@@ -182,8 +179,6 @@ LIM.SCENE=LIM.SCENE||{};
             return Promise.all([promise1, promise2]);
         }
     }
-
-
     _.Fractal.prototype.drawPoincareDisk=function (x,y,radius,depth) {
         this.ctx.strokeStyle = "#" + Math.floor(Math.random() * 16777215).toString(16);
         this.ctx.beginPath();
@@ -225,8 +220,6 @@ LIM.SCENE=LIM.SCENE||{};
 
         return Promise.all([promise1, promise2, promise3, promise4]);
     }
-
-
     _.Fractal.prototype.drawElectron=function (x,y,length,depth) {
       
         this.ctx.beginPath();
@@ -272,13 +265,12 @@ LIM.SCENE=LIM.SCENE||{};
             resolve();
         });
         const promise4 = new Promise((resolve) => {
-            if(!q||(q==1))
+            if(!q||(q===1))
             this.recurElectron(x-length/1.75, y - length/1.75, childlength, depth - 1,4);
             resolve();
         });
        return Promise.all([promise1, promise2, promise3, promise4]);
     }
-
     _.Fractal.prototype.drawKochCurve=function (x1, y1, x2, y2) {
 
        this.ctx.beginPath();

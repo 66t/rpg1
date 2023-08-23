@@ -48,36 +48,36 @@
     "s_a5":"v_1",
     "s_a6":"v_1",
     "s_b1":"v_1",
-    
+
     "s_back":"v_story",
     "s_tier":"v_story",
     "t_text":"v_story",
     "s_stage_1":"v_story",
     "s_stage_2":"v_story",
     "s_stage_3":"v_story",
-    
+
     "w_site":"v_ban",
     "w_time":"v_ban",
     "s_site_tile":"v_ban",
     "s_time_tile":"v_ban"
-    
+
   },
   "vessel": {
     "story":{"acti": true, "run": 0, "ope": 0, "data": [{"alpha": 1,"x": 0,"y": 0,"index": 100}],"action":{}},
-    "ban":{"acti": true, "run": 0, "ope": 0, 
+    "ban": {"acti": true, "run": 0, "ope": 0,
       "data":
       [
         {"alpha": 1,"x": 0,"y": 0,"index": 150,"filter": {
-        "glow": {
-          "type": "glow",
-          "acti": true,
-          "cease": false,
-          "cycle": 0,
-          "time": 0,
-          "uniforms": {"color": "#000"},
-          "wave": {}
-        }
-      }},
+          "glow": {
+            "type": "glow",
+            "acti": true,
+            "cease": false,
+            "cycle": 0,
+            "time": 0,
+            "uniforms": {"color": "#000"},
+            "wave": {}
+          }
+        }},
         {"alpha": 1,"x": 0,"y": 0,"index": 150,"filter": {
           "glow": {
             "type": "glow",
@@ -410,7 +410,7 @@
         }
       }
     },
-    
+
     "c0": {
       "acti": true,
       "run":0,
@@ -427,7 +427,7 @@
           "clip":[0,0,800,600,0,0,800,600],
           "tone":[0,0,0,0],"blend":[0,0,0,0]
         }
-        
+
       ],
       "action": {}
     },
@@ -1045,7 +1045,7 @@
         }
       }
     },
-    
+
     "t1": {
       "acti": true,
       "run":0,
@@ -1124,7 +1124,7 @@
         }
       }
     },
-    
+
     "h1": {
       "acti": true,
       "run":0,
@@ -1467,10 +1467,10 @@
         }
       }
     }
-    
+
   },
-  
-  
+
+
   "tube":{
     "text":{
       "acti": false,
@@ -1501,8 +1501,8 @@
       "depth":3,"line":4
     }
   },
-  
-  
+
+
   "filter":{
     "adj":{
       "type":"adj",
@@ -1538,7 +1538,7 @@
         [0,0.35,"#000",0.75,"#888"],
         [0,0.34,"#000",0.75,"#888"],
         [0,0.33,"#000",0.75,"#888"]
-        
+
       ],
       "outlineWidth":3, "outlineColor":[
         "#CC543A", "#CA7A2C", "#FFB11B", "#FAD689", "#838A2D", "#1B813E",
@@ -1591,12 +1591,12 @@
   },
   "handler":{
     "next":["#console_next"],
-    
-    
+
+
     "load":["#load_bit:back:%[1]:%[2]:%[3]:%[4]:start","#activa:s_site_tile"],
     "start":["#sound:bgm_0","#text:site:$dataScript.location","#text:time:$dataScript.time",
-             "#hide:w_1","#filter:v_1:radial:1","#setData:s_back:1:bit:back","#setData:s_back:2:bit:back","#mode:s_back:1"],
-    
+      "#hide:w_1","#filter:v_1:radial:1","#setData:s_back:1:bit:back","#setData:s_back:2:bit:back","#mode:s_back:1"],
+
     "open":["#mode:s_back:2","#mode:v_ban:1"],
     "console":["#console_load:0"],
     "ban_next":["#mode:v_ban:2"],
@@ -1604,10 +1604,10 @@
 
     "load_site":["#activa:s_time_tile","#activa:w_site","#sound:show"],
     "acti_site":["#size:w_site:1","#mask:w_site:0_1:6:1:w","#mode:w_site:1"],
-    
+
     "load_time":["#activa:w_time","#sound:show"],
     "acti_time":["#size:w_time:1","#mask:w_time:0_1:8:1:h","#mode:w_time:1"]
-    
+
   },
   "sound":{
     "load":{"id":"theater_load"},

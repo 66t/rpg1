@@ -35,7 +35,8 @@ SceneManager.onBlur = function() {LIM.INPUT.codeTable={}};
 
 DataManager._databaseFiles = [
     {name: '$dataRole',       src: 'LIM_Role.json'},
-    {name: '$dataTree',       src: 'LIM_Tree.json'}
+    {name: '$dataTree',       src: 'LIM_Tree.json'},
+    {name: '$dataLink',       src: 'LIM_Map.json'},
 ];
 Graphics._createGameFontLoader = function() {
     this._createFontLoader('GameFont');
@@ -52,21 +53,8 @@ Scene_Boot.prototype.isGameFontLoaded = function() {
         }
     }
 };
-
-
 document.onkeydown = function(event) {
     var e = event || window.event || arguments.callee.caller.arguments[0];
-    if(e&& e.keyCode==116) location.reload();
+    if(e&& e.keyCode===116) location.reload();
 };
 
-
-window.addEventListener('message', function(event) {
-    switch (event.data[0]) {
-        case "0":  SceneManager._scene.startRunning(JSON.parse(event.data.substring(1)));break
-        case "1": 
-            let b=JSON.parse(event.data.substring(1))
-            b.traje=1
-            Conductor.start(b);break
-    }
-  
-});

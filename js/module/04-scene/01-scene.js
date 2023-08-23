@@ -86,7 +86,7 @@ LIM.SCENE=LIM.SCENE||{};
                     let d1= this._filter[key].obj
                     let d2= this._filter[key].obj.uniforms
                     for(let i=0;i<src.length;i++){
-                        if(i==src.length-1) {
+                        if(i===src.length-1) {
                             if(d1) d1[src[i]]= data.uniforms[uniforms]
                             if(d2) d2[src[i]]= data.uniforms[uniforms]
                         }
@@ -252,7 +252,9 @@ LIM.SCENE=LIM.SCENE||{};
         return [text.text]
     }
     _.Scene.prototype.showItem = function() {
-        if(this.isRun(1)) {this.setRun(1,false)}
+        if(this.isRun(1)) {
+            this.setRun(1,false)
+        }
         this.children=[]
         let arr=[]
         for(let key in this._item)
@@ -434,10 +436,7 @@ LIM.SCENE=LIM.SCENE||{};
            case "#setActAttr":
                   if(this._item[eve[1]]&&this._item[eve[1]]._com.action[eve[2]])
                       this._item[eve[1]]._com.action[eve[2]][eve[3]]=eve[4]
-                  break  
-              
-              
-              
+                  break
             case "#open":
                 if(this._item[eve[1]])
                     this._item[eve[1]].setOpe(parseInt(eve[2]),!eve[3])
@@ -463,7 +462,6 @@ LIM.SCENE=LIM.SCENE||{};
                 if(this._item[eve[1]])
                     this._item[eve[1]].alpha = 1
                 break
-              
             case "#on_effector":
                 if(this._data.effector[eve[1]])
                     this._data.effector[eve[1]].count++

@@ -1,6 +1,6 @@
 {
   "bit":{
-    "cof1":["img/scene_title/","cof1",128,true],
+    "cof1":["img/scene_title/","cof1",0,true],
     "cof2":["img/scene_title/","cof2",0,true],
     "back":["img/scene_title/","back",0,true],
     "floor":["img/scene_title/","floor",0,true],
@@ -20,108 +20,13 @@
       "run":0,
       "ope":0,
       "data":[
-        {"alpha":1,"x":500,"y":0,"index":60,"filter": {}},
-        {"alpha":1,"x":0,"y":0, "index":60,"filter": {}}
+        {"alpha":1,"x":500,"y":0,"index":60},
+        {"alpha":1,"x":0,"y":0, "index":60}
       ],
       "action":{
-        "-1_0":{"wave":304,"frame":0,"com":"show2"},
-        "0_1":{"wave":304,"frame":100,"com":"show3"}
+        "-1_0":{"wave":1,"frame":0,"com":"show2"},
+        "0_1":{"wave":7,"frame":100,"com":"show3"}
       }
-    },
-    "ban":{"acti": true, "run": 0, "ope": 0,
-      "data":
-      [
-        {"alpha": 1,"x": 0,"y": 0,"index": 150,"filter": {
-          "glow": {
-            "type": "glow",
-            "acti": true,
-            "cease": false,
-            "cycle": 0,
-            "time": 0,
-            "uniforms": {"color": "#000"},
-            "wave": {}
-          }
-        }},
-        {"alpha": 1,"x": 0,"y": 0,"index": 150,"filter": {
-          "glow": {
-            "type": "glow",
-            "acti": true,
-            "cease": false,
-            "cycle": 0,
-            "time": 0,
-            "uniforms": {"color": "#000"},
-            "wave": {}
-          }
-        }},
-        {"alpha": 0,"x": 0,"y": 0,"index": 150,"filter": {"glow": {
-          "type": "glow","acti": true,"cease": false,
-          "cycle": 0,"time": 0, "uniforms": {"color":3385016}, "wave": {}}}}
-      ],
-      "action":{
-        "0_1":{
-          "wave":304,"frame":105,"com":"ban_next"
-        },
-        "1_2":{
-          "wave":304,"frame":35,"com":"hide_ban"
-        }
-      }},
-    "2": {
-      "acti": true,
-      "run": 0,
-      "ope": 0,
-      "data": [
-        {
-          "alpha": 1,
-          "x": -10,
-          "y": 10,
-          "index": 10,
-          "filter": {
-            "pixel": {
-              "type": "pixel",
-              "acti": true,
-              "cease": false,
-              "cycle": 0,
-              "time": 0,
-              "uniforms": {"size.0": 12, "size.1": 12},
-              "wave": {}
-            },
-            "bulge":{
-              "type":"bulge",
-              "acti":true,
-              "cease":false,
-              "cycle":0,
-              "time":0,
-              "uniforms":{
-                "radius":1000,
-                "strength":0.5,
-                "center.0":0.2,
-                "center.1":1
-              },
-              "wave":{
-                "center.0":[{"count":"add","wave": 304,"val1":0.3,"val2":0.7,"frame":600,"fre":0,"digit":false}]
-              }
-            },
-            "radial":{
-              "type":"radial",
-              "acti":false,
-              "cease":false,
-              "cycle":0,
-              "time":0,
-              "uniforms":{
-                "radius":1200,
-                "center.0":800,
-                "center.1":600,
-                "angle":0,
-                "kemelSize":5
-              },
-              "wave":{
-                "angle":[{"count":"add","wave": 304,"val1":0,"val2":180,"frame":600,"fre":0,"digit":false}]
-              }
-            }
-          }
-        }
-      ],
-      "action": {}
     }
   },
   "window": {},
@@ -598,6 +503,10 @@
         }
       }
     },
+    
+    
+    
+    
     "cof2": {
       "acti": false,
       "loop": true,
@@ -784,10 +693,10 @@
     "glitch":{
       "type":"glitch",
       "acti":true,
-      "cease":false,
+      "cease":true,
       "cycle":240,
       "time":0,
-      "com":"newgame2",
+      "comE":"newgame2",
       "uniforms":{
         "direction":100,
         "fillMode":3,
@@ -795,19 +704,13 @@
       },
       "wave":{
         "seed":{"cor":true,"type":"seed"},
-        "offset":[
-          {"count":"add","val1":0,"val2":40,"frame":480,"phase":0,"wave":304,"freq":2,"digit":true,"sample":1,"reve":false},
-          {"count":"add","val1":0,"val2":40,"frame":480,"phase":0,"wave":304,"freq":2,"digit":true,"sample":1,"reve":false},
-          {"count":"add","val1":0,"val2":40,"frame":480,"phase":0,"wave":304,"freq":2,"digit":true,"sample":1,"reve":false},
-          {"count":"add","val1":0,"val2":40,"frame":480,"phase":0,"wave":304,"freq":2,"digit":true,"sample":1,"reve":false}
-
-        ],
-        "red.0":[{"count":"add","wave": 304,"val1":0,"val2":-20,"frame":480,"freq":2,"digit":true,"phase":0,"sample":1,"reve":false}],
-        "red.1":[{"count":"add","wave": 304,"val1":0,"val2":20,"frame":480,"freq":2,"digit":true,"phase":0,"sample":1,"reve":false}],
-        "blue.0":[{"count":"add","wave": 304,"val1":0,"val2":-20,"frame":480,"freq":2,"digit":true,"phase":0,"sample":1,"reve":false}],
-        "blue.1":[{"count":"add","wave": 304,"val1":0,"val2":-20,"frame":480,"freq":2,"digit":true,"phase":0,"sample":1,"reve":false}],
-        "green.0":[{"count":"add","wave": 304,"val1":0,"val2":20,"frame":480,"freq":2,"digit":true,"phase":0,"sample":1,"reve":false}],
-        "green.1":[{"count":"add","wave": 304,"val1":0,"val2":20,"frame":480,"freq":2,"digit":true,"phase":0,"sample":1,"reve":false}]
+        "offset":[{"count":"+","wave": 2,"val1":0,"val2":40,"frame":240,"fre":0,"digit":true}],
+        "red.x":[{"count":"+","wave": 2,"val1":0,"val2":-20,"frame":240,"fre":0,"digit":true}],
+        "red.y":[{"count":"+","wave": 2,"val1":0,"val2":20,"frame":240,"fre":0,"digit":true}],
+        "blue.x":[{"count":"+","wave": 2,"val1":0,"val2":-20,"frame":240,"fre":0,"digit":true}],
+        "blue.y":[{"count":"+","wave": 2,"val1":0,"val2":-20,"frame":240,"fre":0,"digit":true}],
+        "green.x":[{"count":"+","wave": 2,"val1":0,"val2":20,"frame":240,"fre":0,"digit":true}],
+        "green.y":[{"count":"+","wave": 2,"val1":0,"val2":20,"frame":240,"fre":0,"digit":true}]
       }
     },
     "old":{
@@ -863,10 +766,14 @@
     "back7":["#mode:s_title:1","#sleep:s_back"],
     "back8":["#sleep:s_trochaG"],
     "back9":["#sleep:s_trochaB"],
+    
+    
     "show1":["#activa:v_1"],
     "show2":["#mode:v_1:1"],
     "show3":["#open:c_1:0","#open:c_1:1","#open:c_1:2"],
+    
     "trocha1": ["#activa:s_trocha","#activa:s_name","#activa:s_ver","#sleep:s_title"],
+    
     "cof1": ["#activa:s_cof1","#activa:s_cof2"],
     "ver":["#mode:s_ver:1"],
     "cof2": ["#sleep:s_name"],
@@ -878,38 +785,14 @@
     "newgame":["#stopSound","#filter:this:glitch:1","#filter:this:old:1","#filter:this:adj:1"],
     "newgame2":["%newgame"]
   },
+
   "sound":{
-    "bgm":{
-      "traje":0,
-      "revers":false,
-      "type":"bgm",
-      "name":"星空のメロディー",
-      "volume":1,
-      "rate":1,
-      "time":[0,0],
-      "fade":[0,0,"linear","linear"],
-      "pan":[0,0],
-      "loop":[true,0,0],
-      "dis":[0,"none"],
-      "bit":[1,0],
-      "filter":["none",10,-12,0,0]
-    },
-    "bgm1":{
-      "traje":1,
-      "revers":false,
-      "type":"bgm",
-      "name":"melo",
-      "volume":1,
-      "rate":1,
-      "time":[0,0],
-      "fade":[0,0,"linear","linear"],
-      "pan":[0,0],
-      "loop":[true,0,0],
-      "dis":[0,"none"],
-      "bit":[1,0],
-      "filter":["none",10,-12,0,0]
-      
-    }
+    "bgm":{"id":"main_bgm","traje":10,"config":{"attack":5,"release":8,"loop":true,"volume":1,"attackCurve":"exponential","releaseCurve":"exponential"}},
+    "wheel":{"id":"main_wheeel","effect":[{"type":"quad","id":0}]},
+    "cancel":{"id":"main_cancel","effect":[{"type":"quad","id":0}]},
+    "select":{"id":"main_select","effect":[{"type":"quad","id":0}]},
+    "disable":{"id":"main_disable","effect":[{"type":"quad","id":0}]},
+    "activation":{"id":"main_activation","effect":[{"type":"quad","id":0}]}
   }
 
 }

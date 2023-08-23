@@ -171,7 +171,6 @@ LIM.SCENE=LIM.SCENE||{};
             data[key]=shape[key]
             this._data[key]=data[key]
         }
-      
         this.shape(data);
     };
 
@@ -351,7 +350,6 @@ LIM.SCENE=LIM.SCENE||{};
             
         }
     }
-    
     _.Shape.prototype.setFilter=function(i,filter){
         switch (i) {
             case 0:this.filters=[filter];break
