@@ -14,69 +14,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="022b3a10-94e5-42d6-b94a-cfdedd324291" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/audio/bgm/ShadyGirls.ogg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/LIM_Map.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/map/MapLink.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/map/Map_bb.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/map/Map_cc.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/map/Map_dd.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/map/Map_ee.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/map/Map_ff.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/map/Map_gg.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/map/Map_rr.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/map/Map_tt.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/map/Map_vv.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/scene/a.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/scene/b.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/scene/c.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/03-scene/05-wave.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/03-scene/06-window.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/03-scene/07-command.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/03-scene/08-shape.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/04-scene/01-scene.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/04-scene/02-vessel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/04-scene/03-window.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/04-scene/04-command.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/04-scene/05-shape.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/04-scene/06-wave.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/04-scene/07-fractal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/04-scene/08-tube.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/module/04-tilemap/01-map.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.rpgmv.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.rpgmv.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/Actors.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/Actors.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/MapInfos.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/MapInfos.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/System.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/System.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/Tilesets.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/Tilesets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/scene/test.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/scene/theater.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/scene/title.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/scene/title.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/scene/title2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/scene/wave.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/edi/scene/css.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/edi/scene/js/handle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/edi/scene/js/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/edi/scene/main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/edi/vue.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/edi/wave.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/event/event1.js" beforeDir="false" afterPath="$PROJECT_DIR$/event/event1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/load.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/load.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/00-utils/00-sys.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/00-utils/00-sys.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/00-utils/02-math.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/00-utils/02-math.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/00-utils/05-entity.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/02-audio/01-conductor.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/02-audio/01-conductor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/03-scene-old/01-scene.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/03-scene-old/02-vessel.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/03-scene-old/03-window.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/03-scene-old/04-command.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/03-scene-old/05-shape.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/03-scene-old/06-wave.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/03-scene-old/07-fractal.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/03-scene-old/08-tube.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/03-scene/01-scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/03-scene/01-scene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/03-scene/03-Vessel.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/03-scene/03-Vessel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/module/03-scene/04-fractal.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/03-scene/04-fractal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/plugins.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/plugins.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/map/Map_bb.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/map/Map_bb.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/map/Map_cc.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/map/Map_cc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/module/04-tilemap/01-map.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/04-tilemap/01-map.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -458,7 +399,8 @@
       <workItem from="1692699582491" duration="1222000" />
       <workItem from="1692730971306" duration="1218000" />
       <workItem from="1692762775707" duration="4109000" />
-      <workItem from="1692770058855" duration="16431000" />
+      <workItem from="1692770058855" duration="16586000" />
+      <workItem from="1692844101167" duration="6153000" />
     </task>
     <task id="LOCAL-00001" summary="11">
       <created>1684404192045</created>
@@ -684,7 +626,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690609885968</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="upup">
+      <created>1692797495659</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1692797495659</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -734,7 +683,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="gengxin" />
     <MESSAGE value="shape进度+10%" />
     <MESSAGE value="shape 更新了一丢丢" />
     <MESSAGE value="动作：激活" />
@@ -759,7 +707,8 @@
     <MESSAGE value="开启指令时代" />
     <MESSAGE value="编辑器" />
     <MESSAGE value="重构==编辑器50%" />
-    <option name="LAST_COMMIT_MESSAGE" value="重构==编辑器50%" />
+    <MESSAGE value="upup" />
+    <option name="LAST_COMMIT_MESSAGE" value="upup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,3 +1,8 @@
 {
-
+  "bit":[
+    ["img/tilesets/","FDE_Dreams_A1",0,true,0,0,0],
+    ["img/tilesets/","FDE_Dreams_A5",0,true,0,0,0]
+  ],
+  "auto":[]
+  
 }

@@ -26,7 +26,7 @@ LIM.TILEMAP=LIM.TILEMAP||{};
         this._mapArr=[]
         this._bitload =[]
         this._bit ={}
-        this._load = -1
+        this._load = -2
         
         DataManager.loadDataFile('5', 'map/MAP_' + this._name + '.json',this._mapArr);
         let data=$dataLink[this._name]
@@ -38,27 +38,58 @@ LIM.TILEMAP=LIM.TILEMAP||{};
     _.Map.prototype.update = function () {
         if(this.isLoad())
             switch (this._load) {
-                case -1:
+                case -2:
                     this.DataLoaded();
                     break;
-                case 0:
+                case -1:
                     this.BitLoaded();
+                    break;
+                case 0:
+                    this.jointBit();
                     break;
                 case 1:
                     this.refresh();
                     break;
             }
     }
-
+    _.Map.prototype.refresh = function () {
+    }
+    
     _.Map.prototype.DataLoaded = function () {
         if(this._mapArr.filter((item)=>{return !item.load}).length===0)
-            this._load = 0
+            this._load = -1
     }
+    
     _.Map.prototype.BitLoaded = function () {
-        console.log(this._mapArr)
-        for(let key in this._data.bit) this.loadBit(key,this._data.bit[key])
-        this._load = 1
+        this._load = 0
+        for(let key in this._mapArr) 
+            if(this._mapArr[key].load&&this._mapArr[key].data)
+                for(let key2 in this._mapArr[key].data.bit)
+                    this.loadBit(key+""+key2,this._mapArr[key].data.bit[key2])
+       
     }
+    _.Map.prototype.jointBit = function () {
+        this._load = 1
+        for(let key in this._mapArr)
+            if(this._mapArr[key].load&&this._mapArr[key].data){
+                let tag=['auto']
+                for(let t of tag) {
+                    if(this._mapArr[key].data[t]) this.drawAtuo(key, this._mapArr[key].data[t])
+                }
+            }
+    }
+    _.Map.prototype.drawAtuo = function (index,data){
+        this._mapArr[index].atuo=[]
+        for(let i in data){
+            let bitmap=new Bitmap(96,144)
+            bitmap.blt(this._bit[index+""+data[i].bit],
+                data[i].x*96,data[i].y*144,96,144,
+                0,0,96,144)
+            this._mapArr[index].atuo.push(bitmap)
+        }
+       
+    }
+    
     _.Map.prototype.loadBit = function (key,val) {
         this._bitload.push(key)
         this._bit[key] =ImageManager.loadBitmap(val[0],val[1],val[2],val[3])
